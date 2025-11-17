@@ -1,0 +1,16 @@
+services:
+  frontend:
+    image: nginx:latest
+    volumes:
+      - ".werf/nginx-local.conf:/etc/nginx/nginx.conf:ro"
+    ports:
+      - "80:80"
+    depends_on:
+      - hugo
+
+  hugo:
+    image: hugomods/hugo:debian-ci-0.150.1
+    command: server --printMemoryUsage --printPathWarnings --printI18nWarnings --bind=0.0.0.0 -p 1313 --liveReloadPort 80
+    volumes:
+      - "./:/src"
+      - "../hugo-web-product-module/:/hugo-web-product-module:ro"

@@ -1,0 +1,20 @@
+# This is a <PART> of URL in the template /products/<PART>/
+productCode: development-platform
+
+priorityClassName:
+  _default: develop
+  production: production-medium
+  web-production: production-medium
+
+ingressClass:
+  _default: nginx
+
+certificateClusterIssuer:
+  _default: letsencrypt
+  production: letsencrypt-nginx
+
+resources:
+  requests:
+    memory:
+      _default: 32M
+      web-production: 150M
