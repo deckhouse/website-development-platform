@@ -8,6 +8,7 @@ HUGOFLAGS ?= --minify
 MARKDOWNLINT_VERSION ?= v0.45.0
 
 .PHONY: help serve build clean lint-markdown lint-markdown-fix
+.PHONY: help serve build clean lint-markdown lint-markdown-fix mod
 
 help:
 	@echo "Usage: make [target]"
@@ -19,6 +20,7 @@ help:
 	@echo "  clean            Remove generated public files"
 	@echo "  lint-markdown    Lint markdown files"
 	@echo "  lint-markdown-fix Fix markdown files automatically"
+	@echo "  mod              Clean up Hugo modules (hugo mod tidy)"
 	@echo "  help             Show this help"
 	@echo
 	@echo "Variables (can be overridden):"
@@ -50,3 +52,7 @@ lint-markdown:
 lint-markdown-fix:
 	@echo "Fixing markdown files..."
 	@docker run --rm -v "$(PWD):/workdir" -w /workdir ghcr.io/igorshubovych/markdownlint-cli:$(MARKDOWNLINT_VERSION) "**/*.md" -c markdownlint.yaml --fix
+
+mod:
+	@echo "Cleaning up Hugo modules..."
+	$(HUGO) mod tidy

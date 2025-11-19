@@ -10,7 +10,7 @@ services:
 
   hugo:
     image: hugomods/hugo:debian-ci-0.150.1
-    command: server --printMemoryUsage --printPathWarnings --printI18nWarnings --bind=0.0.0.0 -p 1313 --liveReloadPort 80
+    command: server --printMemoryUsage --printPathWarnings --printI18nWarnings --renderToMemory --bind=0.0.0.0 -p 1313 --disableLiveReload
     volumes:
       - "./:/src"
       - "../hugo-web-product-module/:/hugo-web-product-module:ro"
