@@ -338,12 +338,14 @@ moduleStatus: experimental
 
 #### Глобальные пресеты
 
-**Пресет "Admin"**
+##### Пресет "Admin"
+
 - Тип: `global`
 - Разрешения: Все глобальные разрешения
 - Назначение: Супер-администраторы системы
 
-**Пресет "Viewer"**
+##### Пресет "Viewer"
+
 - Тип: `global`
 - Разрешения:
   - `read:actions`, `read:automations`, `read:dashboards`
@@ -356,19 +358,22 @@ moduleStatus: experimental
 
 #### Пресеты для процессов
 
-**Пресет "Process admin"**
+##### Пресет "Process admin"
+
 - Тип: `process-definitions`
 - Разрешения: `delete:process`, `edit:role-bindings`, `read:process`, `update:process`
 - Назначение: Администраторы процессов
 
-**Пресет "Process viewer"**
+##### Пресет "Process viewer"
+
 - Тип: `process-definitions`
 - Разрешения: `read:process`
 - Назначение: Пользователи с правами на просмотр процессов
 
 #### Пресеты для ресурсов
 
-**Пресет "Resource admin"**
+##### Пресет "Resource admin"
+
 - Тип: `resources`
 - Разрешения: Все разрешения для ресурсов
 - Назначение: Администраторы конкретных ресурсов
