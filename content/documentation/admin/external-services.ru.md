@@ -101,6 +101,8 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
+Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации](https://docs.defectdojo.com/en/api/api-v2-docs/).
+
 ### Docker Registry
 
 **Тип авторизации:** Basic Authentication
@@ -136,6 +138,9 @@ Authorization: Basic <base64-encoded-credentials>
 ```sh
 Private-Token: <ваш-gitlab-token>
 ```
+
+Подробнее о том, как получить GitLab token можно узнать в [официальной документации](https://
+docs.gitlab.com/api/rest/authentication/).
 
 ### Harbor
 
