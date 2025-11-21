@@ -6,6 +6,7 @@ BIND ?= 0.0.0.0
 SERVE_FLAGS ?= --cleanDestinationDir --bind=$(BIND)
 HUGOFLAGS ?= --minify
 MARKDOWNLINT_VERSION ?= v0.45.0
+WERF_PLATFORM ?= linux/amd64
 
 .PHONY: help serve build clean lint-markdown lint-markdown-fix
 .PHONY: help serve build clean lint-markdown lint-markdown-fix mod
@@ -32,7 +33,7 @@ help:
 
 up:
 	which werf >/dev/null || source $(trdl use werf 2 beta)
-	werf compose up --dev
+	WERF_PLATFORM=$(WERF_PLATFORM) werf compose up --dev
 
 serve:
 	$(HUGO) serve $(SERVE_FLAGS)
