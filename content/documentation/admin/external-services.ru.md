@@ -139,8 +139,7 @@ Authorization: Basic <base64-encoded-credentials>
 Private-Token: <ваш-gitlab-token>
 ```
 
-Подробнее о том, как получить GitLab token можно узнать в [официальной документации](https://
-docs.gitlab.com/api/rest/authentication/).
+Подробнее о том, как получить GitLab token можно узнать в [официальной документации](https://docs.gitlab.com/api/rest/authentication/).
 
 ### Harbor
 
