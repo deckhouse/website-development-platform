@@ -11,8 +11,6 @@ services:
   hugo:
     image: hugomods/hugo:debian-ci-0.150.1
     user: "${UID:-1000}:${GID:-1000}"
-    environment:
-      - HUGO_ENABLEGITINFO=false
     command: server --renderToMemory --printPathWarnings --printI18nWarnings --bind=0.0.0.0 -p 1313 --liveReloadPort 80 --noBuildLock --enableGitInfo=false
     ports:
       - "1313:1313"
