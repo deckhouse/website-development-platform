@@ -257,20 +257,16 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### SonarQube
 
-**Тип авторизации:** Basic Authentication (User Token)
+**Тип авторизации:** Bearer Token
 
 **Заголовки:**
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Bearer <токен>` |
 
 **Пример:**
 
-1. Сформируйте строку с User Token: `token:` (где `token` - ваш SonarQube User Token)
-2. Закодируйте её в Base64: `echo "token:" | base64`
-3. Добавьте заголовок:
-
 ```sh
-Authorization: Basic <base64-encoded-credentials>
+Authorization: Bearer <ваш-токен>
 ```
