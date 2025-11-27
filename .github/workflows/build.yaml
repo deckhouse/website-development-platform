@@ -87,6 +87,7 @@ jobs:
           CheckFavicon: false
           IgnoreInternalEmptyHash: true
           IgnoreCanonicalBrokenLinks: true
+          ExternalTimeout: 30
           EOF
 
       - name: Check links (English)
