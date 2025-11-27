@@ -39,20 +39,6 @@ spec:
   - host: {{ .URL }}
     http:
       paths:
-      - path: /products/{{ $.Values.productCode }}/gs
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend
-            port:
-              name: http
-      - path: /products/{{ $.Values.productCode }}/guides
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend
-            port:
-              name: http
       - path: /products/{{ $.Values.productCode }}/documentation
         pathType: Prefix
         backend:
