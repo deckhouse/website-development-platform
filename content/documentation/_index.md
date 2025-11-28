@@ -2,6 +2,11 @@
 title: Overview
 description: Documentation for the Deckhouse Development Platform product
 weight: 10
+params:
+  no_list: true
+cascade:
+  params:
+    simple_list: true
 ---
 
 Deckhouse Development Platform (DDP) is a comprehensive solution for managing all stages of development through a single interface.
