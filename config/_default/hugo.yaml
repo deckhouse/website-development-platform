@@ -88,6 +88,26 @@ params:
   # Global relevant links.
   links:
 
+# See the tdewolff/minify project page for details
+minify:
+  tdewolff:
+    html:
+      keepComments: false
+      keepDefaultAttrVals: true
+      keepDocumentTags: true
+      keepEndTags: true
+      keepQuotes: true
+      keepSpecialComments: true
+      keepWhitespace: false
+    json:
+      keepNumbers: true
+      precision: 0
+    svg:
+      keepComments: false
+      precision: 0
+    xml:
+      keepWhitespace: false
+
 module:
   imports:
     - path: github.com/deckhouse/hugo-web-product-module
