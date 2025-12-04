@@ -341,7 +341,7 @@ description: |
 
 ## CreateKafkaACLs
 
-CreateKafkaACLs -— создаёт новый набор ACL в Kafka.
+CreateKafkaACLs — создаёт новый набор ACL в Kafka.
 
 ### Пример запроса
 
@@ -1124,11 +1124,11 @@ FIELDS:
 Как искать в документации:
 
 1. Найдите нужный ресурс (например, Deployment).
-1. В заголовке будет указана API Group и версия. Пример для Deployment
+1. В заголовке будет указана API Group и версия. Пример для Deployment:
 
-```yaml
-apiVersion: apps/v1
-```
+   ```yaml
+   apiVersion: apps/v1
+   ```
 
 * **API Group** - apps
 * **Version** - v1
