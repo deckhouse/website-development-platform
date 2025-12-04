@@ -16,7 +16,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL DefectDojo в формате `https://example.com`.
+* **URL** — URL DefectDojo в формате `https://example.com`.
 
 ### Параметры
 
@@ -36,7 +36,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+* **URL** — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 ### Параметры
 
@@ -62,7 +62,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+* **URL** — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 <a id="gitlabprojectsparameters"></a>
 
@@ -92,7 +92,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Harbor в формате `https://example.com`
+* **URL** — URL Harbor в формате `https://example.com`
 
 ### Параметры
 
@@ -112,7 +112,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Harbor в формате `https://example.com`.
+* **URL** — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -132,7 +132,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Harbor в формате `https://example.com`.
+* **URL** — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -152,7 +152,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Harbor в формате `https://example.com`
+* **URL** — URL Harbor в формате `https://example.com`
 
 ### Параметры
 
@@ -232,7 +232,7 @@ title: Типы источников данных
     },
     "manifest": "string", // Отрендеренные манифесты
     "version": "integer", // Версия helmrelease
-    "namespace": "string" // Namespace, где развернут релиз
+    "namespace": "string" // Пространство имен, где развернут релиз
   },
   // ... другие helmreleases
 ]
@@ -241,7 +241,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kubernetes API в формате `https://api.example.com`.
+* **URL** — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -277,7 +277,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kafka в формате `example.com`.
+* **URL** — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -335,7 +335,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kafka в формате `example.com`.
+* **URL** — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -377,7 +377,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kafka в формате `example.com`
+* **URL** — URL Kafka в формате `example.com`
 
 ### Параметры
 
@@ -402,7 +402,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kubernetes API в формате `https://api.example.com`.
+* **URL** — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -422,7 +422,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** - URL Kubernetes API в формате `https://api.example.com`.
+* **URL** — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -430,7 +430,7 @@ title: Типы источников данных
 
 ## KubernetesNamespaces
 
-Источник данных типа **KubernetesNamespaces** возвращает список всех Namespace в кластере Kubernetes.
+Источник данных типа **KubernetesNamespaces** возвращает список всех пространств имен в кластере Kubernetes.
 
 ### Авторизация
 
@@ -438,11 +438,11 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа возвращает все Namespace в кластере Kubernetes. Спецификация ресурса Namespace доступна в [официальной документации](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/namespace-v1/).
+Платформа возвращает все пространства имен в кластере Kubernetes. Спецификация ресурса Namespace доступна в [официальной документации](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/namespace-v1/).
 
 ### Конфигурация
 
-* **URL** - URL Kubernetes API в формате `https://api.example.com`.
+* **URL** — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -489,7 +489,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** - URL Kubernetes API в формате `https://api.example.com`.
+* **URL** — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -498,12 +498,12 @@ FIELDS:
 |apiGroup    |опционально    |API группа ресурса. Для ресурсов в core API группе поле не задается.                                                                                                                         |[См. определение требуемых Group и Version](#определение-требуемых-group-и-version)|
 |version     |**обязательно**|Версия API ресурса.                                                                                                                                                                          |[См. определение требуемых Group и Version](#определение-требуемых-group-и-version)|
 |isNamespaced|**обязательно**|Является ли ресурс namespaced или нет. Проверить, является ли ресурс namespaced можно с помощью команды `kubectl api-resources`                                                              |true, false                              |
-|namespace   |опционально    |Namespace из которого будут собираться ресурсы. Если не указан, ресурсы будут собираться из всех namespace. Значение параметра учитывается только если значение **isNamespaced** равно `true`|                                         |
+|namespace   |опционально    |Пространство имен, из которого будут собираться ресурсы. Если не указан, ресурсы будут собираться из всех пространств имен. Значение параметра учитывается только если значение **isNamespaced** равно `true`|                                         |
 |resource    |**обязательно**|Название ресурса. Указывается маленькими буквами во множественном числе, как в поле NAME вывода команды `kubectl api-resources`.                                                             |                                         |
 
 ## Примеры конфигурации
 
-Собрать все ingress ресурсы Kubernetes кластера:
+Собрать все ingress-ресурсы Kubernetes-кластера:
 
 ```yaml
 apiGroup: networking.k8s.io
@@ -512,7 +512,7 @@ isNamespaced: true
 resource: ingresses
 ```
 
-Собрать все pod Kubernetes кластера:
+Собрать все поды Kubernetes-кластера:
 
 ```yaml
 version: v1
@@ -520,7 +520,7 @@ isNamespaced: true
 resource: pods
 ```
 
-Собрать все pod Kubernetes кластера в namespace `d8-development-platform`:
+Собрать все поды Kubernetes-кластера в namespace `d8-development-platform`:
 
 ```yaml
 version: v1
@@ -529,7 +529,7 @@ resource: pods
 namespace: d8-development-platform
 ```
 
-Собрать все namespace Kubernetes кластера:
+Собрать все пространства имен Kubernetes-кластера:
 
 ```yaml
 version: v1
@@ -537,7 +537,7 @@ isNamespaced: false
 resource: namespaces
 ```
 
-Собрать все кастомные ресурсы ModuleRelease Kubernetes кластера:
+Собрать все кастомные ресурсы ModuleRelease Kubernetes-кластера:
 
 ```yaml
 apiGroup: deckhouse.io
@@ -548,7 +548,7 @@ resource: modulereleases
 
 ### Определение требуемых Group и Version
 
-Каждому типу ресурса соответствует своя версия и группа. Полный список API-ресурсов с их группами и версиями: [документация Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/)
+Каждому типу ресурса соответствует своя версия и группа. Полный список API-ресурсов с их группами и версиями — в [документации Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/).
 
 Если неизвестно, какие требуются Group и Version, можно попробовать подставить актуальные значения. Есть несколько вариантов как их посмотреть:
 
@@ -590,7 +590,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** - URL Nexus в формате `https://example.com`
+* **URL** — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -610,7 +610,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** - URL Nexus в формате `https://example.com`
+* **URL** — URL Nexus в формате `https://example.com`
 
 ### Параметры
 
@@ -630,9 +630,9 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** - URL prometheus API в формате `https://example.com/api/v1/query`
-* **Тип query** - Prometheus
-* **Query** - запрос в формате PromQL ([подробнее](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
+* **URL** — URL prometheus API в формате `https://example.com/api/v1/query`.
+* **Тип query** — Prometheus.
+* **Query** — запрос в формате PromQL ([подробнее](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
 
 ### Параметры
 
@@ -652,7 +652,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** - URL Sonarqube в формате `https://example.com`
+* **URL** — URL Sonarqube в формате `https://example.com`.
 
 ### Параметры
 
@@ -709,10 +709,10 @@ GenericAPI возвращает массив объектов JSON. Структ
 
 ### Конфигурация
 
-* **URL** - базовый URL API в формате `https://api.example.com`
-* **Method** - HTTP метод (GET, POST, PUT, PATCH, DELETE)
-* **Query Type** - тип запроса (Generic)
-* **Query** - дополнительные query параметры (например, для фильтрации или поиска)
+* **URL** — базовый URL API в формате `https://api.example.com`.
+* **Method** — HTTP метод (GET, POST, PUT, PATCH, DELETE).
+* **Query Type** — тип запроса (Generic).
+* **Query** — дополнительные query параметры (например, для фильтрации или поиска).
 
 ### Параметры
 
@@ -730,23 +730,23 @@ GenericAPI возвращает массив объектов JSON. Структ
 
 ### Типы пагинации
 
-**none** - без пагинации, получает все данные одним запросом
+- **none** — без пагинации, получает все данные одним запросом.
 
-**offset** - пагинация по номеру страницы и количеству элементов:
-- Использует параметры `pageParam` и `limitParam`
-- Пример: `?page=1&limit=20`
+- **offset** — пагинация по номеру страницы и количеству элементов:
+  - Использует параметры `pageParam` и `limitParam`.
+  - Пример: `?page=1&limit=20`.
 
-**page** - пагинация по номеру страницы и размеру:
-- Использует параметры `pageParam` и `sizeParam`
-- Пример: `?page=1&size=20`
+- **page** — пагинация по номеру страницы и размеру:
+  - Использует параметры `pageParam` и `sizeParam`.
+  - Пример: `?page=1&size=20`.
 
-**cursor** - пагинация по курсору:
-- Использует параметр `cursorParam`
-- Пример: `?cursor=eyJpZCI6MTIzfQ==`
+- **cursor** — пагинация по курсору:
+  - Использует параметр `cursorParam`.
+  - Пример: `?cursor=eyJpZCI6MTIzfQ==`.
 
-**link_header** - пагинация через заголовок Link:
-- Использует заголовок `Link` в ответе для определения следующей страницы
-- Стандарт RFC 5988
+- **link_header** — пагинация через заголовок Link:
+  - Использует заголовок `Link` в ответе для определения следующей страницы.
+  - Стандарт RFC 5988.
 
 ### Примеры конфигурации
 
