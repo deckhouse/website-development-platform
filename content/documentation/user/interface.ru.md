@@ -1,5 +1,6 @@
 ---
 title: Интерфейс
+weight: 20
 ---
 
 Интерфейс Deckhouse Development Platform включает в себя следующие разделы:
