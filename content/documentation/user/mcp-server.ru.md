@@ -178,7 +178,7 @@ MCP-сервер Deckhouse Development Platform совместим с любым
 
 ### Пример запроса к MCP-серверу
 
-**HTTP Заголовки:**
+**HTTP-заголовки:**
 
 ```sh
 X-API-TOKEN: your-api-token-here
