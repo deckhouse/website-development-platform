@@ -264,7 +264,7 @@ title: Типы источников данных
   {
     "Cluster": "string",             // Название кластера Kafka
     "ResourceType": "string",        // Тип ресурса (TOPIC, GROUP и т.д.)
-    "ResourceName": "string",        // Имя ресурса
+    "ResourceName": "string",        // Название ресурса
     "PatternType": "string",         // Тип паттерна (LITERAL, PREFIXED и т.д.)
     "Principal": "string",           // Principal пользователя (например: "User:Alice")
     "Host": "string",                // Хост (обычно "*" для любого хоста)
