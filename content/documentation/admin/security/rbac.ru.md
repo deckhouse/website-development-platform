@@ -354,6 +354,28 @@ weight: 20
   - `read:audit-logs`, `read:processes`
 - Назначение: Пользователи с правами только на просмотр
 
+##### Пресет "Platform Engineer"
+
+- Тип: `global`
+- Разрешения:
+  - **Самообслуживание** (полный доступ):
+    - `create:actions`, `read:actions`, `update:actions`, `delete:actions`, `run:actions`
+    - `create:automations`, `read:automations`, `update:automations`, `delete:automations`
+    - `create:dashboards`, `read:dashboards`, `update:dashboards`, `delete:dashboards`
+    - `create:page-dashboards`, `delete:page-dashboards`
+    - `create:datasources`, `read:datasources`, `update:datasources`, `delete:datasources`, `sync:datasources`
+    - `create:entities`, `read:entities`, `update:entities`, `delete:entities`
+    - `create:processes`, `read:processes`, `update:processes`, `delete:processes`, `control:processes`
+    - `create:webhooks`, `read:webhooks`, `update:webhooks`, `delete:webhooks`
+    - `create:widgets`, `read:widgets`, `update:widgets`, `delete:widgets`, `run:widget-actions`
+    - `create:workflows`, `read:workflows`, `update:workflows`, `delete:workflows`
+  - **Каталог** (полный доступ):
+    - `create:resources`, `read:resources`, `update:resources`, `delete:resources`, `update:resources-order`
+    - `create:resource-relations`, `read:resource-relations`, `update:resource-relations`, `delete:resource-relations`
+  - **Доступ к страницам**:
+    - `view:self-service-page`
+- Назначение: Платформенные инженеры, которым нужен полный доступ к функциональности самообслуживания и каталогу, но не требуется доступ к административным функциям системы
+
 #### Пресеты для процессов
 
 ##### Пресет "Process admin"
@@ -401,6 +423,12 @@ weight: 20
 - Тип: `global`
 - Разрешения: Только права на чтение (используйте пресет "Viewer")
 - Назначение: Пользователи с ограниченными правами
+
+#### Роль "Платформенный инженер"
+
+- Тип: `global`
+- Разрешения: Полный доступ к самообслуживанию и каталогу, без доступа к администрированию (используйте пресет "Platform Engineer")
+- Назначение: Платформенные инженеры, которым нужен полный доступ к функциональности самообслуживания и каталогу
 
 #### Роль "Администратор ресурса"
 
