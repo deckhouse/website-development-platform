@@ -413,7 +413,7 @@ acls:
 
 ### Список возможных операций
 
-[Документация Kafka](https://kafka.apache.org/39/documentation/#operations_resources_and_protocols)
+[Документация Kafka](https://kafka.apache.org)
 
 **Topic:**
 
@@ -981,7 +981,7 @@ acls:
 
 ### Список возможных операций
 
-[Документация Kafka](https://kafka.apache.org/39/documentation/#operations_resources_and_protocols)
+[Документация Kafka](https://kafka.apache.org)
 
 **Topic:**
 
