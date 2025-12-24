@@ -31,7 +31,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ extractPart "ddp/demo-service" "/" 1 }} // Вывод: "demo-service"
+{{ extractPart "ddp/demo-service" "/" 1 }} // Вывод: "demo-service".
 ```
 
 ### extractLastPart
@@ -50,7 +50,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ extractLastPart "ddp/demo-service" "/" }} // Вывод: "demo-service"
+{{ extractLastPart "ddp/demo-service" "/" }} // Вывод: "demo-service".
 ```
 
 ### toJSON
@@ -69,7 +69,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ toJSON . }} // Вывод: JSON-представление объекта в контексте
+{{ toJSON . }} // Вывод: JSON-представление объекта в контексте.
 ```
 
 ### replaceChar
@@ -89,7 +89,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ replaceChar "hello/world" "/" "-" }} // Вывод: "hello-world"
+{{ replaceChar "hello/world" "/" "-" }} // Вывод: "hello-world".
 ```
 
 ### filteredItems
@@ -110,7 +110,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ filteredItems .items "name" "Alice" }} // Вывод: [{"name": "Alice", "age": 30}]
+{{ filteredItems .items "name" "Alice" }} // Вывод: [{"name": "Alice", "age": 30}].
 ```
 
 ### anyOf
@@ -131,7 +131,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ anyOf "eq" "value" "key" .data }} // Вывод: true, если хотя бы одна запись удовлетворяет условию
+{{ anyOf "eq" "value" "key" .data }} // Вывод: true, если хотя бы одна запись удовлетворяет условию.
 ```
 
 ### allOf
@@ -152,7 +152,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ allOf "gt" 10 "age" .users }} // Вывод: true, если все пользователи старше 10 лет
+{{ allOf "gt" 10 "age" .users }} // Вывод: true, если все пользователи старше 10 лет.
 ```
 
 ### getFieldValue
@@ -172,7 +172,7 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ getFieldValue .item "name" }} // Вывод: Значение поля "name" из структуры .item
+{{ getFieldValue .item "name" }} // Вывод: Значение поля "name" из структуры .item.
 ```
 
 ### findValueInDictArray
@@ -216,10 +216,10 @@ title: Шаблонизация
 Примеры в шаблоне:
 
 ```go
-{{ generatePassword }}                                   // Вывод: Случайный пароль длиной 16 символов
-{{ generatePassword 12 }}                                // Вывод: Случайный пароль длиной 12 символов
-{{ generatePassword 8 true true true }}                  // Вывод: Пароль длиной 8 символов
-{{ generatePassword 10 false true true }}                // Вывод: Пароль длиной 10 символов только из строчных букв и цифр
+{{ generatePassword }}                                   // Вывод: Случайный пароль длиной 16 символов.
+{{ generatePassword 12 }}                                // Вывод: Случайный пароль длиной 12 символов.
+{{ generatePassword 8 true true true }}                  // Вывод: Пароль длиной 8 символов.
+{{ generatePassword 10 false true true }}                // Вывод: Пароль длиной 10 символов только из строчных букв и цифр.
 ```
 
 ### encodeUnicode
@@ -237,8 +237,8 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ encodeUnicode "Привет" }} // Вывод: "\u041f\u0440\u0438\u0432\u0435\u0442"
-{{ encodeUnicode "Hello" }}  // Вывод: "\u0048\u0065\u006c\u006c\u006f"
+{{ encodeUnicode "Привет" }} // Вывод: "\u041f\u0440\u0438\u0432\u0435\u0442".
+{{ encodeUnicode "Hello" }}  // Вывод: "\u0048\u0065\u006c\u006c\u006f".
 ```
 
 ### decodeUnicode
@@ -257,8 +257,8 @@ title: Шаблонизация
 Пример в шаблоне:
 
 ```go
-{{ decodeUnicode "\u041f\u0440\u0438\u0432\u0435\u0442" }} // Вывод: "Привет"
-{{ decodeUnicode "\u0048\u0065\u006c\u006c\u006f" }}      // Вывод: "Hello"
+{{ decodeUnicode "\u041f\u0440\u0438\u0432\u0435\u0442" }} // Вывод: "Привет".
+{{ decodeUnicode "\u0048\u0065\u006c\u006c\u006f" }}      // Вывод: "Hello".
 ```
 
 ## Глобальные переменные
@@ -332,9 +332,9 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .property.environment }}   // Значение параметра "environment"
-{{ .property.count }}         // Значение параметра "count"
-{{ .property.url }}           // Значение параметра "url"
+{{ .property.environment }}   // Значение параметра "environment".
+{{ .property.count }}         // Значение параметра "count".
+{{ .property.url }}           // Значение параметра "url".
 ```
 
 ### Ответ действия
@@ -362,9 +362,9 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .response.status }}        // Статус ответа
-{{ .response.data.id }}       // ID из данных ответа
-{{ .response.headers.auth }}  // Значение заголовка авторизации
+{{ .response.status }}        // Статус ответа.
+{{ .response.data.id }}       // ID из данных ответа.
+{{ .response.headers.auth }}  // Значение заголовка авторизации.
 ```
 
 > **Внимание:** Контекст `{{ .response.* }}` может использоваться только в полях, описывающих правила обновления сущности после запуска действия.
@@ -389,13 +389,13 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .credentials.token }}             // Токен доступа
-{{ .credentials.username }}          // Имя пользователя
-{{ .credentials.password }}          // Пароль
-{{ .credentials.accessKeyId }}       // Access Key ID для S3
-{{ .credentials.secretAccessKey }}   // Secret Access Key для S3
-{{ .credentials.apiKey }}            // API ключ
-{{ .credentials.bearerToken }}       // Bearer токен
+{{ .credentials.token }}             // Токен доступа.
+{{ .credentials.username }}          // Имя пользователя.
+{{ .credentials.password }}          // Пароль.
+{{ .credentials.accessKeyId }}       // Access Key ID для S3.
+{{ .credentials.secretAccessKey }}   // Secret Access Key для S3.
+{{ .credentials.apiKey }}            // API ключ.
+{{ .credentials.bearerToken }}       // Bearer токен.
 ```
 
 ## Сущность (entity)
@@ -416,10 +416,10 @@ title: Шаблонизация
 ### Основные поля сущности
 
 ```go
-{{ .entity.uuid }}           // UUID сущности
-{{ .entity.slug }}           // Идентификатор сущности
-{{ .entity.name }}           // Название сущности
-{{ .entity.description }}    // Описание сущности
+{{ .entity.uuid }}           // UUID сущности.
+{{ .entity.slug }}           // Идентификатор сущности.
+{{ .entity.name }}           // Название сущности.
+{{ .entity.description }}    // Описание сущности.
 ```
 
 ### Параметры сущности
@@ -441,11 +441,11 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .entity.properties.projectId }}     // ID проекта из параметров сущности
-{{ .entity.properties.branch }}        // Ветка Git из параметров сущности
-{{ .entity.properties.environment }}   // Окружение из параметров сущности
-{{ .entity.properties.apiUrl }}        // URL API из параметров сущности
-{{ .entity.properties.version }}       // Версия из параметров сущности
+{{ .entity.properties.projectId }}     // ID проекта из параметров сущности.
+{{ .entity.properties.branch }}        // Ветка Git из параметров сущности.
+{{ .entity.properties.environment }}   // Окружение из параметров сущности.
+{{ .entity.properties.apiUrl }}        // URL API из параметров сущности.
+{{ .entity.properties.version }}       // Версия из параметров сущности.
 ```
 
 ## Параметры процесса
@@ -468,9 +468,9 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .process.deploymentUrl }}    // URL для деплоя из параметров процесса
-{{ .process.branch }}           // Ветка Git из параметров процесса
-{{ .process.environment }}      // Окружение из параметров процесса
+{{ .process.deploymentUrl }}    // URL для деплоя из параметров процесса.
+{{ .process.branch }}           // Ветка Git из параметров процесса.
+{{ .process.environment }}      // Окружение из параметров процесса.
 ```
 
 ## Параметры сценария
@@ -493,7 +493,7 @@ title: Шаблонизация
 Примеры использования:
 
 ```go
-{{ .workflow.apiEndpoint }}       // API endpoint из параметров сценария
-{{ .workflow.notificationEmail }} // Email для уведомлений из параметров сценария
-{{ .workflow.retryAttempts }}     // Количество попыток повтора из параметров сценария
+{{ .workflow.apiEndpoint }}       // API endpoint из параметров сценария.
+{{ .workflow.notificationEmail }} // Email для уведомлений из параметров сценария.
+{{ .workflow.retryAttempts }}     // Количество попыток повтора из параметров сценария.
 ```
