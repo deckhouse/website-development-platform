@@ -77,7 +77,7 @@ jobs:
             projects/data/6db2f1ee-9b6f-4f4f-8381-2fb43060478a/github/registry_host DECKHOUSE_DEV_REGISTRY_HOST | DECKHOUSE_DEV_REGISTRY_HOST ;
             projects/data/101ceaca-97cd-462f-aed5-070d9b9de175/dev-registry/writetoken login | DECKHOUSE_DEV_REGISTRY_USER ;
             projects/data/101ceaca-97cd-462f-aed5-070d9b9de175/dev-registry/writetoken password | DECKHOUSE_DEV_REGISTRY_PASSWORD ;
-            projects/data/6db2f1ee-9b6f-4f4f-8381-2fb43060478a/github/documentation_deploy_secret KUBECONFIG_BASE64_DEV | KUBECONFIG_BASE64_DEV ;
+            projects/data/6db2f1ee-9b6f-4f4f-8381-2fb43060478a/github/documentation_deploy_secret KUBECONFIG_BASE64_DEV_25 | KUBECONFIG_BASE64_DEV ;
 
       - name: Check dev registry credentials
         id: check_dev_registry
@@ -107,8 +107,8 @@ jobs:
           env: ${{ steps.env.outputs.env }}
         env:
           WERF_REPO: ${{ steps.check_dev_registry.outputs.web_registry_path }}
-          WERF_SET_URL: "global.url=deckhouse.${{ steps.env.outputs.env }}.flant.com"
-          WERF_SET_URL_RU: "global.url_ru=deckhouse.ru.${{ steps.env.outputs.env }}.flant.com"
+          WERF_SET_URL: "global.url=deckhouse.${{ steps.env.outputs.env }}.flant.dev"
+          WERF_SET_URL_RU: "global.url_ru=deckhouse-ru.${{ steps.env.outputs.env }}.flant.dev"
 
       - name: Update comment - deployment succeeded
         if: success() && steps.comment.outputs.result
@@ -124,8 +124,8 @@ jobs:
             }
             const repoName = context.repo.repo;
             const appName = repoName.startsWith('website-') ? repoName.replace(/^website-/, '') : repoName;
-            const urlEn = `https://deckhouse.${env}.flant.com/products/${appName}/documentation/`;
-            const urlRu = `https://deckhouse.ru.${env}.flant.com/products/${appName}/documentation/`;
+            const urlEn = `https://deckhouse.${env}.flant.dev/products/${appName}/documentation/`;
+            const urlRu = `https://deckhouse-ru.${env}.flant.dev/products/${appName}/documentation/`;
       
             await github.rest.issues.updateComment({
               owner: context.repo.owner,
