@@ -4,4 +4,4 @@ module github.com/deckhouse/website-development-platform
 
 go 1.24.2
 
-require github.com/deckhouse/hugo-web-product-module v0.1.4 // indirect
+require github.com/deckhouse/hugo-web-product-module v0.1.5 // indirect
