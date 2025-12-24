@@ -170,34 +170,36 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа возвращает все HelmReleases в кластере Kubernetes. Спецификация:
+Платформа возвращает все HelmReleases в кластере Kubernetes.
+
+Спецификация:
 
 ```json
 [
   {
-    "name": "string",              // Название
+    "name": "string",              // Название.
     "info": {
-      "first_deployed": "string",  // Дата и время первого деплоя
-      "last_deployed": "string",   // Дата и время последнего деплоя
-      "deleted": "string",         // Дата и время удаления (может быть пустой строкой)
-      "description": "string",     // Описание
-      "status": "string",          // Статус
-      "notes": "string"            // Заметки
+      "first_deployed": "string",  // Дата и время первого деплоя.
+      "last_deployed": "string",   // Дата и время последнего деплоя.
+      "deleted": "string",         // Дата и время удаления (может быть пустой строкой).
+      "description": "string",     // Описание.
+      "status": "string",          // Статус.
+      "notes": "string"            // Заметки.
     },
     "chart": {
       "metadata": {
-        "name": "string",          // Название чарта
-        "home": "string",          // Домашняя страница
-        "sources": "array",        // Массив строк с URL-адресами источников
-        "version": "string",       // Версия чарта
-        "description": "string",   // Описание чарта
-        "keywords": "array",       // Массив строк с ключевыми словами
-        "maintainers": "array",    // Массив объектов с информацией о мейнтейнерах
-        "icon": "string",          // URL иконки
-        "apiVersion": "string",    // Версия API
-        "appVersion": "string"     // Версия приложения
+        "name": "string",          // Название чарта.
+        "home": "string",          // Домашняя страница.
+        "sources": "array",        // Массив строк с URL-адресами источников.
+        "version": "string",       // Версия чарта.
+        "description": "string",   // Описание чарта.
+        "keywords": "array",       // Массив строк с ключевыми словами.
+        "maintainers": "array",    // Массив объектов с информацией о мейнтейнерах.
+        "icon": "string",          // URL иконки.
+        "apiVersion": "string",    // Версия API.
+        "appVersion": "string"     // Версия приложения.
       },
-      "templates": [               // Массив объектов с шаблонами
+      "templates": [               // Массив объектов с шаблонами.
         {
           "name": "templates/NOTES.txt",
           "data": "..."
@@ -206,11 +208,11 @@ title: Типы источников данных
           "name": "templates/_helpers.tpl",
           "data": "..."
         }
-        // ... другие шаблоны
+        // ... другие шаблоны.
       ],        
-      "values": "object",          // Объект с доступными настройками Helm чарта
-      "schema": "null",            // Схема (может быть null)
-      "files": [                   // Массив объектов с файлами
+      "values": "object",          // Объект с доступными настройками Helm чарта.
+      "schema": "null",            // Схема (может быть null).
+      "files": [                   // Массив объектов с файлами.
         {
           "name": ".helmignore",
           "data": "..."
@@ -219,10 +221,10 @@ title: Типы источников данных
           "name": "LICENSE",
           "data": "..."
         }
-        // ... другие файлы
+        // ... другие файлы.
       ]             
     },
-    "config": {        // Текушая конфигурацию
+    "config": {        // Текущая конфигурация.
       "caSecretName": "string",
       "cache": {
         "enabled": "boolean", 
@@ -230,11 +232,11 @@ title: Типы источников данных
       }
       // ... другие настройки
     },
-    "manifest": "string", // Отрендеренные манифесты
-    "version": "integer", // Версия helmrelease
-    "namespace": "string" // Пространство имен, где развернут релиз
+    "manifest": "string", // Отрендеренные манифесты.
+    "version": "integer", // Версия helmrelease.
+    "namespace": "string" // Пространство имен, где развернут релиз.
   },
-  // ... другие helmreleases
+  // ... другие helmreleases.
 ]
 
 ```
@@ -253,7 +255,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью SASL/PLAIN и SASL/SCRAM. Документация: [Kafka SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [Kafka SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
@@ -262,14 +264,14 @@ title: Типы источников данных
 ```json
 [
   {
-    "Cluster": "string",             // Название кластера Kafka
-    "ResourceType": "string",        // Тип ресурса (TOPIC, GROUP и т.д.)
-    "ResourceName": "string",        // Название ресурса
-    "PatternType": "string",         // Тип паттерна (LITERAL, PREFIXED и т.д.)
-    "Principal": "string",           // Principal пользователя (например: "User:Alice")
-    "Host": "string",                // Хост (обычно "*" для любого хоста)
-    "Operation": "string",           // Операция (READ, WRITE, DESCRIBE и т.д.)
-    "PermissionType": "string"       // Тип разрешения (ALLOW, DENY)
+    "Cluster": "string",             // Название кластера Kafka.
+    "ResourceType": "string",        // Тип ресурса (TOPIC, GROUP и т.д.).
+    "ResourceName": "string",        // Название ресурса.
+    "PatternType": "string",         // Тип паттерна (LITERAL, PREFIXED и т.д.).
+    "Principal": "string",           // Principal пользователя (например: "User:Alice").
+    "Host": "string",                // Хост (обычно "*" для любого хоста).
+    "Operation": "string",           // Операция (READ, WRITE, DESCRIBE и т.д.).
+    "PermissionType": "string"       // Тип разрешения (ALLOW, DENY).
   },
   // ... другие записи ACL
 ]
@@ -281,12 +283,12 @@ title: Типы источников данных
 
 ### Параметры
 
-|Название         |Обязательность   |Описание                                                                                                                                                                                                    |Возможные значения                   |
+|Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 |SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
 |SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
-|User             | **обязательно** | Username пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
-|Pass             | **обязательно** | Password пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
+|User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
+|Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
 ## KafkaBrokers
 
@@ -294,7 +296,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью SASL/PLAIN и SASL/SCRAM. Документация: [Kafka SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [Kafka SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
@@ -302,30 +304,30 @@ title: Типы источников данных
 
 ```json
 {
-  "Cluster": "string",          // Название кластера Kafka (из kafkaBrokerMetadata.Cluster)
-  "Leader": "boolean",          // Является ли брокер лидером-контроллером (true/false)
-  "NodeID": "number",           // Уникальный ID брокера (из broker.NodeID)
-  "Port": "number",             // Порт брокера (из broker.Port)
-  "Host": "string",             // Хост брокера (из broker.Host)
-  "Rack": "string|null",        // Рек (зона доступности) брокера (из broker.Rack)
-  "Configs": {                  // Конфигурации брокера
+  "Cluster": "string",          // Название кластера Kafka (из kafkaBrokerMetadata.Cluster).
+  "Leader": "boolean",          // Является ли брокер лидером-контроллером (true/false).
+  "NodeID": "number",           // Уникальный ID брокера (из broker.NodeID).
+  "Port": "number",             // Порт брокера (из broker.Port).
+  "Host": "string",             // Хост брокера (из broker.Host).
+  "Rack": "string|null",        // Рек (зона доступности) брокера (из broker.Rack).
+  "Configs": {                  // Конфигурации брокера.
     {
-      "Name": "number",         // Уникальный ID брокера
-      "Configs": [              // Массив отдельных конфигураций
+      "Name": "number",         // Уникальный ID брокера.
+      "Configs": [              // Массив отдельных конфигураций.
         {
-          "Key": "listeners",       // Ключ конфигурации
-          "Value": "CLIENT://:9092,INTERNAL://:9094", // Значение конфигурации
-          "Source": "STATIC_BROKER_CONFIG" // Источник конфигурации
+          "Key": "listeners",       // Ключ конфигурации.
+          "Value": "CLIENT://:9092,INTERNAL://:9094", // Значение конфигурации.
+          "Source": "STATIC_BROKER_CONFIG" // Источник конфигурации.
         },
         {
-          "Key": "log.retention.hours", // Ключ конфигурации
-          "Value": 168,                 // Значение конфигурации
-          "Source": "DEFAULT_CONFIG"    // Источник конфигурации
+          "Key": "log.retention.hours", // Ключ конфигурации.
+          "Value": 168,                 // Значение конфигурации.
+          "Source": "DEFAULT_CONFIG"    // Источник конфигурации.
         },
         {
-          "...": "..."                  // Другие параметры
+          "...": "..."                  // Другие параметры.
           // Полный список параметров см. в официальной документации:
-          // https://kafka.apache.org/documentation/#brokerconfigs
+          // https://kafka.apache.org/documentation/#brokerconfigs.
         }
       ]
     }
@@ -339,12 +341,12 @@ title: Типы источников данных
 
 ### Параметры
 
-|Название         |Обязательность   |Описание                                                                                                                                                                                                    |Возможные значения                   |
+|Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 |SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
 |SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
-|User             | **обязательно** | Username пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
-|Pass             | **обязательно** | Password пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
+|User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
+|Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
 ## KafkaTopics
 
@@ -352,7 +354,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью SASL/PLAIN и SASL/SCRAM. Документация: [Kafka SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [Kafka SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
@@ -360,33 +362,33 @@ title: Типы источников данных
 
 ```json
 {
-  "Cluster": "string",           // Название кластера Kafka
-  "Topic": "string",             // Название топика
-  "ID": "string",                // Уникальный идентификатор топика
-  "IsInternal": "boolean",       // Является ли топик внутренним (Пример внутреннего топика: __consumer_offsets)
-  "Partitions": "number",        // Количество партиций в топике
-  "Configs": {                   // Конфигурации топика (динамические параметры)
-    "retention.ms": 604800000,   // Пример параметра: время хранения сообщений
-    "cleanup.policy": "delete",  // Пример параметра: политика очистки
-    "...": "..."                 // Другие параметры
+  "Cluster": "string",           // Название кластера Kafka.
+  "Topic": "string",             // Название топика.
+  "ID": "string",                // Уникальный идентификатор топика.
+  "IsInternal": "boolean",       // Является ли топик внутренним (Пример внутреннего топика: __consumer_offsets).
+  "Partitions": "number",        // Количество партиций в топике.
+  "Configs": {                   // Конфигурации топика (динамические параметры).
+    "retention.ms": 604800000,   // Пример параметра: время хранения сообщений.
+    "cleanup.policy": "delete",  // Пример параметра: политика очистки.
+    "...": "..."                 // Другие параметры.
     // Полный список параметров см. в официальной документации:
-    // https://kafka.apache.org/documentation/#topicconfigs
+    // https://kafka.apache.org/documentation/#topicconfigs.
   }
 }
 ```
 
 ### Конфигурация
 
-* **URL** — URL Kafka в формате `example.com`
+* **URL** — URL Kafka в формате `example.com`.
 
 ### Параметры
 
-|Название         |Обязательность   |Описание                                                                                                                                                                                                    |Возможные значения                   |
+|Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 |SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
 |SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
-|User             | **обязательно** | Username пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
-|Pass             | **обязательно** | Password пользователя для подключения к Kafka                                                                                                                                                              | -                                   |
+|User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
+|Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
 ## KubernetesDeployments
 
@@ -795,7 +797,7 @@ limitParam: limit
 query: "filter=active&sort=name"
 ```
 
-**POST запрос с телом:**
+**POST-запрос с телом:**
 
 ```yaml
 url: https://api.example.com
