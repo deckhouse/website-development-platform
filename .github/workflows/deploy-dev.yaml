@@ -107,8 +107,8 @@ jobs:
           env: ${{ steps.env.outputs.env }}
         env:
           WERF_REPO: ${{ steps.check_dev_registry.outputs.web_registry_path }}
-          WERF_SET_URL: "global.url=deckhouse.${{ steps.env.outputs.env }}.flant.com"
-          WERF_SET_URL_RU: "global.url_ru=deckhouse.ru.${{ steps.env.outputs.env }}.flant.com"
+          WERF_SET_URL: "global.url=deckhouse.${{ steps.env.outputs.env }}.flant.dev"
+          WERF_SET_URL_RU: "global.url_ru=deckhouse-ru.${{ steps.env.outputs.env }}.flant.dev"
 
       - name: Update comment - deployment succeeded
         if: success() && steps.comment.outputs.result
@@ -124,8 +124,8 @@ jobs:
             }
             const repoName = context.repo.repo;
             const appName = repoName.startsWith('website-') ? repoName.replace(/^website-/, '') : repoName;
-            const urlEn = `https://deckhouse.${env}.flant.com/products/${appName}/documentation/`;
-            const urlRu = `https://deckhouse.ru.${env}.flant.com/products/${appName}/documentation/`;
+            const urlEn = `https://deckhouse.${env}.flant.dev/products/${appName}/documentation/`;
+            const urlRu = `https://deckhouse-ru.${env}.flant.dev/products/${appName}/documentation/`;
       
             await github.rest.issues.updateComment({
               owner: context.repo.owner,
