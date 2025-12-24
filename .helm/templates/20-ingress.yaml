@@ -33,7 +33,7 @@ spec:
 {{- if eq $.Values.werf.env "production" }}
     secretName: star-{{ .URL | replace "." "-" }}
 {{- else }}
-    secretName: {{ pluck $.Values.web.env $.Values.wildCertificateSecret | first | default $.Values.wildCertificateSecret._default }}
+    secretName: {{ pluck $.Values.werf.env $.Values.wildCertificateSecret | first | default $.Values.wildCertificateSecret._default }}
 {{- end }}
   rules:
   - host: {{ .URL }}
