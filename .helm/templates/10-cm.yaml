@@ -52,7 +52,7 @@ data:
           "deckhouse.ru"   "ru";
           "*.deckhouse.ru"   "ru";
           # for test environments
-          "deckhouse.ru.*" "ru";
+          "deckhouse-ru.*" "ru";
           default       "en";
       }
 
