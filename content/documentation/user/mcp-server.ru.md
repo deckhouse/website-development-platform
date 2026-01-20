@@ -312,13 +312,13 @@ MCP — это открытый протокол для взаимодейств
    - Сохраните конфигурацию.
    - LM Studio попытается подключиться к серверу.
    - Если подключение успешно, вы увидите список доступных инструментов:
-      - `get_resources`.
-      - `get_resource_entities`.
-      - `get_actions_for_resource`.
-      - `get_actions_for_entity`.
-      - `get_datasources_for_resource`.
-      - `get_self_service_capabilities`.
-      - `get_external_data`.
+     - `get_resources`.
+     - `get_resource_entities`.
+     - `get_actions_for_resource`.
+     - `get_actions_for_entity`.
+     - `get_datasources_for_resource`.
+     - `get_self_service_capabilities`.
+     - `get_external_data`.
 
 После успешного подключения вы можете использовать инструменты в диалогах с моделями:
 
