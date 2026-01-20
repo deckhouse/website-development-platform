@@ -365,19 +365,29 @@ weight: 20
 
 - Тип: `global`.
 - Разрешения: все глобальные разрешения.
-- Назначение: супер-администраторы системы.
+- Назначение: администраторы системы.
 
 ##### Пресет «Viewer»
 
 - Тип: `global`.
 - Разрешения:
   - `read:actions`, `read:automations`, `read:dashboards`.
-  - `read:datasources`, `read:entities`, `read:resources`.
-  - `read:webhooks`, `read:widgets`, `read:workflows`.
-  - `read:resource-relations`, `read:system-alerts`.
-  - `view:admin-page`, `view:self-service-page`.
-  - `read:audit-logs`, `read:processes`.
+  - `read:datasources`, `read:entities`, `read:external-services`.
+  - `read:processes`, `read:resource-relations`, `read:resources`.
+  - `read:seeds`, `read:system-alerts`, `read:webhooks`.
+  - `read:widgets`, `read:workflows`.
+  - `read:audit-logs`, `view:admin-page`, `view:self-service-page`.
 - Назначение: Пользователи с правами только на просмотр.
+
+##### Пресет «Developer»
+
+- Тип: `global`.
+- Разрешения:
+  - `read:actions`, `read:dashboards`, `read:external-services`.
+  - `read:processes`, `read:widgets`, `read:workflows`.
+  - `run:actions`, `run:widget-actions`, `control:processes`.
+  - `update:team-variables`.
+- Назначение: Разработчики, которым нужен доступ к просмотру информации и выполнению действий, но не требуется доступ к созданию, изменению или удалению объектов. Разработчики видят только те сущности, к которым им предоставлен доступ через привязки ролей на уровне ресурсов или сущностей.
 
 #### Пресеты для процессов
 
@@ -421,17 +431,11 @@ weight: 20
 - Разрешения: все глобальные разрешения (используйте пресет «Admin»).
 - Назначение: супер-администраторы.
 
-#### Роль  «Просмотрщик»
+#### Роль «Администратор ресурса»
 
 - Тип: `resources`.
 - Разрешения: все разрешения для ресурсов (используйте пресет «Resource admin»).
 - Назначение: конкретный ресурс, команда «Администраторы».
-
-#### Роль "Администратор ресурса"
-
-- Тип: `resources`
-- Разрешения: Все разрешения для ресурсов (используйте пресет "Resource admin")
-- Назначение: Конкретный ресурс, команда "Администраторы"
 
 #### Роль «Оператор процессов»
 
