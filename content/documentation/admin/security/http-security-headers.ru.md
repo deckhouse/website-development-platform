@@ -72,7 +72,7 @@ Content Security Policy (CSP) — это механизм безопасност
 
 ### CSP по умолчанию
 
-```sh
+```text
 default-src 'self';
 script-src 'self';
 style-src 'self' 'unsafe-inline';

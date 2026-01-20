@@ -81,7 +81,7 @@ moduleStatus: experimental
 
 **Пример:**
 
-```sh
+```text
 Authorization: <ваш-api-token>
 ```
 
@@ -97,11 +97,11 @@ Authorization: <ваш-api-token>
 
 **Пример:**
 
-```sh
+```text
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
-Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации](https://docs.defectdojo.com/en/api/api-v2-docs/).
+Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации Defectdojo](https://docs.defectdojo.com/en/api/api-v2-docs/).
 
 ### Docker Registry
 
@@ -119,7 +119,7 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 2. Закодируйте её в Base64: `echo "username:password" | base64`
 3. Добавьте заголовок:
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
@@ -135,7 +135,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 **Пример:**
 
-```sh
+```text
 Private-Token: <ваш-gitlab-token>
 ```
 
@@ -157,7 +157,7 @@ Private-Token: <ваш-gitlab-token>
 2. Закодируйте её в Base64: `echo "username:password" | base64`
 3. Добавьте заголовок:
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
@@ -173,7 +173,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 **Пример:**
 
-```sh
+```text
 Authorization: <ваш-kaiten-api-token>
 ```
 
@@ -189,7 +189,7 @@ Authorization: <ваш-kaiten-api-token>
 
 **Пример:**
 
-```sh
+```text
 Authorization: Bearer <ваш-kubernetes-token>
 ```
 
@@ -209,7 +209,7 @@ Authorization: Bearer <ваш-kubernetes-token>
 2. Закодируйте её в Base64: `echo "username:password" | base64`
 3. Добавьте заголовок:
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
@@ -229,7 +229,7 @@ Authorization: Basic <base64-encoded-credentials>
 2. Закодируйте её в Base64: `echo "username:password" | base64`
 3. Добавьте заголовок:
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
@@ -245,13 +245,13 @@ Authorization: Basic <base64-encoded-credentials>
 
 **Пример Bearer Token:**
 
-```sh
+```text
 Authorization: Bearer <ваш-токен>
 ```
 
 **Пример Basic Authentication:**
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
@@ -267,6 +267,6 @@ Authorization: Basic <base64-encoded-credentials>
 
 **Пример:**
 
-```sh
+```text
 Authorization: Bearer <ваш-токен>
 ```
