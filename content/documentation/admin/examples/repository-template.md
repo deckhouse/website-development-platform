@@ -1,5 +1,9 @@
 ---
 title: Repository template in DDP
+params:
+  relatedLinks:
+    - title: "Go Template Syntax"
+      url: "https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax"
 ---
 
 This guide explains how to create a repository template for the DDP platform. A repository template is a Git repository that contains templated code and can be used to create new repositories by applying templating variables.
