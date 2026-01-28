@@ -1,7 +1,7 @@
 ---
 title: "Шаблон репозитория в DDP"
 params:
-  relatdLinks:
+  relatedLinks:
     - title: "Действие CreateRepositoryFromTemplate"
       url: "../../actions/types/#createrepositoryfromtemplate"
     - title: "Автоматическое обновление сервисов"
