@@ -1,5 +1,15 @@
 ---
-title: Шаблон репозитория в DDP
+title: "Шаблон репозитория в DDP"
+params:
+  relatdLinks:
+    - title: "Действие CreateRepositoryFromTemplate"
+      url: "../../actions/types/#createrepositoryfromtemplate"
+    - title: "Автоматическое обновление сервисов"
+      url: "../service-autoupdates/"
+    - title: "Шаблонизация в DDP"
+      url: "../../../user/templating/"
+    - title: "Go Template Syntax"
+      url: "https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax"
 ---
 
 Инструкция описывает создание шаблона репозитория для платформы DDP. Шаблон репозитория — это Git-репозиторий, содержащий шаблонизированный код, который может быть использован для создания новых репозиториев с применением переменных шаблонизации.
