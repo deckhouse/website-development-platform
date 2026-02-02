@@ -1360,10 +1360,6 @@ docker:
 
 * **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
 
-### Документация API
-
-- [Nexus 3 REST API: Repository Management](https://help.sonatype.com/en/repositories-api.html)
-
 ## DeleteNexusRepository
 
 **DeleteNexusRepository** — удаляет существующий репозиторий из Nexus Repository Manager 3.
@@ -1390,6 +1386,257 @@ name: my-repo-to-delete
 
 * **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
 
-### Документация API
+## CreateNexusPrivilege
 
-- [Nexus 3 REST API: Repository Management](https://help.sonatype.com/en/repositories-api.html).
+CreateNexusPrivilege — создаёт новую привилегию в Nexus Repository Manager 3. Привилегии определяют права доступа к репозиториям и другим ресурсам Nexus.
+
+### Пример запроса (repository-view)
+
+```yaml
+name: example-privilege
+description: Example privilege description
+type: repository-view
+actions:
+  - READ
+  - BROWSE
+format: maven2
+repository: maven-releases
+```
+
+### Пример запроса (repository-content-selector)
+
+```yaml
+name: content-selector-privilege
+description: Privilege with content selector
+type: repository-content-selector
+actions:
+  - READ
+format: maven2
+repository: maven-releases
+contentSelector: my-content-selector
+```
+
+### Пример запроса (wildcard)
+
+```yaml
+name: wildcard-privilege
+description: Wildcard privilege
+type: wildcard
+pattern: nx-*
+actions:
+  - READ
+```
+
+### Спецификация запроса
+
+| Поле             | Обязательность  | Описание                                                                                                                                    |
+|------------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| name             | **обязательно** | Название создаваемой привилегии. Должно быть уникальным в рамках Nexus                                                                      |
+| description      | опционально     | Описание привилегии                                                                                                                         |
+| type             | **обязательно** | Тип привилегии: `repository-view`, `repository-content-selector`, `repository-admin`, `application`, `wildcard`                            |
+| actions          | опционально     | Список действий, разрешённых привилегией (например, `READ`, `BROWSE`, `CREATE`, `UPDATE`, `DELETE`)                                        |
+| format           | опционально     | Формат репозитория (например, `maven2`, `docker`, `npm`). Используется для типов `repository-view`, `repository-content-selector`, `repository-admin` |
+| repository       | опционально     | Название репозитория. Используется для типов `repository-view`, `repository-content-selector`, `repository-admin`                            |
+| contentSelector  | опционально     | Название селектора контента. Обязателен для типа `repository-content-selector`. Если не указан или невалиден, тип автоматически преобразуется в `repository-view` |
+| pattern          | опционально     | Паттерн для типа `wildcard`                                                                                                                  |
+| domain           | опционально     | Домен для типа `application`                                                                                                                 |
+| attributes       | опционально     | Дополнительные атрибуты в формате ключ-значение                                                                                              |
+
+### Примечание
+
+Для типа `repository-content-selector` селектор контента должен существовать в Nexus до создания привилегии. Если селектор контента не указан или невалиден, действие автоматически преобразует тип привилегии в `repository-view`.
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+## AssignNexusPrivilege
+
+AssignNexusPrivilege — назначает привилегии существующей роли в Nexus Repository Manager 3. Действие получает текущую конфигурацию роли и объединяет существующие привилегии с новыми.
+
+### Пример запроса
+
+```yaml
+roleId: example-role
+privileges:
+  - example-privilege
+  - another-privilege
+```
+
+### Спецификация запроса
+
+| Поле       | Обязательность  | Описание                                                                     |
+|------------|-----------------|------------------------------------------------------------------------------|
+| roleId     | **обязательно** | Идентификатор роли, которой назначаются привилегии                            |
+| privileges | **обязательно** | Список названий привилегий, которые необходимо назначить роли                |
+
+### Алгоритм работы
+
+1. Получает текущую конфигурацию роли из Nexus.
+2. Объединяет существующие привилегии роли с новыми привилегиями из запроса.
+3. Обновляет роль с объединённым списком привилегий.
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+### Примечание
+
+Роль должна существовать в Nexus до назначения привилегий. Если роль не найдена, действие завершится с ошибкой. Все указанные привилегии также должны существовать в Nexus.
+
+## DeleteNexusPrivilege
+
+DeleteNexusPrivilege — удаляет привилегию из Nexus Repository Manager 3.
+
+### Пример запроса
+
+```yaml
+name: example-privilege
+```
+
+### Спецификация запроса
+
+| Поле | Обязательность  | Описание                                    |
+|------|-----------------|---------------------------------------------|
+| name | **обязательно** | Название привилегии, которую требуется удалить |
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+## CreateNexusRole
+
+CreateNexusRole — создаёт новую роль в Nexus Repository Manager 3. Роли объединяют привилегии и могут включать другие роли.
+
+### Пример запроса
+
+```yaml
+id: example-role
+name: Example Role
+description: Example role description
+privileges:
+  - nx-repository-view-*-*-read
+  - nx-repository-view-maven2-*-browse
+roles: []
+```
+
+### Спецификация запроса
+
+| Поле        | Обязательность  | Описание                                                                     |
+|-------------|-----------------|------------------------------------------------------------------------------|
+| id          | **обязательно** | Уникальный идентификатор роли                                                |
+| name        | **обязательно** | Название роли                                                                |
+| description | опционально     | Описание роли                                                                |
+| privileges  | опционально     | Список названий привилегий, которые назначаются роли                         |
+| roles       | опционально     | Список идентификаторов других ролей, которые включаются в данную роль        |
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+## AssignNexusRole
+
+AssignNexusRole — назначает роли существующему пользователю в Nexus Repository Manager 3. Действие получает текущую конфигурацию пользователя и объединяет существующие роли с новыми.
+
+### Пример запроса
+
+```yaml
+userId: example-user
+roles:
+  - example-role
+  - another-role
+```
+
+### Спецификация запроса
+
+| Поле   | Обязательность  | Описание                                                      |
+|--------|-----------------|---------------------------------------------------------------|
+| userId | **обязательно** | Идентификатор пользователя, которому назначаются роли          |
+| roles  | **обязательно** | Список идентификаторов ролей, которые необходимо назначить пользователю |
+
+### Алгоритм работы
+
+1. Получает текущую конфигурацию пользователя из Nexus.
+2. Объединяет существующие роли пользователя с новыми ролями из запроса.
+3. Обновляет пользователя с объединённым списком ролей.
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+### Примечание
+
+Пользователь должен существовать в Nexus до назначения ролей. Если пользователь не найден, действие завершится с ошибкой. Все указанные роли также должны существовать в Nexus.
+
+## DeleteNexusRole
+
+DeleteNexusRole — удаляет роль из Nexus Repository Manager 3.
+
+### Пример запроса
+
+```yaml
+id: example-role
+```
+
+### Спецификация запроса
+
+| Поле | Обязательность  | Описание                                |
+|------|-----------------|-----------------------------------------|
+| id   | **обязательно** | Идентификатор роли, которую требуется удалить |
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+## CreateNexusUser
+
+CreateNexusUser — создаёт нового пользователя в Nexus Repository Manager 3.
+
+### Пример запроса
+
+```yaml
+userId: example-user
+firstName: First
+lastName: Last
+emailAddress: user@example.com
+password: password
+status: active
+roles:
+  - nx-admin
+```
+
+### Спецификация запроса
+
+| Поле        | Обязательность  | Описание                                                                     |
+|-------------|-----------------|------------------------------------------------------------------------------|
+| userId      | **обязательно** | Уникальный идентификатор пользователя                                        |
+| firstName   | **обязательно** | Имя пользователя                                                             |
+| lastName    | **обязательно** | Фамилия пользователя                                                         |
+| emailAddress| **обязательно** | Email-адрес пользователя                                                     |
+| password    | **обязательно** | Пароль пользователя                                                          |
+| status      | **обязательно** | Статус пользователя: `active` или `disabled`                                |
+| roles       | опционально     | Список идентификаторов ролей, которые назначаются пользователю при создании  |
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
+
+## DeleteNexusUser
+
+DeleteNexusUser — удаляет пользователя из Nexus Repository Manager 3.
+
+### Пример запроса
+
+```yaml
+userId: example-user
+```
+
+### Спецификация запроса
+
+| Поле   | Обязательность  | Описание                                    |
+|--------|-----------------|---------------------------------------------|
+| userId | **обязательно** | Идентификатор пользователя, которого требуется удалить |
+
+### Учетные данные
+
+* **token** — строка base64(`admin:password`), используется как Basic Auth при запросах к Nexus.
