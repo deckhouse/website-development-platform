@@ -24,8 +24,7 @@ Checks run in the background on the backend. A separate schedule is created for 
 
 ### 2.1. Enabling and disabling monitoring
 
-- **Enable Monitoring** — master switch for monitoring for the service.
-- **Enable Health Check** — turn the checks themselves on or off within monitoring (with monitoring on, you can temporarily disable only the checks).
+- **Enable Monitoring** — switch to enable or disable monitoring for the service. When enabled, periodic health checks run according to the monitoring config.
 
 When monitoring is disabled, the schedule for that service is removed and no new checks run. Status and history remain in the database until the service is deleted.
 
@@ -76,8 +75,6 @@ Example text on failure:
 - By default **no more than 10 recent entries** per service are kept; older ones are removed automatically after each new check.
 - Each entry includes: check time, status, response time (ms), error message (if any).
 
-The limit of 10 entries per service is defined in code and is not configurable.
-
 ---
 
 ## 3. How to use
@@ -93,7 +90,6 @@ The limit of 10 entries per service is defined in code and is not configurable.
 
 3. **Monitoring tab**  
    - Turn on **Enable Monitoring**.  
-   - Turn on **Enable Health Check**.  
    - Set **Schedule (cron)** — e.g. `*/5 * * * *` for every 5 minutes.  
    - Optionally change **Timeout**, **Method**, **Path**, **Expected Status Code**, request body, and headers.  
    - In **Notifications**, choose notification type (None / Webhook / System Alert) and if needed configure webhook (URL, method, headers) or alert templates.  
@@ -121,7 +117,6 @@ Base path: `GET/POST/PUT/DELETE /api/v2/external_services` and by UUID: `/api/v2
   "url": "https://api.example.com",
   "monitoringEnabled": true,
   "monitoringConfig": {
-    "enabled": true,
     "scheduleExpression": "*/5 * * * *",
     "method": "GET",
     "path": "/health",
@@ -178,7 +173,7 @@ An invalid expression will cause a validation error when saving the service (bot
 
 - **Timeout** is the maximum time to wait for a single health-check HTTP request; **schedule (cron)** is how often that check runs. They are independent.
 - One check per service runs at most once per cron tick; concurrent checks for the same service are blocked.
-- History: **no more than 10 entries per service**; the limit is the same for all services (10 per service), configurable only in code.
+- History: **no more than 10 entries per service**; the limit is the same for all services (10 per service).
 - Notifications are sent **only on status change** (e.g. healthy → unhealthy or unhealthy → healthy), not on every check.
 - For webhook you can set URL, method, and headers; the body uses the same templates as the messages.
 
@@ -192,14 +187,14 @@ An invalid expression will cause a validation error when saving the service (bot
 | Notification type and webhook/alert parameters | Same Notifications block in the form / same fields in `monitoringConfig` |
 | View current status | UI: Monitoring tab on service details; API: `GET .../health` |
 | View check history | UI: Check History table on Monitoring tab; API: `GET .../health/history` |
-| History limit (10 per service) | Backend code only (constant or config at startup) |
+| History limit (10 per service) | Fixed by the platform, not configurable |
 
 ---
 
 ## 7. Quick checklist
 
 1. Create or open an external service (URL, system account if needed).  
-2. Enable **Enable Monitoring** and **Enable Health Check**.  
+2. Enable **Enable Monitoring**.  
 3. Set **Schedule (cron)** (e.g. `*/5 * * * *`).  
 4. Optionally change Path, Method, Expected Status Code, Timeout.  
 5. Optionally enable notifications (Webhook or System Alert) and configure them.  
