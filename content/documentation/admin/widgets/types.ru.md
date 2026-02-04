@@ -610,7 +610,7 @@ title: Типы виджетов
 
 Пример корректного запроса для виджета:
 
-```text
+```sh
 rate(nginx_ingress_controller_nginx_process_connections[5m])
 ```
 
@@ -645,7 +645,7 @@ rate(nginx_ingress_controller_nginx_process_connections[5m])
 
 Пример корректной query для виджета:
 
-```text
+```sh
 sum(ingress_nginx_detail_requests_total)
 ```
 
