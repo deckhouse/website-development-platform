@@ -668,19 +668,19 @@ GenericAPI поддерживает любые типы аутентификац
 
 **Bearer Token:**
 
-```text
+```sh
 Authorization: Bearer <токен>
 ```
 
 **Basic Authentication:**
 
-```text
+```sh
 Authorization: Basic <base64-encoded-credentials>
 ```
 
 **API Key:**
 
-```text
+```sh
 X-API-Key: <ключ>
 ```
 
