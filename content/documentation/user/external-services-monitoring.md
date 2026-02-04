@@ -1,187 +1,204 @@
 ---
-title: External services monitoring
+title: External services health monitoring
 menuTitle: External services monitoring
 d8Edition: ee
 moduleStatus: experimental
 ---
 
-External services monitoring is a mechanism for automatically checking the availability and correct operation of external services connected to the platform. The platform runs periodic health checks and displays the current status of each service in the UI.
+Full description of capabilities and instructions for using health checks for external services.
 
-## How it works
+## 1. Overview
 
-The platform automatically performs health checks for external services on a schedule. For each service, you can configure the check parameters: request method, path, expected HTTP status, timeout, headers, and (if needed) the request body.
+External services health monitoring allows you to:
 
-The result of each check is stored, and the service status is updated based on the most recent successful or failed response.
+- **Periodically check availability** of an external service over HTTP(S).
+- **Store status** (healthy / unhealthy / unknown) and **check history** (time, response code, response time, errors).
+- **Notify** on status change (webhook or system alert).
+- **Configure schedule** for checks using cron expressions (for example, every 5 minutes).
 
-Possible statuses:
+Checks run in the background on the backend. A separate schedule is created for each external service with monitoring enabled; when a service is updated or removed, the schedule is updated automatically.
 
-- `healthy`: the service is reachable and the response matches the expected parameters.
-- `unhealthy`: the service is unreachable, does not respond within the timeout, or returns an unexpected status/error.
-- `unknown`: the status is not yet determined (for example, the check has not run yet or there is no data about the last check).
+---
 
-## Configuring monitoring
+## 2. Capabilities
 
-Monitoring is configured in **Administration** → **External services** when creating or editing an external service.
+### 2.1. Enabling and disabling monitoring
 
-### Monitoring parameters
+- **Enable Monitoring** — switch to enable or disable monitoring for the service. When enabled, periodic health checks run according to the monitoring config.
 
-| Parameter | Description | Example |
-|----------|-------------|---------|
-| **Enable monitoring** | Enables or disables automatic health checks for the service | Enabled |
-| **Check interval** | How often to run the service health check | `5m`, `1h`, `30s` |
-| **Request method** | HTTP method used for the health check | `GET`, `POST`, `PUT` |
-| **Check path** | Server path used for the health check | `/health`, `/api/status` |
-| **Expected status code** | HTTP status code considered successful | `200`, `201` |
-| **Request timeout** | Maximum time to wait for a response | `10s`, `30s` |
-| **Headers** | Additional HTTP headers to include in the request | `Content-Type: application/json` |
-| **Request body** | Request body (for POST/PUT methods) | JSON or YAML |
+When monitoring is disabled, the schedule for that service is removed and no new checks run. Status and history remain in the database until the service is deleted.
 
-### Configuration examples
+### 2.2. Health check settings
 
-Health check using a GET request:
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Schedule (cron)** | How often to run checks, in cron format (minute hour day month day_of_week). | `*/5 * * * *` (every 5 minutes) |
+| **Timeout** | Timeout for a single HTTP request (e.g. `10s`, `30s`). | `10s` |
+| **Method** | HTTP method for the request. | GET |
+| **Path** | Path relative to the service base URL (e.g. `/health`, `/api/status`). | `/health` |
+| **Expected Status Code** | HTTP response code that indicates a successful check. | 200 |
+| **Request Body** | Request body in YAML/JSON (for POST/PUT/PATCH). | — |
+| **Headers** | Additional request headers. | — |
 
-- Method: `GET`
-- Path: `/health`
-- Expected status code: `200`
-- Timeout: `10s`
+Final check URL: `{service URL}{Path}` (e.g. `https://api.example.com/health`).
 
-Health check using a POST request:
+**Statuses:**
 
-- Method: `POST`
-- Path: `/api/health/check`
-- Expected status code: `200`
-- Request body: `{"check": true}`
-- Headers: `Content-Type: application/json`
+- **healthy** — request completed, response code matches expected.
+- **unhealthy** — network error, timeout, response code does not match, or server returned 5xx/429.
+- **unknown** — check has not run yet or data is missing.
 
-### Using templates
+### 2.3. Notifications
 
-You can use templates in request headers and the request body to substitute values:
+You can send a notification when status changes:
 
-- `{{.service.name}}`: service name
-- `{{.service.url}}`: service URL
-- `{{.status}}`: current status
-- `{{.error}}`: error message
-- `{{.responseTime}}`: response time
+| Type | Description |
+|------|-------------|
+| **None** | Notifications disabled. |
+| **Webhook** | HTTP request to the specified URL when status becomes unhealthy or when it recovers (healthy). URL, method, and headers are configurable; body can use templates. |
+| **System Alert** | Create a system alert in the platform (if this feature is enabled). Alert name and description templates can be set. |
 
-## Viewing health status
+**Message templates** (for webhook and alerts):
 
-The health status of an external service is shown in several places:
+- `{{.service.name}}` — external service name.
+- `{{.service.url}}` — service URL.
+- `{{.status}}` — new status (healthy / unhealthy).
+- `{{.error}}` — error message (if any).
+- `{{.responseTime}}` — response time in milliseconds.
 
-- in the external services list
-- on the service details page
-- in the check history
-- in the dashboard widget (if enabled)
+Example text on failure:  
+`Service {{.service.name}} is unhealthy. Error: {{.error}}`
 
-**In the external services list**: In **Administration** → **External services**, the table includes a **Status** column with color indication:
+### 2.4. Check history
 
-- Green - the service is operating normally (`healthy`).
-- Red - the service is unavailable (`unhealthy`).
-- Gray - the status is not determined (`unknown`).
+- **Each** external service has its own check history.
+- By default **no more than 10 recent entries** per service are kept; older ones are removed automatically after each new check.
+- Each entry includes: check time, status, response time (ms), error message (if any).
 
-**On the service details page**: When you open an external service, you can see detailed health information:
+---
 
-- current status
-- time of the last check
-- time of the last successful check
-- response time
-- last error message (if any)
+## 3. How to use
 
-**In the check history**: The service details page shows the recent health check history, including:
+### 3.1. Via the web UI
 
-- status of each check
-- check time
-- response time
-- error message (if the check failed)
+1. **Go to external services**  
+   Administration → External Services.
 
-By default, the platform stores the last 10 history records. You can change this limit in the platform configuration.
+2. **Create or open an external service**  
+   - Create: **Connect** button, fill in name, slug, URL, and if needed system account and headers.  
+   - Edit: pencil icon next to the row.
 
-**In the dashboard widget**: The **External services health** widget lets you track the state of all external services that have monitoring enabled.
+3. **Monitoring tab**  
+   - Turn on **Enable Monitoring**.  
+   - Set **Schedule (cron)** — e.g. `*/5 * * * *` for every 5 minutes.  
+   - Optionally change **Timeout**, **Method**, **Path**, **Expected Status Code**, request body, and headers.  
+   - In **Notifications**, choose notification type (None / Webhook / System Alert) and if needed configure webhook (URL, method, headers) or alert templates.  
+   - Save the service.
 
-The widget shows:
+4. **Viewing status and history**  
+   - In the external services table, the **Status** column shows current status (healthy / unhealthy / unknown).  
+   - Open the service and on the Monitoring tab at the bottom you will see:  
+     - **Health Status** — last check, response time, last error.  
+     - **Check History** — table of recent checks (time, status, response time, error).
 
-- Summary statistics: total number of services and how many are in `healthy`, `unhealthy`, and `unknown` states
-- Services table: a list of services with the following details:
-  - Service name
-  - Health status
-  - Response time
-  - Time of the last check
-  - Error description (if any)
+5. **Monitoring-only configuration**  
+   On the external services list page, each row has a monitor icon button (**Configure monitoring**) — it opens the same edit dialog with focus on the Monitoring tab.
 
-The widget supports pagination for easier viewing when there are many services. You can choose how many entries to display per page: 5, 10, 20, 50, or 100.
+### 3.2. Via API
 
-## Notifications
+Base path: `GET/POST/PUT/DELETE /api/v2/external_services` and by UUID: `/api/v2/external_services/:external_service_uuid`.
 
-When an external service health status changes, the platform can send notifications. Notification settings are configured per service in that service’s monitoring configuration.
+**Create or update a service with monitoring (request body fragment):**
 
-Notification types:
-
-- **No notifications**: notifications are not sent.
-- **Webhook**: sends a notification to the specified webhook URL.
-- **System notification**: creates a system notification in the platform (available to administrators only).
-
-Notifications are triggered on the following events:
-
-- `healthy` → `unhealthy`: the service becomes unavailable or starts returning errors.
-- `unhealthy` → `healthy`: the service recovers and passes health checks again.
-
-You can use template variables in notification messages:
-
-- `{{service.name}}`: service name
-- `{{service.url}}`: service URL
-- `{{status}}`: current status
-- `{{error}}`: error message
-- `{{responseTime}}`: response time
-
-Example message:
-
-```text
-Service {{.service.name}} ({{.service.url}}) became unavailable.
-Error: {{.error}}
-Response time: {{.responseTime}}ms
+```json
+{
+  "name": "My API",
+  "slug": "my-api",
+  "url": "https://api.example.com",
+  "monitoringEnabled": true,
+  "monitoringConfig": {
+    "scheduleExpression": "*/5 * * * *",
+    "method": "GET",
+    "path": "/health",
+    "expectedStatusCode": 200,
+    "timeout": "10s",
+    "notificationType": "none",
+    "messages": {
+      "unhealthyMessage": "Service {{.service.name}} is unhealthy",
+      "recoveryMessage": "Service {{.service.name}} recovered"
+    },
+    "webhookMethod": "POST"
+  }
+}
 ```
 
-## Availability check before use
+**Get current health status:**
 
-The platform can check an external service’s availability before running operations that depend on it:
+```http
+GET /api/v2/external_services/:external_service_uuid/health
+```
 
-- **Data sources**: before data synchronization.
-- **Actions**: before executing an action that uses the external service.
-- **Widgets**: before loading widget data.
-- **Widget actions**: before running an action from the widget UI.
+Response includes `status`, `lastCheckAt`, `lastSuccessAt`, `lastError`, `responseTimeMs`, etc.
 
-If the service is unavailable (`unhealthy`), the operation is blocked and the user sees a clear error message. This reduces the risk of silent failures and prevents starting operations that are unlikely to complete successfully.
+**Get check history:**
 
-> **Warning:** if monitoring is disabled for the service, availability checks before use are not performed, and operations may run regardless of the service’s actual state.
+```http
+GET /api/v2/external_services/:external_service_uuid/health/history?limit=10&offset=0
+```
 
-## Recommendations
+Response is an array of entries with fields `checkedAt`, `status`, `responseTimeMs`, `error`.
 
-### Check interval
+---
 
-Choose the interval based on the service’s criticality and the acceptable incident response time:
+## 4. Cron expressions (schedule)
 
-- **Critical services**: every 1 to 5 minutes.
-- **Important services**: every 15 to 30 minutes.
-- **Regular services**: once an hour or less frequently.
+Format: **minute hour day_of_month month day_of_week** (standard cron with step and range support).
 
-### Timeout
+Examples:
 
-Set the timeout to account for normal response time and network latency:
+| Expression | Meaning |
+|------------|---------|
+| `*/5 * * * *` | Every 5 minutes |
+| `*/1 * * * *` | Every minute |
+| `0 * * * *` | Every hour (at minute 0) |
+| `0 */2 * * *` | Every 2 hours |
+| `0 0 * * *` | Once a day at midnight |
+| `0 9 * * 1-5` | At 9:00 on weekdays |
 
-- for fast services: 5 to 10 seconds
-- for slow services: 30 to 60 seconds
+An invalid expression will cause a validation error when saving the service (both on the backend and in the UI when checks are enabled).
 
-### Use dedicated health-check endpoints
+---
 
-Use dedicated health endpoints (for example, `/health`, `/api/status`). These endpoints should:
+## 5. Limitations and notes
 
-- Respond quickly.
-- Ideally require no authentication, or use minimal permissions.
-- Avoid creating noticeable load on the service.
+- **Timeout** is the maximum time to wait for a single health-check HTTP request; **schedule (cron)** is how often that check runs. They are independent.
+- One check per service runs at most once per cron tick; concurrent checks for the same service are blocked.
+- History: **no more than 10 entries per service**; the limit is the same for all services (10 per service).
+- Notifications are sent **only on status change** (e.g. healthy → unhealthy or unhealthy → healthy), not on every check.
+- For webhook you can set URL, method, and headers; the body uses the same templates as the messages.
 
-### Monitoring critical services
+---
 
-For services that key processes depend on, it is recommended to:
+## 6. Where things are configured
 
-- Enable notifications on status changes.
-- Configure a short check interval.
-- Use system notifications for administrators (or a webhook integration with your on-call channel).
+| What | Where |
+|------|-------|
+| Enable monitoring, schedule, method, path, status code, timeout, body, headers | UI: external service form → Monitoring tab / API: `monitoringConfig` in create/update body |
+| Notification type and webhook/alert parameters | Same Notifications block in the form / same fields in `monitoringConfig` |
+| View current status | UI: Monitoring tab on service details; API: `GET .../health` |
+| View check history | UI: Check History table on Monitoring tab; API: `GET .../health/history` |
+| History limit (10 per service) | Fixed by the platform, not configurable |
+
+---
+
+## 7. Quick checklist
+
+1. Create or open an external service (URL, system account if needed).  
+2. Enable **Enable Monitoring**.  
+3. Set **Schedule (cron)** (e.g. `*/5 * * * *`).  
+4. Optionally change Path, Method, Expected Status Code, Timeout.  
+5. Optionally enable notifications (Webhook or System Alert) and configure them.  
+6. Save.  
+7. Monitor status in the table and service details; check history and backend logs if needed.
+
+If status stays **unknown** after saving, wait for the first schedule run (e.g. within 5 minutes for `*/5 * * * *`) or check backend logs for check execution errors.
