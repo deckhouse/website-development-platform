@@ -13,15 +13,15 @@ weight: 10
 
 Конфигурация виджета включает общие параметры и набор полей, специфичных для конкретного типа виджета.
 
-В конфигурации поддерживается использование синтаксиса [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax) для шаблонизации, при обработке виджета, например:
+В конфигурации поддерживается использование синтаксиса [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) для шаблонизации, при обработке виджета, например:
 
 * `{{ .entity.name }}` - подстановка значения параметра сущности «name».
 * `{{ .credentials.token }}` - подстановка учетных данных с названием «token».
 
 Для каждого виджета доступно задание области видимости:
 
-* **Global** - виджет не поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax);
-* **Resource** - виджет поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax). Виджеты с областью видимости Resource можно прикрепить только к страницам сущности.
+* **Global** - виджет не поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax);
+* **Resource** - виджет поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax). Виджеты с областью видимости Resource можно прикрепить только к страницам сущности.
 
 В конфигурации виджетов возможно задание учетной записи, с данными которой виджет будет взаимодействовать с инфраструктурными системами, а также выбрать тип учетных данных, который будет использоваться.
 

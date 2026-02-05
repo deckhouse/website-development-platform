@@ -4,7 +4,7 @@ title: Типы действий
 
 ## CreateDefectdojoEngagement
 
-CreateDefectdojoEngagement — создаёт новый [Engagement](https://docs.defectdojo.com/en/working_with_findings/organizing_engagements_tests/product_hierarchy/#what-can-an-engagement-represent) в системе DefectDojo. Действие использует DefectDojo API v2.
+CreateDefectdojoEngagement — создаёт новый engagement в системе DefectDojo. Действие использует DefectDojo API v2.
 
 ### Пример запроса
 
@@ -623,7 +623,7 @@ manifests:
 
 ## CreateRepositoryFromTemplate
 
-CreateRepositoryFromTemplate — создаёт новый репозиторий из шаблона в Gitlab. Механизм рендеринга основан на [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax) и поддерживает все встроенные методы, а также расширения, добавленные в платформу.
+CreateRepositoryFromTemplate — создаёт новый репозиторий из шаблона в Gitlab. Механизм рендеринга основан на [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) и поддерживает все встроенные методы, а также расширения, добавленные в платформу.
 
 ### Пример запроса
 
@@ -673,7 +673,7 @@ values:
 
 ### Детали работы
 
-Действие поддерживает шаблонизацию имён директорий и файлов. Для этого необходимо в их название добавить выражение в формате [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax).
+Действие поддерживает шаблонизацию имён директорий и файлов. Для этого необходимо в их название добавить выражение в формате [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
 Например директория `src/{{ .module }}/utils` при наличии value **module** со значением **example** будет отрендерена в директорию `src/example/utils` в целевом репозитории.
 
 Если после рендеринга из шаблона содержимое файла будет отсутствовать, файл не создаётся. Например файл с содержимым:
@@ -705,7 +705,7 @@ createContent: false
 
 ### Исключение файлов
 
-Некоторые файлы могут содержать переменные в формате [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax), которые необходимо сохранять при рендеринге репозитория из шаблона, например, Helm чарты в директории `helm`. Директория `.git` игнорируется всегда.
+Некоторые файлы могут содержать переменные в формате [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax), которые необходимо сохранять при рендеринге репозитория из шаблона, например, Helm чарты в директории `helm`. Директория `.git` игнорируется всегда.
 
 Для исключения подобных файлов из механизма рендеринга следует добавить в корень репозитория файл `.templateignore` с соответствующим содержимым.
 
