@@ -27,7 +27,7 @@ weight: 10
 
 Правило типа **Property** проверяет, соответствует ли конкретный параметр сущности заданному шаблонному выражению.
 
-Конфигурация правила состоит из одного параметра — выражения. Для описания выражения используется синтаксис [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax).
+Конфигурация правила состоит из одного параметра — выражения. Для описания выражения используется синтаксис [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
 
 Примеры выражений:
 

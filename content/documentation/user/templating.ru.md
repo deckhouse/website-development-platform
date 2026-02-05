@@ -2,7 +2,7 @@
 title: Шаблонизация
 ---
 
-Платформа поддерживает шаблонизацию с использованием [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax). Подробности и примеры использования описаны в соответствующих разделах документации.
+Платформа поддерживает шаблонизацию с использованием [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax). Подробности и примеры использования описаны в соответствующих разделах документации.
 
 Помимо стандартных функций доступны:
 
