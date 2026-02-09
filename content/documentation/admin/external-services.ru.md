@@ -101,7 +101,7 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
-Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации](https://docs.defectdojo.com/en/api/api-v2-docs/).
+Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
 
 ### Docker Registry
 
