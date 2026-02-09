@@ -101,8 +101,6 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
-Подробнее о том, как получить API v2 Key токен можно узнать в [официальной документации](https://docs.defectdojo.com/en/api/api-v2-docs/).
-
 ### Docker Registry
 
 **Тип авторизации:** Basic Authentication
