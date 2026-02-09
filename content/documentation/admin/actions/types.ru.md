@@ -4,7 +4,7 @@ title: Типы действий
 
 ## CreateDefectdojoEngagement
 
-CreateDefectdojoEngagement — создаёт новый [Engagement](https://docs.defectdojo.com/asset_modelling/hierarchy/product_hierarchy/#engagements) в системе DefectDojo. Действие использует DefectDojo API v2.
+CreateDefectdojoEngagement — создаёт новый engagement в системе DefectDojo. Действие использует DefectDojo API v2.
 
 ### Пример запроса
 
