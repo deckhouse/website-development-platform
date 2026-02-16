@@ -268,3 +268,19 @@ Authorization: Basic <base64-encoded-credentials>
 ```sh
 Authorization: Bearer <ваш-токен>
 ```
+
+### Vault
+
+**Тип авторизации:** Token Authentication
+
+**Заголовки:**
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `X-Vault-Token` | `<токен>` |
+
+**Пример:**
+
+```sh
+X-Vault-Token: <ваш-vault-token>
+```
