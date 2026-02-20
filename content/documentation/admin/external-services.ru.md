@@ -69,6 +69,10 @@ moduleStatus: experimental
 
 При настройке внешних сервисов необходимо указать соответствующие HTTP-заголовки для авторизации. Ниже приведен список внешних сервисов, поддерживаемых платформой, с указанием типа авторизации и необходимых заголовков.
 
+{{< alert level="info" >}}
+Приведенные ниже примеры демонстрируют возможные способы авторизации для каждого сервиса. В некоторых сервисах могут использоваться другие механизмы. Платформа поддерживает все варианты, которые можно передать через HTTP-заголовки.
+{{< /alert >}}
+
 ### CodeScoring
 
 **Тип авторизации:** API Token
@@ -159,6 +163,48 @@ Private-Token: <ваш-gitlab-token>
 Authorization: Basic <base64-encoded-credentials>
 ```
 
+### Jenkins
+
+**Тип авторизации:** Basic Authentication (Username/Password)
+
+**Заголовки:**
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Basic <base64-encoded-credentials>` |
+
+**Пример:**
+
+1. Сформируйте строку `username:password`, где:
+   - `username` - имя пользователя в Jenkins
+   - `password` - пароль пользователя, или
+2. Закодируйте её в Base64: `echo "username:password" | base64`
+3. Добавьте заголовок:
+
+```sh
+Authorization: Basic <base64-encoded-credentials>
+```
+
+### Jira
+
+**Тип авторизации:** Basic Authentication
+
+**Заголовки:**
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Basic <base64-encoded-credentials>` |
+
+**Пример:**
+
+1. Сформируйте строку `username:password`
+2. Закодируйте её в Base64: `echo "username:password" | base64`
+3. Добавьте заголовок:
+
+```sh
+Authorization: Basic <base64-encoded-credentials>
+```
+
 ### Kaiten
 
 **Тип авторизации:** API Token
@@ -167,12 +213,12 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `<токен>` |
+| `Authorization` | `Bearer <токен>` |
 
 **Пример:**
 
 ```sh
-Authorization: <ваш-kaiten-api-token>
+Authorization: Bearer <ваш-kaiten-api-token>
 ```
 
 ### Kubernetes
