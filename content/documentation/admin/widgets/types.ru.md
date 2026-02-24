@@ -33,7 +33,7 @@ title: Типы виджетов
 
 Конфигурация авторизации описана в разделе [Внешние сервисы](../external-services/#gitlab).
 
-## Bitbucket. Запросы на слияние
+## Bitbucket. Pull Requests
 
 Виджет позволяет отображать данные о Pull Requests (PR) в Bitbucket Server / Bitbucket Data Center и выполнять действия с ними.
 

@@ -107,24 +107,18 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 
 ### Bitbucket
 
-**Тип авторизации:** Basic Authentication (учётная запись пользователя или Personal Access Token)
-
-Виджет Bitbucket. Запросы на слияние работает с Bitbucket Server и Bitbucket Data Center.
+**Тип авторизации:** Bearer Token (Personal Access Token)
 
 **Заголовки:**
 
-| Заголовок       | Формат значения                      |
-|-----------------|--------------------------------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Bearer <токен>` |
 
 **Пример:**
 
-1. Сформируйте строку `username:password`, где в качестве пароля может использоваться пароль пользователя или Personal Access Token.
-2. Закодируйте её в Base64: `echo "username:password" | base64`
-3. Добавьте заголовок:
-
 ```sh
-Authorization: Basic <base64-encoded-credentials>
+Authorization: Bearer <ваш-bitbucket-personal-access-token>
 ```
 
 ### Docker Registry
