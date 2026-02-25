@@ -105,6 +105,22 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
+### Bitbucket
+
+**Тип авторизации:** Bearer Token (Personal Access Token)
+
+**Заголовки:**
+
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
+| `Authorization` | `Bearer <токен>` |
+
+**Пример:**
+
+```sh
+Authorization: Bearer <ваш-bitbucket-personal-access-token>
+```
+
 ### Docker Registry
 
 **Тип авторизации:** Basic Authentication
