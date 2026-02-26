@@ -46,7 +46,7 @@ weight: 30
 
 ### Хранение в HashiCorp Vault
 
-Если для типа учётных данных выбрано хранилище **Vault**, значения пользователей сохраняются платформой в HashiCorp Vault или в Deckhouse Stronghold.
+Если для типа учётных данных выбрано хранилище **Vault**, то реквизиты пользователей сохраняются платформой в HashiCorp Vault или в Deckhouse Stronghold.
 
 **Как это устроено:**
 - В Vault используется движок **KV Secrets Engine v2**. Путь к секретам задаётся в настройках Vault в DDP (например, `secrets/data/ddp`).
