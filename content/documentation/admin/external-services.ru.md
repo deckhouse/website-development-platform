@@ -192,8 +192,8 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`, где:
-   - `username` - имя пользователя в Jenkins.
-   - `password` - пароль пользователя.
+   - `username` — имя пользователя в Jenkins.
+   - `password` — пароль пользователя.
 2. Закодируйте её в Base64: `echo "username:password" | base64`
 3. Добавьте заголовок:
 
