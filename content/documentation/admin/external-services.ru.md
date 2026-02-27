@@ -22,19 +22,19 @@ moduleStatus: experimental
 | **URL**                      | Базовый URL для обращения к внешнему сервису                                                                                  |
 | **Учётные данные**           | Список доступных учетных данных (например, токенов), которые могут быть подставлены в запросы                                 |
 | **Заголовки**                | HTTP-заголовки, автоматически добавляемые к запросам                                                                          |
-| **Отключить проверку SSL**   | Отключить проверку SSL-сертификата внешнего сервиса (например, при использовании self-signed сертификатов)                    |
+| **Отключить проверку SSL**   | Отключение проверки SSL-сертификата внешнего сервиса (например, при использовании self-signed сертификатов)                   |
 | **Системная учётная запись** | Учётная запись, которая будет использоваться для периодически запускаемых заданий: источников данных, проверок статуса и т.д. |
 
 ## Использование внешних сервисов
 
 Внешние сервисы могут быть подключены к различным объектам платформы:
 
-- действиям
-- виджетам
-- источникам данных
-- проверкам статуса сущностей
+- действиям,
+- виджетам,
+- источникам данных,
+- проверкам статуса сущностей.
 
-Подключение сервиса выполняется на вкладке **"Авторизация"** в настройках соответствующего объекта.
+Подключение сервиса выполняется на вкладке «Авторизация» в настройках соответствующего объекта.
 
 Для каждого объекта можно в явном виде переопределить параметры, заданные во внешнем сервисе.  
 Например, если внешний сервис содержит токен авторизации, но в конкретном действии используются другие учетные данные — можно указать альтернативные значения. В этом случае будет переопределён **только** указанный параметр, остальные значения будут взяты из конфигурации внешнего сервиса.
@@ -43,26 +43,26 @@ moduleStatus: experimental
 
 ### Действия
 
-- К одному действию можно подключить **несколько внешних сервисов**.
-- Можно выбрать сервис **по умолчанию**.
-- Параметр **системная учетная запись** не используется в действиях.
+- К одному действию можно подключить несколько внешних сервисов.
+- Можно выбрать сервис по умолчанию.
+- Параметр системная учетная запись не используется в действиях.
 - При запуске действия можно выбрать, для какого внешнего сервиса оно будет запускаться. Если ни один сервис не выбран, будет использоваться сервис по умолчанию. Если сервис по умолчанию не задан, то будет использоваться первый внешний сервис в списке.
 
 ### Виджеты
 
-- Для одного виджета также поддерживается подключение **нескольких внешних сервисов**.
-- Один из них может быть выбран как **используемый по умолчанию**.
-- В последующих релизах будет добавлена возможность изменения сервиса **во время просмотра** виджета.
-- Параметр **системная учетная запись** не используется в виджетах.
+- Для одного виджета также поддерживается подключение нескольких внешних сервисов.
+- Один из них может быть выбран как используемый по умолчанию.
+- В последующих релизах будет добавлена возможность изменения сервиса во время просмотра виджета.
+- Параметр системная учетная запись не используется в виджетах.
 
 ### Источники данных
 
-- Поддерживается подключение **только одного внешнего сервиса**.
-- Если в сервисе задана **системная учётная запись**, она используется по умолчанию при синхронизации.
+- Поддерживается подключение только одного внешнего сервиса.
+- Если в сервисе задана системная учётная запись, она используется по умолчанию при синхронизации.
 
 ### Проверки статуса
 
-- Проверке может быть назначен **один внешний сервис**.
+- Проверке может быть назначен один внешний сервис.
 - Если у него указана системная учётная запись — она используется при запуске автоматических проверок.
 
 ## Заголовки авторизации для внешних сервисов
@@ -75,7 +75,7 @@ moduleStatus: experimental
 
 ### CodeScoring
 
-**Тип авторизации:** API Token
+**Тип авторизации:** API Token.
 
 **Заголовки:**
 
@@ -91,7 +91,7 @@ Authorization: <ваш-api-token>
 
 ### DefectDojo
 
-**Тип авторизации:** API v2 Key Token
+**Тип авторизации:** API v2 Key Token.
 
 **Заголовки:**
 
@@ -107,7 +107,7 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 
 ### Bitbucket
 
-**Тип авторизации:** Bearer Token (Personal Access Token)
+**Тип авторизации:** Bearer Token (Personal Access Token).
 
 **Заголовки:**
 
@@ -123,7 +123,7 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 
 ### Docker Registry
 
-**Тип авторизации:** Basic Authentication
+**Тип авторизации:** Basic Authentication.
 
 **Заголовки:**
 
@@ -133,9 +133,9 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 
 **Пример:**
 
-1. Сформируйте строку `username:password`
-1. Закодируйте её в Base64: `echo "username:password" | base64`
-1. Добавьте заголовок:
+1. Сформируйте строку `username:password`.
+2. Закодируйте её в Base64: `echo "username:password" | base64`.
+3. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -143,7 +143,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### GitLab
 
-**Тип авторизации:** Personal Access Token или Project Access Token
+**Тип авторизации:** Personal Access Token или Project Access Token.
 
 **Заголовки:**
 
@@ -161,49 +161,7 @@ Private-Token: <ваш-gitlab-token>
 
 ### Harbor
 
-**Тип авторизации:** Basic Authentication
-
-**Заголовки:**
-
-| Заголовок | Формат значения |
-|-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
-
-**Пример:**
-
-1. Сформируйте строку `username:password`
-1. Закодируйте её в Base64: `echo "username:password" | base64`
-1. Добавьте заголовок:
-
-```sh
-Authorization: Basic <base64-encoded-credentials>
-```
-
-### Jenkins
-
-**Тип авторизации:** Basic Authentication (Username/Password)
-
-**Заголовки:**
-
-| Заголовок | Формат значения |
-|-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
-
-**Пример:**
-
-1. Сформируйте строку `username:password`, где:
-   - `username` — имя пользователя в Jenkins,
-   - `password` — пароль пользователя.
-1. Закодируйте её в Base64: `echo "username:password" | base64`.
-1. Добавьте заголовок:
-
-```sh
-Authorization: Basic <base64-encoded-credentials>
-```
-
-### Jira
-
-**Тип авторизации:** Basic Authentication
+**Тип авторизации:** Basic Authentication.
 
 **Заголовки:**
 
@@ -214,8 +172,50 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-1. Закодируйте её в Base64: `echo "username:password" | base64`.
-1. Добавьте заголовок:
+2. Закодируйте её в Base64: `echo "username:password" | base64`.
+3. Добавьте заголовок:
+
+```sh
+Authorization: Basic <base64-encoded-credentials>
+```
+
+### Jenkins
+
+**Тип авторизации:** Basic Authentication (Username/Password).
+
+**Заголовки:**
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Basic <base64-encoded-credentials>` |
+
+**Пример:**
+
+1. Сформируйте строку `username:password`, где:
+   - `username` — имя пользователя в Jenkins.
+   - `password` — пароль пользователя.
+2. Закодируйте её в Base64: `echo "username:password" | base64`
+3. Добавьте заголовок:
+
+```sh
+Authorization: Basic <base64-encoded-credentials>
+```
+
+### Jira
+
+**Тип авторизации:** Basic Authentication.
+
+**Заголовки:**
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Basic <base64-encoded-credentials>` |
+
+**Пример:**
+
+1. Сформируйте строку `username:password`.
+2. Закодируйте её в Base64: `echo "username:password" | base64`.
+3. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -223,7 +223,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### Kaiten
 
-**Тип авторизации:** API Token
+**Тип авторизации:** API Token.
 
 **Заголовки:**
 
@@ -239,7 +239,7 @@ Authorization: Bearer <ваш-kaiten-api-token>
 
 ### Kubernetes
 
-**Тип авторизации:** Bearer Token (Service Account Token или User Token)
+**Тип авторизации:** Bearer Token (Service Account Token или User Token).
 
 **Заголовки:**
 
@@ -255,7 +255,7 @@ Authorization: Bearer <ваш-kubernetes-token>
 
 ### Nexus
 
-**Тип авторизации:** Basic Authentication
+**Тип авторизации:** Basic Authentication.
 
 **Заголовки:**
 
@@ -265,9 +265,9 @@ Authorization: Bearer <ваш-kubernetes-token>
 
 **Пример:**
 
-1. Сформируйте строку `username:password`
-1. Закодируйте её в Base64: `echo "username:password" | base64`
-1. Добавьте заголовок:
+1. Сформируйте строку `username:password`.
+2. Закодируйте её в Base64: `echo "username:password" | base64`.
+3. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -275,7 +275,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### OpenSearch
 
-**Тип авторизации:** Basic Authentication
+**Тип авторизации:** Basic Authentication.
 
 **Заголовки:**
 
@@ -285,9 +285,9 @@ Authorization: Basic <base64-encoded-credentials>
 
 **Пример:**
 
-1. Сформируйте строку `username:password`
-1. Закодируйте её в Base64: `echo "username:password" | base64`
-1. Добавьте заголовок:
+1. Сформируйте строку `username:password`.
+2. Закодируйте её в Base64: `echo "username:password" | base64`.
+3. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -295,7 +295,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### Prometheus
 
-**Тип авторизации:** Bearer Token или Basic Authentication
+**Тип авторизации:** Bearer Token или Basic Authentication.
 
 **Заголовки:**
 
@@ -317,7 +317,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 ### SonarQube
 
-**Тип авторизации:** Bearer Token
+**Тип авторизации:** Bearer Token.
 
 **Заголовки:**
 
@@ -333,7 +333,7 @@ Authorization: Bearer <ваш-токен>
 
 ### Vault
 
-**Тип авторизации:** Token Authentication
+**Тип авторизации:** Token Authentication.
 
 **Заголовки:**
 
