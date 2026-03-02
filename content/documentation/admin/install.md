@@ -19,7 +19,7 @@ spec:
     rbac:
       superAdminEmail: admin@deckhouse.io # Super administrator email with full access to platform configuration. Can be changed at any time.
     security:
-      secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials
+      secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials.
 ```
 
 After installation, the Deckhouse Development Platform web UI will be available at `https://ddp.<your domain>`.
