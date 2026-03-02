@@ -48,10 +48,10 @@ spec:
     postgres:
       mode: external
       host: postgres.example.com  # PostgreSQL server hostname or IP address.
-      port: 5432                  # PostgreSQL port (default 5432)
-      database: ddp               # Database name
-      username: ddp_user          # Connection username
-      password: secure_password   # Connection password
+      port: 5432                  # PostgreSQL port (default 5432).
+      database: ddp               # Database name.
+      username: ddp_user          # Connection username.
+      password: secure_password   # Connection password.
 ```
 
 ### Connecting external Redis
