@@ -130,10 +130,10 @@ spec:
       secretKey: "16charssecretkey"
     postgres:
       mode: internal
-      image: registry.example.com/postgres:16.3  # Образ PostgreSQL из приватного registry
+      image: registry.example.com/postgres:16.3  # Образ PostgreSQL из приватного registry.
     redis:
       mode: internal
-      image: registry.example.com/redis:7.4.0    # Образ Redis из приватного registry
+      image: registry.example.com/redis:7.4.0    # Образ Redis из приватного registry.
     additionalImagePullSecrets:
-      - "custom-registry-secret"                 # (опционально) дополнительные секреты для доступа к приватному registry
+      - "custom-registry-secret"                 # (опционально) дополнительные секреты для доступа к приватному registry.
 ```
