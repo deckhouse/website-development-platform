@@ -17,7 +17,7 @@ spec:
   version: 1
   settings:
     rbac:
-      superAdminEmail: admin@deckhouse.io # Super administrator email with full access to platform configuration. Can be changed at any time
+      superAdminEmail: admin@deckhouse.io # Super administrator email with full access to platform configuration. Can be changed at any time.
     security:
       secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials
 ```
