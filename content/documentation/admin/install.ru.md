@@ -47,11 +47,11 @@ spec:
       secretKey: "16charssecretkey"
     postgres:
       mode: external
-      host: postgres.example.com  # Имя хоста или IP-адрес сервера PostgreSQL
-      port: 5432                  # Порт PostgreSQL (по умолчанию 5432)
-      database: ddp               # Название базы данных
-      username: ddp_user          # Имя пользователя для подключения
-      password: secure_password   # Пароль для подключения
+      host: postgres.example.com  # Имя хоста или IP-адрес сервера PostgreSQL.
+      port: 5432                  # Порт PostgreSQL (по умолчанию 5432).
+      database: ddp               # Название базы данных.
+      username: ddp_user          # Имя пользователя для подключения.
+      password: secure_password   # Пароль для подключения.
 ```
 
 ### Подключение внешнего Redis
