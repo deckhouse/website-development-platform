@@ -133,7 +133,7 @@ spec:
       image: registry.example.com/postgres:16.3  # PostgreSQL image from private registry
     redis:
       mode: internal
-      image: registry.example.com/redis:7.4.0    # Redis image from private registry
+      image: registry.example.com/redis:7.4.0    # Redis image from private registry.
     additionalImagePullSecrets:
-      - "custom-registry-secret"                 # (optional) additional secrets for private registry access
+      - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
 ```
