@@ -73,10 +73,10 @@ spec:
       secretKey: "16charssecretkey"
     redis:
       mode: external
-      host: redis.example.com       # Имя хоста или IP-адрес сервера Redis
-      port: 6379                    # Порт Redis (по умолчанию 6379)
-      database: "0"                 # Индекс базы данных Redis (по умолчанию "0")
-      password: redis_password      # Пароль для подключения (необязательно; если Redis без пароля — оставить пустым)
+      host: redis.example.com       # Имя хоста или IP-адрес сервера Redis.
+      port: 6379                    # Порт Redis (по умолчанию 6379).
+      database: "0"                 # Индекс базы данных Redis (по умолчанию "0").
+      password: redis_password      # Пароль для подключения (необязательно; если Redis без пароля — оставить пустым).
 ```
 
 ### Полный пример с внешними инстансами
