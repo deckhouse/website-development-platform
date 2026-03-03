@@ -83,7 +83,7 @@ params:
   showedit: true
 
   # Enable Lunr.js offline search
-  offlineSearch: false
+  offlineSearch: true
 
   # Global relevant links.
   links:
