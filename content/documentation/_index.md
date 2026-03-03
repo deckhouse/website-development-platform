@@ -4,6 +4,9 @@ description: Documentation for the Deckhouse Development Platform product
 weight: 10
 params:
   no_list: true
+outputs:
+  - HTML
+  - search
 cascade:
   params:
     simple_list: true
