@@ -107,12 +107,12 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 
 ### Bitbucket
 
-**Тип авторизации:** Bearer Token (Personal Access Token).
+**Тип авторизации:** Bearer Token (Personal Access Token)
 
 **Заголовки:**
 
-| Заголовок | Формат значения |
-|-----------|-----------------|
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
 | `Authorization` | `Bearer <токен>` |
 
 **Пример:**
