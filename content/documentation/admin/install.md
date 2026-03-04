@@ -5,7 +5,7 @@ weight: 11
 
 Deckhouse Development Platform can be installed in two ways: with **external** PostgreSQL and Redis instances (connecting to databases already deployed outside the cluster) or with **internal** instances (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
 
-## Enabling the module
+## Installation with internal resources
 
 To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
 
@@ -26,7 +26,7 @@ spec:
 
 After installation, the Deckhouse Development Platform web UI will be available at `https://ddp.<your domain>`.
 
-When you do not specify `postgres` and `redis` sections, the platform deploys **internal** PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external instances](#connecting-external-instances).
+When you do not specify `postgres` and `redis` sections, the platform deploys **internal** PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-resources-for-production).
 
 ### Configuring internal instances (optional)
 
@@ -55,7 +55,9 @@ spec:
       - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
 ```
 
-## Connecting external instances
+## Installation with external resources for production
+
+This installation option is recommended for production: the platform connects to PostgreSQL and Redis deployed outside the cluster, which improves resilience and simplifies backup and scaling of databases.
 
 ### Connecting external PostgreSQL
 
