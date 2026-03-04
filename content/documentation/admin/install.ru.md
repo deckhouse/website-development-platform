@@ -3,6 +3,8 @@ title: Установка
 weight: 11
 ---
 
+Deckhouse Development Platform можно установить двумя способами: с **внешними** инстансами PostgreSQL и Redis (подключение к уже развёрнутым базам данных вне кластера) или с **внутренними** инстансами (развёртывание PostgreSQL и Redis внутри кластера). Внешние инстансы рекомендуются для production, внутренние подходят для тестов и пилотной эксплуатации. Ниже описаны оба варианта.
+
 ## Включение модуля
 
 Для установки Deckhouse Development Platform включите модуль `development-platform` в вашем Kubernetes-кластере под управлением Deckhouse Kubernetes Platform. Для этого можно использовать [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) с минимальным количеством настроек:
@@ -24,7 +26,34 @@ spec:
 
 После установки веб-интерфейс Deckhouse Development Platform будет доступен по адресу `https://ddp.<ваш домен>`.
 
-При развертывании в такой конфигурации в кластер будут установлены Redis и PostgreSQL. Такой сценарий не рекомендуется для production и подходит только для тестов и пилотной эксплуатации. В промышленной эксплуатации рекомендуется использовать выделенные экземпляры PostgreSQL и Redis (см. разделы ниже).
+При развёртывании без указания секций `postgres` и `redis` платформа разворачивает **внутренние** инстансы PostgreSQL и Redis внутри кластера. Такой сценарий не рекомендуется для production и подходит только для тестов и пилотной эксплуатации; для промышленной эксплуатации используйте [внешние инстансы](#подключение-внешних-инстансов).
+
+### Настройка внутренних инстансов (опционально)
+
+Если вы используете внутренние инстансы, можно явно указать `mode: internal` и задать образы из приватного Docker registry:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
+      image: registry.example.com/postgres:16.3  # Образ PostgreSQL из приватного registry.
+    redis:
+      mode: internal
+      image: registry.example.com/redis:7.4.0    # Образ Redis из приватного registry.
+    additionalImagePullSecrets:
+      - "custom-registry-secret"                 # (опционально) дополнительные секреты для доступа к приватному registry.
+```
 
 ## Подключение внешних инстансов
 
@@ -109,31 +138,4 @@ spec:
       port: 6379
       database: "0"
       password: secure_redis_password
-```
-
-## Установка с внутренними инстансами
-
-Если вы не подключаете внешние базы (как в разделах выше), платформа может разворачивать PostgreSQL и Redis внутри кластера. Пример конфигурации с внутренними инстансами и использованием приватного Docker registry:
-
-```yaml
-apiVersion: deckhouse.io/v1alpha1
-kind: ModuleConfig
-metadata:
-  name: development-platform
-spec:
-  enabled: true
-  version: 1
-  settings:
-    rbac:
-      superAdminEmail: admin@deckhouse.io
-    security:
-      secretKey: "16charssecretkey"
-    postgres:
-      mode: internal
-      image: registry.example.com/postgres:16.3  # Образ PostgreSQL из приватного registry.
-    redis:
-      mode: internal
-      image: registry.example.com/redis:7.4.0    # Образ Redis из приватного registry.
-    additionalImagePullSecrets:
-      - "custom-registry-secret"                 # (опционально) дополнительные секреты для доступа к приватному registry.
 ```

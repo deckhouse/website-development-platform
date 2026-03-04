@@ -3,6 +3,8 @@ title: Installation
 weight: 11
 ---
 
+Deckhouse Development Platform can be installed in two ways: with **external** PostgreSQL and Redis instances (connecting to databases already deployed outside the cluster) or with **internal** instances (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+
 ## Enabling the module
 
 To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
@@ -24,7 +26,34 @@ spec:
 
 After installation, the Deckhouse Development Platform web UI will be available at `https://ddp.<your domain>`.
 
-With this configuration, Redis and PostgreSQL will be deployed into the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use. For production, use dedicated PostgreSQL and Redis instances (see sections below).
+When you do not specify `postgres` and `redis` sections, the platform deploys **internal** PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external instances](#connecting-external-instances).
+
+### Configuring internal instances (optional)
+
+If you use internal instances, you can explicitly set `mode: internal` and specify images from a private Docker registry:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
+      image: registry.example.com/postgres:16.3  # PostgreSQL image from private registry
+    redis:
+      mode: internal
+      image: registry.example.com/redis:7.4.0    # Redis image from private registry.
+    additionalImagePullSecrets:
+      - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
+```
 
 ## Connecting external instances
 
@@ -109,31 +138,4 @@ spec:
       port: 6379
       database: "0"
       password: secure_redis_password
-```
-
-## Installation with internal instances
-
-If you do not connect external databases (as in the sections above), the platform can deploy PostgreSQL and Redis inside the cluster. Example configuration with internal instances and a private Docker registry:
-
-```yaml
-apiVersion: deckhouse.io/v1alpha1
-kind: ModuleConfig
-metadata:
-  name: development-platform
-spec:
-  enabled: true
-  version: 1
-  settings:
-    rbac:
-      superAdminEmail: admin@deckhouse.io
-    security:
-      secretKey: "16charssecretkey"
-    postgres:
-      mode: internal
-      image: registry.example.com/postgres:16.3  # PostgreSQL image from private registry
-    redis:
-      mode: internal
-      image: registry.example.com/redis:7.4.0    # Redis image from private registry.
-    additionalImagePullSecrets:
-      - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
 ```
