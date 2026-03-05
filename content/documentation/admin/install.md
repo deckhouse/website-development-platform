@@ -26,7 +26,7 @@ spec:
 
 After installation, the Deckhouse Development Platform web UI will be available at `https://ddp.<your domain>`.
 
-When you do not specify `postgres` and `redis` sections, the platform deploys **internal** PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-resources-for-production).
+When you do not specify `postgres` and `redis` sections, the platform deploys **internal** PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
 
 ### Configuring internal instances (optional)
 
