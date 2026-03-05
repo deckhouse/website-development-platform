@@ -159,6 +159,8 @@ Private-Token: <ваш-gitlab-token>
 Authorization: Bearer <ваш-bitbucket-personal-access-token>
 ```
 
+### Harbor
+
 **Тип авторизации:** Basic Authentication.
 
 **Заголовки:**
