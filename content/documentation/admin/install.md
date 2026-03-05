@@ -7,7 +7,7 @@ Deckhouse Development Platform can be installed in two ways: with [external Post
 
 ## Installation with internal instances
 
-To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
+To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1

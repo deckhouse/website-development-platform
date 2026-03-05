@@ -7,7 +7,7 @@ Deckhouse Development Platform можно установить двумя спо
 
 ## Установка с внутренними инстансами
 
-Для установки Deckhouse Development Platform включите модуль `development-platform` в вашем Kubernetes-кластере под управлением Deckhouse Kubernetes Platform. Для этого можно использовать [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) с минимальным количеством настроек:
+Для установки Deckhouse Development Platform включите модуль `development-platform` в вашем Kubernetes-кластере под управлением Deckhouse Kubernetes Platform. Для этого можно использовать [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) с минимальным количеством настроек:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
