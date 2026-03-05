@@ -3,9 +3,9 @@ title: Installation
 weight: 11
 ---
 
-Deckhouse Development Platform can be installed in two ways: with **external** PostgreSQL and Redis instances (connecting to databases already deployed outside the cluster) or with **internal** instances (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+Deckhouse Development Platform can be installed in two ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster) or with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
 
-## Installation with internal resources
+## Installation with internal instances
 
 To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](../../../../kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
 
@@ -55,7 +55,7 @@ spec:
       - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
 ```
 
-## Installation with external resources for production
+## Installation with external instances
 
 This installation option is recommended for production: the platform connects to PostgreSQL and Redis deployed outside the cluster, which improves resilience and simplifies backup and scaling of databases.
 
