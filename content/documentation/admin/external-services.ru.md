@@ -111,8 +111,8 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 
 **Заголовки:**
 
-| Заголовок | Формат значения |
-|-----------|-----------------|
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
 | `Authorization` | `Bearer <токен>` |
 
 **Пример:**
@@ -134,8 +134,8 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -172,8 +172,8 @@ Private-Token: <ваш-gitlab-token>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -194,8 +194,8 @@ Authorization: Basic <base64-encoded-credentials>
 1. Сформируйте строку `username:password`, где:
    - `username` — имя пользователя в Jenkins.
    - `password` — пароль пользователя.
-2. Закодируйте её в Base64: `echo "username:password" | base64`
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -214,8 +214,8 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -266,8 +266,8 @@ Authorization: Bearer <ваш-kubernetes-token>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -286,8 +286,8 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
