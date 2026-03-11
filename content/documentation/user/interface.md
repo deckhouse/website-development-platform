@@ -12,16 +12,7 @@ The Deckhouse Development Platform interface consists of the following sections:
 
 ## Global search
 
-The top navigation bar includes a **Search** button. It lets you quickly find entities across the platform.
-
-### How to use search
-
-1. Open search: click **Search** in the top navigation bar.
-1. Enter a query: start typing in the search field.
-1. Select a result: results appear in a dropdown list under the input field. For each matching entity, the platform shows:
-   - name;
-   - slug;
-   - the resource the entity belongs to.
+The top navigation bar includes a **Search** field. It lets you quickly find entities across the platform.
 
 ### Limitations
 
