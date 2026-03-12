@@ -85,6 +85,16 @@ spec:
       password: secure_password   # Connection password.
 ```
 
+#### pg_trgm extension
+
+The platform requires the PostgreSQL `pg_trgm` extension. If you use an external PostgreSQL instance, enable it before starting DDP: connect to the database as a user with permission to create extensions and run:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+```
+
+If you deploy the built-in PostgreSQL instance, the extension is created automatically.
+
 ### Connecting external Redis
 
 To use an external Redis instance, specify connection parameters in the `redis` section:
