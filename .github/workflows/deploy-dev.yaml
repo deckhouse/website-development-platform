@@ -9,4 +9,4 @@ on:
 
 jobs:
   call-reusable:
-    uses: deckhouse/hugo-web-product-module/project_template/.github/workflows/deploy-dev.yaml@main
+    uses: deckhouse/hugo-web-product-module/.github/workflows/deploy-dev.yaml@main

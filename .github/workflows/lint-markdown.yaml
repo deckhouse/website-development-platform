@@ -5,4 +5,4 @@ on:
 
 jobs:
   call-reusable:
-    uses: deckhouse/hugo-web-product-module/project_template/.github/workflows/lint-markdown.yaml@main
+    uses: deckhouse/hugo-web-product-module/.github/workflows/lint-markdown.yaml@main
