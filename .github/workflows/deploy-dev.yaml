@@ -27,7 +27,7 @@ jobs:
       && startsWith(github.repository, 'deckhouse/')
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           submodules: recursive
@@ -50,7 +50,7 @@ jobs:
 
       - name: Create deployment comment
         id: comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -66,7 +66,7 @@ jobs:
 
       - name: Import secrets
         id: secrets
-        uses: hashicorp/vault-action@v2
+        uses: hashicorp/vault-action@v3
         with:
           url: https://seguro.flant.com
           path: github
@@ -112,7 +112,7 @@ jobs:
 
       - name: Update comment - deployment succeeded
         if: success() && steps.comment.outputs.result
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -137,7 +137,7 @@ jobs:
 
       - name: Update comment - deployment failed
         if: failure() && steps.comment.outputs.result
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -174,7 +174,7 @@ jobs:
 
       - name: Remove deploy label
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

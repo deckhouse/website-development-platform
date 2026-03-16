@@ -4,6 +4,9 @@ description: Документация продукта Deckhouse Development Pla
 weight: 10
 params:
   no_list: true
+outputs:
+  - HTML
+  - search
 cascade:
   params:
     simple_list: true
