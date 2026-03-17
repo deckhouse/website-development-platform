@@ -161,7 +161,7 @@ Private-Token: <ваш-gitlab-token>
 
 ### GitHub
 
-**Тип авторизации:** Personal Access Token (или токен приложения).
+**Тип авторизации:** Personal Access Token.
 
 **Заголовки:**
 
