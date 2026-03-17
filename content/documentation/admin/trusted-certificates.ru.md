@@ -59,4 +59,4 @@ MIIDXTCCAkWgAwIBAgIJAKL...
 - `update:trusted-certificates` — редактирование названия существующего сертификата;
 - `delete:trusted-certificates` — удаление сертификатов.
 
-Подробнее о ролевой модели см. в [документации по RBAC](../security/rbac/).
+Подробнее о ролевой модели см. в [«документации по RBAC»](../security/rbac/).
