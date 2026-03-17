@@ -159,6 +159,24 @@ Private-Token: <ваш-gitlab-token>
 Authorization: Bearer <ваш-bitbucket-personal-access-token>
 ```
 
+### GitHub
+
+**Тип авторизации:** Personal Access Token.
+
+**Заголовки:**
+
+| Заголовок       | Формат значения    |
+|-----------------|--------------------|
+| `Authorization` | `Bearer <токен>`   |
+
+**Пример:**
+
+```
+Authorization: Bearer <ваш-github-token>
+```
+
+Токен создаётся в настройках GitHub: «Settings» → «Developer settings» → «Personal access tokens».
+
 ### Harbor
 
 **Тип авторизации:** Basic Authentication.
