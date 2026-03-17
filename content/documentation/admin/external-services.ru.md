@@ -171,7 +171,7 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 
 **Пример:**
 
-```
+```sh
 Authorization: Bearer <ваш-github-token>
 ```
 
