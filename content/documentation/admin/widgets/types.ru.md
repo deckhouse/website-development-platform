@@ -533,7 +533,6 @@ title: Типы виджетов
 * [GitLab](../external-services/#gitlab).
 * [Bitbucket](../external-services/#bitbucket).
 
-
 ### Конфигурация
 
 | Название     | Обязательность  | Описание                                                         | Значение по умолчанию |
