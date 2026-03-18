@@ -159,6 +159,40 @@ Private-Token: <ваш-gitlab-token>
 
 Подробнее о том, как получить GitLab token можно узнать в [официальной документации](https://docs.gitlab.com/api/rest/authentication/).
 
+### Bitbucket
+
+**Тип авторизации:** Bearer Token (Personal Access Token)
+
+**Заголовки:**
+
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
+| `Authorization` | `Bearer <токен>` |
+
+**Пример:**
+
+```sh
+Authorization: Bearer <ваш-bitbucket-personal-access-token>
+```
+
+### GitHub
+
+**Тип авторизации:** Personal Access Token.
+
+**Заголовки:**
+
+| Заголовок       | Формат значения    |
+|-----------------|--------------------|
+| `Authorization` | `Bearer <токен>`   |
+
+**Пример:**
+
+```sh
+Authorization: Bearer <ваш-github-token>
+```
+
+Токен создаётся в настройках GitHub: «Settings» → «Developer settings» → «Personal access tokens».
+
 ### Harbor
 
 **Тип авторизации:** Basic Authentication.
