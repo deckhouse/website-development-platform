@@ -123,7 +123,7 @@ MCP — это открытый протокол для взаимодейств
 1. **Получение параметров**
 
    - Войдите в Deckhouse Development Platform.
-   - Получите ваш API-токен в разделе настроек профиля.
+   - Получите ваш API-токен в разделе «Профиль».
    - Запишите URL вашей платформы (например: `https://ddp.example.com`).
 
 1. **Настройка в LM Studio**
@@ -142,9 +142,9 @@ MCP — это открытый протокол для взаимодейств
      - Замените `ddp.example.com` на адрес вашей платформы.
    - **Transport**: `HTTP` или `JSON-RPC`.
    - **Authentication**:
-     - **Type**: `Custom Header` или `API Key`.
-     - **Header Name**: `X-API-TOKEN`.
-     - **Token**: вставьте ваш API-токен от платформы.
+     - **Type**: `Bearer Token` или аналог (заголовок `Authorization`).
+     - **Header**: `Authorization: Bearer <ваш_api_токен>`.
+     - **Token**: вставьте ваш API-токен от платформы (из раздела «Профиль»).
 
 1. **Проверка подключения**
 
@@ -170,8 +170,8 @@ MCP-сервер Deckhouse Development Platform совместим с любым
 1. **URL эндпоинта**: `https://your-platform.com/api/v2/mcp`.
 1. **Протокол**: JSON-RPC 2.0.
 1. **Аутентификация**:
-   - Заголовок: `X-API-TOKEN: YOUR_API_TOKEN`.
-   - Где `YOUR_API_TOKEN` — ваш API-токен от платформы.
+   - Заголовок: `Authorization: Bearer YOUR_API_TOKEN`.
+   - Где `YOUR_API_TOKEN` — ваш API-токен от платформы (раздел «Профиль»).
 1. **Метод**: POST.
 
 ### Пример запроса к MCP-серверу
@@ -179,7 +179,7 @@ MCP-сервер Deckhouse Development Platform совместим с любым
 **HTTP-заголовки:**
 
 ```sh
-X-API-TOKEN: your-api-token-here
+Authorization: Bearer your-api-token-here
 Content-Type: application/json
 ```
 
@@ -220,7 +220,7 @@ Content-Type: application/json
 
 ### Аутентификация
 
-- Все запросы к MCP-серверу должны быть аутентифицированы с помощью API-токена из вашего профиля. Токен передается через заголовок `X-API-TOKEN: TOKEN`.
+- Все запросы к MCP-серверу должны быть аутентифицированы с помощью API-токена из раздела «Профиль». Токен передаётся в заголовке `Authorization: Bearer <api_token>`.
 - Права доступа соответствуют правам вашего пользователя в платформе.
 
 ### Права доступа
@@ -241,8 +241,8 @@ Content-Type: application/json
 ### Ошибка аутентификации
 
 - Проверьте правильность формата токена.
-- Убедитесь, что токен не истек.
-- Убедитесь, что используется заголовок `X-API-TOKEN` (не `Authorization`).
+- Убедитесь, что токен не истёк.
+- Убедитесь, что используется заголовок `Authorization: Bearer <api_token>`.
 
 ### Инструмент возвращает ошибку доступа
 
