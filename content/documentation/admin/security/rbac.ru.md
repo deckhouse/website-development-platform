@@ -91,6 +91,12 @@ weight: 20
 - `update:external-services` — редактирование внешних сервисов.
 - `delete:external-services` — удаление внешних сервисов.
 
+Доверенные сертификаты:
+- `create:trusted-certificates` — добавление доверенных сертификатов.
+- `read:trusted-certificates` — просмотр доверенных сертификатов.
+- `update:trusted-certificates` — редактирование доверенных сертификатов.
+- `delete:trusted-certificates` — удаление доверенных сертификатов.
+
 Процессы:
 - `create:processes` — создание процессов.
 - `read:processes` — просмотр процессов.
