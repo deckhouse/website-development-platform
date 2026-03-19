@@ -105,6 +105,22 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
+### Bitbucket
+
+**Тип авторизации:** Bearer Token (Personal Access Token).
+
+**Заголовки:**
+
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
+| `Authorization` | `Bearer <токен>` |
+
+**Пример:**
+
+```sh
+Authorization: Bearer <ваш-bitbucket-personal-access-token>
+```
+
 ### Docker Registry
 
 **Тип авторизации:** Basic Authentication.
@@ -118,8 +134,8 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -141,23 +157,7 @@ Authorization: Basic <base64-encoded-credentials>
 Private-Token: <ваш-gitlab-token>
 ```
 
-Подробнее о том, как получить GitLab token можно узнать в [официальной документации](https://docs.gitlab.com/api/rest/authentication/).
-
-### Bitbucket
-
-**Тип авторизации:** Bearer Token (Personal Access Token)
-
-**Заголовки:**
-
-| Заголовок       | Формат значения  |
-|-----------------|------------------|
-| `Authorization` | `Bearer <токен>` |
-
-**Пример:**
-
-```sh
-Authorization: Bearer <ваш-bitbucket-personal-access-token>
-```
+Подробнее о том, как получить GitLab token можно узнать [в официальной документации](https://docs.gitlab.com/api/rest/authentication/).
 
 ### GitHub
 
@@ -190,8 +190,8 @@ Authorization: Bearer <ваш-github-token>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -212,8 +212,8 @@ Authorization: Basic <base64-encoded-credentials>
 1. Сформируйте строку `username:password`, где:
    - `username` — имя пользователя в Jenkins.
    - `password` — пароль пользователя.
-2. Закодируйте её в Base64: `echo "username:password" | base64`
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -232,8 +232,8 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -284,8 +284,8 @@ Authorization: Bearer <ваш-kubernetes-token>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
@@ -304,8 +304,8 @@ Authorization: Basic <base64-encoded-credentials>
 **Пример:**
 
 1. Сформируйте строку `username:password`.
-2. Закодируйте её в Base64: `echo "username:password" | base64`.
-3. Добавьте заголовок:
+1. Закодируйте её в Base64: `echo "username:password" | base64`.
+1. Добавьте заголовок:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
