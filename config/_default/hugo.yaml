@@ -1,22 +1,6 @@
 defaultContentLanguage: 'en'
 defaultContentLanguageInSubdir: true
 
-markup:
-  highlight:
-    anchorLineNos: false
-    codeFences: true
-    guessSyntax: false
-    hl_Lines: ""
-    hl_inline: false
-    lineAnchors: ""
-    lineNoStart: 1
-    lineNos: false
-    lineNumbersInTable: true
-    noClasses: false
-    noHl: false
-    style: native
-    tabWidth: 4
-
 timeZone: "UTC"
 
 markup:
