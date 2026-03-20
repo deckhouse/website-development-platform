@@ -154,7 +154,7 @@ subkey: 123
 
 Platform:
 
-1. Clones the template repository for generating the MR by its ID (**source_project_id**). More details [about templating](#work-details).
+1. Clones the template repository for generating the MR by its ID (**source_project_id**). More details about [templating](#operation-details).
 1. Reads the `values.yaml` file stored in the repository root and defines default variables for templating.
 1. Reads the variables passed when running the action and merges them with the variables from `values.yaml`. Priority is given to the variables passed when running the action.
 1. Reads the `.templateignore` file and defines directories and files excluded from templating.
@@ -1087,13 +1087,13 @@ namespace: example
 
 ### Request Specification
 
-| Name | Required | Description | Possible Values ​​|
-|---------------------------|-----------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| group | Yes | Resource API Group. Specifies the API group to which the object being deleted belongs. | [Defining required Group and Version](#defining-required-group-and-version) |
-| version | Yes | Resource API Version | [Defining required Group and Version](#defining-required-group-and-version) |
+| Name | Required | Description | Possible Values                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|---------------------------|-----------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| group | Yes | Resource API Group. Specifies the API group to which the object being deleted belongs. | [Defining required Group and Version](#determining-the-required-group-and-version)                                                                                                                                                                                                                                                                                                                                                      |
+| version | Yes | Resource API Version | [Defining required Group and Version](#determining-the-required-group-and-version)                                                                                                                                                                                                                                                                                                                                                             |
 | resource_type | Yes | The type of resource being deleted | pods, services, deployments, statefulsets, daemonsets, replicasets, jobs, cronjobs, nodes, namespaces, configmaps, secrets, persistentvolumes, persistentvolumeclaims, limitranges, resourcequotas, horizontalpodautoscalers, ingresses, networkpolicies, serviceaccounts, roles, clusterroles, rolebindings, clusterrolebindings, podsecuritypolicies, storageclasses, volumeattachments, events, endpoints, customresourcedefinitions |
-| resource_name | Yes | Name of the specific resource to be deleted | - |
-| Namespace | Yes | Namespace in which the resource is located | - |
+| resource_name | Yes | Name of the specific resource to be deleted | -                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Namespace | Yes | Namespace in which the resource is located | -                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ### Credentials
 
@@ -1138,7 +1138,7 @@ How to search the documentation:
 1. Find the desired resource (e.g., Deployment).
 1. The header will indicate the API Group and version. Example for Deployment:
 
-``yaml
+```yaml
 apiVersion: apps/v1
 ```
 
@@ -1333,21 +1333,21 @@ httpPort: 5001
 
 ### Request Specification
 
-| Field | Required | Description | Example |
-|------------|-----------------|---------------------------------------------------------------------------------------------------|----------------------------------------|
-| `description` | No | Documentation on the purpose of this action/repository. Not used by Nexus itself, for the UI only | - |
-| `name` | Yes | The name of the repository being created. Must be unique within Nexus | my-maven-repo |
-| `format` | Yes | Format (`maven`, `docker`, `npm`, `raw`, etc.) | maven |
-| `type` | Yes | Type: `hosted`, `proxy`, or `group` | hosted |
-| `online` | Yes | Whether the repository is accessible (`true`/`false`) | true |
-| `storage` | Yes | Storage object: `blobStoreName`, `strictContentTypeValidation`, `writePolicy` | [Example](#maven-hosted-query-example) |
-| `cleanup` | None | Associated cleanup policies (`policyNames`) | policyNames: [maven-cleanup] |
-| `maven` | for maven | Maven-only: `versionPolicy`, `layoutPolicy` | [Example](#maven-hosted-query-example) |
-| `proxy` | for proxy | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge` | - |
-| `group` | for group | List of included memberNames | [Example](#docker-group-query-example) |
-| `docker` | for docker | Docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth` | [Example](#docker-group-request-example) |
-| `component` | very rare | Only for some non-standard scenarios | - |
-| `attributes`| None | Any custom fields | - |
+| Field | Required | Description | Example                                  |
+|------------|-----------------|---------------------------------------------------------------------------------------------------|------------------------------------------|
+| `description` | No | Documentation on the purpose of this action/repository. Not used by Nexus itself, for the UI only | -                                        |
+| `name` | Yes | The name of the repository being created. Must be unique within Nexus | my-maven-repo                            |
+| `format` | Yes | Format (`maven`, `docker`, `npm`, `raw`, etc.) | maven                                    |
+| `type` | Yes | Type: `hosted`, `proxy`, or `group` | hosted                                   |
+| `online` | Yes | Whether the repository is accessible (`true`/`false`) | true                                     |
+| `storage` | Yes | Storage object: `blobStoreName`, `strictContentTypeValidation`, `writePolicy` | [Example](#request-example-maven-hosted) |
+| `cleanup` | None | Associated cleanup policies (`policyNames`) | policyNames: [maven-cleanup]             |
+| `maven` | for maven | Maven-only: `versionPolicy`, `layoutPolicy` | [Example](#request-example-maven-hosted) |
+| `proxy` | for proxy | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge` | -                                        |
+| `group` | for group | List of included memberNames | [Example](#request-example-docker-group)              |
+| `docker` | for docker | Docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth` | [Example](#request-example-docker-group) |
+| `component` | very rare | Only for some non-standard scenarios | -                                        |
+| `attributes`| None | Any custom fields | -                                        |
 
 ### Requirements
 
@@ -1490,7 +1490,7 @@ DeleteNexusPrivilege — Removes a privilege from Nexus Repository Manager 3.
 
 ### Request Example
 
-``yaml
+```yaml
 name: example-privilege
 ```
 
@@ -1574,7 +1574,7 @@ DeleteNexusRole — Deletes a role from Nexus Repository Manager 3.
 
 ### Request Example
 
-``yaml
+```yaml
 id: example-role
 ```
 
