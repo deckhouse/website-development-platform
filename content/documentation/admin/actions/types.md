@@ -1309,7 +1309,7 @@ versionPolicy: RELEASE
 layoutPolicy: PERMISSIVE
 ```
 
-### Example request (Docker group)
+### Request example (Docker group)
 
 ```yaml
 description: |
