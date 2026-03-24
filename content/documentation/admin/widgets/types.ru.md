@@ -534,6 +534,7 @@ title: Типы виджетов
 * [Bitbucket](../external-services/#bitbucket).
 * [GitHub](../external-services/#github).
 
+
 ### Конфигурация
 
 | Название     | Обязательность  | Описание                                                            | Значение по умолчанию |
