@@ -44,3 +44,4 @@ If a user was part of a team and the team was subsequently filtered by rules, th
 The user's last activity on the platform. Displayed in the user table in "Administration" → "Users." It is updated upon login or when the user's JWT token is automatically rotated (the rotation interval depends on the Dex configuration and is 10 minutes by default).
 
 > The last activity time is not updated when using the API token issued by the user or when the user performs any actions on the platform between automatic JWT token rotations.
+> 

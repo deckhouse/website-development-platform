@@ -61,9 +61,10 @@ A "Date" type parameter can accept a date value with a user-defined format. In t
 
 #### Parameter Configuration
 
-* Format - Date display settings. If the format is not explicitly specified, the default format is used: `YYYY-MM-DDTHH:mm:ss.sssZ`. A description of the format configuration is available at [link](https://day.js.org/docs/en/display/format). The format setting affects:
-* Date display in tables and entity cards;
-* Parameter value when running actions or scenarios.
+* Format - Date display settings. If the format is not explicitly specified, the default format is used: `YYYY-MM-DDTHH:mm:ss.sssZ`. A description of the format configuration is available at [link](https://day.js.org/docs/en/display/format).
+  * The format setting affects:
+  * Date display in tables and entity cards;
+  * Parameter value when running actions or scenarios.
 * Current date by default - The current date is used as the default value when editing entities, as well as when running actions or scenarios.
 * Default value - A predefined default value. Does not apply if the "Current date by default" toggle is enabled.
 

@@ -79,7 +79,7 @@ Authorization: Bearer {{ .credentials.api_key }}
 Content-Type: application/json
 ```
 
-where `api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
+Where `api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
 
 1. **Response Field**: `choices.0.message.content`.
 1. **Request body template**:

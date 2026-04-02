@@ -39,11 +39,9 @@ Get a list of external services (GitLab, SonarQube, etc.).
 
 **Example:**
 
-``sh
+```sh
 Get a list of external services
 ```
-
----
 
 ### get_resource_entities
 
@@ -261,7 +259,7 @@ Content-Type: application/json
 - Check that the token has not expired.
 - Check that the 'Authorization: Bearer <api_token>' header is used.
 
-### The tool returns an access error.
+### The tool returns an access error
 
 - Check that your user has permission to access the requested resource.
 - Check that the resource name or ID is correct.
