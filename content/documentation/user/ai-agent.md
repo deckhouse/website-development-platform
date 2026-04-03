@@ -6,8 +6,8 @@ title: AI Assistant
 Experimental Feature
 {{< /alert >}}
 
-The AI ​​Assistant is an intelligent assistant built into the Deckhouse Development Platform. It answers questions about the platform, analyzes catalog data, and performs various tasks using MCP (Model Context Protocol) tools.
-The AI ​​Assistant uses customizable AI providers to process requests and can work with various language models, including OpenAI GPT, Ollama, and any models accessible through a compatible REST API.
+The AI Assistant is an intelligent assistant built into the Deckhouse Development Platform. It answers questions about the platform, analyzes catalog data, and performs various tasks using MCP (Model Context Protocol) tools.
+The AI Assistant uses customizable AI providers to process requests and can work with various language models, including OpenAI GPT, Ollama, and any models accessible through a compatible REST API.
 
 ## Configuring AI Providers
 
@@ -19,7 +19,7 @@ The platform supports three types of AI providers:
 
 - **Ollama** — for working with local models via Ollama.
 
-- **Custom** — for working with any custom REST API compatible with the AI ​​Assistant request/response format.
+- **Custom** — for working with any custom REST API compatible with the AI Assistant request/response format.
 
 ### Credentials for Providers
 
@@ -71,7 +71,7 @@ Authorization: Bearer {{ .credentials.openai_api_key }}
 - Credentials can be updated without changing the provider configuration.
 - One set of credentials can be used across multiple providers.
 
-**How ​​it works:**
+**How it works:**
 1. You add credentials through the user profile.
 2. In the provider headers, specify the template `{{ .credentials.key_name }}`.
 3. When executing the request, the system automatically replaces the template with the actual credential value.
@@ -139,9 +139,9 @@ choices.0.message.content
 
 This means: take the first element of the `choices` array, then the `message` field, then the `content` field.
 
-For other formats, possible values ​​are `response.text`, `content`, `answer`.
+For other formats, possible values are `response.text`, `content`, `answer`.
 
-**How ​​to determine the correct path:**
+**How to determine the correct path:**
 1. Make a test request to your API.
 1. Examine the JSON response structure.
 1. Locate the field containing the model response text.
@@ -221,7 +221,7 @@ where `api_key` is the name of the credential key (see the [Credentials for Prov
 
 1. **Response Field**: `choices.0.message.content`. 1. **Request body template**:
 
-```json 
+```json
 { 
 "model": "{{.model}}", 
 "messages": [ 
@@ -235,11 +235,11 @@ where `api_key` is the name of the credential key (see the [Credentials for Prov
 } 
 ```
 
-## Working with the AI ​​Assistant
+## Working with the AI Assistant
 
 ### Opening Chat
 
-The AI ​​Assistant is accessible through the chat sidebar on the right side of the interface. To open the chat, click the chat button in the lower right corner of the screen.
+The AI Assistant is accessible through the chat sidebar on the right side of the interface. To open the chat, click the chat button in the lower right corner of the screen.
 
 ### Selecting a Provider
 
@@ -247,7 +247,7 @@ At the top of the chat is a provider selector. Select the desired provider from 
 
 ### Available Tools (MCP Tools)
 
-The AI ​​Assistant uses MCP (Model Context Protocol) tools to work with the platform. A full list with descriptions, parameters, and examples is provided in the [MCP server documentation](../user/mcp-server/).
+The AI Assistant uses MCP (Model Context Protocol) tools to work with the platform. A full list with descriptions, parameters, and examples is provided in the [MCP server documentation](../user/mcp-server/).
 
 A model can call multiple tools in a single request if necessary.
 
@@ -265,7 +265,7 @@ The chat displays a list of all available tools with their descriptions and usag
 
 ### Features
 
-- **Data Analysis**: The AI ​​assistant doesn't just return raw data; it analyzes it and provides structured responses.
+- **Data Analysis**: The AI assistant doesn't just return raw data; it analyzes it and provides structured responses.
 - **Filtering**: You can request data with conditions, and the assistant will filter it for you.
 - **Aggregation**: The assistant can count, group data, and provide statistics.
 
@@ -301,4 +301,4 @@ The assistant will call the MCP tool and return a list of available platform act
 
 - **Use specific questions**: The more specific the question, the more accurate the answer will be.
 - **Specify parameters explicitly**: If you know the name of a resource or parameter, specify it in the question.
-- **Experiment**: The AI ​​assistant understands natural language, so try different question formulations.
+- **Experiment**: The AI assistant understands natural language, so try different question formulations.
