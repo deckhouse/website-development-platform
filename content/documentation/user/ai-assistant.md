@@ -32,8 +32,8 @@ To add new credentials for AI providers:
 1. In the form for creating or editing a provider, click the **Manage Credentials** button.
 1. In the dialog that opens, click **Add Credentials**.
 1. Enter the key-value pair:
-- **Key**: The name of the credential key (e.g., 'api_key', 'openai_token', 'bearer_token').
-- **Value**: The token or access key itself.
+   - **Key**: The name of the credential key (e.g., 'api_key', 'openai_token', 'bearer_token').
+   - **Value**: The token or access key itself.
 1. Click **Save**.
 
 #### Changing Credentials
@@ -60,7 +60,7 @@ Instead of:
 Authorization: Bearer sk-1234567890abcdef
 ```
 
-Use:
+use:
 
 ```sh
 Authorization: Bearer {{ .credentials.openai_api_key }}
@@ -83,18 +83,18 @@ To set up an OpenAI provider, follow these steps:
 1. Open your user profile and go to the **AI Providers** tab.
 1. Click the **Add** button.
 1. Fill out the form:
-- **Name**: `ChatGPT` (or any other convenient name).
-- **Provider**: Select `OpenAI`.
-- **Model**: Enter the model name, for example `gpt-4` or `gpt-3.5-turbo`.
-- **URL**: `https://api.openai.com/v1/chat/completions`.
-- **Method**: `POST`.
-- **Headers**: Add an Authorization header using the credentials:
+   - **Name**: `ChatGPT` (or any other convenient name).
+   - **Provider**: Select `OpenAI`.
+   - **Model**: Enter the model name, for example `gpt-4` or `gpt-3.5-turbo`.
+   - **URL**: `https://api.openai.com/v1/chat/completions`.
+   - **Method**: `POST`.
+   - **Headers**: Add an Authorization header using the credentials:
 
-```sh
-Authorization: Bearer {{ .credentials.openai_api_key }}
-```
-
-where `openai_api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
+       ```sh
+       Authorization: Bearer {{ .credentials.openai_api_key }}
+       ```
+    
+       where `openai_api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
 
 1. Click **Save**.
 
@@ -104,11 +104,11 @@ To set up a local Ollama provider:
 
 1. Make sure Ollama is running on your server.
 1. Create a new provider:
-- **Name**: `Ollama Local`.
-- **Provider**: Select `Ollama`.
-- **Model**: Enter the model name, such as `llama2` or `mistral`.
-- **URL**: `http://localhost:11434/api/generate` (or your Ollama server address).
-- **Method**: `POST`.
+   - **Name**: `Ollama Local`.
+   - **Provider**: Select `Ollama`.
+   - **Model**: Enter the model name, such as `llama2` or `mistral`.
+   - **URL**: `http://localhost:11434/api/generate` (or your Ollama server address).
+   - **Method**: `POST`.
 
 1. Click **Save**.
 
@@ -219,7 +219,8 @@ Content-Type: application/json
 
 where `api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
 
-1. **Response Field**: `choices.0.message.content`. 1. **Request body template**:
+1. **Response Field**: `choices.0.message.content`.
+1. **Request body template**:
 
 ```json
 { 
