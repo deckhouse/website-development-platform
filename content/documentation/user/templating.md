@@ -147,7 +147,7 @@ Parameters:
 
 Returns:
 
-* `true` only if all values ​​meet the condition.
+* `true` only if all values meet the condition.
 
 Example in a template:
 
@@ -316,7 +316,7 @@ When running a script or process, the command is selected once, and its variable
 
 ### Action Parameters
 
-Action parameters are accessible through the `{{ .property.* }}` context and contain the values ​​passed when running the action.
+Action parameters are accessible through the `{{ .property.* }}` context and contain the values passed when running the action.
 
 To retrieve the value of an action parameter, use the following construct:
 
@@ -452,7 +452,7 @@ Usage examples:
 
 ## Process Parameters
 
-Each process can set general parameters, the values ​​of which can be used in all actions included in the script.
+Each process can set general parameters, the values of which can be used in all actions included in the script.
 
 To obtain the value of a process parameter, use the following construct:
 
@@ -477,7 +477,7 @@ Usage examples:
 
 ## Script Parameters
 
-Each script can specify general parameters whose values ​​can be used in all actions within the script.
+Each script can specify general parameters whose values can be used in all actions within the script.
 
 To get the value of a script parameter, use the following construct:
 

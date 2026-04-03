@@ -169,133 +169,132 @@ choices.0.message.content
 }
 ```
 
-Для API с другим форматом:
+For APIs with a different format:
 
 ```json
 {
-  "messages": [
-    {
-      "content": "{{.prompt}}",
-      "role": "user"
-    }
-  ],
-  "model": "{{.model}}",
-  "stream": false
+"messages": [
+{
+"content": "{{.prompt}}",
+"role": "user"
+}
+],
+"model": "{{.model}}",
+"stream": false
 }
 ```
 
-Для API с минимальной структурой запроса:
+For APIs with a minimal request structure:
 
 ```json
 {
-  "query": "{{.prompt}}",
-  "model_name": "{{.model}}"
+"query": "{{.prompt}}",
+"model_name": "{{.model}}"
 }
 ```
 
-**Важно:**
-- Шаблон должен быть валидным JSON.
-- Переменные `{{.prompt}}` и `{{.model}}` будут автоматически заменены при отправке запроса.
-- Значение `{{.prompt}}` автоматически экранируется для безопасной вставки в JSON.
-- Вы можете добавить любые дополнительные поля, необходимые для вашего API (temperature, max_tokens, и т.д.).
+**Important:**
+- The template must be valid JSON.
+- The `{{.prompt}}` and `{{.model}}` variables will be automatically replaced when sending the request.
+- The `{{.prompt}}` value is automatically escaped for safe insertion into JSON.
+- You can add any additional fields required for your API (temperature, max_tokens, etc.).
 
-**Пример полной настройки кастомного провайдера:**
+**Example of a complete custom provider setup:**
 
-1. **Название**: `My Custom API`.
-1. **Провайдер**: `Custom`.
-1. **Модель**: `my-model-v1`.
+1. **Name**: `My Custom API`.
+1. **Provider**: `Custom`.
+1. **Model**: `my-model-v1`.
 1. **URL**: `https://api.example.com/v1/chat`.
-1. **Метод**: `POST`.
-1. **Заголовки**:
-
-   ```sh
-   Authorization: Bearer {{ .credentials.api_key }}
-   Content-Type: application/json
-   ```
-
-   где `api_key` — название ключа учетных данных (см. раздел [Учетные данные для провайдеров](#учетные-данные-для-провайдеров)).
-
-1. **Поле ответа**: `choices.0.message.content`.
-1. **Шаблон тела запроса**:
-
-   ```json
-   {
-     "model": "{{.model}}",
-     "messages": [
-       {
-         "role": "user",
-         "content": "{{.prompt}}"
-       }
-     ],
-     "temperature": 0.7,
-     "max_tokens": 1000
-   }
-   ```
-
-## Работа с AI-агентом
-
-### Открытие чата
-
-AI-агент доступен через боковую панель чата в правой части интерфейса. Для открытия чата нажмите на кнопку чата в правом нижнем углу экрана.
-
-### Выбор провайдера
-
-В верхней части чата находится селектор провайдеров. Выберите нужный провайдер из списка доступных. Если у вас настроен только один провайдер, он будет выбран автоматически.
-
-### Доступные инструменты (MCP Tools)
-
-AI-агент использует инструменты MCP (Model Context Protocol) для работы с платформой. Полный список с описанием, параметрами и примерами приведён в [документации MCP-сервера](../user/mcp-server/).
-
-Модель при необходимости может вызвать несколько инструментов в рамках одного запроса.
-
-Основные возможности:
-- Получение и анализ данных из каталога платформы.
-- MCP-proxy к внешним сервисам (GitLab, SonarQube, Kubernetes и др.) через `get_external_data` — запросы выполняются с учётными данными пользователя.
-
-### Просмотр доступных инструментов
-
-В чате отображается список всех доступных инструментов с их описаниями и примерами использования. Вы можете:
-
-- Раскрыть раздел **Доступные инструменты** для просмотра списка.
-- Раскрыть каждый инструмент для просмотра его параметров и примеров.
-- Кликнуть на пример, чтобы вставить его в поле ввода и сразу выполнить или отредактировать запрос.
-
-### Особенности работы
-
-1. **Анализ данных**: AI-агент не просто возвращает сырые данные, а анализирует их и предоставляет структурированные ответы.
-1. **Фильтрация**: Вы можете запрашивать данные с условиями, и агент выполнит фильтрацию.
-1. **Агрегация**: Агент может подсчитывать количество, группировать данные и предоставлять статистику.
-
-### Отладка
-
-Если ответ агента кажется некорректным, вы можете просмотреть логи отладки, нажав на кнопку с иконкой вопроса рядом с ответом. Это поможет понять, какие инструменты были вызваны и какие данные были получены.
-
-## Примеры использования
-
-### Пример 1: Анализ сервисов
-
-**Вопрос:**
+1. **Method**: `POST`.
+1. **Headers**:
 
 ```sh
-Получи все сервисы и покажи название и дату создания
+Authorization: Bearer {{ .credentials.api_key }}
+Content-Type: application/json
 ```
 
-**Результат:**
-Агент использует инструменты MCP для получения данных о сервисах и возвращает список с названием и датой создания.
+where `api_key` is the name of the credential key (see the [Credentials for Providers](#credentials-for-providers) section).
 
-### Пример 2: Список действий
+1. **Response Field**: `choices.0.message.content`. 1. **Request body template**:
 
-**Вопрос:**
+```json
+{
+"model": "{{.model}}",
+"messages": [
+{
+"role": "user",
+"content": "{{.prompt}}"
+}
+],
+"temperature": 0.7,
+"max_tokens": 1000
+}
+```
+
+## Working with the AI Agent
+
+### Opening Chat
+
+The AI Agent is accessible through the chat sidebar on the right side of the interface. To open the chat, click the chat button in the lower right corner of the screen.
+
+### Selecting a Provider
+
+At the top of the chat is a provider selector. Select the desired provider from the list of available ones. If you only have one provider configured, it will be selected automatically.
+
+### Available Tools (MCP Tools)
+
+The AI Agent uses MCP (Model Context Protocol) tools to work with the platform. A complete list with descriptions, parameters, and examples is provided in the [MCP server documentation](../user/mcp-server/).
+
+The model can call multiple tools in a single request if needed.
+
+Key features:
+- Retrieving and analyzing data from the platform catalog.
+- MCP proxy to external services (GitLab, SonarQube, Kubernetes, etc.) via `get_external_data` — requests are executed with user credentials.
+
+### Viewing Available Tools
+
+The chat displays a list of all available tools with their descriptions and usage examples. You can:
+
+- Expand the **Available Tools** section to view the list.
+- Expand each tool to view its parameters and examples.
+- Click on an example to paste it into the input field and immediately execute or edit the request.
+
+### Features
+
+1. **Data Analysis**: The AI agent doesn't just return raw data; it analyzes it and provides structured responses.
+1. **Filtering**: You can request data with conditions, and the agent will perform the filtering.
+1. **Aggregation**: The agent can count, group data, and provide statistics.
+
+### Debugging
+
+If the agent's response seems incorrect, you can view the debug logs by clicking the question mark icon next to the response. This will help you understand which tools were called and what data was retrieved.
+
+## Usage Examples
+
+### Example 1: Service Analysis
+
+**Question:**
 
 ```sh
-Получи список действий
+Get all services and show their name and creation date
 ```
 
-**Результат:**
-Агент вызовет инструмент MCP и вернёт список доступных действий платформы.
+**Result:**
+The agent uses MCP tools to retrieve service data and returns a list with their name and creation date.
 
-## Рекомендации
+### Example 2: Action List
 
-1. **Используйте конкретные вопросы**: Чем конкретнее вопрос, тем точнее будет ответ.
-1. **Указывайте параметры явно**: Если вы знаете название ресурса или параметр, укажите его в вопросе.
-1. **Экспериментируйте**: AI-агент понимает естественный язык, пробуйте разные формулировки вопросов.
+**Question:**
+
+```sh
+Get a list of actions
+```
+
+**Result:**
+The agent will call the MCP tool and return a list of available platform actions.
+
+## Recommendations
+
+1. **Use specific questions**: The more specific the question, the more accurate the answer.
+1. **Specify parameters explicitly**: If you know the name of a resource or parameter, specify it in the question.
+1. **Experiment**: The AI agent understands natural language, so try different question formulations.

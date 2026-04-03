@@ -8,8 +8,8 @@ For each resource, action, or scenario, the platform administrator can add an un
 * **Date** - date
 * **JSON** - text in JSON format
 * **Entities** - entity, one of whose parameters can be selected as a value
-* **Enum** - enumeration of values ​​with a key and display value
-* **List** - list of values ​​with the ability to select one of them
+* **Enum** - enumeration of values with a key and display value
+* **List** - list of values with the ability to select one of them
 * **Markdown** - text in Markdown format
 * **Number** - number
 * **Object** - arbitrary object in JSON format
@@ -61,7 +61,7 @@ A "Date" type parameter can accept a date value with a user-defined format. In t
 
 #### Parameter Configuration
 
-* Format - Date display settings. If the format is not explicitly specified, the default format is used: `YYYY-MM-DDTHH:mm:ss.sssZ`. A description of the format configuration is available at [link](https://day.js.org/docs/en/display/format).
+* Format - Date display settings. If the format is not explicitly specified, the default format is used: `YYYY-MM-DDTHH:mm:ss.sssZ`. A description of the format configuration is available at the [Day.js](https://day.js.org/docs/en/display/format) documentation.
   * The format setting affects:
   * Date display in tables and entity cards;
   * Parameter value when running actions or scenarios.
@@ -72,7 +72,7 @@ A "Date" type parameter can accept a date value with a user-defined format. In t
 When running actions or scripts and using the current date as the default, the parameter must not be hidden in the user form. Otherwise, the current date will not be populated.
 {{< /alert >}}
 
-When running actions or scripts, you cannot populate a date parameter with values ​​using the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
+When running actions or scripts, you cannot populate a date parameter with values using the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
 
 ### List
 
