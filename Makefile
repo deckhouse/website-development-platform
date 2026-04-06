@@ -10,8 +10,10 @@ WERF_PLATFORM ?= linux/amd64
 
 CURRENT_UID ?= $(shell id -u)
 CURRENT_GID ?= $(shell id -g)
+PORTS_TO_FREE ?= 80 1313 1314
 
 .PHONY: help serve build down lint-markdown lint-markdown-fix mod
+.PHONY: help serve build down lint-markdown lint-markdown-fix mod free-ports
 
 help:
 	@echo "Usage: make [target]"
@@ -34,10 +36,20 @@ help:
 	@echo "  MARKDOWNLINT_VERSION=$(MARKDOWNLINT_VERSION)"
 
 up:
+	@$(MAKE) down
+	@$(MAKE) free-ports
 	@UID=$(CURRENT_UID) GID=$(CURRENT_GID) docker compose up
+
+free-ports:
+	@containers="$$(for port in $(PORTS_TO_FREE); do docker ps -q --filter "publish=$$port"; done | sort -u)"; \
+	if [ -n "$$containers" ]; then \
+		echo "Stopping containers using ports $(PORTS_TO_FREE): $$containers"; \
+		docker stop $$containers; \
+	fi
 
 down:
 	docker compose rm -f
+	docker compose down --remove-orphans
 
 serve:
 	$(HUGO) serve $(SERVE_FLAGS)
@@ -57,3 +69,4 @@ lint-markdown-fix:
 mod:
 	@echo "Cleaning up Hugo modules..."
 	$(HUGO) mod tidy
+
