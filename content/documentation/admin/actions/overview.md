@@ -3,12 +3,12 @@ title: Overview
 weight: 10
 ---
 
-Actions are a platform mechanism for initiating operations in external infrastructure systems and services, i.e., outside the platform. They can be used, for example:
+Actions are a platform mechanism for initiating operations in external infrastructure systems and services, i.e., outside the platform. They can be used, for example, to:
 
-- Create projects, variables, branches, or tags in GitLab;
-- Create resources in Kubernetes;
-- Create secrets in Deckhouse Stronghold or HashiCorp Vault;
-- Create projects in SonarQube, DefectDojo, and other systems;
+- Create projects, variables, branches, or tags in GitLab,
+- Create resources in Kubernetes,
+- Create secrets in Deckhouse Stronghold or HashiCorp Vault,
+- Create projects in SonarQube, DefectDojo, and other systems,
 - Create topics and ACLs in Kafka.
 
 An action can be bound to one or more resources. After that, it can be executed for any data entity related to those resources.
@@ -19,14 +19,14 @@ An action can be bound to one or more resources. After that, it can be executed 
 
 When creating or editing an action, provide the following basic information:
 
-- **Name** (required) — an arbitrary name for the action.
-- **Identifier** (required) — the action identifier. Generated automatically from the name.
-- **Resource** (optional) — One or more resources for which the action will be available to run.
-- **Icon** (optional) — The icon displayed on the action card.
-- **Owner** (optional) — The user account responsible for the configuration and operation of the action.
-- **Owner Team** (optional) — The team responsible for the configuration and operation of the action.
-- **Tags** (optional) — Tags for classifying and searching for actions.
-- **Description** (optional) — A description in Markdown. Displayed when the action or a script containing the action is run.
+- **Name** (required): Arbitrary name for the action.
+- **Identifier** (required): Action identifier. Generated automatically from the name.
+- **Resource** (optional): One or more resources for which the action will be available to run.
+- **Icon** (optional): Icon displayed on the action card.
+- **Owner** (optional): User account responsible for the configuration and operation of the action.
+- **Owner Team** (optional): Team responsible for the configuration and operation of the action.
+- **Tags** (optional): Tags for classifying and searching for actions.
+- **Description** (optional): Description in Markdown. Displayed when the action or a script containing the action is run.
 
 ### User Form
 
@@ -36,9 +36,9 @@ In the "User Form" section, specify the parameters available for filling when th
 
 The following options are available for each parameter:
 
-- **Editable** — Allows you to change the parameter value when the action is launched. If this option is disabled, the value cannot be changed.
-- **Required** — Requires a value to be specified when the action is launched.
-- **Hidden** — The parameter is not displayed in the user form when the action is launched.
+- **Editable**: Allows you to change the parameter value when the action is launched. If this option is disabled, the value cannot be changed.
+- **Required**: Requires a value to be specified when the action is launched.
+- **Hidden**: The parameter is not displayed in the user form when the action is launched.
 
 For each parameter, you can specify a default value, which will be populated in the form when the action is launched.
 
@@ -52,7 +52,7 @@ You can use [Go template](https://developer.hashicorp.com/nomad/tutorials/templa
 
 #### Parameter Conditions
 
-Parameters can be automatically hidden or shown in the user form depending on the value of a Boolean parameter. This is configured in the "Parameter Conditions" section, where you define the rules for showing or hiding the selected parameters.
+Parameters can be automatically hidden or shown in the user form depending on the value of a `Boolean` parameter. This is configured in the "Parameter Conditions" section, where you define the rules for showing or hiding the selected parameters.
 
 ### Backend
 
@@ -60,11 +60,11 @@ Parameters can be automatically hidden or shown in the user form depending on th
 
 The action can be executed using one of two backend types:
 
-- **Built-in** — the main action logic is executed within the platform.
+- **Built-in**: Main action logic is executed within the platform.
 
-> When selecting the built-in backend, you must specify the type of built-in action. Depending on the selected type, the platform automatically generates a sample request body and determines the list of credentials required to execute the action.
+  > When selecting the built-in backend, you must specify the type of built-in action. Depending on the selected type, the platform automatically generates a sample request body and determines the list of credentials required to execute the action.
 
-- **Webhook** — the main action logic is executed by an external service to which the platform sends an HTTP request.
+- **Webhook**: Main action logic is executed by an external service to which the platform sends an HTTP request.
 
 #### Masking Action Fields
 
@@ -72,18 +72,18 @@ For each action, you can enable masking of fields that may contain sensitive inf
 
 If you enable the "Mask Action Fields" option, the following will be hidden in the action execution records:
 
-- The body field (request body);
-- The response field (response generated based on the execution results);
-- The values of all filled-in parameters.
+- The `body` field (request body)
+- The `response` field (response generated based on the execution results)
+- The values of all filled-in parameters
 
 #### Temporary Response
 
 For each action, you can enable the "Temporary Response" option. This allows you to restrict access to the action's results and hide them from other users.
 
-If this option is enabled, after the action is successfully completed, the response:
+If this option is enabled, after the action is successfully completed, the response is:
 
-- is saved as temporary and displayed **only** to the user who initiated the action;
-- is removed from the regular response field so that it is not accessible to other users.
+- Saved as temporary and displayed **only** to the user who initiated the action.
+- Removed from the regular response field so that it is not accessible to other users.
 
 Other users will see only the encrypted temporary response instead of the response content.
 
@@ -133,8 +133,8 @@ For built-in actions, the **URL** field can contain the address of the infrastru
 
 This parameter determines whether the platform verifies the SSL certificate of:
 
-- webhook backend (for webhook actions);
-- infrastructure service (for built-in actions).
+- Webhook backend (for webhook actions)
+- Infrastructure service (for built-in actions)
 
 Enable this option if self-signed or untrusted certificates are used.
 
@@ -146,8 +146,8 @@ HTTP method of requesting the webhook backend. For built-in actions, the method 
 
 For webhook actions, you can select the format for sending the request body:
 
-- **JSON** (default) — the request body is sent in JSON format with the `Content-Type: application/json` header.
-- **Form URL Encoded** — the request body is sent in the `application/x-www-form-urlencoded` format. This format only supports flat key-value structures, where all values are converted to strings. Nested objects and arrays are not supported.
+- **JSON** (default): Request body is sent in JSON format with the `Content-Type: application/json` header.
+- **Form URL Encoded**: Request body is sent in the `application/x-www-form-urlencoded` format. This format only supports flat key-value structures, where all values are converted to strings. Nested objects and arrays are not supported.
 
 {{< alert level="info" >}}
 When selecting the Form URL Encoded format, the request body must contain only flat key-value pairs. For example:
@@ -163,13 +163,13 @@ Nested structures and arrays are not supported in this format.
 
 Webhook actions have an **advanced logging** option, which enables detailed logging of all HTTP request and response details:
 
-- Request URL,
-- HTTP method,
-- HTTP headers (including tokens),
-- Request body,
-- Response status code,
-- HTTP response headers,
-- Response body.
+- Request URL
+- HTTP method
+- HTTP headers (including tokens)
+- Request body
+- Response status code
+- HTTP response headers
+- Response body
 
 When enabled, all this data is written to the action execution log. When disabled, logging occurs in standard mode.
 
@@ -185,7 +185,7 @@ HTTP headers in the "key: value" format that will be added to the request to the
 
 #### Entity Parameter Update
 
-After executing an action, the result (usually the infrastructure system's response) is stored in the 'response' field. If the "Update Entity Parameters" option is enabled, the platform uses the data from the 'response' field and applies update rules to write values to the entity parameters.
+After executing an action, the result (usually the infrastructure system's response) is stored in the `response` field. If the "Update Entity Parameters" option is enabled, the platform uses the data from the `response` field and applies update rules to write values to the entity parameters.
 
 For example, when executing the "Create Project in GitLab" action, the `response` field will contain the specification of the created project, such as:
 
@@ -198,8 +198,8 @@ For example, when executing the "Create Project in GitLab" action, the `response
 
 If you need to immediately populate the `repository_id` entity parameter after creating a project in GitLab, specify the following in the update rules:
 
-- **source:** `{{ .response.id }}`;
-- **entity parameter:** `repository_id`.
+- **source:** `{{ .response.id }}`
+- **entity parameter:** `repository_id`
 
 #### Write to Process Storage
 
@@ -207,10 +207,10 @@ After executing the action, the result is written to the **response** field. The
 
 This block specifies a list of rules:
 
-| Field | Description | Examples |
-|------|----------|---------|
-| **Source** | A Go template string where the context is the **response** of this action. The template is executed after the action successfully completes; the result (string) is written to storage. | `{{ .id }}` — get the id field from the response; `{{ .result.projectId }}` — get the projectId nested field from the result in the response |
-| **Storage Key** | The name of the key in the process storage. The value from the source is stored under this key. | `projectId`, `deployJobId` |
+| Field | Description | Examples                                                                                                                                   |
+|------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **Source** | A Go template string where the context is the **response** of this action. The template is executed after the action successfully completes; the result (string) is written to storage. | `{{ .id }}`: Get the id field from the response. `{{ .result.projectId }}`: Get the projectId nested field from the result in the response |
+| **Storage Key** | The name of the key in the process storage. The value from the source is stored under this key. | `projectId`, `deployJobId`                                                                                                                 |
 
 If there are no rules (the list is empty), nothing is written to storage when the action in the process is executed. Data from the storage can be used in subsequent actions in the same process via the `{{ .store.<key> }}` placeholders. For more information on using storage, see the ["Process Storage"](../processes/#process-storage) section.
 
@@ -265,6 +265,8 @@ If confirmation is required from a specific user, they will be notified in the p
 
 By default, access to external infrastructure services is performed using the credentials of the user who launched the action. If necessary, you can explicitly specify that the action should be executed under a specific account.
 
+For actions that are launched as automation events, specifying the account is mandatory.
+
 #### Credentials
 
 For built-in actions, the platform predefines a set of required credentials. Their IDs are loaded when selecting the built-in backend. For each ID, you must select the credential type to use.
@@ -293,10 +295,10 @@ Entries with the full startup log are created in the database regardless of the 
 
 For each action execution, a status entry is created. Possible statuses:
 
-- **Created** — the entry has been created, but the action has not yet been executed.
-- **Unapproved** — the action is awaiting approval.
-- **Running** — the action is running.
-- **Failed** — the action completed with an error.
-- **Update failed** — the action completed, but updating the entity parameters failed.
-- **Success** — the action completed successfully.
-- **Retrying** — the action completed with an error and is being attempted again.
+- **Created**: Entry has been created, but the action has not yet been executed.
+- **Unapproved**: Action is awaiting approval.
+- **Running**: Action is running.
+- **Failed**: Action completed with an error.
+- **Update failed**: Action completed, but updating the entity parameters failed.
+- **Success**: Action completed successfully.
+- **Retrying**: Action completed with an error and is being attempted again.

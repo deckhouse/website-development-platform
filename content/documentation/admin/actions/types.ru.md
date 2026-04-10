@@ -1120,7 +1120,7 @@ kubectl explain deployment
 
 Вывод:
 
-```yaml
+```console
 GROUP:      apps
 KIND:       Deployment
 VERSION:    v1

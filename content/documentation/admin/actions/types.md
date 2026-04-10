@@ -1,24 +1,24 @@
 ---
-title: Типы действий
+title: Action types
 ---
 
 ## CreateDefectdojoEngagement
 
-CreateDefectdojoEngagement — creates a new engagement in the DefectDojo system. The action uses the DefectDojo API v2.
+CreateDefectdojoEngagement — Creates a new engagement in the DefectDojo system. The action uses the DefectDojo API v2.
 
 ### Request Example
 
-```yaml
+``yaml
 name: example engagement
 product: '1'
 target_start: '2024-06-01'
 target_end: '2024-06-30'
 lead: '1'
-```
+``
 
 ### Request Specification
 
-The list of fields corresponds to the official DefectDojo API, `/api/v2/engagements`. For more details, see the [Defectdojo documentation](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+The list of fields corresponds to the official DefectDojo API, `/api/v2/engagements`. For more details, see the Defectdojo documentation [https://demo.defectdojo.org/api/v2/oa3/swagger-ui/].
 
 ### Credentials
 
@@ -26,7 +26,7 @@ The list of fields corresponds to the official DefectDojo API, `/api/v2/engageme
 
 ## CreateDefectdojoProduct
 
-CreateDefectdojoProduct — creates a new product in the DefectDojo system. This action uses the DefectDojo API v2.
+CreateDefectdojoProduct — Creates a new product in the DefectDojo system. This action uses the DefectDojo API v2.
 
 ### Request Example
 
@@ -38,23 +38,23 @@ prod_type: 1
 
 ### Request Specification
 
-The list of fields corresponds to the official DefectDojo API, `/api/v2/products`. For more details, see the [Defectdojo documentation](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+The list of fields corresponds to the official DefectDojo API, `/api/v2/products`. For more details, see the Defectdojo documentation [https://demo.defectdojo.org/api/v2/oa3/swagger-ui/].
 
 ### Credentials
 
-* **token** — API v2 Key of the user on whose behalf the action will be executed.
+* **token** — API v2 Key of the user under whom the action will be executed.
 
 ## CreateGitlabBranches
 
-CreateGitlabBranches — creates new branches in the target repository.
+CreateGitlabBranches — Creates new branches in the target repository.
 
 ### Request Example
 
 ```yaml
 project_id: '0'
 branches:
-- branch: new-branch
-ref: main
+  - branch: new-branch
+    ref: main
 ```
 
 ### Request Specification
@@ -68,13 +68,13 @@ ref: main
 
 ### Credentials
 
-* **token** — API v2 Key of the user on whose behalf the action will be executed.
+* **token** — the user token on whose behalf the action will be executed.
 
 ### Note
 
-A valid GitLab token is required to execute the action. This token is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+A valid GitLab token is required to execute the action. This token is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-The action performs a POST request to the URL `/api/v4/projects/:id/repository/branches`. If the project is successfully created, GitLab returns information about the created branches.
+The action performs a POST request to the URL '/api/v4/projects/:id/repository/branches'. If the project is successfully created, GitLab returns information about the created branches.
 
 ## CreateGitlabGroupVariables
 
@@ -85,8 +85,8 @@ CreateGitlabGroupVariables — creates group-level variables in GitLab.
 ```yaml
 group_id: '0'
 variables:
-- key: EXAMPLE_VARIABLE
-value: value
+  - key: EXAMPLE_VARIABLE
+    value: value
 ```
 
 ### Request Specification
@@ -96,17 +96,17 @@ value: value
 | group_id | Yes | The group ID in which to create variables |
 | variables | Yes | List of variables to create |
 
-The list of variable fields corresponds to the official GitLab Group-level Variables API, `/groups/:id/variables`. For more details, see the [Gitlab documentation](https://docs.gitlab.com/api/group_level_variables/#create-variable).
+The list of variable fields corresponds to the official GitLab Group-level Variables API, `/groups/:id/variables`. For more details, see [the Gitlab documentation](https://docs.gitlab.com/api/group_level_variables/#create-variable).
 
 ### Credentials
 
-* **token** — API v2 Key of the user on whose behalf the action will be executed.
+* **token** — the token of the user under whom the action will be executed.
 
 ### Note
 
-To execute the action, you must have valid credentials with a GitLab token. This token is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+To execute the action, you must have valid credentials with a GitLab token. This token is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-The action makes a POST request to the URL: `/api/v4/groups/:id/variables`.
+The action makes a POST request to the URL: '/api/v4/groups/:id/variables'.
 
 ## CreateGitlabMergeRequest
 
@@ -120,17 +120,17 @@ source_project_branch: example
 source_project_tag: v1.0.0
 target_project_id: '0'
 merge_request_spec:
-source_branch: example
-target_branch: '1'
-title: example
+  source_branch: example
+  target_branch: '1'
+  title: example
 additionalIgnoreFiles:
-- .ignore
-- .example
+  - .ignore
+  - .example
 values:
-key1: value1
-nested:
-enabled: true
-subkey: 123
+  key1: value1
+  nested:
+    enabled: true
+    subkey: 123
 ```
 
 ### Request Specification
@@ -164,9 +164,9 @@ Platform:
 
 ### Note
 
-This action requires a valid GitLab token. This token is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+This action requires a valid GitLab token. This token is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-This action makes a POST request to the URL: '/api/v4/projects/:id/merge_requests'.
+This action makes a POST request to the URL: `/api/v4/projects/:id/merge_requests`.
 
 ## CreateGitlabProject
 
@@ -200,9 +200,9 @@ namespace_id: '0'
 
 ### Note
 
-The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-The action makes a POST request to the URL '/api/v4/projects', passing the request parameters in JSON format. If the project is successfully created, GitLab returns data about the newly created project.
+The action makes a POST request to the URL `/api/v4/projects`, passing the request parameters in JSON format. If the project is successfully created, GitLab returns data about the newly created project.
 
 ## CreateGitlabProjectVariables
 
@@ -213,8 +213,8 @@ CreateGitlabProjectVariables — creates project-level variables in GitLab.
 ```yaml
 project_id: '0'
 variables:
-- key: EXAMPLE_VARIABLE
-value: value
+  - key: EXAMPLE_VARIABLE
+    value: value
 ```
 
 ### Request Specification
@@ -224,17 +224,17 @@ value: value
 | project_id | Yes | Project ID in which to create variables |
 | variables | Yes | List of variables to create |
 
-The list of variable fields corresponds to the official GitLab Project-level CI/CD variables API, `/projects/:id/variables`. For more details, see the [Gitlab documentation](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
+The list of variable fields corresponds to the official GitLab Project-level CI/CD variables API, `/projects/:id/variables`. For more details, see [the Gitlab documentation](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
 
 ### Credentials
 
-* **token** — API v2 Key of the user on whose behalf the action will be executed.
+* **token** — the user token under which the action will be executed.
 
 ### Note
 
-This action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+This action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-This action makes a POST request to the URL: `/api/v4/projects/:id/variables`.
+This action makes a POST request to the URL: '/api/v4/projects/:id/variables'.
 
 ## CreateGitlabProjectWebhook
 
@@ -268,9 +268,9 @@ pipeline_events: true
 
 ### Note
 
-The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and is used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-The action makes a POST request to the URL: `/api/v4/projects/:id/hooks`.
+The action makes a POST request to the URL: '/api/v4/projects/:id/hooks'.
 
 ## CreateGitlabTag
 
@@ -315,9 +315,9 @@ project_id: '0'
 tag_name: v1.0.0
 name: Release v1.0.0
 description: |
-## Changes:
-- New feature.
-- Bug fixes.
+  ## Changes:
+  - New feature.
+  - Bug fixes.
 ```
 
 ### Request Specification
@@ -335,9 +335,9 @@ description: |
 
 ### Note
 
-The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header `Private-Token`).
+The action requires valid GitLab token credentials. The token containing the credentials is passed through the credentials mechanism and used for authentication when calling the GitLab API (HTTP header 'Private-Token').
 
-The action makes a POST request to the URL: `/api/v4/projects/:id/releases`.
+The action makes a POST request to the URL: '/api/v4/projects/:id/releases'.
 
 ## CreateKafkaACLs
 
@@ -350,42 +350,42 @@ securityProtocol: SASL_PLAINTEXT
 saslMechanism: PLAIN
 acls:
   - topics:
-  - example_1
-allow:
-  - User:principal_2
-  - Group:principal_3
-deny:
-  - User:principal_4
-  - Group:principal_5
-ops:
-  - CREATE
-  - READ
-  - WRITE
-  - DELETE
-  - DESCRIBE
-  - DESCRIBE_CONFIGS
-  - ALTER
-pattern: LITERAL
+      - example_1
+    allow:
+      - User:principal_2
+      - Group:principal_3
+    deny:
+      - User:principal_4
+      - Group:principal_5
+    ops:
+      - CREATE
+      - READ
+      - WRITE
+      - DELETE
+      - DESCRIBE
+      - DESCRIBE_CONFIGS
+      - ALTER
+    pattern: LITERAL
   - topics:
-  - example_6
-allow:
-  - User:principal_7
-allow_hosts:
-  - 127.0.0.1
-deny:
-  - User:principal_8
-deny_hosts:
-  - 127.0.0.1
-ops:
-  - CREATE
-pattern: LITERAL
+      - example_6
+    allow:
+      - User:principal_7
+    allow_hosts:
+      - 127.0.0.1
+    deny:
+      - User:principal_8
+    deny_hosts:
+      - 127.0.0.1
+    ops:
+      - CREATE
+    pattern: LITERAL
 ```
 
 ### Request Specification
 
 | Name | Required | Description | Possible Values | Default |
 |-------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|------------------------|
-| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL | - |
+| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL | - |
 | saslMechanism | No | The authentication mechanism that SASL will use. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. More details are available in the Kafka documentation [in the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 | - |
 | acls | Yes | The set of ACLs to create | - | - |
 | acls.ops | Yes | List of operations for which the rule will be created | [List of possible operations](#list-of-possible-operations) | - |
@@ -412,36 +412,36 @@ pattern: LITERAL
 
 ### List of possible operations
 
-For more details, see the [Kafka documentation](https://kafka.apache.org).
+For more details, see the Kafka documentation [https://kafka.apache.org].
 
 **Topic:**
 
-* ALL.
-* ALTER.
-* ALTER_CONFIGS.
-* CREATE.
-* DELETE.
-* DESCRIBE.
-* DESCRIBE_CONFIGS.
-* READ.
-* WRITE.
+* ALL
+* ALTER
+* ALTER_CONFIGS
+* CREATE
+* DELETE
+* DESCRIBE
+* DESCRIBE_CONFIGS
+* READ
+* WRITE
 
 **Group:**
 
-* ALL.
-* DELETE.
-* DESCRIBE.
-* READ.
+* ALL
+* DELETE
+* DESCRIBE
+* READ
 
 **TransactionalID:**
 
-* ALL.
-* DESCRIBE.
-* WRITE.
+* ALL
+* DESCRIBE
+* WRITE
 
 **Tokens:**
 
-* DESCRIBE.
+* DESCRIBE
 
 ## CreateKafkaTopics
 
@@ -462,14 +462,14 @@ topics:
 
 ### Request Specification
 
-| Name | Required | Description                                                                                                                                                                                                                        | Possible Values                                                                                      |
-|-------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                            | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL                                                                    |
-| saslMechanism | No | The authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512                                                                    |
-| partitions | Yes | The number of partitions into which the topic will be divided                                                                                                                                                                      | -                                                                                                      |
-| replication_factor | Yes | The number of copies (replicas) of each partition of the topic to be placed on different brokers                                                                                                                                   | -                                                                                                      |
-| configs | Yes | Key-value configuration for created topics                                                                                                                                                                                         | Values are provided [in the Kafka documentation](https://kafka.apache.org/documentation/#topicconfigs) |
-| topics | Yes | List of topic names to create                                                                                                                                                                                                      | -                                                                                                      |
+| Name | Required | Description | Possible Values |
+|-------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+| saslMechanism | No | The authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+| partitions | Yes | The number of partitions into which the topic will be divided | - |
+| replication_factor | Yes | The number of copies (replicas) of each partition of the topic to be placed on different brokers | - |
+| configs | Yes | Key-value configuration for created topics | Values are provided [in the Kafka documentation](https://kafka.apache.org/documentation/#topicconfigs) |
+| topics | Yes | List of topic names to create | - |
 
 ### Credentials
 
@@ -486,27 +486,27 @@ CreateKafkaUsers — creates new SASL/SCRAM users in Kafka.
 securityProtocol: SASL_PLAINTEXT
 saslMechanism: PLAIN
 users:
-- user: example_user_1
-password: example_password_user_1
-mechanism: SCRAM-SHA-256
-iterations: 4096
-- user: example_user_2
-password: example_password_user_2
-mechanism: SCRAM-SHA-256
-iterations: 4096
+  - user: example_user_1
+    password: example_password_user_1
+    mechanism: SCRAM-SHA-256
+    iterations: 4096
+  - user: example_user_2
+    password: example_password_user_2
+    mechanism: SCRAM-SHA-256
+    iterations: 4096
 ```
 
 ### Request Specification
 
 | Name | Required | Description | Possible Values |
-|-------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| securityProtocol | Yes | Protocol for connecting to Kafka. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
-| saslMechanism | No | Authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+|-------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| securityProtocol | Yes | Protocol for connecting to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+| saslMechanism | No | Authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
 | users | Yes | Set of users to create | - |
 | users.user | Yes | Name of the user to create | - |
 | users.password | Yes | Password of the user to create | - |
 | users.mechanism | Yes | Authentication mechanism for the created user | SCRAM-SHA-256, SCRAM-SHA-512 |
-| users.iterations | Yes | Number of iterations to use for password hashing                                                                                                                                    | От 4096 до 16384                        |
+| users.iterations | Yes | Number of iterations to use for password hashing                                                                                                                                     | From 4096 to 16384                         |
 
 ### Credentials
 
@@ -529,12 +529,12 @@ run_sca_after_clone: true
 
 ### Request Specification
 
-| Name | Required | Description |
-|--------------------|----------------|------------------------------------------------------------------------------|
-| name | Yes | Project name in CodeScoring |
-| repository | Yes | Repository URL (e.g., <https://gitlab.example.com/group/project.git>) |
-| vcs_id | Yes | VCS system ID in CodeScoring (must be greater than 0) |
-| run_sca_after_clone| No | Automatically run SCA analysis after cloning the repository |
+| Name | Required | Description                                                           |
+|--------------------|----------------|-----------------------------------------------------------------------|
+| name | Yes | Project name in CodeScoring                                           |
+| repository | Yes | Repository URL (e.g., `<https://gitlab.example.com/group/project.git>)` |
+| vcs_id | Yes | VCS system ID in CodeScoring (must be greater than 0)                 |
+| run_sca_after_clone| No | Automatically run SCA analysis after cloning the repository           |
 
 ### Response
 
@@ -565,19 +565,19 @@ CreateKeycloakClient — Creates a new client in Keycloak.
 ```yaml
 realm: master
 config:
-clientId: example
-name: example
-enabled: true
-clientAuthenticatorType: client-secret
-secret: secret
-defaultClientScopes:
-- roles
-- profile
-- email
-optionalClientScopes:
-- address
-- phone
-- offline_access
+  clientId: example
+  name: example
+  enabled: true
+  clientAuthenticatorType: client-secret
+  secret: secret
+  defaultClientScopes:
+    - roles
+    - profile
+    - email
+  optionalClientScopes:
+    - address
+    - phone
+    - offline_access
 ```
 
 ### Request Specification
@@ -600,14 +600,14 @@ CreateKubernetesResource — Creates a new resource or resources in a Kubernetes
 
 ```yaml
 manifests:
-- apiVersion: v1
-kind: Namespace
-metadata:
-name: example1
-- apiVersion: v1
-kind: Namespace
-metadata:
-name: example2
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: example1
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: example2
 ```
 
 ### Request Specification
@@ -633,13 +633,13 @@ templateRepositoryUrl: https://gitlab.example.com/example-1.git
 targetRepositoryUrl: https://gitlab.example.com/example-2.git
 targetBranch: master
 additionalIgnoreFiles:
-- .ignore
-- .example
+  - .ignore
+  - .example
 values:
-key1: value1
-nested:
-enabled: true
-subkey: 123
+  key1: value1
+  nested:
+    enabled: true
+    subkey: 123
 ```
 
 ### Request Specification
@@ -689,7 +689,7 @@ If the templating variables are missing both in the `values.yaml` file and in th
 
 ### Template Repository Variables
 
-To add default variables used for templating, you must create a values.yaml file with the appropriate contents in the root of the repository.
+To add default variables used for templating, you must create a `values.yaml` file with the appropriate contents in the root of the repository.
 
 Example of a `values.yaml` file:
 
@@ -721,10 +721,10 @@ The `.templateignore` file is optional.
 
 ```sh
 ├── example-folder-01
-│ ├── example-file-01
-│ └── {{ .example }}-file-02
+│   ├── example-file-01
+│   └── {{ .example }}-file-02
 ├── {{ .example }}-folder-02
-│ └── ...
+│   └── ...
 ├── values.yaml
 └── .templateignore
 ```
@@ -733,10 +733,10 @@ If the **example** variable is set to **new** when rendering the repository, the
 
 ```sh
 ├── example-folder-01
-│ ├── example-file-01
-│ └── new-file-02
+│   ├── example-file-01
+│   └── new-file-02
 ├── new-folder-02
-│ └── ...
+│   └── ...
 ├── values.yaml
 └── .templateignore
 ```
@@ -745,17 +745,17 @@ If the **example** variable is set to **new** when rendering the repository, the
 
 The **ddp-render-dir** utility is available for local debugging of templates.
 
-Utility:
+This utility:
 
 1. Creates a copy of the source directory.
 1. Renders files in this directory using the same rules as for creating repositories from templates.
 
 Command line switches:
 
-* **--source-dir** — the source directory to render.
-* **--target-dir** — the directory where the rendered result will be placed.
-* **--values** (optional) — path to the `values.yaml` file containing variables to be used during rendering.
-* **--ignore-files** (optional) — list of files containing paths to exclude from the target repository.
+* `--source-dir`: Source directory to render.
+* `--target-dir`: Directory where the rendered result will be placed.
+* `--values` (optional): Path to the `values.yaml` file containing variables to be used during rendering.
+* `--ignore-files` (optional): List of files containing paths to exclude from the target repository.
 
 ## CreateSonarqubeProject
 
@@ -797,10 +797,10 @@ CreateVaultSecret — Creates a secret with one or more values in HashiCorp Vaul
 ```yaml
 path: example/data/path
 secrets:
-- key: key1
-value: value1
-- key: key2
-value: value2
+  - key: key1
+    value: value1
+  - key: key2
+    value: value2
 ```
 
 ### Request Specification
@@ -819,11 +819,11 @@ value: value2
 
 ### Note
 
-**allow_update** – Determines the action's behavior when an existing secret exists:
+The `allow_update` parameter determines the action's behavior when an existing secret exists:
 
-- `false` (default) – the action fails if the secret already exists;
-- `true` – a new version of the secret is created with the values passed in the action;
-- `merge` – only the secret keys specified in the action are updated or created. Existing keys not mentioned in the action are preserved unchanged.
+- `false` (default): Action fails if the secret already exists.
+- `true`: New version of the secret is created with the values passed in the action.
+- `merge`: Only the secret keys specified in the action are updated or created. Existing keys not mentioned in the action are preserved unchanged.
 
 ## DeleteVaultSecret
 
@@ -843,11 +843,11 @@ path: example/data/path
 
 ### Credentials
 
-* **token** — a Vault token that has the necessary permissions to delete secrets.
+* **token** — A Vault token that has the necessary permissions to delete secrets.
 
 ## DeleteDefectdojoProduct
 
-DeleteDefectdojoProduct — deletes a product from DefectDojo. This action uses DefectDojo API v2.
+DeleteDefectdojoProduct — Deletes a product from DefectDojo. This action uses DefectDojo API v2.
 
 ### Request Example
 
@@ -901,53 +901,53 @@ DeleteKafkaACLs — deletes a set of ACLs in Kafka.
 ```yaml
 securityProtocol: SASL_PLAINTEXT
 saslMechanism: PLAIN
-acls: 
-- topics: 
-- example_1 
-allow: 
-- User:principal_2 
-- Group:principal_3 
-allow_hosts: 
-- 127.0.0.1 
-deny: 
-- User:principal_4 
-- Group:principal_5 
-deny_host: 
-- 127.0.0.1 
-ops: 
-- CREATE 
-- READ 
-- WRITE 
-- DELETE 
-- DESCRIBE 
-- DESCRIBE_CONFIGS 
-- ALTER 
-pattern: LITERAL 
-- any_topic: true 
-any_group: true 
-any_transactional_id: true 
-any_allow: true 
-any_allow_hosts: true 
-any_deny: true 
-any_deny_hosts: true 
-ops: 
-- ANY 
-pattern: ANY 
-- any_resource: true 
-any_allow: true 
-any_allow_hosts: true 
-any_deny: true 
-any_deny_hosts: true 
-ops: 
-- ANY 
-pattern: ANY
+acls:
+  - topics:
+      - example_1
+    allow:
+      - User:principal_2
+      - Group:principal_3
+    allow_hosts:
+      - 127.0.0.1
+    deny:
+      - User:principal_4
+      - Group:principal_5
+    deny_host:
+      - 127.0.0.1
+    ops:
+      - CREATE
+      - READ
+      - WRITE
+      - DELETE
+      - DESCRIBE
+      - DESCRIBE_CONFIGS
+      - ALTER
+    pattern: LITERAL
+  - any_topic: true
+    any_group: true
+    any_transactional_id: true
+    any_allow: true
+    any_allow_hosts: true
+    any_deny: true
+    any_deny_hosts: true
+    ops:
+      - ANY
+    pattern: ANY
+  - any_resource: true
+    any_allow: true
+    any_allow_hosts: true
+    any_deny: true
+    any_deny_hosts: true
+    ops:
+      - ANY
+    pattern: ANY
 ```
 
 ### Request specification
 
 | Name | Required | Description | Possible values | Default value |
-|---------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|-------------------------|
-| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL | - |
+|---------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|-------------------------|
+| securityProtocol | Yes | The protocol for connecting to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL | - |
 | saslMechanism | No | The authentication mechanism that SASL will use. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. More details are available in the Kafka documentation [in the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 | - |
 | acls | Yes | The set of ACLs to create | - | - |
 | acls.ops | Yes | The list of operations for which the rule will be created. | [List of possible operations](#list-of-possible-operations) | - |
@@ -977,10 +977,10 @@ pattern: ANY
 
 ### List of possible patterns
 
-* ANY.
-* MATCH.
-* LITERAL.
-* PREFIXED.
+* ANY
+* MATCH
+* LITERAL
+* PREFIXED
 
 ### List of possible operations
 
@@ -988,31 +988,31 @@ Detailed descriptions are available in the Kafka documentation [in the Kafka doc
 
 **Topic:**
 
-* ALL.
-* ALTER.
-* ALTER_CONFIGS.
-* CREATE.
-* DELETE.
-* DESCRIBE.
-* DESCRIBE_CONFIGS.
-* READ.
-* WRITE.
+* ALL
+* ALTER
+* ALTER_CONFIGS
+* CREATE
+* DELETE
+* DESCRIBE
+* DESCRIBE_CONFIGS
+* READ
+* WRITE
 
 **Group:**
 
-* ALL.
-* DELETE. * DESCRIBE.
-* READ.
+* ALL
+* DELETE. * DESCRIBE
+* READ
 
 **TransactionalID:**
 
-* ALL.
-* DESCRIBE.
-* WRITE.
+* ALL
+* DESCRIBE
+* WRITE
 
 **Token:**
 
-* DESCRIBE.
+* DESCRIBE
 
 ## DeleteKafkaTopics
 
@@ -1042,7 +1042,7 @@ topics:
 
 ## DeleteKafkaUsers
 
-DeleteKafkaUsers — deletes existing SASL/SCRAM users in Kafka.
+DeleteKafkaUsers — Deletes existing SASL/SCRAM users in Kafka.
 
 ### Request Example
 
@@ -1050,21 +1050,21 @@ DeleteKafkaUsers — deletes existing SASL/SCRAM users in Kafka.
 securityProtocol: SASL_PLAINTEXT
 saslMechanism: PLAIN
 users:
-- user: example_user_1
-mechanism: SCRAM-SHA-256
-- user: example_user_2
-mechanism: SCRAM-SHA-256
+  - user: example_user_1
+    mechanism: SCRAM-SHA-256
+  - user: example_user_2
+    mechanism: SCRAM-SHA-256
 ```
 
 ### Request Specification
 
-| Name | Required | Description                                                                                                                                                                                                                        | Possible Values |
-|-------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| securityProtocol | Yes | Protocol for connecting to Kafka. More details can be found [in the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                             | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
-| saslMechanism | No | The authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see the [Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
-| users | Yes | The set of users to delete                                                                                                                                                                                                         | - |
-| users.user | Yes | The name of the user to delete                                                                                                                                                                                                     | - |
-| users.mechanism | Yes | The authentication mechanism of the user to delete                                                                                                                                                                                 | SCRAM-SHA-256, SCRAM-SHA-512 |
+| Name | Required | Description | Possible Values |
+|-------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| securityProtocol | Yes | Protocol for connecting to Kafka. More details can be found [in the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol) | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+| saslMechanism | No | The authentication mechanism that will use SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see the Kafka documentation [https://kafka.apache.org/documentation/#security_sasl_mechanism] | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+| users | Yes | The set of users to delete | - |
+| users.user | Yes | The name of the user to delete | - |
+| users.mechanism | Yes | The authentication mechanism of the user to delete | SCRAM-SHA-256, SCRAM-SHA-512 |
 
 ### Credentials
 
@@ -1073,7 +1073,7 @@ mechanism: SCRAM-SHA-256
 
 ## DeleteKubernetesResource
 
-DeleteKubernetesResource — deletes an existing resource in the Kubernetes cluster.
+DeleteKubernetesResource — Deletes an existing resource in the Kubernetes cluster.
 
 ### Request Example
 
@@ -1102,7 +1102,7 @@ namespace: example
 ### Determining the required Group and Version
 
 Each resource type has its own API Group and Version.
-A full list of API resources with their Groups and Versions is provided in the [Kubernetes documentation](https://kubernetes.io/docs/reference/kubernetes-api/).
+A full list of API resources with their Groups and Versions is provided [in the Kubernetes documentation](https://kubernetes.io/docs/reference/kubernetes-api/).
 
 If you don't know the required Group and Version, you can use the current values.
 There are several ways to determine them:
@@ -1119,14 +1119,14 @@ kubectl explain deployment
 
 Output:
 
-```yaml
-GROUP: apps
-KIND: Deployment
-VERSION: v1
+```console
+GROUP:      apps
+KIND:       Deployment
+VERSION:    v1
 
 DESCRIPTION:
-Deployment enables declarative updates for Pods and ReplicaSets.
-
+    Deployment enables declarative updates for Pods and ReplicaSets.
+    
 FIELDS:
 ...
 ```
@@ -1143,8 +1143,8 @@ apiVersion: apps/v1
 ```
 
 Here:
-* **API Group** - apps.
-* **Version** - v1.
+* **API Group** - apps
+* **Version** - v1
 
 ## DeleteSonarqubeProject
 
@@ -1204,8 +1204,8 @@ StartGitlabPipeline — Starts pipeline execution in GitLab.
 project_id: 0
 ref: main
 variables:
-- key: example-key
-value: example-value
+  - key: example-key
+    value: example-value
 ```
 
 ### Request Specification
@@ -1231,7 +1231,7 @@ The action makes a POST request to the URL: `/api/v4/projects/:id/pipeline`.
 
 ## CreateVaultKubernetesAuthRole
 
-CreateVaultKubernetesAuthRole — creates or updates a Kubernetes authentication role in HashiCorp Vault.
+CreateVaultKubernetesAuthRole — Creates or updates a Kubernetes authentication role in HashiCorp Vault.
 
 ### Request Example
 
@@ -1239,15 +1239,15 @@ CreateVaultKubernetesAuthRole — creates or updates a Kubernetes authentication
 mountPath: kubernetes
 role: example
 bound_service_account_names:
-- default
+  - default
 bound_service_account_namespaces:
-- default
+  - default
 optional:
-token_ttl: 1h
-token_max_ttl: 12h
-audience: vault
-token_policies:
-- default
+  token_ttl: 1h
+  token_max_ttl: 12h
+  audience: vault
+  token_policies:
+    - default
 ```
 
 ### Request Specification
@@ -1276,7 +1276,7 @@ Supported values in optional:
 | token_no_default_policy | bool | Exclude default policy from the token |
 | token_bound_cidrs | []string | Limit CIDR ranges within which the issued token can be used |
 
-A full list of supported parameters is provided in the official documentation of [HashiCorp Vault](https://developer.hashicorp.com/vault/docs/auth/kubernetes#parameters).
+A full list of supported parameters is provided in the [official documentation](https://developer.hashicorp.com/vault/docs/auth/kubernetes#parameters) of HashiCorp Vault.
 
 ### Credentials
 
@@ -1284,29 +1284,29 @@ A full list of supported parameters is provided in the official documentation of
 
 ## CreateNexusRepository
 
-**CreateNexusRepository** — creates a new repository of any supported type (Maven, Docker, NPM, etc.) in Nexus Repository Manager 3 using the REST API.
+**CreateNexusRepository** — Creates a new repository of any supported type (Maven, Docker, NPM, etc.) in Nexus Repository Manager 3 using the REST API.
 
 The format, type, and other key settings are fully configurable and comply with the Nexus API.
 
-### Request example (Maven hosted)
+### Request example (Maven-hosted)
 
 ```yaml
 description: |
-Maven hosted repo for internal Java build artifacts.
+  Maven-hosted repo for internal Java build artifacts.
 name: my-maven-repo
 format: maven
 type: hosted
 online: true
-storage: 
-blobStoreName: default 
-strictContentTypeValidation: true 
-writePolicy: ALLOW
-cleanup: 
-policyNames: 
--maven-cleanup
-maven: 
-versionPolicy: RELEASE 
-layoutPolicy: PERMISSIVE
+storage:
+  blobStoreName: default
+  strictContentTypeValidation: true
+  writePolicy: ALLOW
+cleanup:
+  policyNames:
+    - maven-cleanup
+maven:
+  versionPolicy: RELEASE
+  layoutPolicy: PERMISSIVE
 ```
 
 ### Request example (Docker group)
@@ -1319,47 +1319,47 @@ format: docker
 type: group
 online: true
 storage:
-blobStoreName: default
-strictContentTypeValidation: true
+  blobStoreName: default
+  strictContentTypeValidation: true
 group:
-memberNames:
-  - docker-hosted
-  - docker-proxy
+  memberNames:
+    - docker-hosted
+    - docker-proxy
 docker:
-v1Enabled: false
-forceBasicAuth: true
-httpPort: 5001
+  v1Enabled: false
+  forceBasicAuth: true
+  httpPort: 5001
 ```
 
 ### Request Specification
 
-| Field | Required | Description | Example                                |
-|------------|-----------------|---------------------------------------------------------------------------------------------------|----------------------------------------|
-| `description` | No | Documentation on the purpose of this action/repository. Not used by Nexus itself, for the UI only | -                                      |
-| `name` | Yes | The name of the repository being created. Must be unique within Nexus | my-maven-repo                          |
-| `format` | Yes | Format (`maven`, `docker`, `npm`, `raw`, etc.) | maven                                  |
-| `type` | Yes | Type: `hosted`, `proxy`, or `group` | hosted                                 |
-| `online` | Yes | Whether the repository is accessible (`true`/`false`) | true                                   |
+| Field | Required | Description | Example                                  |
+|------------|-----------------|---------------------------------------------------------------------------------------------------|------------------------------------------|
+| `description` | No | Documentation on the purpose of this action/repository. Not used by Nexus itself, for the UI only | -                                        |
+| `name` | Yes | The name of the repository being created. Must be unique within Nexus | my-maven-repo                            |
+| `format` | Yes | Format (`maven`, `docker`, `npm`, `raw`, etc.) | maven                                    |
+| `type` | Yes | Type: `hosted`, `proxy`, or `group` | hosted                                   |
+| `online` | Yes | Whether the repository is accessible (`true`/`false`) | true                                     |
 | `storage` | Yes | Storage object: `blobStoreName`, `strictContentTypeValidation`, `writePolicy` | [Example](#request-example-maven-hosted) |
-| `cleanup` | None | Associated cleanup policies (`policyNames`) | policyNames: maven-cleanup             |
+| `cleanup` | None | Associated cleanup policies (`policyNames`) | policyNames: [maven-cleanup]             |
 | `maven` | for maven | Maven-only: `versionPolicy`, `layoutPolicy` | [Example](#request-example-maven-hosted) |
-| `proxy` | for proxy | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge` | -                                      |
-| `group` | for group | List of included memberNames | [Example](#request-example-docker-group)            |
+| `proxy` | for proxy | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge` | -                                        |
+| `group` | for group | List of included memberNames | [Example](#request-example-docker-group)              |
 | `docker` | for docker | Docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth` | [Example](#request-example-docker-group) |
-| `component` | very rare | Only for some non-standard scenarios | -                                      |
-| `attributes`| None | Any custom fields | -                                      |
+| `component` | very rare | Only for some non-standard scenarios | -                                        |
+| `attributes`| None | Any custom fields | -                                        |
 
 ### Requirements
 
 - Use only those blocks (`maven`, `group`, `proxy`, `docker`, etc.) that are supported for your type/format.
-- For Maven hosted, `maven: {versionPolicy, layoutPolicy}` is required.
+- For Maven-hosted, `maven: {versionPolicy, layoutPolicy}` is required.
 - For group, `group.memberNames` is required.
 - For proxy, `proxy.remoteUrl` is required.
 - For Docker, use the specific fields in `docker`.
 
 ### Credentials
 
-* **token** — a base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — a Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## DeleteNexusRepository
 
@@ -1379,12 +1379,13 @@ name: my-repo-to-delete
 
 ### Algorithm
 
-- A `DELETE` operation is performed on `/service/rest/v1/repositories/{name}`, where `{name}` is the value of the `name` field. - If the repository is found and deleted, a 204 response is returned.
-- If not found, a 404 error is returned.
+- A `DELETE` operation is performed on `/service/rest/v1/repositories/{name}`, where `{name}` is the value of the `name` field.
+- If the repository is found and deleted, a `204` response is returned.
+- If it is not found, a `404` error is returned.
 
 ### Credentials
 
-* **token** — a base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — a Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## CreateNexusPrivilege
 
@@ -1397,8 +1398,8 @@ name: example-privilege
 description: Example privilege description
 type: repository-view
 actions: 
-- READ 
-- BROWSE
+  - READ 
+  - BROWSE
 format:maven2
 repository: maven-releases
 ```
@@ -1409,9 +1410,9 @@ repository: maven-releases
 name: content-selector-privilege
 description: Privilege with content selector
 type: repository-content-selector
-actions: 
-- READ
-format:maven2
+actions:
+  - READ
+format: maven2
 repository: maven-releases
 contentSelector: my-content-selector
 ```
@@ -1424,7 +1425,7 @@ description: Wildcard privilege
 type: wildcard
 pattern: nx-*
 actions:
-- READ
+  - READ
 ```
 
 ### Request Specification
@@ -1448,7 +1449,7 @@ For the `repository-content-selector` type, the content selector must exist in N
 
 ### Credentials
 
-* **token** — base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## AssignNexusPrivilege
 
@@ -1459,8 +1460,8 @@ AssignNexusPrivilege — assigns privileges to an existing role in Nexus Reposit
 ```yaml
 roleId: example-role
 privileges:
-- example-privilege
-- another-privilege
+  - example-privilege
+  - another-privilege
 ```
 
 ### Request Specification
@@ -1478,7 +1479,7 @@ privileges:
 
 ### Credentials
 
-* **token** — base64 string(`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ### Note
 
@@ -1502,11 +1503,11 @@ name: example-privilege
 
 ### Credentials
 
-* **token** — base64 string(`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## CreateNexusRole
 
-CreateNexusRole — creates a new role in Nexus Repository Manager 3. Roles group privileges and can include other roles.
+CreateNexusRole — Creates a new role in Nexus Repository Manager 3. Roles group privileges and can include other roles.
 
 ### Request Example
 
@@ -1515,8 +1516,8 @@ id: example-role
 name: Example Role
 description: Example role description
 privileges:
-- nx-repository-view-*-*-read
-- nx-repository-view-maven2-*-browse
+  - nx-repository-view-*-*-read
+  - nx-repository-view-maven2-*-browse
 roles: []
 ```
 
@@ -1532,7 +1533,7 @@ roles: []
 
 ### Credentials
 
-* **token** — a base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — a Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## AssignNexusRole
 
@@ -1543,8 +1544,8 @@ AssignNexusRole — assigns roles to an existing user in Nexus Repository Manage
 ```yaml
 userId: example-user
 roles:
-- example-role
-- another-role
+  - example-role
+  - another-role
 ```
 
 ### Request Specification
@@ -1562,7 +1563,7 @@ roles:
 
 ### Credentials
 
-* **token** — base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ### Note
 
@@ -1586,11 +1587,11 @@ id: example-role
 
 ### Credentials
 
-* **token** — base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## CreateNexusUser
 
-CreateNexusUser — creates a new user in Nexus Repository Manager 3.
+CreateNexusUser — Creates a new user in Nexus Repository Manager 3.
 
 ### Request Example
 
@@ -1602,7 +1603,7 @@ emailAddress: user@example.com
 password: password
 status: active
 roles:
-- nx-admin
+  - nx-admin
 ```
 
 ### Request Specification
@@ -1619,7 +1620,7 @@ roles:
 
 ### Credentials
 
-* **token** — base64 string (`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## DeleteNexusUser
 
@@ -1639,7 +1640,7 @@ userId: example-user
 
 ### Credentials
 
-* **token** — base64 string(`admin:password`), used as Basic Auth for requests to Nexus.
+* **token** — Base64-encoded string (`admin:password`), used as Basic Auth for requests to Nexus.
 
 ## Wait
 
