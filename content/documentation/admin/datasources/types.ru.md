@@ -388,66 +388,6 @@ title: Типы источников данных
 |User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
 |Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
-## KubernetesDeployments
-
-Источник данных типа **KubernetesDeployments** возвращает список всех Deployment в кластере Kubernetes.
-
-### Авторизация
-
-Конфигурация авторизации описана в разделе [Внешние сервисы](../external-services/#kubernetes).
-
-### Спецификация ответа
-
-Платформа возвращает все Deployment в кластере Kubernetes. Спецификация ресурса Deployment доступна в [официальной документации](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/#DeploymentSpec).
-
-### Конфигурация
-
-* **URL** — URL Kubernetes API в формате `https://api.example.com`.
-
-### Параметры
-
-Настраиваемые параметры отсутствуют.
-
-## KubernetesIngresses
-
-Источник данных типа **KubernetesIngresses** возвращает список всех Ingress в кластере Kubernetes.
-
-### Авторизация
-
-Конфигурация авторизации описана в разделе [внешний сервис Kubernetes](../external-services/#kubernetes).
-
-### Спецификация ответа
-
-Платформа возвращает все Ingress в кластере Kubernetes. Спецификация ресурса Ingress доступна в [официальной документации](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/).
-
-### Конфигурация
-
-* **URL** — URL Kubernetes API в формате `https://api.example.com`.
-
-### Параметры
-
-Настраиваемые параметры отсутствуют.
-
-## KubernetesNamespaces
-
-Источник данных типа **KubernetesNamespaces** возвращает список всех пространств имен в кластере Kubernetes.
-
-### Авторизация
-
-Конфигурация авторизации описана в разделе [внешний сервис Kubernetes](../external-services/#kubernetes).
-
-### Спецификация ответа
-
-Платформа возвращает все пространства имен в кластере Kubernetes. Спецификация ресурса Namespace доступна в [официальной документации](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/namespace-v1/).
-
-### Конфигурация
-
-* **URL** — URL Kubernetes API в формате `https://api.example.com`.
-
-### Параметры
-
-Настраиваемые параметры отсутствуют.
-
 ## KubernetesResources
 
 Источник данных типа **KubernetesResources** возвращает список ресурсов Kubernetes. Тип возвращаемых ресурсов задается через параметры источника данных. Поддерживаются как встроенные в Kubernetes типы ресурсов, так и любые кастомные ресурсы.
@@ -501,7 +441,7 @@ FIELDS:
 |namespace   |опционально    | Пространство имен, из которого будут собираться ресурсы. Если не указан, ресурсы будут собираться из всех пространств имен. Значение параметра учитывается только если значение **isNamespaced** равно `true` |                                         |
 |resource    |**обязательно**| Название ресурса. Указывается маленькими буквами во множественном числе, как в поле NAME вывода команды `kubectl api-resources`.                                                                              |                                         |
 
-## Примеры конфигурации
+### Примеры
 
 Собрать все ingress-ресурсы Kubernetes-кластера:
 
@@ -550,11 +490,7 @@ resource: modulereleases
 
 Каждому типу ресурса соответствует своя версия и группа. Полный список API-ресурсов с их группами и версиями — в [документации Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/).
 
-Если неизвестно, какие требуются Group и Version, можно попробовать подставить актуальные значения. Есть несколько вариантов как их посмотреть:
-
-#### С помощью утилиты kubectl
-
-Команда `kubectl explain` показывает `version` и `apiGroup` для ресурса.
+Если неизвестно, какие требуются Group и Version, можно попробовать подставить актуальные значения. Есть несколько вариантов как их посмотреть, например с помощью утилиты kubectl: команда `kubectl explain` показывает `version` и `apiGroup` для ресурса.
 
 Пример:
 
