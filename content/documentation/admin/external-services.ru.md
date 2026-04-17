@@ -349,6 +349,24 @@ Authorization: Basic <base64-encoded-credentials>
 Authorization: Bearer <ваш-токен>
 ```
 
+### PT Application Inspector
+
+**Тип авторизации:** токен доступа.
+
+**Заголовки:**
+
+| Заголовок      | Формат значения   |
+|----------------|-------------------|
+| `Access-Token` | `<токен доступа>` |
+
+Платформа обменивает токен доступа на JWT через API PT Application Inspector и дальше обращается к API с заголовком `Authorization: Bearer <jwt>`.
+
+**Пример:**
+
+```sh
+Access-Token: <ваш-токен-доступа>
+```
+
 ### Vault
 
 **Тип авторизации:** Token Authentication.
