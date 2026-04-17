@@ -192,14 +192,14 @@ MCP — это открытый протокол для взаимодейств
 1. Конфигурация сервера (заполните следующие поля):
 
    - «Server Name»: `DDP MCP Server` (или любое удобное название).
-   - «Server URL»: `https://<ddp.example.com>/api/v2/mcp`.
+   - «Server URL»: `https://<DOMAIN>/api/v2/mcp`.
    - «Transport»: `HTTP` или `JSON-RPC`.
    - «Authentication»:
      - «Type»: `Bearer Token` или аналог (заголовок `Authorization`).
      - «Header»: `Authorization: Bearer <ваш_api_токен>`.
      - «Token»: вставьте ваш API-токен платформы (из раздела «Профиль»).
 
-1. Проверка подключения:
+2. Проверка подключения:
 
    - Сохраните конфигурацию.
    - LM Studio попытается подключиться к серверу.
