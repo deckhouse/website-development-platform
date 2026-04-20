@@ -6,17 +6,17 @@ title: Action types
 
 CreateDefectdojoEngagement — Creates a new engagement in the DefectDojo system. The action uses the DefectDojo API v2.
 
-### Request Example
+### Request example
 
-``yaml
+```yaml
 name: example engagement
 product: '1'
 target_start: '2024-06-01'
 target_end: '2024-06-30'
 lead: '1'
-``
+```
 
-### Request Specification
+### Request specification
 
 The list of fields corresponds to the official DefectDojo API, `/api/v2/engagements`. For more details, see the Defectdojo documentation [https://demo.defectdojo.org/api/v2/oa3/swagger-ui/].
 
@@ -28,7 +28,7 @@ The list of fields corresponds to the official DefectDojo API, `/api/v2/engageme
 
 CreateDefectdojoProduct — Creates a new product in the DefectDojo system. This action uses the DefectDojo API v2.
 
-### Request Example
+### Request example
 
 ```yaml
 name: example
@@ -36,7 +36,7 @@ description: example description
 prod_type: 1
 ```
 
-### Request Specification
+### Request specification
 
 The list of fields corresponds to the official DefectDojo API, `/api/v2/products`. For more details, see the Defectdojo documentation [https://demo.defectdojo.org/api/v2/oa3/swagger-ui/].
 
@@ -48,7 +48,7 @@ The list of fields corresponds to the official DefectDojo API, `/api/v2/products
 
 CreateGitlabBranches — Creates new branches in the target repository.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: '0'
@@ -57,7 +57,7 @@ branches:
     ref: main
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |-----------------|----------------|-----------------------------------------------------------------------------|
@@ -78,9 +78,9 @@ The action performs a POST request to the URL '/api/v4/projects/:id/repository/b
 
 ## CreateGitlabGroupVariables
 
-CreateGitlabGroupVariables — creates group-level variables in GitLab.
+CreateGitlabGroupVariables — Creates group-level variables in GitLab.
 
-### Request Example
+### Request example
 
 ```yaml
 group_id: '0'
@@ -89,7 +89,7 @@ variables:
     value: value
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |-----------------|----------------|-----------------------------------------------------------------------------|
@@ -110,9 +110,9 @@ The action makes a POST request to the URL: '/api/v4/groups/:id/variables'.
 
 ## CreateGitlabMergeRequest
 
-CreateGitlabMergeRequest - creates a new Merge Request (MR) in the target repository. Files stored in the source repository are added to the Merge Request. The files can contain variables, the values of which will be substituted when the MR is created.
+CreateGitlabMergeRequest - Creates a new Merge Request (MR) in the target repository. Files stored in the source repository are added to the Merge Request. The files can contain variables, the values of which will be substituted when the MR is created.
 
-### Request Example
+### Request example
 
 ```yaml
 source_project_id: '0'
@@ -133,7 +133,7 @@ values:
     subkey: 123
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default Value |
 |-------------------------|----------------|--------------------------------------------------------------------------------------------------------------|-----------------------|
@@ -150,7 +150,7 @@ values:
 * **password** — the password (token) of the user under which the action will be executed.
 * **username** — the username under which the action will be executed.
 
-### Operation Algorithm
+### Operation algorithm
 
 Platform:
 
@@ -170,9 +170,9 @@ This action makes a POST request to the URL: `/api/v4/projects/:id/merge_request
 
 ## CreateGitlabProject
 
-CreateGitlabProject — creates a new project in GitLab. This action calls the GitLab API to create a project with the specified parameters, such as the project name, path, description, and other settings. The GitLab token, which must be provided in the credentials, is used for authentication.
+CreateGitlabProject — Creates a new project in GitLab. This action calls the GitLab API to create a project with the specified parameters, such as the project name, path, description, and other settings. The GitLab token, which must be provided in the credentials, is used for authentication.
 
-### Request Example
+### Request example
 
 ```yaml
 name: example
@@ -183,7 +183,7 @@ initialize_with_readme: false
 namespace_id: '0'
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default Value |
 |-----------------------|----------------|--------------------------------------------------------------------------------------------|-----------------------|
@@ -206,9 +206,9 @@ The action makes a POST request to the URL `/api/v4/projects`, passing the reque
 
 ## CreateGitlabProjectVariables
 
-CreateGitlabProjectVariables — creates project-level variables in GitLab.
+CreateGitlabProjectVariables — Creates project-level variables in GitLab.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: '0'
@@ -217,7 +217,7 @@ variables:
     value: value
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |-----------------|----------------|-----------------------------------------------------------------------------|
@@ -238,9 +238,9 @@ This action makes a POST request to the URL: '/api/v4/projects/:id/variables'.
 
 ## CreateGitlabProjectWebhook
 
-CreateGitlabProjectWebhook — creates a webhook in a GitLab project.
+CreateGitlabProjectWebhook — Creates a webhook in a GitLab project.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: '0'
@@ -251,7 +251,7 @@ merge_requests_events: true
 pipeline_events: true
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |----------------------|------------------|-----------------------------------------------------------|
@@ -276,7 +276,7 @@ The action makes a POST request to the URL: '/api/v4/projects/:id/hooks'.
 
 CreateGitlabTag — creates a new tag in a GitLab project.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: '0'
@@ -285,7 +285,7 @@ ref: main
 message: Tag description
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |----------------------|----------------|------------------------------------------------------------------------------|
@@ -308,7 +308,7 @@ The action is performed by a POST request to the URL: `/api/v4/projects/:id/repo
 
 CreateGitlabRelease — creates a GitLab release based on an existing tag.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: '0'
@@ -320,7 +320,7 @@ description: |
   - Bug fixes.
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |--------------|----------------|-----------------------------------------------------------------------------|
@@ -343,7 +343,7 @@ The action makes a POST request to the URL: '/api/v4/projects/:id/releases'.
 
 CreateKafkaACLs — creates a new ACL set in Kafka.
 
-### Example request
+### Request example
 
 ```yaml
 securityProtocol: SASL_PLAINTEXT
@@ -381,7 +381,7 @@ acls:
     pattern: LITERAL
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values | Default |
 |-------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|------------------------|
@@ -447,7 +447,7 @@ For more details, see the Kafka documentation [https://kafka.apache.org].
 
 CreateKafkaTopics — creates new topics in Kafka.
 
-### Request Example
+### Request example
 
 ```yaml
 securityProtocol: SASL_PLAINTEXT
@@ -460,7 +460,7 @@ topics:
   - example_2
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values |
 |-------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
@@ -480,7 +480,7 @@ topics:
 
 CreateKafkaUsers — creates new SASL/SCRAM users in Kafka.
 
-### Request Example
+### Request example
 
 ```yaml
 securityProtocol: SASL_PLAINTEXT
@@ -496,7 +496,7 @@ users:
     iterations: 4096
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values |
 |-------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
@@ -518,7 +518,7 @@ users:
 CreateCodeScoringProject — creates a new project in the CodeScoring system.
 The action uses the CodeScoring API to register a project with the specified parameters: project name, repository URL, VCS system ID, and the option to automatically run SCA analysis after cloning the repository.
 
-### Example Request
+### Request example
 
 ```yaml
 name: example-project
@@ -527,7 +527,7 @@ vcs_id: 2
 run_sca_after_clone: true
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description                                                           |
 |--------------------|----------------|-----------------------------------------------------------------------|
@@ -560,7 +560,7 @@ id: 1
 
 CreateKeycloakClient — Creates a new client in Keycloak.
 
-### Request Example
+### Request example
 
 ```yaml
 realm: master
@@ -580,7 +580,7 @@ config:
     - offline_access
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values |
 |---------|----------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -596,7 +596,7 @@ config:
 
 CreateKubernetesResource — Creates a new resource or resources in a Kubernetes cluster or updates existing ones.
 
-### Request Example
+### Request example
 
 ```yaml
 manifests:
@@ -610,7 +610,7 @@ manifests:
       name: example2
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |----------------------------|----------------|------------------------------------------------------------------------------------|
@@ -624,7 +624,7 @@ manifests:
 
 CreateRepositoryFromTemplate — creates a new repository from a template in Gitlab. The rendering engine is based on the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) and supports all built-in methods, as well as extensions added to the platform.
 
-### Request Example
+### Request example
 
 ```yaml
 sourceBranch: main
@@ -642,7 +642,7 @@ values:
     subkey: 123
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default Value |
 |--------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------|-----------------------|
@@ -659,7 +659,7 @@ values:
 * **password** — password (token) of the user under whom the action will be executed.
 * **username** — the username that will run the action.
 
-### Operation Algorithm
+### Operation algorithm
 
 Platform:
 
@@ -670,7 +670,7 @@ Platform:
 1. Renders files from templates, taking into account `values.yaml` and the variables passed to the action.
 1. Changes the remote repository to the target one (**targetRepositoryUrl**) and does a git push to the target branch (**targetBranch**), or to the main branch **main**.
 
-### Operation Details
+### Operation details
 
 This action supports templating of directory and file names. To do this, add an expression in the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) format to their names.
 For example, the directory `src/{{ .module }}/utils` with a value of **module** and a value of **example** will be rendered to the directory `src/example/utils` in the target repository.
@@ -687,7 +687,7 @@ will not be created if the variable **createContent** is **false**. Similarly, f
 
 If the templating variables are missing both in the `values.yaml` file and in the variables passed when running the action, rendering will fail and the target repository will not be created.
 
-### Template Repository Variables
+### Template repository variables
 
 To add default variables used for templating, you must create a `values.yaml` file with the appropriate contents in the root of the repository.
 
@@ -702,7 +702,7 @@ The `values.yaml` file is optional.
 
 <a id="templateignore"></a>
 
-### Excluding Files
+### Excluding files
 
 Some files may contain variables in the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) format that must be preserved when rendering a repository from a template. For example, Helm charts in the `helm` directory. The `.git` directory is always ignored.
 
@@ -741,7 +741,7 @@ If the **example** variable is set to **new** when rendering the repository, the
 └── .templateignore
 ```
 
-### Local Debugging
+### Local debugging
 
 The **ddp-render-dir** utility is available for local debugging of templates.
 
@@ -762,7 +762,7 @@ Command line switches:
 CreateSonarqubeProject — Creates a new project in SonarQube.
 This action uses the SonarQube Web API to create a project with the specified parameters, such as the project key, project name, master branch, new code definition parameters, and project visibility. Authentication is performed using the SonarQube token, which must be passed in the credentials.
 
-### Request Example
+### Request example
 
 ```yaml
 project: example-project
@@ -773,7 +773,7 @@ newCodeDefinitionValue: '30'
 visibility: public
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values | Default Value |
 |-------------------------|----------------|-------------------------------------------------------------------------------------------------|----------------------------------------------------|------------------------|
@@ -792,7 +792,7 @@ visibility: public
 
 CreateVaultSecret — Creates a secret with one or more values in HashiCorp Vault.
 
-### Request Example
+### Request example
 
 ```yaml
 path: example/data/path
@@ -803,7 +803,7 @@ secrets:
     value: value2
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values | Default |
 |---------------------------|----------------|-----------------------------------------------------------------|-------------------|--------------|
@@ -829,13 +829,13 @@ The `allow_update` parameter determines the action's behavior when an existing s
 
 DeleteVaultSecret — Deletes a secret from HashiCorp Vault.
 
-### Request Example
+### Request example
 
 ```yaml
 path: example/data/path
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |---------------------------|----------------|------------------------------------------------------------------------------------|
@@ -849,13 +849,13 @@ path: example/data/path
 
 DeleteDefectdojoProduct — Deletes a product from DefectDojo. This action uses DefectDojo API v2.
 
-### Request Example
+### Request example
 
 ```yaml
 id: 1
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default value |
 |-------------|----------------|----------------------------------------------------|------------------------|
@@ -896,7 +896,7 @@ The action makes a DELETE request to the URL: `/api/v4/projects/:id`.
 
 DeleteKafkaACLs — deletes a set of ACLs in Kafka.
 
-### Example request
+### Request example
 
 ```yaml
 securityProtocol: SASL_PLAINTEXT
@@ -1028,7 +1028,7 @@ topics:
   - example_2
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values |
 |---------------------------|----------------|-----------------------------------------------------|-----------------------------------------|
@@ -1044,7 +1044,7 @@ topics:
 
 DeleteKafkaUsers — Deletes existing SASL/SCRAM users in Kafka.
 
-### Request Example
+### Request example
 
 ```yaml
 securityProtocol: SASL_PLAINTEXT
@@ -1056,7 +1056,7 @@ users:
     mechanism: SCRAM-SHA-256
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values |
 |-------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
@@ -1075,7 +1075,7 @@ users:
 
 DeleteKubernetesResource — Deletes an existing resource in the Kubernetes cluster.
 
-### Request Example
+### Request example
 
 ```yaml
 group: apps
@@ -1085,7 +1085,7 @@ resource_name: nginx-deployment
 namespace: example
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |---------------------------|-----------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1150,13 +1150,13 @@ Here:
 
 DeleteSonarqubeProject — deletes a project from SonarQube.
 
-### Request Example
+### Request example
 
 ```yaml
 project: example-project
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default Value |
 |------------------|------------------|----------------------------------------------------------------|------------------------|
@@ -1170,7 +1170,7 @@ project: example-project
 
 DeleteSonarqubeProjects — deletes one or more projects from SonarQube.
 
-### Request Example
+### Request example
 
 ```yaml
 analyzedBefore: 2017-10-19T13:00:00+0200
@@ -1180,7 +1180,7 @@ q: example
 qualifiers: TRK
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Possible Values | Example Values |
 |--------------------|------------------|---------------------------------------------------------------------------------|------------------------------|---------------------------------------|
@@ -1198,7 +1198,7 @@ qualifiers: TRK
 
 StartGitlabPipeline — Starts pipeline execution in GitLab.
 
-### Request Example
+### Request example
 
 ```yaml
 project_id: 0
@@ -1208,7 +1208,7 @@ variables:
     value: example-value
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |---------------------------|------------------|-----------------------------------------------------------------------------|
@@ -1233,7 +1233,7 @@ The action makes a POST request to the URL: `/api/v4/projects/:id/pipeline`.
 
 CreateVaultKubernetesAuthRole — Creates or updates a Kubernetes authentication role in HashiCorp Vault.
 
-### Request Example
+### Request example
 
 ```yaml
 mountPath: kubernetes
@@ -1250,7 +1250,7 @@ optional:
     - default
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description |
 |-------------------------------------|----------------|----------------------------------------------------------------------------------|
@@ -1331,7 +1331,7 @@ docker:
   httpPort: 5001
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description | Example                                  |
 |------------|-----------------|---------------------------------------------------------------------------------------------------|------------------------------------------|
@@ -1365,19 +1365,19 @@ docker:
 
 **DeleteNexusRepository** — deletes an existing repository from Nexus Repository Manager 3.
 
-### Request Example
+### Request example
 
 ```yaml
 name: my-repo-to-delete
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |------|-----------------|------------------------------------------|
 | `name` | Yes | Name of the repository to delete |
 
-### Algorithm
+### Operation algorithm
 
 - A `DELETE` operation is performed on `/service/rest/v1/repositories/{name}`, where `{name}` is the value of the `name` field.
 - If the repository is found and deleted, a `204` response is returned.
@@ -1391,7 +1391,7 @@ name: my-repo-to-delete
 
 CreateNexusPrivilege — creates a new privilege in Nexus Repository Manager 3. Privileges define access rights to repositories and other Nexus resources.
 
-### Example request (repository-view)
+### Request example (repository-view)
 
 ```yaml
 name: example-privilege
@@ -1404,7 +1404,7 @@ format:maven2
 repository: maven-releases
 ```
 
-### Example request (repository-content-selector)
+### Request example (repository-content-selector)
 
 ```yaml
 name: content-selector-privilege
@@ -1417,7 +1417,7 @@ repository: maven-releases
 contentSelector: my-content-selector
 ```
 
-### Request Example (wildcard)
+### Request example (wildcard)
 
 ```yaml
 name: wildcard-privilege
@@ -1428,7 +1428,7 @@ actions:
   - READ
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |------------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1455,7 +1455,7 @@ For the `repository-content-selector` type, the content selector must exist in N
 
 AssignNexusPrivilege — assigns privileges to an existing role in Nexus Repository Manager 3. The action gets the current role configuration and merges the existing privileges with the new ones.
 
-### Request Example
+### Request example
 
 ```yaml
 roleId: example-role
@@ -1464,14 +1464,14 @@ privileges:
   - another-privilege
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |------------|----------------|------------------------------------------------------------------------------|
 | roleId | Yes | ID of the role to which privileges are being assigned |
 | privileges | Yes | List of privilege names to assign to the role |
 
-### Operation Algorithm
+### Operation algorithm
 
 1. Gets the current role configuration from Nexus.
 2. Merges the role's existing privileges with the new privileges from the request.
@@ -1489,13 +1489,13 @@ The role must exist in Nexus before privileges can be assigned. If the role is n
 
 DeleteNexusPrivilege — Removes a privilege from Nexus Repository Manager 3.
 
-### Request Example
+### Request example
 
 ```yaml
 name: example-privilege
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |------|-----------------|--------------------------------------------|
@@ -1509,7 +1509,7 @@ name: example-privilege
 
 CreateNexusRole — Creates a new role in Nexus Repository Manager 3. Roles group privileges and can include other roles.
 
-### Request Example
+### Request example
 
 ```yaml
 id: example-role
@@ -1521,7 +1521,7 @@ privileges:
 roles: []
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |-------------|-----------------|------------------------------------------------------------------------------|
@@ -1539,7 +1539,7 @@ roles: []
 
 AssignNexusRole — assigns roles to an existing user in Nexus Repository Manager 3. This action retrieves the user's current configuration and merges existing roles with new ones.
 
-### Request Example
+### Request example
 
 ```yaml
 userId: example-user
@@ -1548,14 +1548,14 @@ roles:
   - another-role
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |--------|-----------------|--------------------------------------------------------------|
 | userId | Yes | ID of the user to assign roles to |
 | roles | Yes | List of role IDs to assign to the user |
 
-### Operation Algorithm
+### Operation algorithm
 
 1. Retrieves the current user configuration from Nexus.
 2. Merge the user's existing roles with the new roles from the request.
@@ -1573,13 +1573,13 @@ The user must exist in Nexus before assigning roles. If the user is not found, t
 
 DeleteNexusRole — Deletes a role from Nexus Repository Manager 3.
 
-### Request Example
+### Request example
 
 ```yaml
 id: example-role
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |------|-----------------|-----------------------------------------|
@@ -1593,7 +1593,7 @@ id: example-role
 
 CreateNexusUser — Creates a new user in Nexus Repository Manager 3.
 
-### Request Example
+### Request example
 
 ```yaml
 userId: example-user
@@ -1606,7 +1606,7 @@ roles:
   - nx-admin
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |-------------|-----------------|------------------------------------------------------------------------------|
@@ -1626,13 +1626,13 @@ roles:
 
 DeleteNexusUser — Deletes a user from Nexus Repository Manager 3.
 
-### Request Example
+### Request example
 
 ```yaml
 userId: example-user
 ```
 
-### Request Specification
+### Request specification
 
 | Field | Required | Description |
 |--------|-----------------|--------------------------------------------|
@@ -1646,7 +1646,7 @@ userId: example-user
 
 Wait — waits for the specified number of seconds (with an optional random addition called jitter). Intended for use in processes as a delay element, for example, to wait for the results of a previous action to be applied.
 
-### Request Example
+### Request example
 
 ```yaml
 duration_seconds: 10
@@ -1654,7 +1654,7 @@ max_jitter_seconds: 0
 description: "Waiting for release"
 ```
 
-### Request Specification
+### Request specification
 
 | Name | Required | Description | Default Value |
 |---------------------|----------------|----------------------------------------------------------------------------------|-----------------------|
