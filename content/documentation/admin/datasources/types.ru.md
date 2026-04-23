@@ -567,7 +567,6 @@ FIELDS:
 ### Конфигурация
 
 * **URL** — URL prometheus API в формате `https://example.com/api/v1/query`.
-* **Тип query** — Prometheus.
 * **Query** — запрос в формате PromQL ([подробнее](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
 
 ### Параметры
@@ -647,7 +646,6 @@ GenericAPI возвращает массив объектов JSON. Структ
 
 * **URL** — базовый URL API в формате `https://api.example.com`.
 * **Method** — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
-* **Query Type** — тип запроса (Generic).
 * **Query** — дополнительные query параметры (например, для фильтрации или поиска).
 
 ### Параметры
