@@ -58,7 +58,7 @@ title: Типы источников данных
 
 Если значение параметра **all** равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра **tags** равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
+Если значение параметра **tags** равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
 
 ### Конфигурация
 
