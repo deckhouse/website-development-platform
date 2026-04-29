@@ -8,7 +8,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис DefectDojo](../external-services/#defectdojo).
+Конфигурация авторизации описана в разделе [«Внешний сервис DefectDojo»](../external-services/#defectdojo).
 
 ### Спецификация ответа
 
@@ -28,7 +28,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис GitLab](../external-services/#gitlab).
+Конфигурация авторизации описана в разделе [«Внешний сервис GitLab»](../external-services/#gitlab).
 
 ### Спецификация ответа
 
@@ -44,11 +44,11 @@ title: Типы источников данных
 
 ## GitlabProjects
 
-Источник данных типа **GitlabProjects** возвращает список проектов в Gitlab.
+Источник данных типа **GitlabProjects** возвращает список проектов в GitLab.
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис GitLab](../external-services/#gitlab).
+Конфигурация авторизации описана в разделе [«Внешний сервис GitLab»](../external-services/#gitlab).
 
 ### Спецификация ответа
 
@@ -58,7 +58,7 @@ title: Типы источников данных
 
 Если значение параметра **all** равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра **tags** равно `true` платформа дополнительно получает git теги. Для получения git тегов, выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
+Если значение параметра **tags** равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
 
 ### Конфигурация
 
@@ -84,15 +84,15 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Harbor](../external-services/#harbor).
+Конфигурация авторизации описана в разделе [«Внешний сервис Harbor»](../external-services/#harbor).
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна в интерфейса Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`
+* **URL** — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -104,11 +104,11 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Harbor](../external-services/#harbor).
+Конфигурация авторизации описана в разделе [«Внешний сервис Harbor»](../external-services/#harbor).
 
 ### Спецификация ответа
 
-Платформа получает список всех доступных проектов выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. пецификация ответа доступна в интерфейса Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -124,11 +124,11 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Harbor](../external-services/#harbor).
+Конфигурация авторизации описана в разделе [«Внешний сервис Harbor»](../external-services/#harbor).
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна в интерфейса Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -144,15 +144,15 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Harbor](../external-services/#harbor).
+Конфигурация авторизации описана в разделе [«Внешний сервис Harbor»](../external-services/#harbor).
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна в интерфейса Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`
+* **URL** — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -164,7 +164,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Kubernetes](../external-services/#kubernetes).
+Конфигурация авторизации описана в разделе [«Внешний сервис Kubernetes»](../external-services/#kubernetes).
 
 Подробнее про аутентификацию в Kubernetes описано в [официальной документации](https://kubernetes.io/docs/reference/access-authn-authz/authentication/).
 
@@ -222,7 +222,7 @@ title: Типы источников данных
         // ... другие файлы.
       ]             
     },
-    "config": {        // Текушая конфигурация.
+    "config": {        // Текущая конфигурация.
       "caSecretName": "string",
       "cache": {
         "enabled": "boolean", 
@@ -249,7 +249,7 @@ title: Типы источников данных
 
 ## KafkaAcls
 
-Источник данных типа **KafkaAcls** собирает информацию о достпуных acls.
+Источник данных типа **KafkaAcls** собирает информацию о доступных ACL.
 
 ### Авторизация
 
@@ -298,7 +298,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа осуществляет несколько запросов к Kafka с целью получения сведений о доступных топиках. Полученные данные предоставляются в следующем формате:
+Платформа осуществляет несколько запросов к Kafka с целью получения сведений о доступных брокерах. Полученные данные предоставляются в следующем формате:
 
 ```json
 {
@@ -394,7 +394,7 @@ title: Типы источников данных
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Kubernetes](../external-services/#kubernetes).
+Конфигурация авторизации описана в разделе [«Внешний сервис Kubernetes»](../external-services/#kubernetes).
 
 ### Спецификация ответа
 
@@ -490,7 +490,7 @@ resource: modulereleases
 
 Каждому типу ресурса соответствует своя версия и группа. Полный список API-ресурсов с их группами и версиями — в [документации Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/).
 
-Если неизвестно, какие требуются Group и Version, можно попробовать подставить актуальные значения. Есть несколько вариантов как их посмотреть, например с помощью утилиты kubectl: команда `kubectl explain` показывает `version` и `apiGroup` для ресурса.
+Если неизвестно, какие требуются Group и Version, можно попробовать подставить актуальные значения. Есть несколько вариантов, как их посмотреть, например с помощью утилиты kubectl: команда `kubectl explain` показывает `version` и `apiGroup` для ресурса.
 
 Пример:
 
@@ -518,7 +518,7 @@ FIELDS:
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Nexus](../external-services/#nexus).
+Конфигурация авторизации описана в разделе [«Внешний сервис Nexus»](../external-services/#nexus).
 
 ### Спецификация ответа
 
@@ -538,7 +538,7 @@ FIELDS:
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Nexus](../external-services/#nexus).
+Конфигурация авторизации описана в разделе [«Внешний сервис Nexus»](../external-services/#nexus).
 
 ### Спецификация ответа
 
@@ -546,7 +546,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Nexus в формате `https://example.com`
+* **URL** — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -558,7 +558,7 @@ FIELDS:
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис Prometheus](../external-services/#prometheus).
+Конфигурация авторизации описана в разделе [«Внешний сервис Prometheus»](../external-services/#prometheus).
 
 ### Спецификация ответа
 
@@ -566,7 +566,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL prometheus API в формате `https://example.com/api/v1/query`.
+* **URL** — URL Prometheus API в формате `https://example.com/api/v1/query`.
 * **Query** — запрос в формате PromQL ([подробнее](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
 
 ### Параметры
@@ -579,7 +579,7 @@ FIELDS:
 
 ### Авторизация
 
-Конфигурация авторизации описана в разделе [внешний сервис SonarQube](../external-services/#sonarqube).
+Конфигурация авторизации описана в разделе [«Внешний сервис SonarQube»](../external-services/#sonarqube).
 
 ### Спецификация ответа
 
@@ -587,7 +587,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Sonarqube в формате `https://example.com`.
+* **URL** — URL SonarQube в формате `https://example.com`.
 
 ### Параметры
 
@@ -656,7 +656,7 @@ GenericAPI возвращает массив объектов JSON. Структ
 | path              | опционально    | Путь к эндпоинту API, который будет добавлен к базовому URL                    | Любая строка, начинающаяся с /          | /api/v1/users, /projects       | ""           |
 | dataPath          | опционально    | JSONPath для извлечения массива данных из ответа API                           | Любая строка                            | data, results.items, .         | .            |
 | pageParam         | опционально    | Название параметра для номера страницы (для offset- и page- пагинации)         | Любая строка                            | page, _page, pageNumber        | page         |
-| limitParam        | опционально    | Название параметра для количества элементов на странице (для offset-пагинации) | Любая строка                            | limit, per_page,_limit, size  | limit        |
+| limitParam        | опционально    | Название параметра для количества элементов на странице (для offset-пагинации) | Любая строка                            | limit, per_page, _limit, size  | limit        |
 | sizeParam         | опционально    | Название параметра для размера страницы (для page-пагинации)                   | Любая строка                            | size, pageSize, _size          | size         |
 | cursorParam       | опционально    | Название параметра для курсора (для cursor-пагинации)                          | Любая строка                            | cursor, after, next            | cursor       |
 | pageSize          | опционально    | Количество элементов на странице для пагинации                                 | Положительное целое число               | 10, 20, 50, 100                | 100          |
