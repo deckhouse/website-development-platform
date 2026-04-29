@@ -88,7 +88,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -108,7 +108,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -128,7 +128,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -148,7 +148,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна в интерфейсе Harbor ([подробнее](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
 
 ### Конфигурация
 
@@ -567,7 +567,7 @@ FIELDS:
 ### Конфигурация
 
 * **URL** — URL Prometheus API в формате `https://example.com/api/v1/query`.
-* **Query** — запрос в формате PromQL ([подробнее](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
+* **Query** — запрос ([в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
 
 ### Параметры
 
