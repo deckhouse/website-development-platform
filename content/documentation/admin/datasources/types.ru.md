@@ -88,7 +88,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -108,7 +108,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -128,7 +128,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -148,7 +148,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна ([в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/)).
+Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -166,7 +166,7 @@ title: Типы источников данных
 
 Конфигурация авторизации описана в разделе [«Внешний сервис Kubernetes»](../external-services/#kubernetes).
 
-Подробнее про аутентификацию в Kubernetes описано в [официальной документации](https://kubernetes.io/docs/reference/access-authn-authz/authentication/).
+Аутентификация в Kubernetes описана [в официальной документации](https://kubernetes.io/docs/reference/access-authn-authz/authentication/).
 
 ### Спецификация ответа
 
@@ -283,8 +283,8 @@ title: Типы источников данных
 
 |Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
-|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka — [в документации Kafka](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL — [в документации Kafka](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
 |User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
 |Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
@@ -341,8 +341,8 @@ title: Типы источников данных
 
 |Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
-|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka — [в документации Kafka](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL — [в документации Kafka](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
 |User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
 |Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
@@ -383,8 +383,8 @@ title: Типы источников данных
 
 |Название         |Обязательность   | Описание                                                                                                                                                                                                   |Возможные значения                   |
 |-----------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka. [Подробнее](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
-|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL. [Подробнее](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
+|SecurityProtocol | **обязательно** | Протокол для подключения к Kafka — [в документации Kafka](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL |
+|SaslMechanism    | опционально     | Механизм аутентификации, который будет использовать SASL. Обязателен при использовании протокола SASL_PLAINTEXT или SASL_SSL — [в документации Kafka](https://kafka.apache.org/documentation/#security_sasl_mechanism) | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 |
 |User             | **обязательно** | Имя пользователя для подключения к Kafka                                                                                                                                                                   | -                                   |
 |Pass             | **обязательно** | Пароль пользователя для подключения к Kafka                                                                                                                                                                | -                                   |
 
@@ -567,7 +567,7 @@ FIELDS:
 ### Конфигурация
 
 * **URL** — URL Prometheus API в формате `https://example.com/api/v1/query`.
-* **Query** — запрос ([в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/)), на основе которого будет сформирован ответ.
+* **Query** — запрос [в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), на основе которого будет сформирован ответ.
 
 ### Параметры
 
