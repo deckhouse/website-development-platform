@@ -42,6 +42,7 @@ Review checklist:
 4. Markdown, Hugo, and code examples
 - Every fenced code block must have an explicit language tag.
 - The language tag must be present in `.cursor/rules/docs/hugo-supported-codeblock-languages.mdc`.
+- Markdown ordered lists must use `1.` for every item, not `1.`, `2.`, `3.`.
 - Check Hugo shortcode usage when present.
 - Check that YAML, JSON, shell, and other examples are syntactically plausible and internally consistent.
 - Check that commands, flags, paths, field names, and HTTP codes are formatted as inline code where appropriate.

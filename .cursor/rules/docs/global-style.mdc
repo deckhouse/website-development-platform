@@ -22,6 +22,7 @@ alwaysApply: true
 - For emphasis, prefer bold text; avoid unnecessary italic text.
 - Use Hugo alert shortcode levels: `info`, `warning`, `danger`.
 - For lists, keep punctuation and casing consistent within one list.
+- In Markdown ordered lists, use `1.` for every item instead of `1.`, `2.`, `3.`.
 - Keep instructions actionable and testable.
 - In command examples use `d8 k` instead of `kubectl` (syntax is the same).
 - YAML snippets and YAML files must be syntactically valid.
