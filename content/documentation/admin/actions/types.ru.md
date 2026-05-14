@@ -1514,11 +1514,11 @@ optional:
 
 | Название                            | Обязательность | Описание                                                                          |
 |-------------------------------------|----------------|-----------------------------------------------------------------------------------|
-| mountPath                           | обязательно    | Путь монтирования Kubernetes auth backend в Vault (например, kubernetes)          |
-| role                                | обязательно    | Название роли, которая создаётся в Vault                                          |
-| bound_service_account_names         | обязательно    | Список имён service account'ов, которым разрешён доступ через данную роль         |
-| bound_service_account_namespaces    | обязательно    | Список неймспейсов (namespaces), в которых разрешён доступ через данную роль      |
-| optional                            | необязательно  | Дополнительные параметры роли (приведены в следующей таблице)                     |
+| mountPath                           | Обязательно    | Путь монтирования Kubernetes auth backend в Vault (например, kubernetes)          |
+| role                                | Обязательно    | Название роли, которая создаётся в Vault                                          |
+| bound_service_account_names         | Обязательно    | Список имён service account'ов, которым разрешён доступ через данную роль         |
+| bound_service_account_namespaces    | Обязательно    | Список неймспейсов (namespaces), в которых разрешён доступ через данную роль      |
+| optional                            | Необязательно  | Дополнительные параметры роли (приведены в следующей таблице)                     |
 
 Поддерживаемые значения в optional:
 
@@ -1601,11 +1601,11 @@ docker:
 | `online`    | Да | Доступен ли репозиторий (`true`/`false`)                                                          | true                                   |
 | `storage`   | Да | Объект storage: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                     | [Пример](#пример-запроса-maven-hosted) |
 | `cleanup`   | Нет     | Привязанные политики очистки (`policyNames`)                                                      | policyNames: [maven-cleanup]           |
-| `maven`     | для maven       | Только для maven: `versionPolicy`, `layoutPolicy`                                                 | [Пример](#пример-запроса-maven-hosted) |
-| `proxy`     | для proxy       | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                | -                                      |
-| `group`     | для group       | Список включённых memberNames                                                                     | [Пример](#пример-запроса-docker-group) |
-| `docker`    | для docker      | docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth`                                        | [Пример](#пример-запроса-docker-group) |
-| `component` | очень редко     | Только для некоторых нестандартных сценариев                                                      | -                                      |
+| `maven`     | Для maven       | Только для maven: `versionPolicy`, `layoutPolicy`                                                 | [Пример](#пример-запроса-maven-hosted) |
+| `proxy`     | Для proxy       | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                | -                                      |
+| `group`     | Для group       | Список включённых memberNames                                                                     | [Пример](#пример-запроса-docker-group) |
+| `docker`    | Для docker      | docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth`                                        | [Пример](#пример-запроса-docker-group) |
+| `component` | Очень редко     | Только для некоторых нестандартных сценариев                                                      | -                                      |
 | `attributes`| Нет     | Любые кастомные поля                                                                              | -                                      |
 
 ### Требования
