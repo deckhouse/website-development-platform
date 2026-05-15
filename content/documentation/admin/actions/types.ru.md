@@ -585,7 +585,7 @@ config:
 | Название | Обязательность | Описание                                                                                     | Возможные значения                                                                                |
 |----------|----------------|----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | realm    | Да             | Realm в Keycloak, где требуется создать клиента                                              | -                                                                                                 |
-| config   | Да             | Параметры создаваемого клиента в соответствии со спецификацией ClientRepresentation Keycloak | [Документация](https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation) |
+| config   | Да             | Параметры создаваемого клиента в соответствии со [спецификацией ClientRepresentation Keycloak](https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation) | -                                                                                                 |
 
 ### Учётные данные
 
