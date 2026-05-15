@@ -4,7 +4,7 @@ title: Типы источников данных
 
 ## DefectdojoProducts
 
-Источник данных типа **DefectdojoProducts** возвращает список продуктов в Defectdojo.
+Источник данных типа `DefectdojoProducts` возвращает список продуктов в Defectdojo.
 
 ### Авторизация
 
@@ -16,7 +16,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL DefectDojo в формате `https://example.com`.
+* `URL` — URL DefectDojo в формате `https://example.com`.
 
 ### Параметры
 
@@ -24,7 +24,7 @@ title: Типы источников данных
 
 ## GitlabGroups
 
-Источник данных типа **GitlabGroups** возвращает список групп в GitLab.
+Источник данных типа `GitlabGroups` возвращает список групп в GitLab.
 
 ### Авторизация
 
@@ -36,7 +36,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+* `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 ### Параметры
 
@@ -44,7 +44,7 @@ title: Типы источников данных
 
 ## GitlabProjects
 
-Источник данных типа **GitlabProjects** возвращает список проектов в GitLab.
+Источник данных типа `GitlabProjects` возвращает список проектов в GitLab.
 
 ### Авторизация
 
@@ -54,15 +54,15 @@ title: Типы источников данных
 
 В зависимости от [конфигурации параметров](#gitlabprojectsparameters), платформа выполняет GET-запрос к API GitLab и возвращает соответствующую спецификацию.
 
-Если значение параметра **all** равно `true`, выполняется GET-запрос по URL: `/api/v4/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
+Если значение параметра `all` равно `true`, выполняется GET-запрос по URL: `/api/v4/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра **all** равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
+Если значение параметра `all` равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра **tags** равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
+Если значение параметра `tags` равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
 
 ### Конфигурация
 
-* **URL** — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+* `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 <a id="gitlabprojectsparameters"></a>
 
@@ -71,16 +71,16 @@ title: Типы источников данных
 |Название         |Обязательность                              |Описание                                                                                                                                                                                                                                                                                                                 |Возможные значения                                                            |По умолчанию                                                                  |
 |-----------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 |all              |Опционально                                 |В явном виде указывает, что необходимо собирать репозитории всех групп, к которым есть доступ                                                                                                                                                                                                                            |true, false                                                                   |false                                                                         |
-|group_ids        |Обязательно, если **all** в значении `false`|Источник данных будет собирать проекты групп с указанным ID. ID групп указываются через запятую                                                                                                                                                                                                                          |Пример: 1001,1002                                                             |\-                                                                            |
+|group_ids        |Обязательно, если `all` в значении `false`|Источник данных будет собирать проекты групп с указанным ID. ID групп указываются через запятую                                                                                                                                                                                                                          |Пример: 1001,1002                                                             |\-                                                                            |
 |tags             |Опционально                                 |Платформа дополнительно получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags)  |true, false                                                                   |false                                                                         |
-|include_subgroups|Опционально                                 |Если указан параметр **group_ids**, то параметр **include_subgroups** определяет, собирать ли проекты подгрупп указанных групп                                                                                                                                                                                           |true, false                                                                   |false                                                                         |
+|include_subgroups|Опционально                                 |Если указан параметр `group_ids`, то параметр `include_subgroups` определяет, собирать ли проекты подгрупп указанных групп                                                                                                                                                                                           |true, false                                                                   |false                                                                         |
 |tags_order_by    |Опционально                                 |Соответствует спецификации [GitLab Tags API order_by](https://docs.gitlab.com/api/tags/#list-project-repository-tags)                                                                                                                                                                                                    |[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|
 |tags_sort        |Опционально                                 |Соответствует спецификации [GitLab Tags API sort](https://docs.gitlab.com/api/tags/#list-project-repository-tags)                                                                                                                                                                                                        |[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|
 |tags_search      |Опционально                                 |Соответствует спецификации [GitLab Tags API search](https://docs.gitlab.com/api/tags/#list-project-repository-tags)                                                                                                                                                                                                      |[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|[документация](https://docs.gitlab.com/api/tags/#list-project-repository-tags)|
 
 ## HarborArtifacts
 
-Источник данных типа **HarborArtifacts** собирает информацию о всех артефактах в Harbor.
+Источник данных типа `HarborArtifacts` собирает информацию о всех артефактах в Harbor.
 
 ### Авторизация
 
@@ -92,7 +92,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`.
+* `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -100,7 +100,7 @@ title: Типы источников данных
 
 ## HarborProjects
 
-Источник данных типа **HarborProjects** собирает информацию о всех проектах в Harbor.
+Источник данных типа `HarborProjects` собирает информацию о всех проектах в Harbor.
 
 ### Авторизация
 
@@ -112,7 +112,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`.
+* `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -120,7 +120,7 @@ title: Типы источников данных
 
 ## HarborRepositories
 
-Источник данных типа **HarborRepositories** собирает информацию о всех репозиториях в Harbor.
+Источник данных типа `HarborRepositories` собирает информацию о всех репозиториях в Harbor.
 
 ### Авторизация
 
@@ -132,7 +132,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`.
+* `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -140,7 +140,7 @@ title: Типы источников данных
 
 ## HarborTags
 
-Источник данных типа **HarborTags** собирает информацию о всех тегах у артефактов в Harbor.
+Источник данных типа `HarborTags` собирает информацию о всех тегах у артефактов в Harbor.
 
 ### Авторизация
 
@@ -152,7 +152,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Harbor в формате `https://example.com`.
+* `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -160,7 +160,7 @@ title: Типы источников данных
 
 ## HelmReleases
 
-Источник данных типа **HelmReleases** возвращает список всех HelmReleases в кластере Kubernetes.
+Источник данных типа `HelmReleases` возвращает список всех HelmReleases в кластере Kubernetes.
 
 ### Авторизация
 
@@ -241,7 +241,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Kubernetes API в формате `https://api.example.com`.
+* `URL` — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -249,7 +249,7 @@ title: Типы источников данных
 
 ## KafkaAcls
 
-Источник данных типа **KafkaAcls** собирает информацию о доступных ACL.
+Источник данных типа `KafkaAcls` собирает информацию о доступных ACL.
 
 ### Авторизация
 
@@ -277,7 +277,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Kafka в формате `example.com`.
+* `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -290,7 +290,7 @@ title: Типы источников данных
 
 ## KafkaBrokers
 
-Источник данных типа **KafkaBrokers** собирает информацию о доступных брокерах.
+Источник данных типа `KafkaBrokers` собирает информацию о доступных брокерах.
 
 ### Авторизация
 
@@ -335,7 +335,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Kafka в формате `example.com`.
+* `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -348,7 +348,7 @@ title: Типы источников данных
 
 ## KafkaTopics
 
-Источник данных типа **KafkaTopics** собирает информацию о доступных топиках в Kafka.
+Источник данных типа `KafkaTopics` собирает информацию о доступных топиках в Kafka.
 
 ### Авторизация
 
@@ -377,7 +377,7 @@ title: Типы источников данных
 
 ### Конфигурация
 
-* **URL** — URL Kafka в формате `example.com`.
+* `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -390,7 +390,7 @@ title: Типы источников данных
 
 ## KubernetesResources
 
-Источник данных типа **KubernetesResources** возвращает список ресурсов Kubernetes. Тип возвращаемых ресурсов задаётся через параметры источника данных. Поддерживаются как встроенные в Kubernetes типы ресурсов, так и любые кастомные ресурсы.
+Источник данных типа `KubernetesResources` возвращает список ресурсов Kubernetes. Тип возвращаемых ресурсов задаётся через параметры источника данных. Поддерживаются как встроенные в Kubernetes типы ресурсов, так и любые кастомные ресурсы.
 
 ### Авторизация
 
@@ -429,7 +429,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Kubernetes API в формате `https://api.example.com`.
+* `URL` — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -438,7 +438,7 @@ FIELDS:
 |apiGroup    |Опционально    | API-группа ресурса. Для ресурсов в core API-группе поле не задаётся                                                                                                                                           |[См. определение требуемых Group и Version](#определение-требуемых-group-и-version)|
 |version     |**Обязательно**| Версия API ресурса                                                                                                                                                                                            |[См. определение требуемых Group и Version](#определение-требуемых-group-и-version)|
 |isNamespaced|**Обязательно**| Принадлежность ресурса неймспейсам. Проверить принадлежность можно с помощью команды `d8 k api-resources`                                                                                                     |true, false                              |
-|namespace   |Опционально    | Неймспейс, из которого будут собираться ресурсы. Если не указан, ресурсы будут собираться из всех неймспейсов. Значение параметра учитывается, только если значение **isNamespaced** равно `true`              |                                         |
+|namespace   |Опционально    | Неймспейс, из которого будут собираться ресурсы. Если не указан, ресурсы будут собираться из всех неймспейсов. Значение параметра учитывается, только если значение `isNamespaced` равно `true`              |                                         |
 |resource    |**Обязательно**| Название ресурса. Указывается маленькими буквами во множественном числе, как в поле NAME вывода команды `d8 k api-resources`                                                                                  |                                         |
 
 ### Примеры
@@ -514,7 +514,7 @@ FIELDS:
 
 ## NexusArtifacts
 
-Источник данных типа **NexusArtifacts** возвращает список артефактов в Nexus.
+Источник данных типа `NexusArtifacts` возвращает список артефактов в Nexus.
 
 ### Авторизация
 
@@ -526,7 +526,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Nexus в формате `https://example.com`.
+* `URL` — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -534,7 +534,7 @@ FIELDS:
 
 ## NexusRepositories
 
-Источник данных типа **NexusRepositories** возвращает список репозиториев в Nexus.
+Источник данных типа `NexusRepositories` возвращает список репозиториев в Nexus.
 
 ### Авторизация
 
@@ -546,7 +546,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Nexus в формате `https://example.com`.
+* `URL` — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -554,7 +554,7 @@ FIELDS:
 
 ## PrometheusMetrics
 
-Источник данных типа **PrometheusMetrics** возвращает результат запроса PromQL в Prometheus.
+Источник данных типа `PrometheusMetrics` возвращает результат запроса PromQL в Prometheus.
 
 ### Авторизация
 
@@ -566,8 +566,8 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL Prometheus API в формате `https://example.com/api/v1/query`.
-* **Query** — запрос [в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), на основе которого будет сформирован ответ.
+* `URL` — URL Prometheus API в формате `https://example.com/api/v1/query`.
+* «Query» — запрос [в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), на основе которого будет сформирован ответ.
 
 ### Параметры
 
@@ -575,7 +575,7 @@ FIELDS:
 
 ## SonarqubeProjects
 
-Источник данных типа **SonarqubeProjects** возвращает список проектов в SonarQube.
+Источник данных типа `SonarqubeProjects` возвращает список проектов в SonarQube.
 
 ### Авторизация
 
@@ -587,7 +587,7 @@ FIELDS:
 
 ### Конфигурация
 
-* **URL** — URL SonarQube в формате `https://example.com`.
+* `URL` — URL SonarQube в формате `https://example.com`.
 
 ### Параметры
 
@@ -595,25 +595,25 @@ FIELDS:
 
 ## GenericAPI
 
-Источник данных типа **GenericAPI** позволяет подключаться к любому REST API и получать данные в формате JSON. Поддерживает различные типы пагинации и настраиваемые параметры запроса.
+Источник данных типа `GenericAPI` позволяет подключаться к любому REST API и получать данные в формате JSON. Поддерживает различные типы пагинации и настраиваемые параметры запроса.
 
 ### Авторизация
 
 GenericAPI поддерживает любые типы аутентификации через настройку заголовков HTTP. Наиболее распространённые способы:
 
-**Bearer Token:**
+Bearer Token:
 
 ```sh
 Authorization: Bearer <токен>
 ```
 
-**Basic Authentication:**
+Basic Authentication:
 
 ```sh
 Authorization: Basic <base64-encoded-credentials>
 ```
 
-**API Key:**
+API Key:
 
 ```sh
 X-API-Key: <ключ>
@@ -644,9 +644,9 @@ GenericAPI возвращает массив объектов JSON. Структ
 
 ### Конфигурация
 
-* **URL** — базовый URL API в формате `https://api.example.com`.
-* **Method** — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
-* **Query** — дополнительные query параметры (например, для фильтрации или поиска).
+* `URL` — базовый URL API в формате `https://api.example.com`.
+* `Method` — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
+* `Query` — дополнительные query параметры (например, для фильтрации или поиска).
 
 ### Параметры
 
@@ -664,27 +664,27 @@ GenericAPI возвращает массив объектов JSON. Структ
 
 ### Типы пагинации
 
-- **none** — без пагинации, получает все данные одним запросом.
+- `none` — без пагинации, получает все данные одним запросом.
 
-- **offset** — пагинация по номеру страницы и количеству элементов:
+- `offset` — пагинация по номеру страницы и количеству элементов:
   - использует параметры `pageParam` и `limitParam`;
   - пример: `?page=1&limit=20`.
 
-- **page** — пагинация по номеру страницы и размеру:
+- `page` — пагинация по номеру страницы и размеру:
   - использует параметры `pageParam` и `sizeParam`;
   - пример: `?page=1&size=20`.
 
-- **cursor** — пагинация по курсору:
+- `cursor` — пагинация по курсору:
   - использует параметр `cursorParam`;
   - пример: `?cursor=eyJpZCI6MTIzfQ==`.
 
-- **link_header** — пагинация через заголовок Link:
+- `link_header` — пагинация через заголовок Link:
   - использует заголовок `Link` в ответе для определения следующей страницы;
   - стандарт RFC 5988.
 
 ### Примеры конфигурации
 
-**JSONPlaceholder API (без пагинации):**
+JSONPlaceholder API (без пагинации):
 
 ```yaml
 url: https://jsonplaceholder.typicode.com
@@ -693,7 +693,7 @@ paginationType: none
 dataPath: .
 ```
 
-**GitLab API (offset пагинация):**
+GitLab API (offset пагинация):
 
 ```yaml
 url: https://gitlab.example.com
@@ -706,7 +706,7 @@ headers:
   Authorization: Bearer <token>
 ```
 
-**GitHub API (link header пагинация):**
+GitHub API (link header пагинация):
 
 ```yaml
 url: https://api.github.com
@@ -717,7 +717,7 @@ headers:
   Accept: application/vnd.github.v3+json
 ```
 
-**API с вложенными данными:**
+API с вложенными данными:
 
 ```yaml
 url: https://api.example.com
@@ -729,7 +729,7 @@ limitParam: limit
 query: "filter=active&sort=name"
 ```
 
-**POST-запрос с телом:**
+POST-запрос с телом:
 
 ```yaml
 url: https://api.example.com

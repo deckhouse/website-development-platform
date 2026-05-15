@@ -21,8 +21,8 @@ weight: 10
 
 Для каждого виджета доступно задание области видимости:
 
-* **Global** — виджет не поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax);
-* **Resource** — виджет поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax). Виджеты с областью видимости Resource можно прикрепить только к страницам сущности.
+* «Global» — виджет не поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax);
+* «Resource» — виджет поддерживает получение параметров сущности через механизм [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax). Виджеты с областью видимости Resource можно прикрепить только к страницам сущности.
 
 В конфигурации виджетов возможно задание учётной записи, с данными которой виджет будет взаимодействовать с инфраструктурными системами, а также выбрать тип учётных данных, который будет использоваться.
 
