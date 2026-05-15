@@ -244,7 +244,7 @@ conditions:
 
 В условиях доступны:
 
-- `.status` — данные ответа: `.status.code` (код HTTP), `.status.status` (строка статуса), `.status.headers` (заголовки), `.status.contentLength`. **`.status.headers`** — карта «название заголовка → массив значений» (названия в нижнем регистре). Пример: первый элемент заголовка — `{{ index (index .status.headers "content-type") 0 }}`; перебор — `{{ range index .status.headers "set-cookie" }}...{{ end }}`.
+- `.status` — данные ответа: `.status.code` (код HTTP), `.status.status` (строка статуса), `.status.headers` (заголовки), `.status.contentLength`. `.status.headers` — карта «название заголовка → массив значений» (названия в нижнем регистре). Пример: первый элемент заголовка — `{{ index (index .status.headers "content-type") 0 }}`; перебор — `{{ range index .status.headers "set-cookie" }}...{{ end }}`.
 - `.response` — тело ответа с приведёнными типами (для JSON-ответа).
 - `.entity` — параметры проверяемой сущности.
 
