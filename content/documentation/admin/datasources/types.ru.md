@@ -621,9 +621,9 @@ X-API-Key: <ключ>
 
 ### Конфигурация
 
-* **URL** — базовый URL API в формате `https://api.example.com`.
-* **Method** — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
-* **Query** — дополнительные query параметры (например, для фильтрации или поиска).
+* `URL` — базовый URL API в формате `https://api.example.com`.
+* `Method` — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
+* `Query` — дополнительные query параметры (например, для фильтрации или поиска).
 
 ### Параметры
 
@@ -695,27 +695,27 @@ X-API-Key: <ключ>
 
 ### Типы пагинации
 
-- **none** — без пагинации, получает все данные одним запросом.
+- `none` — без пагинации, получает все данные одним запросом.
 
-- **offset** — пагинация по номеру страницы и количеству элементов:
+- `offset` — пагинация по номеру страницы и количеству элементов:
   - Использует параметры `pageParam` и `limitParam`.
   - Пример: `?page=1&limit=20`.
 
-- **page** — пагинация по номеру страницы и размеру:
+- `page` — пагинация по номеру страницы и размеру:
   - Использует параметры `pageParam` и `sizeParam`.
   - Пример: `?page=1&size=20`.
 
-- **cursor** — пагинация по курсору:
+- `cursor` — пагинация по курсору:
   - Использует параметр `cursorParam`.
   - Пример: `?cursor=eyJpZCI6MTIzfQ==`.
 
-- **link_header** — пагинация через заголовок Link:
+- `link_header` — пагинация через заголовок Link:
   - Использует заголовок `Link` в ответе для определения следующей страницы.
   - Стандарт RFC 5988.
 
 ### Примеры конфигурации
 
-**JSONPlaceholder API (без пагинации):**
+JSONPlaceholder API (без пагинации):
 
 ```yaml
 url: https://jsonplaceholder.typicode.com
@@ -724,7 +724,7 @@ paginationType: none
 dataPath: .
 ```
 
-**GitLab API (offset пагинация):**
+GitLab API (offset пагинация):
 
 ```yaml
 url: https://gitlab.example.com
@@ -737,7 +737,7 @@ headers:
   Authorization: Bearer <token>
 ```
 
-**GitHub API (link header пагинация):**
+GitHub API (link header пагинация):
 
 ```yaml
 url: https://api.github.com
@@ -748,7 +748,7 @@ headers:
   Accept: application/vnd.github.v3+json
 ```
 
-**API с вложенными данными:**
+API с вложенными данными:
 
 ```yaml
 url: https://api.example.com
@@ -760,7 +760,7 @@ limitParam: limit
 query: "filter=active&sort=name"
 ```
 
-**POST-запрос с телом:**
+POST-запрос с телом:
 
 ```yaml
 url: https://api.example.com
