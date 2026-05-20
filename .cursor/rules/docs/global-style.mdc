@@ -45,3 +45,9 @@ alwaysApply: true
 - Do not use first-level heading (`# ...`) in documentation files.
 - Minimum allowed heading level is second-level (`## ...`).
 - If a local checklist conflicts with full policy text, follow `.cursor/rules/docs/refs-editorial-policy-full.mdc`.
+
+# Release notes (`content/documentation/release-notes/`)
+
+- Under a heading (`##`, `###`, or `####`), if the only body content is a single top-level bullet (`-` or `*`), do not use a list: write one or more plain paragraphs instead (merge the bullet text with any lead-in sentence on the same topic).
+- If there is a lead-in paragraph and exactly one bullet, merge them into continuous prose and drop the list marker.
+- When there are two or more top-level bullets under the same heading, keep a Markdown list.
