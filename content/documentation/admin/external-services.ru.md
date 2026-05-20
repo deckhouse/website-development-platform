@@ -105,6 +105,22 @@ Authorization: <ваш-api-token>
 Authorization: Token <ваш-defectdojo-api-v2-key>
 ```
 
+### Argo CD
+
+**Тип авторизации:** Bearer Token (API-токен Argo CD).
+
+**Заголовки:**
+
+| Заголовок       | Формат значения  |
+|-----------------|------------------|
+| `Authorization` | `Bearer <токен>` |
+
+**Пример:**
+
+```sh
+Authorization: Bearer <ваш-api-токен-argo-cd>
+```
+
 ### Bitbucket
 
 **Тип авторизации:** Bearer Token (Personal Access Token).
