@@ -3,35 +3,35 @@ title: HTTP-заголовки безопасности
 weight: 50
 ---
 
-DDP поддерживает следующие HTTP-заголовки для повышения безопасности взаимодействия:
+Deckhouse Development Platform (DDP) поддерживает следующие HTTP-заголовки для повышения безопасности взаимодействия:
 
-1. **Content-Security-Policy**
+1. `Content-Security-Policy`
    - Настраиваемая политика безопасности контента.
    - Подробное описание приведено в разделе [Content Security Policy](#content-security-policy).
 
-2. **X-Frame-Options**
+1. `X-Frame-Options`
    - Защита от clickjacking-атак.
    - Значение по умолчанию: `SAMEORIGIN`.
    - Настраивается в конфигурации DDP в секции `security.headers.xFrameOptions`.
    - Возможные значения: `DENY`, `SAMEORIGIN`.
 
-3. **X-Content-Type-Options**
+1. `X-Content-Type-Options`
    - Предотвращение MIME-sniffing.
    - Значение: `nosniff`.
 
-4. **X-XSS-Protection**
+1. `X-XSS-Protection`
    - Защита от XSS-атак (для устаревших браузеров).
    - Значение: `1; mode=block`.
 
-5. **Referrer-Policy**
+1. `Referrer-Policy`
    - Контроль передачи информации о реферере.
    - Значение: `strict-origin-when-cross-origin`.
 
-6. **Permissions-Policy** (ранее Feature-Policy)
+1. `Permissions-Policy` (ранее Feature-Policy)
    - Ограничение использования функций браузера.
    - Значение: `geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()`.
 
-7. **Strict-Transport-Security (HSTS)**
+1. `Strict-Transport-Security (HSTS)`
    - Принудительное использование HTTPS.
    - Значение: `max-age=31536000; includeSubDomains; preload`.
 
@@ -59,8 +59,8 @@ security:
 
 ## Применение
 
-- **Frontend**: Заголовки добавляются на уровне веб-сервера для раздачи статических файлов и HTML страниц в компоненте DDP Frontend.
-- **Backend API**: Заголовки добавляются через middleware для всех API ответов в компоненте DDP Backend.
+- Frontend: Заголовки добавляются на уровне веб-сервера для раздачи статических файлов и HTML страниц в компоненте DDP Frontend.
+- Backend API: Заголовки добавляются через middleware для всех API ответов в компоненте DDP Backend.
 
 {{< alert level="info" >}}
 Все заголовки безопасности включены по умолчанию (`enabled: true`). При необходимости их можно отключить или настроить в конфигурации DDP.
