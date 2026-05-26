@@ -347,6 +347,24 @@ Authorization: Basic <base64-encoded-credentials>
 Authorization: Bearer <ваш-токен>
 ```
 
+### Svacer
+
+Тип авторизации: Bearer Token.
+
+Заголовки:
+
+| Заголовок       | Формат значения    |
+|-----------------|--------------------|
+| `Authorization` | `Bearer <токен>`   |
+
+Пример:
+
+```sh
+Authorization: Bearer <ваш-токен>
+```
+
+Токен создаётся в интерфейсе Svacer.
+
 ### Vault
 
 Тип авторизации: Token Authentication.
