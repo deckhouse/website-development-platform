@@ -3,7 +3,7 @@ project: deckhouse-web-development-platform
 ---
 
 image: web-artifacts
-fromImage: ghcr.io/gohugoio/hugo:v0.161.1
+fromImage: ghcr.io/gohugoio/hugo:v0.162.0
 final: false
 shell:
   setup:
