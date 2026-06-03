@@ -5,8 +5,8 @@ alwaysApply: true
 
 # Terminology
 
-- The full glossary is normative and must be applied in full:
-  - `.cursor/rules/docs/refs-glossary-full.mdc`
+- The full glossary is normative and published at https://pp.flant.ru/llms.txt (see "Glossary" section).
+  Fetch and apply it before writing or reviewing documentation text.
 - Apply glossary constraints directly:
   - `K8s` with uppercase `K`;
   - `cloud provider` -> "облачный провайдер";
@@ -29,7 +29,13 @@ alwaysApply: true
   - use `stronghold`, not `Stronghold`;
   - use `volume-data-manager`, not `Volume Data Manager`.
 - For RU text, avoid jargon variants forbidden by glossary.
-- If a local checklist conflicts with full glossary text, follow `.cursor/rules/docs/refs-glossary-full.mdc`.
+- If a local checklist conflicts with full glossary text, follow https://pp.flant.ru/llms.txt.
+
+# Inline Code Scope
+
+- Do not wrap values inside YAML files in backticks — YAML values are already code context.
+  For example, the `name` field in `module.yaml` must contain the plain module name, not `` `module-name` ``.
+- The same applies to other YAML fields: `enum` values, `default` values, etc.
 
 # Language Consistency
 
