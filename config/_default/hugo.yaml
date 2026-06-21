@@ -99,8 +99,6 @@ module:
 languages:
   en:
     disabled: false
-    languageDirection: ""
-    languageName: ""
     title: Deckhouse Development Platform
     weight: 0
     baseURL: https://deckhouse.io/products/development-platform/
@@ -108,8 +106,6 @@ languages:
       description: ""
   ru:
     disabled: false
-    languageDirection: ""
-    languageName: ""
     weight: 1
     title: Deckhouse Development Platform
     baseURL: https://deckhouse.ru/products/development-platform/
