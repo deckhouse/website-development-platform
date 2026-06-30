@@ -87,6 +87,35 @@ menuTitle: Внешние сервисы
 Authorization: <ваш-api-token>
 ```
 
+### ClickHouse
+
+Тип авторизации: Basic Authentication или заголовки `X-ClickHouse-User` / `X-ClickHouse-Key`.
+
+Заголовки:
+
+| Заголовок | Формат значения |
+|-----------|-----------------|
+| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `X-ClickHouse-User` | `<имя-пользователя>` |
+| `X-ClickHouse-Key` | `<пароль>` |
+
+Пример Basic Authentication:
+
+1. Сформируйте строку `username:password`.
+1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
+1. Добавьте заголовок:
+
+```sh
+Authorization: Basic <base64-encoded-credentials>
+```
+
+Пример с заголовками ClickHouse:
+
+```sh
+X-ClickHouse-User: <имя-пользователя>
+X-ClickHouse-Key: <пароль>
+```
+
 ### DefectDojo
 
 Тип авторизации: API v2 Key Token.
