@@ -8,17 +8,16 @@ Context:
 
 Primary rule sources:
 - `.cursor/rules/docs/global-style.mdc`
-- `.cursor/rules/docs/terminology.mdc`
-- `.cursor/rules/docs/refs-editorial-policy-full.mdc`
-- `.cursor/rules/docs/refs-glossary-full.mdc`
 - `.cursor/rules/docs/hugo-supported-codeblock-languages.mdc`
+- Full policy compliance using the normative style guide and glossary at https://pp.flant.ru/llms.txt.
+  Fetch it before starting the review.
+- Terminology and wording compliance using https://pp.flant.ru/llms.txt (see "Glossary" section, fetch before starting the review)
+  and `.cursor/rules/docs/terminology.mdc`.
 
 Apply additional rules when relevant:
 - `.cursor/rules/docs/ru-en-parity.mdc` for EN/RU pairs, `.ru.md` naming, and localized media.
 - `.cursor/rules/docs/hugo-shortcodes.mdc` for `alert`, `tabs`, `details`, and shortcode usage.
 - `.cursor/rules/docs/frontmatter-links-media.mdc` for front matter, related links, and media placement.
-- `.cursor/rules/docs/crd-translation-files.mdc` for `crds/doc-ru-*.yaml` translation files.
-- `.cursor/rules/docs/openapi-x-doc.mdc` for `openapi/**/*.yaml` and `x-doc-*` fields.
 
 Review checklist:
 
@@ -28,13 +27,14 @@ Review checklist:
 - Flag missing prerequisites, caveats, limits, or version-sensitive behavior when they are necessary for safe use.
 
 2. Editorial and style compliance
-- Check compliance with `.cursor/rules/docs/refs-editorial-policy-full.mdc` and `.cursor/rules/docs/global-style.mdc`.
+- Check compliance with policy compliance using the normative style guide and glossary.
+- Check terminology and wording compliance.
 - Check for concise technical wording, meaningful link anchors, correct emphasis, and actionable instructions.
 - For Russian instructional text, require imperative "вы"-form.
 - For docs pages, do not allow first-level headings (`#`). Minimum heading level is `##`.
 
 3. Terminology compliance
-- Check compliance with `.cursor/rules/docs/terminology.mdc` and `.cursor/rules/docs/refs-glossary-full.mdc`.
+- Check compliance using https://pp.flant.ru/llms.txt and `.cursor/rules/docs/terminology.mdc`.
 - Flag forbidden or inconsistent terms.
 - Require exact approved product naming.
 - Require `d8 k` instead of `kubectl` in command examples unless the repository rule clearly does not apply to that case.
