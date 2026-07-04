@@ -1,3 +1,5 @@
+# CLAUDE.md for Deckhouse Development Platform
+
 This repository contains Hugo-based documentation for the Deckhouse Development Platform.
 
 ## Run the docs site locally
