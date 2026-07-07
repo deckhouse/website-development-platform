@@ -196,7 +196,7 @@ metadata:
 ```json
 {
     "origin": {
-        "type": "<datasource | manual | webhook",
+        "type": "<datasource | manual | webhook | action>",
         "uuid": "12345678-1234-5678-1234-567812345678>"
     }
 }
