@@ -7,6 +7,7 @@ weight: 10
 
 - создавать проекты, переменные, ветки или теги в GitLab;
 - создавать ресурсы в Kubernetes;
+- получать ресурсы из Kubernetes;
 - создавать секреты в Deckhouse Stronghold или HashiCorp Vault;
 - создавать проекты в SonarQube, DefectDojo и других системах;
 - создавать топики и ACL в Kafka.
