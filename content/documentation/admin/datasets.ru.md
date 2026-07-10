@@ -168,7 +168,7 @@ menuTitle: Наборы данных
 
 Настройка:
 
-Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold) с типом учётных данных token.
+Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold).
 
 {{< alert level="info" >}}
 Подробное описание компонентов набора данных доступно по кнопке «Описание» на карточке в разделе «Наборы данных».
@@ -190,7 +190,7 @@ menuTitle: Наборы данных
 
 Настройка:
 
-Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold) с типом учётных данных token.
+Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold).
 
 {{< alert level="info" >}}
 Подробное описание компонентов набора данных доступно по кнопке «Описание» на карточке в разделе «Наборы данных».
@@ -212,7 +212,7 @@ menuTitle: Наборы данных
 
 Настройка:
 
-Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold) с типом учётных данных token.
+Перед применением настройте внешние сервисы [Kubernetes](../external-services/#kubernetes) и [Vault](../external-services/#vault) (или Stronghold).
 
 {{< alert level="info" >}}
 Подробное описание компонентов набора данных доступно по кнопке «Описание» на карточке в разделе «Наборы данных».
