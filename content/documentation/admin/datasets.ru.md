@@ -162,7 +162,7 @@ menuTitle: Наборы данных
 
 ### Deckhouse managed PostgreSQL
 
-Набор данных для автоматизации развёртывания managed PostgreSQL в Deckhouse Kubernetes Platform.
+Набор данных для развёртывания managed PostgreSQL в Deckhouse Kubernetes Platform.
 
 Набор данных подготавливает ресурс, действия и процессы для управления жизненным циклом managed PostgreSQL: создание инстанса в кластере через внешний сервис Kubernetes и сохранение реквизитов подключения в Vault или Stronghold.
 
@@ -184,7 +184,7 @@ menuTitle: Наборы данных
 
 ### Deckhouse managed Valkey
 
-Набор данных для автоматизации развёртывания managed Valkey в Deckhouse Kubernetes Platform.
+Набор данных для развёртывания managed Valkey в Deckhouse Kubernetes Platform.
 
 Набор данных подготавливает ресурс, действия и процессы для управления жизненным циклом managed Valkey: создание инстанса в кластере через внешний сервис Kubernetes и сохранение реквизитов подключения в Vault или Stronghold.
 
@@ -206,7 +206,7 @@ menuTitle: Наборы данных
 
 ### Deckhouse managed Kafka
 
-Набор данных для автоматизации развёртывания managed Kafka в Deckhouse Kubernetes Platform.
+Набор данных для развёртывания managed Kafka в Deckhouse Kubernetes Platform.
 
 Набор данных подготавливает ресурс, действия и процессы для управления жизненным циклом managed Kafka: создание инстанса в кластере через внешний сервис Kubernetes и сохранение реквизитов подключения в Vault или Stronghold.
 
