@@ -634,8 +634,9 @@ X-API-Key: <ключ>
 | `dataPath`          | Опционально    | Путь к данным в ответе (цепочка ключей через точку)                                       | Любая строка                                      | `data`, `results.items`, `.`          | `.`          |
 | `responseFormat`    | Опционально    | Формат ответа                                                                             | `array`, `map`                                    | `array`, `map`                        | `array`      |
 | `mapKeyField`       | Опционально    | При `responseFormat` равном `map`: название поля, в которое записать ключ из JSON-объекта | Любая строка                                      | `slug`, `externalId`                  | `""`         |
-| `pageParam`         | Опционально    | Название параметра для номера страницы (для offset- и page- пагинации)                    | Любая строка                                      | `page`, `_page`, `pageNumber`         | `page`       |
-| `limitParam`        | Опционально    | Название параметра для количества элементов на странице (для offset-пагинации)            | Любая строка                                      | `limit`, `per_page`, `_limit`, `size` | `limit`      |
+| `pageParam`         | Опционально    | Название параметра для номера страницы (для page-пагинации)                               | Любая строка                                      | `page`, `_page`, `pageNumber`         | `page`       |
+| `offsetParam`       | Опционально    | Название параметра смещения (для offset-пагинации)                                        | Любая строка                                      | `offset`, `skip`                      | `offset`     |
+| `limitParam`        | Опционально    | Название параметра для количества элементов на странице (для offset-пагинации)            | Любая строка                                      | `limit`, `_limit`                     | `limit`      |
 | `sizeParam`         | Опционально    | Название параметра для размера страницы (для page-пагинации)                              | Любая строка                                      | `size`, `pageSize`, `_size`           | `size`       |
 | `cursorParam`       | Опционально    | Название параметра для курсора (для cursor-пагинации)                                     | Любая строка                                      | `cursor`, `after`, `next`             | `cursor`     |
 | `pageSize`          | Опционально    | Количество элементов на странице для пагинации                                            | Положительное целое число                         | `10`, `20`, `50`, `100`               | `100`        |
@@ -697,9 +698,10 @@ X-API-Key: <ключ>
 
 - `none` — без пагинации, получает все данные одним запросом.
 
-- `offset` — пагинация по номеру страницы и количеству элементов:
-  - Использует параметры `pageParam` и `limitParam`.
-  - Пример: `?page=1&limit=20`.
+- `offset` — пагинация по смещению и лимиту:
+  - Использует параметры `offsetParam` и `limitParam`.
+  - Смещение начинается с `0` и увеличивается на число полученных записей.
+  - Пример: `?offset=0&limit=100`, затем `?offset=100&limit=100`.
 
 - `page` — пагинация по номеру страницы и размеру:
   - Использует параметры `pageParam` и `sizeParam`.
@@ -724,17 +726,31 @@ paginationType: none
 dataPath: .
 ```
 
-GitLab API (offset пагинация):
+GitLab API (page-пагинация):
 
 ```yaml
 url: https://gitlab.example.com
 path: /api/v4/projects
-paginationType: offset
+paginationType: page
 pageParam: page
-limitParam: per_page
+sizeParam: per_page
 pageSize: 20
 headers:
   Authorization: Bearer <token>
+```
+
+DefectDojo API (offset-пагинация):
+
+```yaml
+url: https://defectdojo.example.com
+path: /api/v2/engagements
+paginationType: offset
+limitParam: limit
+pageSize: 100
+dataPath: results
+query: "product=42"
+headers:
+  Authorization: Token <token>
 ```
 
 GitHub API (link header пагинация):
@@ -754,9 +770,9 @@ API с вложенными данными:
 url: https://api.example.com
 path: /data
 dataPath: response.data.items
-paginationType: offset
+paginationType: page
 pageParam: page
-limitParam: limit
+sizeParam: limit
 query: "filter=active&sort=name"
 ```
 

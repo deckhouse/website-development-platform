@@ -1,92 +1,127 @@
-# AGENTS.md
+# AGENTS.md for Deckhouse Development Platform
 
-This repository contains the Hugo source for the Deckhouse Development Platform documentation website.
+This repository contains Hugo-based documentation for the Deckhouse Development Platform.
 
-Use this file as a quick entry point. Treat the detailed rules under `.cursor/rules/docs/` as normative when they apply.
-
-## Repo Overview
-
-- Main documentation content lives under `content/documentation/`.
-- Hugo configuration lives under `config/_default/hugo.yaml`.
-- Local run instructions live in `README.md`.
-- The site uses the shared Hugo module `github.com/deckhouse/hugo-web-product-module`.
-
-## Preferred Workflow
-
-Work from the repository root.
+## Run the docs site locally
 
 ```bash
-make up
-make build
-make lint-markdown
-make down
+make up      # start via Docker Compose
+make down    # stop and remove containers
 ```
 
-- Use `make up` to start the local docs site.
-- Use `make build` to verify the site builds.
-- Use `make lint-markdown` before handing off Markdown changes.
-- Use `make lint-markdown-fix` only when automatic fixes are useful and safe.
-- Use `make down` to stop local containers.
+- EN: <http://localhost/products/development-platform/documentation/>
+- RU: <http://ru.localhost/products/development-platform/documentation/>
 
-For local preview URLs, follow `README.md` as the source of truth:
+All targets:
 
-- EN: `http://localhost/products/development-platform/documentation/`
-- RU: `http://ru.localhost/products/development-platform/documentation/`
+| Target | Purpose |
+|--------|---------|
+| `make up` | Start docs via Docker Compose |
+| `make down` | Stop and remove containers |
+| `make serve` | Start Hugo dev server locally without Docker |
+| `make build` | Build the site to `./public` |
+| `make lint-markdown` | Lint Markdown files |
+| `make lint-markdown-fix` | Lint and auto-fix Markdown files |
+| `make mod` | Clean up Hugo modules (`hugo mod tidy`) |
 
-## Documentation Rules
+## Editorial policy
 
-When editing documentation pages:
+The normative style guide and glossary are at **<https://pp.flant.ru/llms.txt>**.  
+Fetch it before writing or reviewing documentation.
 
-- Do not use a first-level heading (`# ...`) in documentation files. Start at `##`.
-- Always use fenced code blocks with an explicit language tag supported by Hugo/Chroma.
-- Use Hugo shortcodes and alerts only as allowed by project rules.
-- Keep YAML examples and front matter syntactically valid.
-- Use meaningful link text. Avoid generic anchors such as "here" or "тут".
-- In command examples, prefer `d8 k` instead of `kubectl`.
+## Documentation style
 
-Primary references:
+- Write concise technical text with clear user value.
+- No first-level headings (`#`) in documentation files. Minimum level is `##`.
+- Prefer short paragraphs and structured lists.
+- For emphasis, use **bold**; avoid unnecessary italic.
+- Keep instructions actionable and testable.
+- In command examples use `d8 k` instead of `kubectl`.
+- YAML snippets must be syntactically valid.
+- Markdown ordered lists: use `1.` for every item (not `1.`, `2.`, `3.`).
 
-- `.cursor/rules/docs/global-style.mdc`
-- `.cursor/rules/docs/hugo-supported-codeblock-languages.mdc`
-- `.cursor/rules/docs/hugo-shortcodes.mdc`
-- `.cursor/rules/docs/refs-editorial-policy-full.mdc`
+### Inline code
 
-## Language And Terminology
+Use inline code for: parameters, module names, commands, file paths, HTTP codes.  
+Do not overuse it for resource type names in narrative text.  
+Do not wrap values inside YAML files in backticks — YAML values are already code context.
 
-- Follow the repository glossary and terminology rules exactly.
-- Do not replace approved terms with ad hoc synonyms.
-- Do not write "платформа Deckhouse" when a specific product name is required.
-- Use module names exactly as defined canonically, without humanizing or reformatting them.
-- For Russian instructional text, use imperative "вы"-form.
+### Links
 
-Primary references:
+- Use meaningful link anchors (avoid "here" or "тут").
+- Links to project pages must be relative.
+- Links to Deckhouse Kubernetes Platform docs must be absolute without domain (`/products/kubernetes-platform/documentation/v1/...`).
 
-- `.cursor/rules/docs/terminology.mdc`
-- `.cursor/rules/docs/refs-glossary-full.mdc`
+### Code blocks
 
-## EN/RU Parity
+Every fenced code block must have an explicit language tag from the Hugo/Chroma list.  
+If the needed language is absent, use `text` or `plain`.
 
-This repository is bilingual.
+Common tags: `bash`, `yaml`, `json`, `go`, `go-html-template`, `text`, `plain`.  
+Full list: see `.cursor/rules/docs/hugo-supported-codeblock-languages.mdc`.
 
-- Keep EN and RU pages semantically aligned when a paired page exists.
-- Russian files must use the `.ru.md` suffix.
-- When changing one language, check whether the paired page needs the same update.
-- Localized media should follow the project naming pattern, for example `image.png` and `image.ru.png`.
+### Hugo shortcodes
 
-Primary reference:
+```go-html-template
+{{< alert level="warning" >}}
+Message text.
+{{< /alert >}}
+```
 
-- `.cursor/rules/docs/ru-en-parity.mdc`
+Alert levels: `info`, `warning`, `danger`.
 
-## Specialized Rules
+```go-html-template
+{{< tabs name="uniq_name" >}}
+{{% tab name="Tab 1" %}}Content{{% /tab %}}
+{{% tab name="Tab 2" %}}Content{{% /tab %}}
+{{< /tabs >}}
+```
 
-If your change touches one of these areas, read the matching rule file before editing:
+```go-html-template
+{{% details "Summary..." %}}
+Markdown content.
+{{% /details %}}
+```
 
-- CRD translation files: `.cursor/rules/docs/crd-translation-files.mdc`
-- Front matter, links, and media conventions: `.cursor/rules/docs/frontmatter-links-media.mdc`
-- OpenAPI `x-doc-*` fields: `.cursor/rules/docs/openapi-x-doc.mdc`
+### Release notes (`content/documentation/release-notes/`)
 
-## Notes For Agents
+- Under a heading, if the only body content is a single bullet — write plain prose, not a list.
+- Keep lists only when there are two or more top-level bullets under the same heading.
 
-- Keep this file short and practical. Do not duplicate the full policy files into new documents.
-- Prefer small, consistent documentation edits over broad rewrites.
-- If project instructions conflict, follow the more specific rule file, and treat the full editorial policy and glossary as authoritative.
+## Terminology
+
+Full glossary: <https://pp.flant.ru/llms.txt> (see "Glossary" section).
+
+Key rules:
+- `K8s` (uppercase K)
+- Use "узел", not "нода"
+- Use "веб-интерфейс"
+- Use `IP-адрес`
+- Use "файлы cookie"
+- Avoid "платформа Deckhouse"; use explicit product names (e.g. Deckhouse Kubernetes Platform)
+- Deckhouse module names must be in lowercase kebab-case.
+- Do not translate product names and abbreviations that the glossary keeps in EN (e.g. `RBAC`)
+
+Mixed EN/RU compound terms use a hyphen: `S3-бакет`, `managed-сервис`, `master-узел`, `HTTP-протокол`.
+
+## Russian text style
+
+In Russian instructional text, always use the imperative вы-form:
+- «создайте», not «создаем»
+- «нажмите», not «нажимаем»
+- «перейдите», not «переходим»
+
+This applies to all step-by-step instructions, quickstart guides, and procedural text.
+
+## Front matter
+
+Required fields: `title`, `description` (concise, unique, not a copy of title).
+
+- Related links: use `params.relatedLinks` in front matter; do not add manual "Related links" sections in the Markdown body.
+
+## EN/RU parity
+
+- Russian files use the `.ru.md` suffix only (not `.RU.md`, `_RU.md`).
+- For each change relevant to both languages, update both files.
+- Do not leave EN/RU pairs semantically diverged unless the change is intentionally language-specific.
+- Localized media: `image1.jpg` (EN) / `image1.ru.jpg` (RU).
