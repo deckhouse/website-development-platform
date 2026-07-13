@@ -7,10 +7,13 @@ params:
 outputs:
   - HTML
   - search
+  - print
 cascade:
   params:
     simple_list: true
 ---
+
+{{< downloads >}}
 
 Deckhouse Development Platform (DDP) is a comprehensive solution for managing all stages of development through a single interface.
 

@@ -13,7 +13,7 @@ The Deckhouse Development Platform interface consists of the following sections:
 
 ## Global search
 
-The top navigation bar includes a "Search" field. It lets you quickly find entities across the platform.
+At the top of the "Catalog" sidebar, a "Search" field lets you quickly find entities across the platform.
 
 ### Limitations
 
