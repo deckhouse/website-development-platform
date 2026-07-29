@@ -1,10 +1,11 @@
-# Kubernetes
+---
+title: Kubernetes
+weight: 60
+---
 
-## Содержание
-
-- CreateKubernetesResource
-- GetKubernetesResource
-- DeleteKubernetesResource
+{{< alert level="info" >}}
+Для выполнения действий необходимо наличие токена сервисного аккаунта Kubernetes.
+{{< /alert >}}
 
 ## CreateKubernetesResource
 
@@ -29,10 +30,6 @@ manifests:
 | Название                   | Обязательность | Описание                                                                                           |
 |----------------------------|----------------|----------------------------------------------------------------------------------------------------|
 | manifests                  | Да             | Манифесты Kubernetes, которые будут применены                                                      |
-
-### Учётные данные
-
-* `token` — токен сервисного аккаунта в Kubernetes.
 
 ## GetKubernetesResource
 
@@ -66,10 +63,6 @@ namespace: default
 |------------|-----------------------------------------------|
 | `resource` | Объект ресурса в формате Kubernetes           |
 
-### Учётные данные
-
-* `token` — токен сервисного аккаунта в Kubernetes.
-
 ## DeleteKubernetesResource
 
 DeleteKubernetesResource — удаляет существующий ресурс в кластере Kubernetes.
@@ -94,10 +87,6 @@ namespace: example
 | resource_name             | Да | Название конкретного ресурса, который необходимо удалить                     | -                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | namespace                 | Да | Неймспейс, в котором находится ресурс                                        | -                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-### Учётные данные
-
-* `token` — токен сервисного аккаунта в Kubernetes.
-
 ### Определение требуемых Group и Version
 
 Каждому типу ресурса соответствует своя группа API (Group) и версия (Version).
@@ -116,7 +105,7 @@ namespace: example
 d8 k explain deployment
 ```
 
-Вывод:
+Пример вывода:
 
 ```yaml
 GROUP:      apps
@@ -132,10 +121,8 @@ FIELDS:
 
 #### С помощью документации
 
-Как искать в документации:
-
 1. Найдите нужный ресурс (например, Deployment).
-1. В заголовке будет указана API Group и версия. Пример для Deployment:
+1. В заголовке указана API Group и версия. Пример для Deployment:
 
    ```yaml
    apiVersion: apps/v1

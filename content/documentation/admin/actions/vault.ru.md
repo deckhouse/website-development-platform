@@ -1,9 +1,11 @@
-# HashiCorp Vault
+---
+title: HashiCorp Vault
+weight: 50
+---
 
-## Содержание
-
-- CreateVaultSecret
-- DeleteVaultSecret
+{{< alert level="info" >}}
+Для выполнения действий необходимо наличие Vault-токена, который имеет необходимые права для создания секретов.
+{{< /alert >}}
 
 ## CreateVaultSecret
 
@@ -30,10 +32,6 @@ secrets:
 | secrets.key               | Да             | Название (идентификатор) секрета                                |                                     | -            |
 | secrets.value             | Да             | Значение секрета                                                |                                     | -            |
 
-### Учётные данные
-
-* `token` — Vault-токен, который имеет необходимые права для создания секретов.
-
 ### Примечание
 
 `allow_update` — определяет поведение действия при создании или обновлении секрета:
@@ -59,13 +57,13 @@ path: example/data/path
 |---------------------------|----------------|----------------------------------------------------------------------------------------------------|
 | path                      | Да             | Путь, по которому находится секрет в Vault, который необходимо удалить                             |
 
-### Учётные данные
-
-* `token` — Vault-токен, который имеет необходимые права для удаления секретов.
-
 ## CreateVaultKubernetesAuthRole
 
 CreateVaultKubernetesAuthRole — создаёт или обновляет роль аутентификации Kubernetes в HashiCorp Vault.
+
+{{< alert level="info" >}}
+Для выполнения действия необходимо наличие Vault-токена, обладающего правами на создание/обновление ролей Kubernetes auth backend.
+{{< /alert >}}
 
 ### Пример запроса
 
@@ -110,9 +108,4 @@ optional:
 | token_no_default_policy | bool          | Исключение default policy из состава токена                           |
 | token_bound_cidrs       | []string      | Ограничение CIDR-диапазонов, откуда можно использовать выданный токен |
 
-Полный список поддерживаемых параметров приведён в [официальной документации](https://developer.hashicorp.com/vault/docs/auth/kubernetes#parameters) HashiCorp Vault.
-
-### Учётные данные
-
-* `token` — Vault-токен, обладающий правами на создание/обновление ролей Kubernetes auth backend.
-
+Полный список поддерживаемых параметров приведён в официальной документации [HashiCorp Vault](https://developer.hashicorp.com/vault/docs/auth/kubernetes#parameters).

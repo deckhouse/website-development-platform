@@ -1,9 +1,7 @@
-# CodeScoring
-
-## Содержание
-
-- CreateCodeScoringProject
-- DeleteCodeScoringProject
+---
+title: Code Scoring
+weight: 100
+---
 
 ## CreateCodeScoringProject
 
