@@ -45,11 +45,15 @@ disableKinds:
 - robotsTXT
 - RSS
 #- section
-- sitemap
+#- sitemap
 - taxonomy
 - term
 
 enableGitInfo: true
+
+outputs:
+  page: [HTML, markdown]
+  section: [HTML, markdown]
 
 sitemap:
   filename: "sitemap.xml"
@@ -71,6 +75,11 @@ params:
 
   # Enable PDF/DOCX documentation exports (generated in CI, downloadable from sidebar).
   pdf: true
+
+  # Optional one-sentence summary for /{lang}/documentation/llms.txt (AI agents).
+  # Default: "Documentation for <site.Title>."
+  # llms:
+  #   summary: "..."
 
   # Global relevant links.
   links:

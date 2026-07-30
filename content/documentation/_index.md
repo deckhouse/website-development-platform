@@ -6,7 +6,10 @@ params:
   no_list: true
 outputs:
   - HTML
+  - markdown
   - search
+  - llms
+  - corpus
   - print
 cascade:
   params:
