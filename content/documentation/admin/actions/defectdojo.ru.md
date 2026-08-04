@@ -21,7 +21,7 @@ prod_type: 1
 
 ### Спецификация запроса
 
-Список полей соответствует официальному API DefectDojo, `/api/v2/products`, подробнее — [в документации Defectdojo](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+Список полей соответствует официальному API DefectDojo, `/api/v2/products`, подробнее — [в документации DefectDojo](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
 
 ## DeleteDefectdojoProduct
 
@@ -55,4 +55,4 @@ lead: '1'
 
 ### Спецификация запроса
 
-Список полей соответствует официальному API DefectDojo, `/api/v2/engagements`, подробнее — [в документации Defectdojo](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+Список полей соответствует официальному API DefectDojo, `/api/v2/engagements`, подробнее — [в документации DefectDojo](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).

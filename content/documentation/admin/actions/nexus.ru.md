@@ -68,8 +68,8 @@ docker:
 | `cleanup`   | Нет     | Привязанные политики очистки (`policyNames`)                                                      | policyNames: [maven-cleanup]           |
 | `maven`     | Для maven       | Только для maven: `versionPolicy`, `layoutPolicy`                                                 | [Пример](#пример-запроса-maven-hosted) |
 | `proxy`     | Для proxy       | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                | -                                      |
-| `group`     | Для group       | Список включённых memberNames                                                                     | [Пример](#пример-запроса-docker-group) |
-| `docker`    | Для docker      | docker-specific: `httpPort`, `v1Enabled`, `forceBasicAuth`                                        | [Пример](#пример-запроса-docker-group) |
+| `group`     | Для group       | Список значений `memberNames`                                                                       | [Пример](#пример-запроса-docker-group) |
+| `docker`    | Для docker      | Специфичные для Docker параметры: `httpPort`, `v1Enabled`, `forceBasicAuth`                       | [Пример](#пример-запроса-docker-group) |
 | `component` | Очень редко     | Только для некоторых нестандартных сценариев                                                      | -                                      |
 | `attributes`| Нет     | Любые кастомные поля                                                                              | -                                      |
 
@@ -146,18 +146,18 @@ actions:
 
 ### Спецификация запроса
 
-| Поле             | Обязательность  | Описание                                                                                                                                                          |
-|------------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name             | Да | Название создаваемой привилегии. Должно быть уникальным в рамках Nexus                                                                                            |
-| description      | Нет     | Описание привилегии                                                                                                                                               |
-| type             | Да | Тип привилегии: `repository-view`, `repository-content-selector`, `repository-admin`, `application`, `wildcard`                                                   |
-| actions          | Нет     | Список действий, разрешённых привилегией (например, `READ`, `BROWSE`, `CREATE`, `UPDATE`, `DELETE`)                                                               |
-| format           | Нет     | Формат репозитория (например, `maven2`, `docker`, `npm`). Используется для типов `repository-view`, `repository-content-selector`, `repository-admin`             |
-| repository       | Нет     | Название репозитория. Используется для типов `repository-view`, `repository-content-selector`, `repository-admin`                                                 |
-| contentSelector  | Нет     | Название селектора контента. Обязателен для типа `repository-content-selector`. Если не указан или невалиден, тип автоматически преобразуется в `repository-view` |
-| pattern          | Нет     | Шаблон для типа `wildcard`                                                                                                                                        |
-| domain           | Нет     | Домен для типа `application`                                                                                                                                      |
-| attributes       | Нет     | Дополнительные атрибуты в формате ключ-значение                                                                                                                   |
+| Поле             | Обязательность   | Описание                                                                                                                                                          |
+|------------------ |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`            | Да               | Название создаваемой привилегии. Должно быть уникальным в рамках Nexus                                                                                            |
+| `description`     | Нет              | Описание привилегии                                                                                                                                               |
+| `type`            | Да               | Тип привилегии: `repository-view`, `repository-content-selector`, `repository-admin`, `application`, `wildcard`                                                   |
+| `actions`         | Нет              | Список действий, разрешённых привилегией (например, `READ`, `BROWSE`, `CREATE`, `UPDATE`, `DELETE`)                                                               |
+| `format`          | Нет              | Формат репозитория (например, `maven2`, `docker`, `npm`). Используется для типов `repository-view`, `repository-content-selector`, `repository-admin`             |
+| `repository`      | Нет              | Название репозитория. Используется для типов `repository-view`, `repository-content-selector`, `repository-admin`                                                 |
+| `contentSelector` | Нет              | Название селектора контента. Обязателен для типа `repository-content-selector`. Если не указан или невалиден, тип автоматически преобразуется в `repository-view` |
+| `pattern`         | Нет              | Шаблон для типа `wildcard`                                                                                                                                        |
+| `domain`          | Нет              | Домен для типа `application`                                                                                                                                      |
+| `attributes`      | Нет              | Дополнительные параметры в формате ключ-значение                                                                                                                  |
 
 ### Примечание
 
