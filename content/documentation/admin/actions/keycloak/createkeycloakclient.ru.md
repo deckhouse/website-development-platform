@@ -1,15 +1,14 @@
 ---
-title: Keycloak
-weight: 70
+title: CreateKeycloakClient
+weight: 10
 ---
+
 
 {{< alert level="info" >}}
 Для выполнения действия необходимы учётные данные:
 * `username` — имя пользователя, от которого будет запускаться выполнение действия.
 * `password` — пароль пользователя, от имени которого будет запускаться выполнение действия.
 {{< /alert >}}
-
-## CreateKeycloakClient
 
 CreateKeycloakClient — создаёт нового клиента в Keycloak.
 
