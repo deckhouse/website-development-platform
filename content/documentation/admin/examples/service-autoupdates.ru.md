@@ -449,7 +449,7 @@ values: {{ .template_values | nindent 4 }}
 - `source_project_id` и `target_project_id` — ID репозиториев шаблона и сервиса.
 - `values` — переменные шаблонизации применяются повторно для корректного рендеринга изменений.
 
-Подробнее о настройках встроенного бэкенда — в разделе [«CreateGitlabMergeRequest»](../actions/types/#creategitlabmergerequest).
+Подробнее о настройках встроенного бэкенда — в разделе [«CreateGitlabMergeRequest»](../actions/gitlab/creategitlabmergerequest/).
 
 ### Создание действия
 
@@ -528,7 +528,7 @@ namespace_id: '{{ .group }}'
 path: '{{ .path }}'
 ```
 
-Это тело запроса передаёт в GitLab API название проекта, ID группы и путь репозитория. Подробнее о настройках — в разделе [«CreateGitlabProject»](../actions/types/#creategitlabproject).
+Это тело запроса передаёт в GitLab API название проекта, ID группы и путь репозитория. Подробнее о настройках — в разделе [«CreateGitlabProject»](../actions/gitlab/creategitlabproject/).
 
 Действие «Создать репозиторий из шаблона»:
 
@@ -558,7 +558,7 @@ values:
 
 - `values` — блок должен содержать пары ключ-значение, которые будут использованы для замены переменных в файлах шаблона. Формат и состав этих переменных полностью зависит от того, как настроен ваш шаблон.
 
-Подробнее о настройках — в разделе [«CreateRepositoryFromTemplate»](../actions/types/#createrepositoryfromtemplate).
+Подробнее о настройках — в разделе [«CreateRepositoryFromTemplate»](../actions/gitlab/createrepositoryfromtemplate/).
 
 Действие «Обновление сервиса из шаблона»:
 
@@ -595,7 +595,7 @@ values: {{ .template_values | nindent 4 }}
 
 - `values` — переменные шаблонизации применяются повторно для корректного рендеринга изменений.
 
-Подробнее о настройках — в разделе [«CreateGitlabMergeRequest»](../actions/types/#creategitlabmergerequest).
+Подробнее о настройках — в разделе [«CreateGitlabMergeRequest»](../actions/gitlab/creategitlabmergerequest/).
 
 Обновление:
 

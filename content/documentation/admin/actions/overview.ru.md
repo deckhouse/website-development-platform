@@ -8,7 +8,7 @@ weight: 10
 
 - создавать проекты, переменные, ветки, теги, релизы и merge request'ы в [GitLab](../gitlab/);
 - создавать ресурсы в [Kubernetes](../kubernetes/) и получать их;
-- создавать секреты в [Deckhouse Stronghold и HashiCorp Vault](../vault/), а также клиентов в [Keycloak](../keycloack/);
+- создавать секреты в [Deckhouse Stronghold и HashiCorp Vault](../vault/), а также клиентов в [Keycloak](../keycloak/);
 - создавать проекты в [SonarQube](../sonarqube/), продукты и engagements в [DefectDojo](../defectdojo/), проекты в [CodeScoring](../codescoring/) и репозитории, роли, пользователей и привилегии в [Nexus Repository](../nexus/);
 - создавать топики и ACL в [Apache Kafka](../kafka/);
 - выполнять вспомогательные действия для отладки и управления выполнением процессов (например, [Debug](../debug/) и [Wait](../wait/)).

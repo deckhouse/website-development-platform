@@ -3,11 +3,9 @@ title: DeleteKubernetesResource
 weight: 30
 ---
 
-
 {{< alert level="info" >}}
 Для выполнения действий необходимо наличие токена сервисного аккаунта Kubernetes.
 {{< /alert >}}
-
 
 DeleteKubernetesResource — удаляет существующий ресурс в кластере Kubernetes.
 
