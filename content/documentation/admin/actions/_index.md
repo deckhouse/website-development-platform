@@ -1,4 +1,4 @@
 ---
-title: SonarQube
+title: Actions
 weight: 30
 ---

@@ -1,4 +1,4 @@
 ---
-title: Gitlab
+title: GitLab
 weight: 20
 ---
