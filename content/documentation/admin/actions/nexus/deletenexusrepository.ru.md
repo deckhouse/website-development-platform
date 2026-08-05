@@ -8,7 +8,7 @@ weight: 20
 Для выполнения действия необходимо наличие токена — строки base64(`admin:password`), используемой как Basic Auth при запросах к Nexus.
 {{< /alert >}}
 
-`DeleteNexusRepository` — удаляет существующий репозиторий из Nexus Repository Manager 3.
+DeleteNexusRepository — удаляет существующий репозиторий из Nexus Repository Manager 3.
 
 ### Пример запроса
 
