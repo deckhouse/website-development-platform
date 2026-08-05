@@ -56,21 +56,21 @@ docker:
 
 ### Спецификация запроса
 
-| Поле        | Обязательность | Описание                                                                                          | Пример                       |
-|-------------|----------------|---------------------------------------------------------------------------------------------------|------------------------------|
-| description | Нет            | Документация по назначению этого действия/репозитория. Не используется самим Nexus, только для UI | -                            |
-| name        | Да             | Название создаваемого репозитория. Должно быть уникальным в рамках Nexus                          | my-maven-repo                |
-| format      | Да             | Формат (`maven`, `docker`, `npm`, `raw` и т. д.)                                                  | maven                        |
-| type        | Да             | Тип: `hosted`, `proxy` или `group`                                                                | hosted                       |
-| online      | Да             | Доступен ли репозиторий (`true`/`false`)                                                          | true                         |
-| storage     | Да             | Объект storage: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                     | [Пример](#пример-запроса-maven-hosted)                |
-| cleanup     | Нет            | Привязанные политики очистки (`policyNames`)                                                      | policyNames: [maven-cleanup] |
-| maven       | Для maven      | Только для maven: `versionPolicy`, `layoutPolicy`                                                 | [Пример](#пример-запроса-maven-hosted)                |
-| proxy       | Для proxy      | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                | -                            |
-| group       | Для group      | Список значений `memberNames`                                                                     | [Пример](#пример-запроса-docker-group)                |
-| docker      | Для docker     | Специфичные для Docker параметры: `httpPort`, `v1Enabled`, `forceBasicAuth`                       | [Пример](#пример-запроса-docker-group)                |
-| component   | Очень редко    | Только для некоторых нестандартных сценариев                                                      | -                            |
-| attributes  | Нет            | Любые кастомные поля                                                                              | -                            |
+| Поле          | Обязательность   | Описание                                                                                            | Пример                                 |
+| ------------- | ---------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| description   | Нет              | Документация по назначению этого действия/репозитория. Не используется самим Nexus, только для UI   | -                                      |
+| name          | Да               | Название создаваемого репозитория. Должно быть уникальным в рамках Nexus                            | my-maven-repo                          |
+| format        | Да               | Формат (`maven`, `docker`, `npm`, `raw` и т. д.)                                                    | maven                                  |
+| type          | Да               | Тип: `hosted`, `proxy` или `group`                                                                  | hosted                                 |
+| online        | Да               | Доступен ли репозиторий (`true`/`false`)                                                            | true                                   |
+| storage       | Да               | Объект storage: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                       | [Пример](#пример-запроса-maven-hosted) |
+| cleanup       | Нет              | Привязанные политики очистки (`policyNames`)                                                        | policyNames: [maven-cleanup]           |
+| maven         | Для maven        | Только для maven: `versionPolicy`, `layoutPolicy`                                                   | [Пример](#пример-запроса-maven-hosted) |
+| proxy         | Для proxy        | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                  | -                                      |
+| group         | Для group        | Список значений `memberNames`                                                                       | [Пример](#пример-запроса-docker-group) |
+| docker        | Для docker       | Специфичные для Docker параметры: `httpPort`, `v1Enabled`, `forceBasicAuth`                         | [Пример](#пример-запроса-docker-group) |
+| component     | Очень редко      | Только для некоторых нестандартных сценариев                                                        | -                                      |
+| attributes    | Нет              | Любые кастомные поля                                                                                | -                                      |
 
 ### Требования
 
