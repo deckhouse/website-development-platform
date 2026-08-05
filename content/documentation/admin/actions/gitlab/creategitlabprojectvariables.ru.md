@@ -1,5 +1,5 @@
 ---
-title: CreateGitlabGroupVariables
+title: CreateGitlabProjectVariables
 weight: 90
 ---
 

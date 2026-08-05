@@ -1,5 +1,5 @@
 ---
-title: StartGitlabPipeline
+title: DeleteGitlabProject
 weight: 110
 ---
 
