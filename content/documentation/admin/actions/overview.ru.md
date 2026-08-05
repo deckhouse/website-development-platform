@@ -6,12 +6,12 @@ weight: 10
 
 Действия — это механизм платформы для запуска операций во внешних инфраструктурных системах и сервисах. С их помощью можно, например, создавать:
 
-- создавать проекты, переменные, ветки, теги, релизы и merge request'ы в [GitLab](../gitlab/createrepositoryfromtemplate/);
-- создавать ресурсы в [Kubernetes](../kubernetes/createkubernetesresource/) и получать их;
-- создавать секреты в [Deckhouse Stronghold и HashiCorp Vault](../vault/createvaultsecret/), а также клиентов в [Keycloak](../keycloak/createkeycloakclient/);
-- создавать проекты в [SonarQube](../sonarqube/createsonarqubeproject/), продукты и engagements в [DefectDojo](../defectdojo/createdefectdojoproduct/), проекты в [CodeScoring](../codescoring/createcodescoringproject/) и репозитории, роли, пользователей и привилегии в [Nexus Repository](../nexus/createnexusrepository/);
-- создавать топики и ACL в [Apache Kafka](../kafka/createkafkatopics/);
-- выполнять вспомогательные действия для отладки и управления выполнением процессов (например, [Debug](../debug/debug/) и [Wait](../wait/wait/)).
+- создавать проекты, переменные, ветки, теги, релизы и merge request'ы в [GitLab](../gitlab/);
+- создавать ресурсы в [Kubernetes](../kubernetes/) и получать их;
+- создавать секреты в [Deckhouse Stronghold и HashiCorp Vault](../vault/), а также клиентов в [Keycloak](../keycloak/);
+- создавать проекты в [SonarQube](../sonarqube/), продукты и engagements в [DefectDojo](../defectdojo/), проекты в [CodeScoring](../codescoring/) и репозитории, роли, пользователей и привилегии в [Nexus Repository](../nexus/);
+- создавать топики и ACL в [Apache Kafka](../kafka/);
+- выполнять вспомогательные действия для отладки и управления выполнением процессов (например, [Debug](../debug/) и [Wait](../wait/)).
 
 Действие можно привязать к одному или нескольким ресурсам. После этого его можно запускать для любой сущности этих ресурсов.
 
