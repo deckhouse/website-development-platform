@@ -1,10 +1,10 @@
 ---
-title: CreateGitlabGroupVariables
+title: CreateGitlabProjectVariables
 weight: 90
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
 CreateGitlabProjectVariables — creates project-level variables in GitLab.
@@ -25,7 +25,7 @@ variables:
 | project_id        | Yes      | Identifier of the project in which to create the variables                          |
 | variables         | Yes      | List of variables to create                                                         |
 
-The field list for variables corresponds to the official GitLab Project-level CI/CD variables API, `/projects/:id/variables`, for more information see [the GitLab documentation](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
+The fields for each variable correspond to the official GitLab project-level CI/CD variables API, `/projects/:id/variables`. For details, see the [GitLab documentation](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
 
 ### Note
 

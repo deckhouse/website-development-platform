@@ -3,7 +3,7 @@ title: Debug
 weight: 10
 ---
 
-Debug runs a debug action. It lets you perform a specified number of wait cycles, as well as write arbitrary data to the log and return it in the action's response.
+Debug runs a debugging action. It performs a specified number of wait cycles, writes arbitrary data to the log, and returns that data in the action response.
 
 ### Request example
 

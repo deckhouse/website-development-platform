@@ -4,7 +4,7 @@ weight: 50
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
 CreateGitlabTag — creates a new tag in a GitLab project.
@@ -24,7 +24,7 @@ message: Tag description
 | ---------------------- | -------- | ------------------------------------------------------------------------------------ |
 | project_id             | Yes      | Identifier of the project in which to create the tag                                  |
 | tag_name               | Yes      | Name of the tag                                                                        |
-| ref                    | Yes      | Name of the branch, a tag, or a commit SHA hash the new tag will point to             |
+| ref                    | Yes      | Name of the branch or tag, or the commit SHA, that the new tag will point to           |
 | message                | Yes      | Tag description                                                                        |
 
 ### Note

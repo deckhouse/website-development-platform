@@ -3,7 +3,7 @@ title: Fail
 weight: 20
 ---
 
-Fail emulates an action execution error. Intended for use in processes as a debugging element.
+Fail simulates an action execution error. It is intended for use as a debugging step in processes.
 
 ### Request example
 

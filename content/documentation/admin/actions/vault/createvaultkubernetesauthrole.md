@@ -4,7 +4,7 @@ weight: 30
 ---
 
 {{< alert level="info" >}}
-Running this action requires a Vault token with permissions to create/update Kubernetes auth backend roles.
+Running this action requires a Vault token with permission to create or update Kubernetes auth backend roles.
 {{< /alert >}}
 
 CreateVaultKubernetesAuthRole — creates or updates a Kubernetes authentication role in HashiCorp Vault.
@@ -36,7 +36,7 @@ optional:
 | bound_service_account_namespaces      | Yes      | List of namespaces allowed to access via this role                                      |
 | optional                              | No       | Additional role parameters (listed in the table below)                                  |
 
-Supported values in optional:
+Supported values for `optional`:
 
 | Field                     | Type            | Description                                                              |
 | ------------------------- | --------------- | ----------------------------------------------------------------------- |

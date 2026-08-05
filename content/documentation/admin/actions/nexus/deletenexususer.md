@@ -5,7 +5,7 @@ weight: 100
 
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used as Basic Auth for requests to Nexus.
+Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
 DeleteNexusUser — deletes a user from Nexus Repository Manager 3.

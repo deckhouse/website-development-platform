@@ -7,7 +7,7 @@ CreateCodeScoringProject — creates a new project in CodeScoring.
 The action uses the CodeScoring API to register a project with the specified parameters:
 - project name,
 - repository URL,
-- VCS system ID,
+- VCS ID,
 - an option to automatically run SCA analysis after cloning the repository.
 
 ### Request example
@@ -25,9 +25,9 @@ run_sca_after_clone: true
 | -------------------- | -------- | ---------------------------------------------------------------------------- |
 | name                 | Yes      | Project name in CodeScoring                                                  |
 | repository           | Yes      | Repository URL (e.g., <https://gitlab.example.com/group/project.git>)        |
-| vcs_id               | Yes      | VCS system ID in CodeScoring (must be greater than 0)                        |
+| vcs_id               | Yes      | VCS ID in CodeScoring (must be greater than 0)                               |
 | run_sca_after_clone  | No       | Automatically run SCA analysis after cloning the repository                  |
 
 ### Response
 
-The response returns the created project object with the following information: project identifier (pk), name, project type, description, repository information, project status, access permissions, license, number of dependencies and vulnerabilities, project languages, scan schedule status, and the dates of the first and last SCA scan.
+The response contains the created project object with the following information: project identifier (pk), name, project type, description, repository information, project status, access permissions, license, number of dependencies and vulnerabilities, project languages, scan schedule status, and the dates of the first and last SCA scans.

@@ -5,10 +5,10 @@ weight: 70
 
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used as Basic Auth for requests to Nexus.
+Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
-AssignNexusRole — assigns roles to an existing user in Nexus Repository Manager 3. The action retrieves the user's current configuration and merges its existing roles with the new ones.
+AssignNexusRole — assigns roles to an existing user in Nexus Repository Manager 3. The action retrieves the user's current configuration and merges the user's existing roles with the new ones.
 
 ### Request example
 

@@ -1,13 +1,13 @@
 ---
-title: CreateGitlabProjecte
+title: CreateGitlabProject
 weight: 20
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
-CreateGitlabProject — creates a new project in GitLab. The action calls the GitLab API to create a project with the specified parameters, such as name, project path, description, and other settings. A GitLab token, which must be provided in the credentials, is used for authentication.
+CreateGitlabProject — creates a new project in GitLab through the GitLab API, using the specified name, project path, description, and other settings. Authentication uses a GitLab token provided in the credentials.
 
 ### Request example
 

@@ -5,9 +5,9 @@ weight: 40
 
 
 {{< alert level="info" >}}
-Running this action requires credentials:
-* `user` — the username on whose behalf the action will be run.
-* `password` — the password of the user on whose behalf the action will be run.
+This action requires the following credentials:
+* `user` — the username under which the action runs.
+* `password` — the password for that user.
 {{< /alert >}}
 
 DeleteKafkaUsers — deletes existing SASL/SCRAM users in Kafka.
@@ -28,8 +28,8 @@ users:
 
 | Name                | Required | Description                                                                                                                                                                                                                        | Possible values                            |
 | ------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| securityProtocol    | Yes      | Protocol used to connect to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL       |
-| saslMechanism       | No       | Authentication mechanism to be used by SASL. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism)      | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512       |
-| users               | Yes      | Set of users to delete                                                                                                                                                                                                                | -                                         |
-| users.user          | Yes      | Name of the user to delete                                                                                                                                                                                                            | -                                         |
-| users.mechanism     | Yes      | Authentication mechanism of the user to delete                                                                                                                                                                                        | SCRAM-SHA-256, SCRAM-SHA-512              |
+| securityProtocol    | Yes      | Protocol for connecting to Kafka. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                                                                 | PLAINTEXT, SASL_PLAINTEXT, SASL_SSL       |
+| saslMechanism       | No       | SASL authentication mechanism. Required when using the SASL_PLAINTEXT or SASL_SSL protocol. For more information, see [the Kafka documentation](https://kafka.apache.org/documentation/#security_sasl_mechanism)                   | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512       |
+| users               | Yes      | Set of users to delete                                                                                                                                                                                                               | -                                         |
+| users.user          | Yes      | Username to delete                                                                                                                                                                                                                   | -                                         |
+| users.mechanism     | Yes      | Authentication mechanism associated with the user to delete                                                                                                                                                                         | SCRAM-SHA-256, SCRAM-SHA-512              |

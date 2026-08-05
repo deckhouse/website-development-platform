@@ -1,13 +1,13 @@
 ---
-title: StartGitlabPipeline
+title: DeleteGitlabProject
 weight: 110
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
-DeleteGitlabProject — deletes an existing project in GitLab. The action calls the GitLab API to delete the project. A GitLab token, which must be provided in the credentials, is used for authentication.
+DeleteGitlabProject — deletes an existing project in GitLab through the GitLab API. Authentication uses a GitLab token provided in the credentials.
 
 ### Request example
 

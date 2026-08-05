@@ -5,7 +5,7 @@ weight: 30
 
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used as Basic Auth for requests to Nexus.
+Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
 CreateNexusPrivilege — creates a new privilege in Nexus Repository Manager 3. Privileges define access rights to repositories and other Nexus resources.

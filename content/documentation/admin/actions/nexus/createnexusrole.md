@@ -5,7 +5,7 @@ weight: 60
 
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used as Basic Auth for requests to Nexus.
+Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
 CreateNexusRole — creates a new role in Nexus Repository Manager 3. Roles combine privileges and can include other roles.

@@ -4,7 +4,7 @@ weight: 30
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
 CreateGitlabProjectWebhook — creates a webhook in a GitLab project.
@@ -26,10 +26,10 @@ pipeline_events: true
 | ----------------------- | ------------------ | ----------------------------------------------------------------- |
 | project_id              | Yes                 | Identifier of the project in which to create the webhook          |
 | url                     | Yes                 | Webhook URL                                                        |
-| push_events             | Yes                 | Trigger the webhook on push to the repository                     |
-| issues_events           | Yes                 | Trigger the webhook when an Issue is created                      |
-| merge_requests_events   | Yes                 | Trigger the webhook when a Merge Request is created                |
-| pipeline_events         | Yes                 | Trigger the webhook when a Pipeline is run                         |
+| push_events             | Yes                 | Trigger the webhook when changes are pushed to the repository      |
+| issues_events           | Yes                 | Trigger the webhook when an issue is created                       |
+| merge_requests_events   | Yes                 | Trigger the webhook when a merge request is created                |
+| pipeline_events         | Yes                 | Trigger the webhook when a pipeline is run                          |
 
 ### Note
 

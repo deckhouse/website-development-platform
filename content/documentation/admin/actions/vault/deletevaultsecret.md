@@ -5,7 +5,7 @@ weight: 20
 
 
 {{< alert level="info" >}}
-Running this action requires a Vault token with the permissions needed to create secrets.
+Running this action requires a Vault token with permission to create secrets.
 {{< /alert >}}
 
 DeleteVaultSecret — deletes a secret from HashiCorp Vault.

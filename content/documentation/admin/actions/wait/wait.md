@@ -3,7 +3,7 @@ title: Wait
 weight: 10
 ---
 
-Wait waits for a specified number of seconds; a random addition to the duration (jitter) can optionally be applied. Intended for use in processes as a delay element, including for waiting until the results of a previous action have been applied.
+Wait pauses execution for a specified number of seconds and can optionally add a random duration (jitter). It is intended for use in processes as a delay element, including while waiting for the results of a previous action to be applied.
 
 ### Request example
 

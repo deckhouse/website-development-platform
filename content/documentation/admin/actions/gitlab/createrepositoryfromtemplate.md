@@ -6,8 +6,8 @@ weight: 10
 {{< alert level="info" >}}
 Running this action requires credentials:
 
-- `password` — the password (token) of the user on whose behalf the action will be run.
-- `username` — the username on whose behalf the action will be run.
+- `password` — the password (token) for the user on whose behalf the action will run.
+- `username` — the username of the user on whose behalf the action will run.
 {{< /alert >}}
 
 CreateRepositoryFromTemplate — creates a new repository from a template in GitLab. The rendering mechanism is based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) and supports all built-in methods, as well as extensions added by the platform.
@@ -51,7 +51,7 @@ The platform:
 1. Reads the variables passed when the action is launched and merges them with the variables from `values.yaml`. Variables passed at launch take priority during the merge.
 1. Reads the `.templateignore` file and determines the directories and files excluded from templating.
 1. Renders the files from the templates, taking into account `values.yaml` and the variables passed to the action.
-1. Changes the remote of the repository to the target one (`targetRepositoryUrl`) and pushes to the target branch (`targetBranch`) or to the `main` branch.
+1. Changes the repository remote to the target repository (`targetRepositoryUrl`) and pushes to the target branch (`targetBranch`) or to the `main` branch.
 
 ### Implementation details
 

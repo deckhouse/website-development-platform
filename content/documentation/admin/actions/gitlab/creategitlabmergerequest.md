@@ -6,8 +6,8 @@ weight: 70
 {{< alert level="info" >}}
 Running this action requires credentials:
 
-- `password` — the password (token) of the user on whose behalf the action will be run.
-- `username` — the username on whose behalf the action will be run.
+- `password` — the password (token) for the user on whose behalf the action will run.
+- `username` — the username of the user on whose behalf the action will run.
 {{< /alert >}}
 
 CreateGitlabMergeRequest — creates a new Merge Request (MR) in the target repository. Files stored in the source repository are added to the Merge Request. Files may contain variables whose values will be substituted at the time the MR is created.
@@ -54,7 +54,7 @@ The platform:
 1. Reads the variables passed when the action is launched and merges them with the variables from `values.yaml`. Variables passed at launch take priority.
 1. Reads the `.templateignore` file and determines the directories and files excluded from templating.
 1. Renders the files from the templates, taking into account `values.yaml` and the variables passed to the action.
-1. Changes the remote of the repository to the target one, according to its ID (`target_project_id`), and performs a git push to the branch in the source project (`source_project_branch`), or to the `main` branch.
+1. Changes the repository remote to the target repository identified by `target_project_id`, then runs `git push` to the branch in the source project (`source_project_branch`) or to the `main` branch.
 1. Creates an MR according to the specified settings by sending a POST request to the GitLab API.
 
 ### Note

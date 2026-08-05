@@ -5,10 +5,10 @@ weight: 10
 
 
 {{< alert level="info" >}}
-Running this action requires a Kubernetes service account token.
+This action requires a Kubernetes service account token.
 {{< /alert >}}
 
-CreateKubernetesResource — creates one or more new resources in a Kubernetes cluster, or updates existing ones.
+CreateKubernetesResource — creates one or more resources in a Kubernetes cluster or updates existing resources.
 
 ### Request example
 
@@ -28,4 +28,4 @@ manifests:
 
 | Name                         | Required | Description                                                                                            |
 | ---------------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| manifests                    | Yes      | Kubernetes manifests to be applied                                                                     |
+| manifests                    | Yes      | Kubernetes manifests to apply                                                                          |

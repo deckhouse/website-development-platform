@@ -4,7 +4,7 @@ weight: 40
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
 CreateGitlabBranches — creates new branches in the target repository.
@@ -25,7 +25,7 @@ branches:
 | project_id        | Yes      | Identifier of the project in which to create the branches                        |
 | branches          | Yes      | List of branches to create                                                        |
 | branches.branch   | Yes      | Name of the new branch                                                            |
-| branches.ref      | Yes      | Name of an existing branch or a commit SHA hash                                   |
+| branches.ref      | Yes      | Name of an existing branch or a commit SHA                                        |
 
 ### Note
 

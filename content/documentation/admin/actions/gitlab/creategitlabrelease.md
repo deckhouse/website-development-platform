@@ -4,7 +4,7 @@ weight: 60
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
 CreateGitlabRelease — creates a GitLab release based on an existing tag.

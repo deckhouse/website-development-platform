@@ -4,7 +4,7 @@ description: Action configuration in Deckhouse Development Platform (DDP) — re
 weight: 10
 ---
 
-Actions are a platform mechanism for running operations in external infrastructure systems and services. With actions, for example, you can:
+Actions are a platform mechanism for running operations in external infrastructure systems and services. For example, actions can:
 
 - create projects, variables, branches, tags, releases, and merge requests in [GitLab](../gitlab/);
 - create resources in [Kubernetes](../kubernetes/) and retrieve them;
@@ -38,7 +38,7 @@ When creating or editing an action, specify the basic information:
 
 An action can be of the following types:
 
-- "Built-in" — the action's execution logic is described inside the platform. For built-in actions, you must select one of the preconfigured backends.
+- "Built-in (BuiltIn)" — the action's execution logic is defined within the platform. For built-in actions, you must select one of the preconfigured backends.
 - "Webhook" — the action's execution logic is fully configured by the user.
 
 #### Retry parameters
@@ -102,7 +102,7 @@ project_id: {{ .property.project_id }}
 
 With this request body, the expression `{{ .property.project_id }}` is replaced with the value of the `project_id` parameter that the user entered in the action's launch form.
 
-For built-in action types, the "Request body" parameter is part of the action's configuration, and a sample of this configuration is available.
+For built-in actions, the "Request body" parameter is part of the action configuration, and a configuration example is available.
 
 ### User form
 
@@ -122,7 +122,7 @@ Each parameter can have a default value that is pre-filled in the form when the 
 For non-editable or hidden parameters, it is recommended to set a default value, since the user will not be able to change them when launching the action.
 {{< /alert >}}
 
-The parameter description is shown when launching the action by clicking the "info" icon button. It is recommended to fill it in to make it easier to understand the purpose of the parameters and reduce the risk of errors when launching the action.
+The parameter description is shown when launching the action by clicking the "info" icon. Providing a description makes the parameter's purpose easier to understand and reduces the risk of errors when launching the action.
 
 Parameter values can use [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax) template functions. For example, the expression `{{ .entity.name }}` in a parameter value means that when the action is launched, the name of the entity it is running for will be substituted.
 
@@ -216,7 +216,7 @@ If the "Create entity relations" option is enabled, the platform automatically c
 
 #### User credentials update
 
-If the user credentials update option is enabled, the action automatically updates the user's credentials according to the update rules.
+If the user credentials update option is enabled, the action automatically updates the user's credentials according to the specified rules.
 
 | Field               | Description                          |
 | ------------------- | --------------------------------------- |
@@ -232,7 +232,7 @@ For example, when running an action that returns a new API key in its response:
 }
 ```
 
-to update the credentials, specify the following update rules:
+To update the credentials, specify the following rules:
 
 1. Source: `{{ .response.apiKey }}`.
 1. Credentials type: select the type of credentials to be updated.
@@ -309,11 +309,11 @@ When approval is enabled, you can enable notifications and specify how they are 
 
 #### Use external service
 
-Selection of the external services for which the action can be run. If multiple external services are added, a specific one can be selected directly when launching the action.
+Select the external services for which the action can be run. If multiple external services are added, a specific service can be selected when launching the action.
 
 #### URL and HTTP headers
 
-The address to which the request will be sent, and the HTTP headers.
+Specify the address to which the request will be sent and the HTTP headers.
 
 Headers support Go templates in the form `{{ .credentials.<credentials type identifier> }}` for substituting user credentials.
 

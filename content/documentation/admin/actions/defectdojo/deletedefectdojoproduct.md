@@ -5,7 +5,7 @@ weight: 20
 
 
 {{< alert level="info" >}}
-Running this action requires a token — an API v2 Key for the user on whose behalf the action will be run.
+This action requires an API v2 key for the user on whose behalf it will run.
 {{< /alert >}}
 
 DeleteDefectdojoProduct — deletes a product from DefectDojo. The action uses the DefectDojo API v2.

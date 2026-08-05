@@ -4,10 +4,10 @@ weight: 100
 ---
 
 {{< alert level="info" >}}
-Running this action requires the token of the user on whose behalf it will be run.
+This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
-StartGitlabPipeline — starts a pipeline run in GitLab.
+StartGitlabPipeline — starts a pipeline in GitLab.
 
 ### Request example
 
@@ -24,7 +24,7 @@ variables:
 | Name                        | Required | Description                                                                    |
 | --------------------------- | -------- | ---------------------------------------------------------------------------------- |
 | project_id                  | Yes      | Identifier of the project in which to run the pipeline                              |
-| ref                         | Yes      | Name of the branch, a tag, or a commit SHA hash on which the pipeline will run      |
+| ref                         | Yes      | Name of the branch or tag, or the commit SHA, on which the pipeline will run         |
 | variables                   | No       | List of variables to pass to the pipeline being run                                 |
 | variables.key               | Yes      | Variable name                                                                        |
 | variables.value             | Yes      | Variable value                                                                       |

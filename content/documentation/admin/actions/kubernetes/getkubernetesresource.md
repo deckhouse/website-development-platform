@@ -5,7 +5,7 @@ weight: 20
 
 
 {{< alert level="info" >}}
-Running this action requires a Kubernetes service account token.
+This action requires a Kubernetes service account token.
 {{< /alert >}}
 
 GetKubernetesResource — retrieves a resource from a Kubernetes cluster.
@@ -24,11 +24,11 @@ namespace: default
 
 | Name                        | Required | Description                                                                        | Possible values                                                                  |
 | --------------------------- | -------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| group                       | Yes      | API group of the resource. Specifies which API group the requested object belongs to  | [Determining the required Group and Version](#determining-the-required-group-and-version) |
+| group                       | Yes      | API group of the resource. Specifies the API group to which the requested object belongs | [Determining the required Group and Version](#determining-the-required-group-and-version) |
 | version                     | Yes      | API version of the resource                                                           | [Determining the required Group and Version](#determining-the-required-group-and-version) |
-| resource_type               | Yes      | Type of the resource to retrieve                                                       | -                                                                                 |
-| resource_name               | Yes      | Name of the specific resource to retrieve                                             | -                                                                                 |
-| namespace                   | Yes      | Namespace in which the resource is located                                            | -                                                                                 |
+| resource_type               | Yes      | Type of resource to retrieve                                                           | -                                                                                 |
+| resource_name               | Yes      | Name of the resource to retrieve                                                       | -                                                                                 |
+| namespace                   | Yes      | Namespace containing the resource                                                     | -                                                                                 |
 
 ### Response
 
@@ -36,14 +36,14 @@ On success, the action returns the resource object in the `resource` field. If t
 
 | Name         | Description                                      |
 | ------------ | --------------------------------------------------- |
-| `resource`   | Resource object in Kubernetes format                 |
+| `resource`   | Resource object in Kubernetes format              |
 
 ### Determining the required Group and Version
 
-Each resource type corresponds to its own API group (Group) and version (Version).
-The full list of API resources with their groups and versions is provided [in the Kubernetes documentation](https://kubernetes.io/docs/reference/kubernetes-api/).
+Each resource type has its own API group (Group) and version (Version).
+A complete list of API resources, groups, and versions is available [in the Kubernetes documentation](https://kubernetes.io/docs/reference/kubernetes-api/).
 
-If you don't know which API groups and versions are required, you can use current values.
+If you do not know which API groups and versions are required, you can look up the current values.
 There are several ways to determine them:
 
 #### Using the `d8 k` utility
@@ -73,12 +73,12 @@ FIELDS:
 #### Using the documentation
 
 1. Find the resource you need (for example, Deployment).
-1. The API Group and version are specified in the header. Example for Deployment:
+1. Find the API group and version in the header. For example, for Deployment:
 
    ```yaml
    apiVersion: apps/v1
    ```
 
    Here:
-    * "API Group" is apps;
-    * "Version" is v1.
+    * `API Group` is `apps`;
+    * `Version` is `v1`.
