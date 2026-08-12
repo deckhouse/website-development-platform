@@ -1,5 +1,6 @@
 ---
 title: Vault secrets
+description: Browse KV v2 secret metadata and key structures without exposing secret values.
 weight: 60
 ---
 
@@ -24,8 +25,8 @@ Authorization is configured in [External services](../../external-services/#vaul
 
 | Name      | Required | Description                                                                                                                       | Default |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Path      | Yes      | Path to a secret or directory in Vault. The path must explicitly include `/data/`. Examples: `services/data/`, `services/data/example` | -    |
-| UI prefix | No       | UI URL prefix. Use `vault` for HashiCorp Vault or `stronghold` for Deckhouse Stronghold                                           | -       |
+| Path      | Yes      | Path to a secret or directory in Vault. The path must explicitly include `/data/`. Examples: `services/data/`, `services/data/example` | —    |
+| UI prefix | No       | UI URL prefix. Use `vault` for HashiCorp Vault or `stronghold` for Deckhouse Stronghold                                           | —       |
 
 ## Path behavior
 

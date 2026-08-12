@@ -1,5 +1,6 @@
 ---
 title: Event statistics
+description: Monitor entity events, Redis streams, and event trends with the Event statistics widget.
 weight: 140
 ---
 

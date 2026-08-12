@@ -1,5 +1,6 @@
 ---
 title: GitLab. Merge requests
+description: Status filtering and management actions for GitLab merge requests.
 weight: 20
 ---
 
@@ -13,8 +14,8 @@ Authentication configuration is described in the [External services](../../exter
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
-| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | -             |
-| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | -             |
+| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
+| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Status filtering
 

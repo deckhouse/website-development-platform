@@ -1,5 +1,6 @@
 ---
 title: GitHub. Tags
+description: Repository tag details and tag creation settings for GitHub.
 weight: 30
 ---
 
@@ -14,7 +15,7 @@ In the external service settings, set **URL** to `https://api.github.com`.
 
 Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
 
-For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the platform user who performed the action, as defined in the DDP profile. If no name is specified, the email address may be used.
+For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the platform user who performed the action, as defined in the Deckhouse Development Platform (DDP) profile. If no name is specified, the email address may be used.
 
 For a lightweight tag without a description, no separate Git tag author is set. The tag is created as a reference to a commit.
 
@@ -24,8 +25,8 @@ The API creates the tag using the GitHub account associated with the token. Howe
 
 | Name             | Required | Description                                           | Example                                                       |
 | ---------------- | -------- | ----------------------------------------------------- | ------------------------------------------------------------- |
-| Repository owner | Yes      | Repository owner, either an organization or a user.   | For `https://github.com/example/my-repo`, specify `example`.   |
-| Repository       | Yes      | Repository name without the `.git` suffix.            | For `https://github.com/example/my-repo`, specify `my-repo`.   |
+| Repository owner | Yes      | Repository owner, either an organization or a user   | For `https://github.com/example/my-repo`, specify `example` |
+| Repository       | Yes      | Repository name without the `.git` suffix            | For `https://github.com/example/my-repo`, specify `my-repo` |
 
 ## Displayed data
 
@@ -39,9 +40,9 @@ The widget can create tags in GitHub. Specify the following fields in the **Crea
 
 | Name        | Required | Description                                                                                       | Default value |
 | ----------- | -------- | ------------------------------------------------------------------------------------------------- | ------------- |
-| Tag name    | Yes      | A unique tag name, such as `v1.0.0` or `release-2024-01`.                                         | —             |
-| Create from | Yes      | The branch or existing tag from which to create the new tag.                                      | —             |
-| Description | No       | Tag annotation, such as a release description. If specified, the widget creates an annotated tag. | —             |
+| Tag name    | Yes      | A unique tag name, such as `v1.0.0` or `release-2024-01`                                         | —             |
+| Create from | Yes      | The branch or existing tag from which to create the new tag                                      | —             |
+| Description | No       | Tag annotation, such as a release description. If specified, the widget creates an annotated tag | —             |
 
 {{< alert level="info" >}}
 Creating tags requires write permissions in the GitHub repository.

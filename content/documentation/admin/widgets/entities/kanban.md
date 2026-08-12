@@ -1,5 +1,6 @@
 ---
 title: Entity Kanban board
+description: Configuration and behavior of the Kanban board for resource entities.
 weight: 20
 ---
 
@@ -21,5 +22,5 @@ The widget displays entities of the selected resource on a Kanban board.
 
 ## Notes
 
-- Entities without a matching state parameter value are displayed in the **No status** column.
-- Cards cannot be moved without permission to modify entities.
+Entities without a matching state parameter value are displayed in the **No status** column.
+Cards cannot be moved without permission to modify entities.

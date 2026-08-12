@@ -1,5 +1,6 @@
 ---
 title: CodeScoring. Secrets
+description: Project secret findings and scan controls from CodeScoring
 weight: 30
 ---
 
@@ -13,5 +14,5 @@ Authentication is described in [External services](../../external-services/#code
 
 | Name       | Required | Description                | Default value |
 | ---------- | -------- | -------------------------- | ------------- |
-| URL        | Yes      | CodeScoring URL.           | -             |
-| Project ID | Yes      | Project ID in CodeScoring. | -             |
+| URL        | Yes      | CodeScoring URL            | —             |
+| Project ID | Yes      | Project ID in CodeScoring  | —             |

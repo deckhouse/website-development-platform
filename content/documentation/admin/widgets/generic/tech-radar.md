@@ -1,5 +1,6 @@
 ---
 title: Technology radar
+description: Visualize technologies and practices by quadrant and maturity ring.
 weight: 160
 ---
 

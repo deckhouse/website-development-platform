@@ -1,5 +1,6 @@
 ---
 title: ClickHouse. Metrics (single value)
+description: Single-value metric based on a ClickHouse SQL query.
 weight: 20
 ---
 
@@ -24,9 +25,9 @@ WHERE timestamp >= {{from}} AND timestamp < {{to}}
 | Default range                | No       | Range used when opening or refreshing the widget if no range is specified in the query parameters                      | Last hour     |
 | Decimal places               | No       | Precision used to display the returned value                                                                           | —             |
 | Unit                         | No       | Suffix displayed with the returned value                                                                                | —             |
-| Show threshold               | No       | Displays the threshold as `<metric value> / <threshold>`                                                                | false         |
+| Show threshold               | No       | Displays `<METRIC_VALUE> / <THRESHOLD>`, where `<METRIC_VALUE>` is the current metric value and `<THRESHOLD>` is the configured threshold | `false`       |
 | Threshold                    | No       | Threshold value                                                                                                         | —             |
-| Lower value is better        | No       | Considers the metric healthy when its value is below the configured threshold                                          | false         |
+| Lower value is better        | No       | Considers the metric healthy when its value is below the configured threshold                                          | `false`       |
 | Warning threshold (%)        | No       | Boundary between red and orange. A metric value above this percentage of the threshold is displayed in orange          | 60            |
 | Success threshold (%)        | No       | Boundary between orange and green. A metric value above this percentage of the threshold is displayed in green         | 90            |
 

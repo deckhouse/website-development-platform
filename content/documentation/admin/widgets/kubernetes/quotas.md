@@ -1,5 +1,6 @@
 ---
 title: Kubernetes. Resource quotas
+description: Resource quota usage visualization for Kubernetes namespaces.
 weight: 40
 ---
 

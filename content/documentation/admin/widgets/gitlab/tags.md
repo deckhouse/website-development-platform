@@ -1,5 +1,6 @@
 ---
 title: GitLab. Tags
+description: Configuration and creation settings for tags in GitLab projects.
 weight: 70
 ---
 
@@ -13,19 +14,19 @@ Authentication configuration is described in the [External services](../../exter
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
-| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | -             |
-| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | -             |
+| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
+| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Additional widget features
 
 ### Creating tags
 
-The widget lets you create GitLab tags directly from DDP.
+The widget lets you create GitLab tags directly from Deckhouse Development Platform (DDP).
 
 #### Configuration
 
 | Name        | Required | Description                                          | Default value |
 | ----------- | -------- | ---------------------------------------------------- | ------------- |
-| Name        | Yes      | Name of the tag to create                            | -             |
-| Create from | Yes      | Branch or existing tag from which to create the tag  | -             |
-| Description | No       | Description of the tag to create                     | -             |
+| Name        | Yes      | Name of the tag to create                            | —             |
+| Create from | Yes      | Branch or existing tag from which to create the tag  | —             |
+| Description | No       | Description of the tag to create                     | —             |

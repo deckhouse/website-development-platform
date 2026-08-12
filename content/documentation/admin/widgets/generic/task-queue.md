@@ -1,5 +1,6 @@
 ---
 title: Task queue
+description: Monitor background task queues, active workers, and task processing status.
 weight: 150
 ---
 

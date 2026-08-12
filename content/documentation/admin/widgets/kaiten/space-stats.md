@@ -1,5 +1,6 @@
 ---
 title: Kaiten. Space statistics
+description: Configuration and metrics provided by the Kaiten space statistics widget.
 weight: 20
 ---
 

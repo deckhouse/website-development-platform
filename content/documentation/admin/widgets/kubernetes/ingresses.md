@@ -1,5 +1,6 @@
 ---
 title: Kubernetes. Ingresses
+description: Ingress specification, rule, and TLS inspection in Kubernetes.
 weight: 20
 ---
 

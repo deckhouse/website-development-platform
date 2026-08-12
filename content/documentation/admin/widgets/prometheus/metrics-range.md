@@ -1,5 +1,6 @@
 ---
 title: Prometheus. Metrics (range)
+description: Time-series chart based on a PromQL range query to Prometheus.
 weight: 10
 ---
 
@@ -37,7 +38,7 @@ The **Resolution step** configuration field is no longer used.
 | Threshold          | No       | Horizontal dashed line on the chart                                                                             | —             |
 | Minimum value      | No       | Lower Y-axis boundary. Leave empty to scale automatically                                                       | —             |
 | Maximum value      | No       | Upper Y-axis boundary. Leave empty to scale automatically                                                       | —             |
-| InsecureSkipVerify | No       | Disables verification of the Prometheus TLS/SSL certificate                                                     | false         |
+| `InsecureSkipVerify` | No     | Disables verification of the Prometheus TLS/SSL certificate                                                     | `false`       |
 
 ## Authorization
 

@@ -1,5 +1,6 @@
 ---
 title: GitLab. Pipeline editor
+description: Editing GitLab CI/CD configuration and creating merge requests from the widget.
 weight: 30
 ---
 
@@ -14,15 +15,13 @@ Authentication configuration is described in the [External services](../../exter
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
-| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | -             |
-| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | -             |
+| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
+| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Displayed data
 
-The widget displays:
-
-- **Code editor** — Monaco Editor for editing `.gitlab-ci.yml`.
-- **Diff view** — changes between the original and edited configuration.
+The widget displays a Monaco code editor for editing `.gitlab-ci.yml`
+and a diff view of the original and edited configuration.
 
 ## Additional widget features
 
@@ -34,11 +33,11 @@ The widget lets you create a merge request containing pipeline configuration cha
 
 | Name            | Required | Description                                           | Default value |
 | --------------- | -------- | ----------------------------------------------------- | ------------- |
-| MR title        | Yes      | Short title describing the purpose of the merge request | -           |
-| MR description  | No       | Detailed description of the merge request and changes | -             |
-| New branch name | Yes      | Name of the new branch that will contain the changes  | -             |
-| Target branch   | Yes      | Branch to which the merge request will be submitted   | main          |
-| Commit message  | Yes      | Description of changes to the pipeline configuration  | -             |
+| MR title        | Yes      | Short title describing the purpose of the merge request | —           |
+| MR description  | No       | Detailed description of the merge request and changes | —             |
+| New branch name | Yes      | Name of the new branch that will contain the changes  | —             |
+| Target branch   | Yes      | Branch to which the merge request will be submitted   | `main`        |
+| Commit message  | Yes      | Description of changes to the pipeline configuration  | —             |
 
 ### Limitations
 

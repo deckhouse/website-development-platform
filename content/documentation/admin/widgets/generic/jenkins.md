@@ -1,5 +1,6 @@
 ---
 title: Jenkins
+description: Monitor Jenkins pipelines and manage regular or multibranch builds from a dashboard.
 weight: 80
 ---
 
@@ -13,8 +14,8 @@ Authorization is configured in [External services](../../external-services/#jenk
 
 | Name | Required | Description                                                                          | Default |
 | ---- | -------- | ------------------------------------------------------------------------------------ | ------- |
-| URL  | Yes      | Jenkins URL used to retrieve data                                                    | -       |
-| Name | Yes      | Jenkins pipeline name. Nested paths are supported: `folder1/folder2/jobName`        | -       |
+| URL  | Yes      | Jenkins URL used to retrieve data                                                    | —       |
+| Name | Yes      | Jenkins pipeline name. Nested paths are supported: `folder1/folder2/jobName`        | —       |
 
 ## Displayed data
 

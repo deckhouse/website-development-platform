@@ -1,5 +1,6 @@
 ---
 title: Kafka. ACLs
+description: Access-control rule inspection and management for Kafka clusters.
 weight: 10
 ---
 
@@ -20,9 +21,9 @@ For each ACL, the widget displays:
 The widget requires a user account.
 The system supports the following authentication methods:
 
-* PLAINTEXT.
-* SCRAM-SHA-256.
-* SCRAM-SHA-512.
+* `PLAINTEXT`.
+* `SCRAM-SHA-256`.
+* `SCRAM-SHA-512`.
 
 ## Configuration
 
@@ -42,7 +43,4 @@ The system supports the following authentication methods:
 
 ## Additional widget capabilities
 
-When actions are enabled in the settings, the widget allows users to:
-
-* Create ACL rules.
-* Delete existing ACL rules.
+When actions are enabled in the settings, the widget allows users to create and delete ACL rules.

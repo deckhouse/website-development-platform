@@ -1,5 +1,6 @@
 ---
 title: Kubernetes. Deployments
+description: Deployment inspection, scaling, and resource management in Kubernetes.
 weight: 10
 ---
 

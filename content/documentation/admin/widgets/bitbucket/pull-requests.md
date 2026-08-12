@@ -1,5 +1,6 @@
 ---
 title: Bitbucket. Pull Requests
+description: Configuration, status filtering, and actions for Bitbucket pull requests.
 weight: 10
 ---
 
@@ -13,8 +14,10 @@ Authentication is described in [External services](../../external-services/#bitb
 
 | Name          | Required | Description                                                    | Example                                                                      |
 | ------------- | -------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Project key   | Yes      | The part of the repository URL immediately after `/projects/`. | For `.../projects/MYTEAM/repos/backend`, specify `MYTEAM`.                    |
-| Repository ID | Yes      | The part of the repository URL immediately after `/repos/`.    | For `.../projects/MYTEAM/repos/backend`, specify `backend`.                   |
+| Project key   | Yes      | The part of the repository URL immediately after `/projects/` | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `MYTEAM` |
+| Repository ID | Yes      | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
+
+`<BITBUCKET_HOST>` is the hostname of the Bitbucket server.
 
 ## Filtering by status
 

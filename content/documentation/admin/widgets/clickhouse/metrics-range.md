@@ -1,5 +1,6 @@
 ---
 title: ClickHouse. Metrics (range)
+description: Time-series chart based on a ClickHouse SQL query.
 weight: 10
 ---
 

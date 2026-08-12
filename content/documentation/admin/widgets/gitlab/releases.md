@@ -1,5 +1,6 @@
 ---
 title: GitLab. Releases
+description: Release details and release creation settings for GitLab projects.
 weight: 60
 ---
 
@@ -15,18 +16,18 @@ Authentication configuration is described in the [External services](../../exter
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
-| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | -             |
+| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Additional widget features
 
 ### Creating a release
 
-The widget lets you create a release in GitLab directly from DDP:
+The widget lets you create a release in GitLab directly from Deckhouse Development Platform (DDP):
 
 | Name         | Required | Description                                                                 | Default value |
 | ------------ | -------- | --------------------------------------------------------------------------- | ------------- |
-| Release name | Yes      | Release name displayed in the list                                          | -             |
-| Tag          | Yes      | Existing tag on which to base the release, selected from the project's tags | -             |
-| Description  | No       | Release description in Markdown format                                      | -             |
+| Release name | Yes      | Release name displayed in the list                                          | —             |
+| Tag          | Yes      | Existing tag on which to base the release, selected from the project's tags | —             |
+| Description  | No       | Release description in Markdown format                                      | —             |
 
 The created release appears in the list automatically, and the latest release is highlighted.

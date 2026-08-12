@@ -1,5 +1,6 @@
 ---
 title: DefectDojo. Product vulnerabilities summary
+description: Product vulnerability totals grouped by severity
 weight: 30
 ---
 
@@ -13,8 +14,8 @@ Authentication is described in [External services](../../external-services/#defe
 
 | Name         | Required | Description                                                  | Default value |
 | ------------ | -------- | ------------------------------------------------------------ | ------------- |
-| URL          | Yes      | DefectDojo URL without the API path (`/api/v2`).              | -             |
-| Product name | Yes      | Product name in DefectDojo.                                  | -             |
+| URL          | Yes      | DefectDojo URL without the API path (`/api/v2`)              | —             |
+| Product name | Yes      | Product name in DefectDojo                                   | —             |
 
 ## Additional widget features
 

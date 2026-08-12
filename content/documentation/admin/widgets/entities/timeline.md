@@ -1,5 +1,6 @@
 ---
 title: Entity timeline
+description: Configuration and behavior of the timeline that displays resource entities by date.
 weight: 40
 ---
 
@@ -21,5 +22,5 @@ The widget displays entities of the selected resource on a timeline.
 
 ## Notes
 
-- The widget automatically scales the timeline to display all entities.
-- Entities with invalid dates, where the start date is later than the end date, are automatically excluded.
+The widget automatically scales the timeline to display all entities.
+Entities with invalid dates, where the start date is later than the end date, are automatically excluded.

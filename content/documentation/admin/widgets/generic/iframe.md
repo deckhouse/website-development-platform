@@ -1,5 +1,6 @@
 ---
 title: Iframe
+description: Configure an Iframe widget that displays content from an external URL.
 weight: 120
 ---
 
@@ -13,4 +14,4 @@ The widget displays data from an external source.
 
 | Name | Required | Description                                         | Default |
 | ---- | -------- | --------------------------------------------------- | ------- |
-| URL  | Yes      | External source URL used to display data in the widget | -    |
+| URL  | Yes      | External source URL used to display data in the widget | —    |

@@ -1,5 +1,6 @@
 ---
 title: DefectDojo. Product
+description: Product vulnerabilities grouped by engagement and severity
 weight: 10
 ---
 
@@ -13,9 +14,9 @@ Authentication is described in [External services](../../external-services/#defe
 
 | Name           | Required | Description                                                                                              | Default value                    |
 | -------------- | -------- | -------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| URL            | Yes      | DefectDojo URL without the API path (`/api/v2`).                                                         | -                                |
-| Product name   | Yes      | Product name in DefectDojo.                                                                             | -                                |
-| Severity levels | Yes     | Vulnerability severity levels loaded when the widget opens or when the selected engagement changes.     | Critical, High, Medium, Low, Info |
+| URL            | Yes      | DefectDojo URL without the API path (`/api/v2`)                                                          | —                                         |
+| Product name   | Yes      | Product name in DefectDojo                                                                              | —                                         |
+| Severity levels | Yes     | Vulnerability severity levels loaded when the widget opens or when the selected engagement changes      | `Critical`, `High`, `Medium`, `Low`, `Info` |
 
 ## Request parameters
 

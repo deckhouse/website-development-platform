@@ -1,5 +1,6 @@
 ---
 title: Entity calendar
+description: Configuration and behavior of the widget that displays resource entities in a calendar.
 weight: 10
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: ClickHouse. Table
+description: Sortable and paginated table based on a ClickHouse SQL query.
 weight: 30
 ---
 

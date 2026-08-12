@@ -1,5 +1,6 @@
 ---
 title: Jira
+description: Display and filter Jira issues with configurable JQL queries.
 weight: 110
 ---
 
@@ -13,8 +14,8 @@ Authorization is configured in [External services](../../external-services/#jira
 
 | Name | Required | Description                                                                 | Default |
 | ---- | -------- | --------------------------------------------------------------------------- | ------- |
-| URL  | Yes      | Jira URL used to retrieve data                                              | -       |
-| JQL  | Yes      | JQL query used to filter issues. Example: `project = PROJ AND status = Open` | -      |
+| URL  | Yes      | Jira URL used to retrieve data                                              | —       |
+| JQL  | Yes      | JQL query used to filter issues. Example: `project = PROJ AND status = Open` | —      |
 
 ## Query parameters
 

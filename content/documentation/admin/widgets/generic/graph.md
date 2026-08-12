@@ -1,5 +1,6 @@
 ---
 title: Graph
+description: Configure charts that aggregate and visualize Deckhouse Development Platform object data.
 weight: 130
 ---
 
@@ -15,12 +16,12 @@ The widget displays information about DDP objects using one of the following cha
 
 | Name                   | Required | Description                                                                         | Default |
 | ---------------------- | -------- | ----------------------------------------------------------------------------------- | ------- |
-| Chart type             | Yes      | Chart visualization type                                                            | -       |
-| Table name             | Yes      | Database table containing the records to visualize                                  | -       |
-| Field name             | Yes      | Field used to aggregate records                                                      | -       |
-| Filters                | No       | Fields and values used to filter the retrieved records                              | -       |
-| Aggregation type       | Yes      | Method used to group the retrieved records                                           | -       |
-| Aggregation parameters | No       | Time range and grouping step used when aggregating records by date                   | -       |
+| Chart type             | Yes      | Chart visualization type                                                            | —       |
+| Table name             | Yes      | Database table containing the records to visualize                                  | —       |
+| Field name             | Yes      | Field used to aggregate records                                                      | —       |
+| Filters                | No       | Fields and values used to filter the retrieved records                              | —       |
+| Aggregation type       | Yes      | Method used to group the retrieved records                                           | —       |
+| Aggregation parameters | No       | Time range and grouping step used when aggregating records by date                   | —       |
 
 When configuring the widget, account for differences between database field names and object specification field names. When structures are stored in the database, camelCase names from object specifications are converted to snake_case. For example:
 

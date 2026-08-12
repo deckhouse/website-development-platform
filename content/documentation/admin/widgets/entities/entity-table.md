@@ -1,9 +1,10 @@
 ---
 title: Entity table
+description: Configuration of the widget that displays Deckhouse Development Platform entities in a table.
 weight: 30
 ---
 
-The widget displays entities created in DDP as a table.
+The widget displays entities created in Deckhouse Development Platform (DDP) as a table.
 
 ## Configuration
 

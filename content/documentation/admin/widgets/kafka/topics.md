@@ -1,5 +1,6 @@
 ---
 title: Kafka. Topics
+description: Topic inspection and management capabilities for Kafka clusters.
 weight: 20
 ---
 
@@ -19,9 +20,9 @@ The following information and actions are available for each topic:
 The widget requires a user account.
 The system supports the following authentication methods:
 
-* PLAINTEXT.
-* SCRAM-SHA-256.
-* SCRAM-SHA-512.
+* `PLAINTEXT`.
+* `SCRAM-SHA-256`.
+* `SCRAM-SHA-512`.
 
 {{< alert level="info" >}}
 The connected account's permissions determine which information is available in the widget.

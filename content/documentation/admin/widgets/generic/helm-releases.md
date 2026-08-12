@@ -1,5 +1,6 @@
 ---
 title: Helm releases
+description: View Helm releases, manifests, values, and rollback history in Kubernetes.
 weight: 20
 ---
 
@@ -19,5 +20,5 @@ Authorization is configured in [External services](../../external-services/#kube
 
 | Name      | Required | Description                                                                          | Default |
 | --------- | -------- | ------------------------------------------------------------------------------------ | ------- |
-| Namespace | No       | Namespace from which the widget loads data. Example: `default`                       | -       |
-| Release   | No       | Name of the release from which the widget loads data. Example: `my-release`          | -       |
+| Namespace | No       | Namespace from which the widget loads data. Example: `default`                       | —       |
+| Release   | No       | Name of the release from which the widget loads data. Example: `my-release`          | —       |

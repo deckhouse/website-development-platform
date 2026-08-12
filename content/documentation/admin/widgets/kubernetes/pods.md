@@ -1,5 +1,6 @@
 ---
 title: Kubernetes. Pods
+description: Pod status, specification, and log inspection in Kubernetes.
 weight: 30
 ---
 

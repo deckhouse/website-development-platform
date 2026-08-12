@@ -1,5 +1,6 @@
 ---
 title: Svacer
+description: Review static analysis findings, trends, and snapshots from Svacer.
 weight: 50
 ---
 
@@ -13,8 +14,8 @@ Authorization is configured in [External services](../../external-services/#svac
 
 | Name                        | Required | Description                                                                                                                  | Default |
 | --------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Project name                | Yes      | Project name in Svacer                                                                                                       | -       |
-| Branch name                 | Yes      | Branch name in Svacer, used as the default branch when the widget opens                                                      | -       |
+| Project name                | Yes      | Project name in Svacer                                                                                                       | —       |
+| Branch name                 | Yes      | Branch name in Svacer, used as the default branch when the widget opens                                                      | —       |
 | Cache the full marker list  | No       | Caches the selected Svacer snapshot's full marker list in the DDP backend to speed up pagination on the **Findings** tab    | Enabled |
 | Cache lifetime (seconds)    | No       | Number of seconds to keep the response in DDP memory when caching is enabled. Valid range: 30–86400                          | 180     |
 | Snapshot marker threshold   | No       | Number of markers above which a snapshot is considered large                                                                | 10,000  |

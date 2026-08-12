@@ -1,5 +1,6 @@
 ---
 title: GitLab. Pipeline statistics
+description: Pipeline metrics, breakdowns, request parameters, and limits for GitLab projects.
 weight: 40
 ---
 
@@ -14,8 +15,8 @@ Authentication configuration is described in the [External services](../../exter
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
-| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | -             |
-| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | -             |
+| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
+| Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Displayed data
 
@@ -51,16 +52,15 @@ The widget displays the following statistics:
 
 ### Branch activity
 
-- Branches with the most pipelines.
-- Number of pipelines for each branch.
+The widget shows the branches with the most pipelines and the number of pipelines for each branch.
 
 ## Request parameters
 
 | Name       | Required | Description                                                                                     | Default value |
 | ---------- | -------- | ----------------------------------------------------------------------------------------------- | ------------- |
-| Start date | Yes      | Start date of the pipeline analysis period in ISO 8601 format. Example: `2024-01-01T00:00:00Z` | -             |
-| End date   | Yes      | End date of the pipeline analysis period in ISO 8601 format. Example: `2024-01-31T23:59:59Z`   | -             |
-| Branch     | No       | Filters by a specific branch. If omitted, the widget analyzes all branches                     | -             |
+| Start date | Yes      | Start date of the pipeline analysis period in ISO 8601 format. Example: `2024-01-01T00:00:00Z` | —             |
+| End date   | Yes      | End date of the pipeline analysis period in ISO 8601 format. Example: `2024-01-31T23:59:59Z`   | —             |
+| Branch     | No       | Filters by a specific branch. If omitted, the widget analyzes all branches                     | —             |
 
 ## Limitations
 

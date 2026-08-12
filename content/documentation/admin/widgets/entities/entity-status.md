@@ -1,5 +1,6 @@
 ---
 title: Entity status
+description: Status check results, blocked actions, and behavior of the entity status widget.
 weight: 50
 ---
 
@@ -11,8 +12,8 @@ The widget displays the following information.
 
 ### Overall status
 
-- **Progress bar** — a visual representation of the overall entity status, including the percentage of successful checks.
-- **Successful check count** — the number of successful checks out of all configured status checks.
+The **progress bar** visualizes the overall entity status, including the percentage of successful checks.
+The **successful check count** shows the number of successful checks out of all configured status checks.
 
 ### Check list
 
@@ -44,10 +45,7 @@ Display conditions:
 - The action must have allowed statuses configured.
 - The entity's current status must not be in the action's list of allowed statuses.
 
-The widget displays the following information:
-
-- Action name.
-- Action description, if specified.
+The widget displays the action name and description, if specified.
 
 ## Configuration
 
@@ -58,7 +56,5 @@ For details, refer to [status check configuration](../../healthchecks/overview/)
 
 ## Notes
 
-The widget has the following behavior:
-
-- If no status checks are configured for the entity, the widget indicates that no checks are available.
-- If status check data is unavailable, the widget indicates that no data is available.
+If no status checks are configured for the entity, the widget indicates that no checks are available.
+If status check data is unavailable, the widget indicates that no data is available.

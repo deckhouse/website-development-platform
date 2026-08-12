@@ -1,5 +1,6 @@
 ---
 title: CodeScoring. Vulnerabilities
+description: Product vulnerability details retrieved from CodeScoring
 weight: 20
 ---
 
@@ -13,5 +14,5 @@ Authentication is described in [External services](../../external-services/#code
 
 | Name       | Required | Description                | Default value |
 | ---------- | -------- | -------------------------- | ------------- |
-| URL        | Yes      | CodeScoring URL.           | -             |
-| Project ID | Yes      | Project ID in CodeScoring. | -             |
+| URL        | Yes      | CodeScoring URL            | —             |
+| Project ID | Yes      | Project ID in CodeScoring  | —             |

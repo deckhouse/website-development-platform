@@ -1,5 +1,6 @@
 ---
 title: GitHub. Pull Requests
+description: Status filtering and repository actions for GitHub pull requests.
 weight: 20
 ---
 
@@ -20,8 +21,8 @@ When a Pull Request is created, merged, or closed, GitHub identifies the GitHub 
 
 | Name             | Required | Description                                           | Example                                                       |
 | ---------------- | -------- | ----------------------------------------------------- | ------------------------------------------------------------- |
-| Repository owner | Yes      | Repository owner, either an organization or a user.   | For `https://github.com/example/my-repo`, specify `example`.   |
-| Repository       | Yes      | Repository name without the `.git` suffix.            | For `https://github.com/example/my-repo`, specify `my-repo`.   |
+| Repository owner | Yes      | Repository owner, either an organization or a user   | For `https://github.com/example/my-repo`, specify `example` |
+| Repository       | Yes      | Repository name without the `.git` suffix            | For `https://github.com/example/my-repo`, specify `my-repo` |
 
 ## Status
 

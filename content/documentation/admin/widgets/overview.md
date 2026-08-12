@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Widget purpose, scope, credentials, and configuration principles
 weight: 10
 ---
 

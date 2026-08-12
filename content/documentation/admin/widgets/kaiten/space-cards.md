@@ -1,5 +1,6 @@
 ---
 title: Kaiten. Space cards
+description: Configuration and displayed task details for the Kaiten space cards widget.
 weight: 10
 ---
 

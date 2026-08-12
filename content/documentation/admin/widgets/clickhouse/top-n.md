@@ -1,5 +1,6 @@
 ---
 title: ClickHouse. Top N
+description: Horizontal bar chart based on a ClickHouse SQL query.
 weight: 40
 ---
 
