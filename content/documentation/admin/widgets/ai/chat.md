@@ -30,7 +30,7 @@ Example prompt for a quick question:
 
 ## Using the widget
 
-To use the widget, add at least one [AI provider](../../user/ai-assistant/#подключение-ai-провайдера).
+To use the widget, add at least one [AI provider](../../../../user/ai-assistant/#подключение-ai-провайдера).
 
 The chat does not retain history:
 
