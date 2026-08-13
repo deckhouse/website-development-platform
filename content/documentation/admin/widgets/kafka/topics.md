@@ -15,19 +15,6 @@ The following information and actions are available for each topic:
 * Message search by timestamp and offset.
 * Topic configuration as a key-value table.
 
-## Authentication
-
-The widget requires a user account.
-The system supports the following authentication methods:
-
-* `PLAINTEXT`.
-* `SCRAM-SHA-256`.
-* `SCRAM-SHA-512`.
-
-{{< alert level="info" >}}
-The connected account's permissions determine which information is available in the widget.
-{{< /alert >}}
-
 ## Configuration
 
 | Name                    | Required | Description                                                                                                                                                                  | Default value |
@@ -47,3 +34,17 @@ When actions are enabled in the settings, the widget allows users to:
 * Delete topics.
 * Send a message to a topic.
 * Remove all messages from a topic.
+
+
+## Authentication
+
+The widget requires a user account.
+The system supports the following authentication methods:
+
+* `PLAINTEXT`.
+* `SCRAM-SHA-256`.
+* `SCRAM-SHA-512`.
+
+{{< alert level="info" >}}
+The connected account's permissions determine which information is available in the widget.
+{{< /alert >}}

@@ -6,10 +6,6 @@ weight: 30
 
 The widget displays SonarQube metrics.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#sonarqube).
-
 ## Configuration
 
 | Name        | Required | Description                                                               | Default                               |
@@ -24,3 +20,8 @@ See the [list of available metrics](https://docs.sonarsource.com/sonarqube-serve
 ## Additional widget features
 
 The widget can display data for the default branch or any other branch.
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#sonarqube).

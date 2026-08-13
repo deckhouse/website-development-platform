@@ -6,11 +6,6 @@ weight: 20
 
 The widget displays Pull Requests (PRs) for a GitHub repository. It also provides actions for viewing changes and creating, merging, and closing PRs.
 
-## Authentication
-
-Authentication is described in [External services](../../external-services/#github).
-In the external service settings or widget configuration, set **URL** to `https://api.github.com`.
-
 ## Account and action initiator
 
 Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
@@ -45,3 +40,9 @@ By default, the widget displays open PRs. The table displays the number, title, 
 {{< alert level="info" >}}
 Pull Request actions require the corresponding permissions in the GitHub repository.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication is described in [External services](../../external-services/#github).
+In the external service settings or widget configuration, set **URL** to `https://api.github.com`.

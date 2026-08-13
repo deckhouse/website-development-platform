@@ -6,10 +6,6 @@ weight: 50
 
 The widget displays static code analysis results for a project branch in Svacer: marker review progress, findings by severity, branch finding trends, snapshot comparisons, and a paginated marker table.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#svacer).
-
 ## Configuration
 
 | Name                        | Required | Description                                                                                                                  | Default |
@@ -47,3 +43,8 @@ The widget footer displays summary metrics for the selected snapshot: total mark
 {{< alert level="info" >}}
 With the **Hybrid** strategy, if the snapshot marker count exceeds the threshold, the **Findings** tab is unavailable unless you filter by review status, severity, or checker.
 {{< /alert >}}
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#svacer).

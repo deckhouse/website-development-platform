@@ -8,7 +8,7 @@ Widgets are cards that visualize data stored in the platform and information fro
 
 Widgets can be added to dashboards. Dashboards can be linked to:
 
-- static pages, such as the catalog, self-service, home, and administration pages;
+- static pages, such as the Catalog, Self-service, Home, and Administration pages;
 - entity cards.
 
 ## Configuration

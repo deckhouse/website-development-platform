@@ -6,11 +6,6 @@ weight: 30
 
 The widget displays GitHub repository tags with commit information, including the author, date, and description. It can also create tags.
 
-## Authentication
-
-Authentication is described in [External services](../../external-services/#github).
-In the external service settings, set **URL** to `https://api.github.com`.
-
 ## Account and action initiator
 
 Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
@@ -47,3 +42,9 @@ The widget can create tags in GitHub. Specify the following fields in the **Crea
 {{< alert level="info" >}}
 Creating tags requires write permissions in the GitHub repository.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication is described in [External services](../../external-services/#github).
+In the external service settings, set **URL** to `https://api.github.com`.

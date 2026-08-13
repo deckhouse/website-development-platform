@@ -6,11 +6,6 @@ weight: 10
 
 The widget displays GitHub Actions runs in a repository. It also displays jobs and artifacts and provides actions for managing them.
 
-## Authentication
-
-Authentication is described in [External services](../../external-services/#github).
-In the external service settings, set **URL** to `https://api.github.com`.
-
 ## Account and action initiator
 
 Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
@@ -47,3 +42,9 @@ The widget provides the following actions:
 {{< alert level="info" >}}
 Workflow and artifact actions require the corresponding permissions in the GitHub repository.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication is described in [External services](../../external-services/#github).
+In the external service settings, set **URL** to `https://api.github.com`.

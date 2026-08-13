@@ -17,10 +17,6 @@ For each secret, you can:
 * View secret keys in a key-value table. Placeholders are displayed instead of values.
 * Navigate nested secrets and directories.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#vault).
-
 ## Configuration
 
 | Name      | Required | Description                                                                                                                       | Default |
@@ -60,3 +56,8 @@ Secret keys are displayed in a key-value table:
 
 * **Key** — Full path to the key in the secret structure, for example, `database.host`.
 * **Value** — Always masked as `********` and cannot be revealed.
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#vault).

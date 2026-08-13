@@ -6,10 +6,6 @@ weight: 80
 
 The widget displays Jenkins pipeline data and lets you manage builds.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#jenkins).
-
 ## Configuration
 
 | Name | Required | Description                                                                          | Default |
@@ -58,3 +54,8 @@ The widget supports the following actions.
 * **Get branch builds** — Loads the build list for a specific branch.
 * **Scan multibranch** — Starts a multibranch pipeline scan to discover new branches.
 * **View logs** — Displays build execution logs.
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#jenkins).

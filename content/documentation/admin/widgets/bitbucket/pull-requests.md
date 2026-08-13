@@ -6,10 +6,6 @@ weight: 10
 
 The widget displays Bitbucket Pull Request (PR) data and provides actions for managing PRs.
 
-## Authentication
-
-Authentication is described in [External services](../../external-services/#bitbucket).
-
 ## Configuration
 
 | Name          | Required | Description                                                    | Example                                                                      |
@@ -17,7 +13,8 @@ Authentication is described in [External services](../../external-services/#bitb
 | Project key   | Yes      | The part of the repository URL immediately after `/projects/` | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `MYTEAM` |
 | Repository ID | Yes      | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
 
-`<BITBUCKET_HOST>` is the hostname of the Bitbucket server.
+where:
+- `<BITBUCKET_HOST>` — the hostname of the Bitbucket server.
 
 ## Filtering by status
 
@@ -43,3 +40,8 @@ When actions are enabled in the settings, the widget provides the following Pull
 {{< alert level="info" >}}
 Pull Request actions require the corresponding permissions in the Bitbucket repository.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication is described in [External services](../../external-services/#bitbucket).

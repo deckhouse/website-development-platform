@@ -31,6 +31,7 @@ WHERE timestamp >= {{from}} AND timestamp < {{to}}
 | Warning threshold (%)        | No       | Boundary between red and orange. A metric value above this percentage of the threshold is displayed in orange          | 60            |
 | Success threshold (%)        | No       | Boundary between orange and green. A metric value above this percentage of the threshold is displayed in green         | 90            |
 
+
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#clickhouse).

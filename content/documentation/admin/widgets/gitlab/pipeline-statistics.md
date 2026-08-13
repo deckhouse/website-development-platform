@@ -7,10 +7,6 @@ weight: 40
 The widget displays GitLab pipeline statistics,
 including overall statistics and breakdowns by status, source, member, and branch.
 
-## Authentication
-
-Authentication configuration is described in the [External services](../../external-services/#gitlab) section.
-
 ## Configuration
 
 | Name       | Required | Description                                                        | Default value |
@@ -67,3 +63,8 @@ The widget shows the branches with the most pipelines and the number of pipeline
 - To optimize performance, the widget analyzes no more than 100 pipelines per request.
 - Statistics include only pipelines with valid data, including a status and execution time.
 - Data is updated each time the widget refreshes.
+
+
+## Authentication
+
+Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

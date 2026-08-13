@@ -7,10 +7,6 @@ weight: 30
 The widget lets you edit the GitLab CI/CD pipeline configuration in `.gitlab-ci.yml`
 and create merge requests with the changes.
 
-## Authentication
-
-Authentication configuration is described in the [External services](../../external-services/#gitlab) section.
-
 ## Configuration
 
 | Name       | Required | Description                                                        | Default value |
@@ -44,3 +40,8 @@ The widget lets you create a merge request containing pipeline configuration cha
 - The widget supports only the `.gitlab-ci.yml` file in the project root.
 - Creating a merge request requires write access to the repository.
 - The maximum configuration file size is limited by the GitLab API.
+
+
+## Authentication
+
+Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

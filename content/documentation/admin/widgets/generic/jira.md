@@ -6,10 +6,6 @@ weight: 110
 
 The widget displays Jira issues based on a JQL query.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#jira).
-
 ## Configuration
 
 | Name | Required | Description                                                                 | Default |
@@ -29,3 +25,8 @@ Authorization is configured in [External services](../../external-services/#jira
 * **View description** — Opens a dialog with the full issue description.
 * **Open in Jira** — Opens the issue in a new tab when you select its key.
 * **Dynamic filtering** — Lets you change the JQL query and maximum number of results directly in the widget without changing its configuration.
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#jira).

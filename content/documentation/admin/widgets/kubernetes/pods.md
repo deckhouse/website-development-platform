@@ -12,10 +12,6 @@ The following information is available for each pod:
 * Container logs.
 * Pod state information, including status and restart count.
 
-## Authorization
-
-Authorization is described in [External services](../../external-services/#kubernetes).
-
 ## Configuration
 
 | Name           | Required | Description                                                                                                        | Default value |
@@ -23,3 +19,8 @@ Authorization is described in [External services](../../external-services/#kuber
 | URL            | Yes      | Kubernetes API server URL used to retrieve data from Kubernetes                                                    | —             |
 | Namespace      | No       | Namespace from which the widget loads data. Example: `default`                                                     | —             |
 | Label selector | No       | Comma-separated selectors used to filter pods. Example: `app.kubernetes.io/name=example`                           | —             |
+
+
+## Authorization
+
+Authorization is described in [External services](../../external-services/#kubernetes).

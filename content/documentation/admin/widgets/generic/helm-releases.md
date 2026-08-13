@@ -12,13 +12,14 @@ The widget displays:
 * **Release manifests** — Manifests associated with Helm releases in the specified Kubernetes namespace, including YAML files that define resource configuration and state.
 * **Values** — Variables used to deploy Helm releases.
 
-## Authorization
-
-Authorization is configured in [External services](../../external-services/#kubernetes).
-
 ## Configuration
 
 | Name      | Required | Description                                                                          | Default |
 | --------- | -------- | ------------------------------------------------------------------------------------ | ------- |
 | Namespace | No       | Namespace from which the widget loads data. Example: `default`                       | —       |
 | Release   | No       | Name of the release from which the widget loads data. Example: `my-release`          | —       |
+
+
+## Authorization
+
+Authorization is configured in [External services](../../external-services/#kubernetes).

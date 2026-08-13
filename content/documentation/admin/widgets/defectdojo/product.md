@@ -6,10 +6,6 @@ weight: 10
 
 The widget displays product vulnerabilities from DefectDojo, grouped by engagement and severity.
 
-## Authentication
-
-Authentication is described in [External services](../../external-services/#defectdojo).
-
 ## Configuration
 
 | Name           | Required | Description                                                                                              | Default value                    |
@@ -35,5 +31,10 @@ In the widget request settings, select the severity levels to load only vulnerab
 - **Details** — displays a table with details for each vulnerability.
 
 {{< alert level="info" >}}
-If the selected engagement and severity levels contain more than 1,000 vulnerabilities, the widget displays the first 1,000 records and a partial-load warning. Tag, test, and component filters apply only to the loaded set.
+If the selected Engagement and severity levels contain more than 1,000 vulnerabilities, the widget displays the first 1,000 records and a partial-load warning. Tag, test, and component filters apply only to the loaded set.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication is described in [External services](../../external-services/#defectdojo).

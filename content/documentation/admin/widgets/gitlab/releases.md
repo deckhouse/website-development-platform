@@ -8,10 +8,6 @@ The widget displays GitLab project releases, highlights the latest release,
 and shows related information: the tag, commit link, author, publication date,
 and a description with Markdown support.
 
-## Authentication
-
-Authentication configuration is described in the [External services](../../external-services/#gitlab) section.
-
 ## Configuration
 
 | Name       | Required | Description                                                        | Default value |
@@ -31,3 +27,8 @@ The widget lets you create a release in GitLab directly from Deckhouse Developme
 | Description  | No       | Release description in Markdown format                                      | —             |
 
 The created release appears in the list automatically, and the latest release is highlighted.
+
+
+## Authentication
+
+Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

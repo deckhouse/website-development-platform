@@ -6,10 +6,6 @@ weight: 20
 
 The widget displays GitLab merge requests (MRs) and provides actions for managing them.
 
-## Authentication
-
-Authentication configuration is described in the [External services](../../external-services/#gitlab) section.
-
 ## Configuration
 
 | Name       | Required | Description                                                        | Default value |
@@ -41,3 +37,8 @@ When actions are enabled in the settings, the widget provides the following merg
 {{< alert level="info" >}}
 Actions on MRs require the corresponding access permissions in the GitLab repository.
 {{< /alert >}}
+
+
+## Authentication
+
+Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

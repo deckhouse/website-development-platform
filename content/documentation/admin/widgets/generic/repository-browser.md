@@ -6,14 +6,6 @@ weight: 190
 
 The widget displays the structure and contents of files in GitLab, Bitbucket, and GitHub repositories.
 
-## Authorization
-
-Configure authorization separately for each provider:
-
-* [GitLab](../../external-services/#gitlab).
-* [Bitbucket](../../external-services/#bitbucket).
-* [GitHub](../../external-services/#github).
-
 ## Configuration
 
 | Name         | Required | Description                                                    | Default |
@@ -42,3 +34,12 @@ Configure authorization separately for each provider:
 | ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
 | Repository owner | Yes      | Repository owner: an organization or user. For `https://github.com/example/my-repo`, specify `example`              | —       |
 | Repository       | Yes      | Repository name without `.git`. For `https://github.com/example/my-repo`, specify `my-repo`                         | —       |
+
+
+## Authorization
+
+Configure authorization separately for each provider:
+
+* [GitLab](../../external-services/#gitlab).
+* [Bitbucket](../../external-services/#bitbucket).
+* [GitHub](../../external-services/#github).

@@ -22,10 +22,6 @@ including status, urgency, blocking state, and assignees.
 | Created after | Yes      | Start date of the query period | 1 month ago |
 | Created before | Yes     | End date of the query period   | Now         |
 
-## Authorization
-
-Authorization is described in [External services](../../external-services/#kaiten).
-
 ## Displayed data
 
 Each card contains:
@@ -38,3 +34,7 @@ Each card contains:
 - Participants.
 - Due date and urgency.
 - Blocking state.
+
+## Authorization
+
+Authorization is described in [External services](../../external-services/#kaiten).

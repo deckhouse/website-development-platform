@@ -20,10 +20,6 @@ Use it to analyze team performance and identify bottlenecks in business processe
 | Created after  | Yes      | Start date of the analysis period | 1 month ago |
 | Created before | Yes      | End date of the analysis period   | Now         |
 
-## Authorization
-
-Authorization is described in [External services](../../external-services/#kaiten).
-
 ## Displayed data
 
 The widget contains four tabs.
@@ -63,3 +59,8 @@ Cards that have not been updated since they were created.
 ### Recently updated
 
 The ten most recently updated cards.
+
+
+## Authorization
+
+Authorization is described in [External services](../../external-services/#kaiten).
