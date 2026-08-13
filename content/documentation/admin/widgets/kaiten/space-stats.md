@@ -60,7 +60,6 @@ Cards that have not been updated since they were created.
 
 The ten most recently updated cards.
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#kaiten).

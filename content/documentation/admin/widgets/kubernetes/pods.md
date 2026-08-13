@@ -20,7 +20,6 @@ The following information is available for each pod:
 | Namespace      | No       | Namespace from which the widget loads data. Example: `default`                                                     | —             |
 | Label selector | No       | Comma-separated selectors used to filter pods. Example: `app.kubernetes.io/name=example`                           | —             |
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#kubernetes).

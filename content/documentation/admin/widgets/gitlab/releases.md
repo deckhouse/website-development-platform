@@ -28,7 +28,6 @@ The widget lets you create a release in GitLab directly from Deckhouse Developme
 
 The created release appears in the list automatically, and the latest release is highlighted.
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

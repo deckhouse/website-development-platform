@@ -41,7 +41,6 @@ By default, the widget displays open PRs. The table displays the number, title, 
 Pull Request actions require the corresponding permissions in the GitHub repository.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#github).

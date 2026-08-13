@@ -35,7 +35,6 @@ The widget can create tags in Bitbucket directly from Deckhouse Development Plat
 | Create from | Yes      | The branch or existing tag from which to create the new tag. Select it from the list |
 | Description | No       | The description of the tag to create                                        |
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#bitbucket).

@@ -41,7 +41,6 @@ The widget lets you create a merge request containing pipeline configuration cha
 - Creating a merge request requires write access to the repository.
 - The maximum configuration file size is limited by the GitLab API.
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

@@ -12,7 +12,6 @@ The widget displays data about GitLab project members. [Learn more about project
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
 | Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

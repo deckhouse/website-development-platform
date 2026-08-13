@@ -43,7 +43,6 @@ The widget provides the following actions:
 Workflow and artifact actions require the corresponding permissions in the GitHub repository.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#github).

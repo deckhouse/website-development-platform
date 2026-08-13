@@ -27,7 +27,6 @@ The widget lets you create GitLab tags directly from Deckhouse Development Platf
 | Create from | Yes      | Branch or existing tag from which to create the tag  | —             |
 | Description | No       | Description of the tag to create                     | —             |
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

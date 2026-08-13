@@ -35,7 +35,6 @@ When actions are enabled in the settings, the widget allows users to:
 * Send a message to a topic.
 * Remove all messages from a topic.
 
-
 ## Authentication
 
 The widget requires a user account.

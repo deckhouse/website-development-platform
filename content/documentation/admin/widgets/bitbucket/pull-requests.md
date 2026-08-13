@@ -41,7 +41,6 @@ When actions are enabled in the settings, the widget provides the following Pull
 Pull Request actions require the corresponding permissions in the Bitbucket repository.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#bitbucket).

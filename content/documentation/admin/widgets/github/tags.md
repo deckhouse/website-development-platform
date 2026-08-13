@@ -43,7 +43,6 @@ The widget can create tags in GitHub. Specify the following fields in the **Crea
 Creating tags requires write permissions in the GitHub repository.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#github).

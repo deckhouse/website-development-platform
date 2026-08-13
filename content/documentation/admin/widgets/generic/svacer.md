@@ -44,7 +44,6 @@ The widget footer displays summary metrics for the selected snapshot: total mark
 With the **Hybrid** strategy, if the snapshot marker count exceeds the threshold, the **Findings** tab is unavailable unless you filter by review status, severity, or checker.
 {{< /alert >}}
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#svacer).

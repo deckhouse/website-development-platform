@@ -20,7 +20,6 @@ The following information is available for each Ingress:
 | Namespace      | No       | Kubernetes namespace from which Ingress resources are loaded. If no namespace is specified, the widget attempts to load all Ingress resources in the cluster. Example: `default` | —             |
 | Label selector | No       | Comma-separated selectors used to filter Ingress resources. Example: `app.kubernetes.io/name=example`                                                    | —             |
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#kubernetes).

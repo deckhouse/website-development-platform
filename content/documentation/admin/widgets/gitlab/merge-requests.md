@@ -38,7 +38,6 @@ When actions are enabled in the settings, the widget provides the following merg
 Actions on MRs require the corresponding access permissions in the GitLab repository.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

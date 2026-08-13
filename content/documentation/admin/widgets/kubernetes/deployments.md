@@ -22,7 +22,6 @@ The following actions are available for each Deployment:
 | Namespace      | No       | Kubernetes namespace from which Deployments are loaded. If no namespace is specified, the widget attempts to load all Deployments in the cluster. Example: `default` | —             |
 | Label selector | No       | Comma-separated selectors used to filter Deployments. Example: `app.kubernetes.io/name=example`                                                                  | —             |
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#kubernetes).

@@ -13,7 +13,6 @@ weight: 10
 | URL        | Да             | URL CodeScoring                     | —                     |
 | ID проекта | Да             | Идентификатор проекта в CodeScoring | —                     |
 
-
 ## Авторизация
 
 Конфигурация авторизации описана в разделе [«Внешние сервисы»](../../external-services/#codescoring).

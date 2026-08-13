@@ -55,7 +55,6 @@ The widget supports the following actions.
 * **Scan multibranch** — Starts a multibranch pipeline scan to discover new branches.
 * **View logs** — Displays build execution logs.
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#jenkins).

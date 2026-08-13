@@ -34,7 +34,6 @@ ORDER BY time
 | Minimum value | No       | Starting point for the chart's vertical axis                                                    | —             |
 | Maximum value | No       | End point for the chart's vertical axis                                                         | —             |
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#clickhouse).

@@ -26,7 +26,6 @@ The widget lets you start GitLab pipelines directly from Deckhouse Development P
 | Ref       | Yes      | Target branch or tag on which to start the pipeline           | —             |
 | Variables | No       | Key-value variables to pass to the pipeline being started     | —             |
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

@@ -57,7 +57,6 @@ Secret keys are displayed in a key-value table:
 * **Key** — Full path to the key in the secret structure, for example, `database.host`.
 * **Value** — Always masked as `********` and cannot be revealed.
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#vault).

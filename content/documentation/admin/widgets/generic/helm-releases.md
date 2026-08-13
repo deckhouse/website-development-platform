@@ -19,7 +19,6 @@ The widget displays:
 | Namespace | No       | Namespace from which the widget loads data. Example: `default`                       | —       |
 | Release   | No       | Name of the release from which the widget loads data. Example: `my-release`          | —       |
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#kubernetes).

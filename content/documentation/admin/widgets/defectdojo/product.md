@@ -34,7 +34,6 @@ In the widget request settings, select the severity levels to load only vulnerab
 If the selected Engagement and severity levels contain more than 1,000 vulnerabilities, the widget displays the first 1,000 records and a partial-load warning. Tag, test, and component filters apply only to the loaded set.
 {{< /alert >}}
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#defectdojo).

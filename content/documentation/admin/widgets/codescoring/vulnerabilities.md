@@ -13,7 +13,6 @@ The widget displays a table of product vulnerabilities based on CodeScoring data
 | URL        | Yes      | CodeScoring URL            | —             |
 | Project ID | Yes      | Project ID in CodeScoring  | —             |
 
-
 ## Authentication
 
 Authentication is described in [External services](../../external-services/#codescoring).

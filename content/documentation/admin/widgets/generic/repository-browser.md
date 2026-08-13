@@ -35,7 +35,6 @@ The widget displays the structure and contents of files in GitLab, Bitbucket, an
 | Repository owner | Yes      | Repository owner: an organization or user. For `https://github.com/example/my-repo`, specify `example`              | —       |
 | Repository       | Yes      | Repository name without `.git`. For `https://github.com/example/my-repo`, specify `my-repo`                         | —       |
 
-
 ## Authorization
 
 Configure authorization separately for each provider:

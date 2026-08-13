@@ -36,7 +36,6 @@ For each ACL, the widget displays:
 
 When actions are enabled in the settings, the widget allows users to create and delete ACL rules.
 
-
 ## Authentication
 
 The widget requires a user account.

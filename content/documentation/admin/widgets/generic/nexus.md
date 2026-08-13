@@ -14,7 +14,6 @@ The widget displays a list of artifacts in a Nexus repository.
 | Repository | Yes      | Name of the repository whose data is displayed in the widget. Example: `my-repo`     | —       |
 | Name       | No       | Name of the artifact whose data is displayed in the widget                            | —       |
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#nexus).

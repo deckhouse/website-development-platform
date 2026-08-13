@@ -15,7 +15,6 @@ For each quota, the widget visualizes the resources in use.
 | URL       | Yes      | Kubernetes API server URL used to retrieve data from Kubernetes         | —             |
 | Namespace | Yes      | Namespace from which the widget loads data. Example: `default`          | —             |
 
-
 ## Authorization
 
 Authorization is described in [External services](../../external-services/#kubernetes).

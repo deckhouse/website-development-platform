@@ -64,7 +64,6 @@ The widget shows the branches with the most pipelines and the number of pipeline
 - Statistics include only pipelines with valid data, including a status and execution time.
 - Data is updated each time the widget refreshes.
 
-
 ## Authentication
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

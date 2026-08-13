@@ -15,7 +15,6 @@ The OpenSearch index widget displays data from a specific index or index pattern
 | Index pattern   | Yes      | Index pattern from which the widget loads data. May contain `*`. Examples: `security-auditlog`, `security-auditlog-*`                     | —            |
 | Timestamp field | No       | Name of the timestamp field. Its value is displayed in a separate column in the data table                                                | `@timestamp` |
 
-
 ## Authorization
 
 Authorization is configured in [External services](../../external-services/#opensearch).
