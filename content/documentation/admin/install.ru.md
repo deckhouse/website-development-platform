@@ -5,6 +5,8 @@ weight: 11
 
 Deckhouse Development Platform (DDP) можно установить двумя способами: с [внешними инстансами](#установка-с-внешними-инстансами) PostgreSQL и Redis (подключение к уже развёрнутым базам данных вне кластера) или с [внутренними инстансами](#установка-с-внутренними-инстансами) (развёртывание PostgreSQL и Redis внутри кластера). Внешние инстансы рекомендуются для production, внутренние подходят для тестов и пилотной эксплуатации.
 
+Дополнительно платформа может использовать [ClickHouse](#clickhouse) — хранилище для больших объёмов данных. По умолчанию он отключён.
+
 ## Установка с внутренними инстансами
 
 Для установки DDP включите модуль `development-platform` в вашем кластере Kubernetes под управлением Deckhouse Kubernetes Platform. Для этого можно использовать [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) с минимальным количеством настроек:
@@ -151,3 +153,68 @@ spec:
       database: "0"
       password: secure_redis_password
 ```
+
+## ClickHouse
+
+ClickHouse — хранилище для больших объёмов данных, например [истории изменений свойств сущностей](../../user/catalog/#история-свойств). По умолчанию ClickHouse не развёртывается и не подключается — платформа работает без него, но зависящие от него возможности остаются недоступными.
+
+ClickHouse можно развернуть внутри кластера в составе модуля либо подключить внешний инстанс. Для промышленной эксплуатации используйте внешний инстанс.
+
+### Внутренний инстанс ClickHouse
+
+Для развёртывания ClickHouse внутри кластера укажите `mode: internal` и не задавайте параметр `host`:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    clickhouse:
+      mode: internal
+      database: ddp                  # Название базы данных, создаётся при первом запуске сервера.
+      username: default              # Имя пользователя для подключения.
+      password: clickhouse_password  # Пароль, с которым создаётся сервер в кластере.
+      image: registry.example.com/clickhouse/clickhouse-server:24.3  # (опционально) образ из приватного registry.
+```
+
+В этом режиме платформа разворачивает один экземпляр ClickHouse с постоянным хранилищем (PersistentVolumeClaim размером `10Gi`) и сама создаёт базу данных при первом запуске.
+
+### Внешний инстанс ClickHouse
+
+Для использования внешнего инстанса ClickHouse укажите `mode: external` и параметры подключения:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    clickhouse:
+      mode: external
+      host: clickhouse.example.com  # Имя хоста или IP-адрес сервера ClickHouse.
+      port: 9000                    # Порт нативного протокола ClickHouse (по умолчанию 9000).
+      database: ddp                 # Название базы данных.
+      username: ddp_user            # Имя пользователя для подключения.
+      password: secure_password     # Пароль для подключения.
+```
+
+{{< alert level="warning" >}}
+Создайте базу данных до подключения внешнего инстанса: платформа применяет миграции схемы, но саму базу данных не создаёт.
+{{< /alert >}}
+
+Доставку данных из PostgreSQL в ClickHouse и последующую очистку выполняют воркеры платформы, поэтому для переноса данных нужен хотя бы один запущенный воркер. Параметры доставки и очистки задаются в секции `clickhouse.replication`; значения по умолчанию подходят для большинства установок. Подробнее о воркерах — в разделе [«Воркеры»](../architecture/workers/).
