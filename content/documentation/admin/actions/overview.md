@@ -146,6 +146,7 @@ All updates are performed only after the action completes successfully. The foll
 | `.global`   | Global variables (variable set identifier, then key)                        | `{{ .global.myGroup.apiUrl }}`        |
 | `.team`     | Variables of the team selected at launch                                    | `{{ .team.token }}`                   |
 | `.store`    | Variables from the process store                                            | `{{ .store.myKey }}`                  |
+| `.context`  | Process launch context — values passed by the page or card that started it   | `{{ .context.repository.id }}`        |
 
 #### Entity parameter update
 
@@ -177,6 +178,7 @@ If the "Create entities" option is enabled, the platform automatically creates n
 | Field                                | Description                                                                                  |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | Owner of created entities             | Assigned as the owner of all entities the action creates in the catalog                       |
+| Owner is the initiator                | The user who started the action becomes the owner of the created entities; the configured owner is ignored |
 | Owner team of created entities        | Assigned as the owner team of all entities the action creates in the catalog                   |
 | Resource                              | Catalog resource in which the entity will be created                                          |
 | Source (identifier)                   | Go template for the identifier of the entity being created                                     |
@@ -202,6 +204,16 @@ To create an entity in the "GitLab projects" resource after the action completes
 1. Source (name): `{{ .response.name }}`.
 
 If needed, add additional rules to populate entity parameters, for example map `{{ .response.path }}` to the `path` parameter.
+
+#### Datasource synchronization
+
+When the "Datasource synchronization" option is enabled, the platform synchronizes the selected datasources after the action succeeds. An object the action created or deleted in the external system reaches the catalog immediately, without waiting for the scheduled synchronization.
+
+| Field       | Description                                              |
+| ----------- | -------------------------------------------------------- |
+| Datasources | Datasources synchronized after the action is executed     |
+
+Synchronization runs in the background: the action does not wait for it and is not marked as failed if the synchronization does not succeed.
 
 #### Entity relation creation
 

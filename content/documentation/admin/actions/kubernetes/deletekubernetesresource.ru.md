@@ -17,6 +17,7 @@ version: v1
 resource_type: deployments
 resource_name: nginx-deployment
 namespace: example
+ignore_not_found: true
 ```
 
 ### Спецификация запроса
@@ -28,3 +29,8 @@ namespace: example
 | resource_type               | Да                | Тип удаляемого ресурса                                                         | pods, services, deployments, statefulsets, daemonsets, replicasets, jobs, cronjobs, nodes, namespaces, configmaps, secrets, persistentvolumes, persistentvolumeclaims, limitranges, resourcequotas, horizontalpodautoscalers, ingresses, networkpolicies, serviceaccounts, roles, clusterroles, rolebindings, clusterrolebindings, podsecuritypolicies, storageclasses, volumeattachments, events, endpoints, customresourcedefinitions   |
 | resource_name               | Да                | Название конкретного ресурса, который необходимо удалить                       | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | namespace                   | Да                | Неймспейс, в котором находится ресурс                                          | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ignore_not_found            | Нет               | Считать удаление успешным, если объекта уже нет в кластере                     | `true`, `false`                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+### Примечание
+
+По умолчанию удаление отсутствующего объекта завершается ошибкой. Параметр `ignore_not_found: true` делает действие идемпотентным: объект, которого уже нет, считается приведённым к нужному состоянию. Это удобно в процессах удаления, которые могут перезапускаться. Остальные ошибки API Kubernetes параметр не подавляет.

@@ -53,6 +53,7 @@ The identifier of each parameter must:
 * "Editable parameter" — for each parameter, you can allow or disallow the user from editing it. If editing is disallowed, the user will not be able to change the parameter's value when launching actions or workflows, meaning the default value will always be used.
 * "Required parameter" — each parameter can be either required or optional. The value of a required parameter cannot be empty when launching actions or workflows. The value of an optional parameter, however, can remain empty without affecting the action's operation.
 * "Hidden parameter" — a hidden parameter is not displayed in entity tables and cards, or when launching actions or workflows.
+* "Show in the simplified form" — when enabled, the parameter is displayed in the simplified process launch form. The simplified form shows only such parameters; the rest keep their default values and are still passed at launch.
 
 ## Parameter types
 
