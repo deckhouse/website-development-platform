@@ -225,6 +225,20 @@ The following are available when launching a process:
 * "Action parameters" — parameters for each action in the process.
 * "Environment variables" — additional variables for execution.
 
+### Launch context
+
+The launch context is a set of values that the page or card passes to the process at launch time. It is not entered by the user and is not stored in the process configuration: it is built by the place in the interface the process was started from.
+
+For example, a microservice card passes the identifier and address of its repository, and the resource ordering section passes the system the resource is ordered for.
+
+In the Go templates of the process actions the context is available under the `.context` root:
+
+```yaml
+project_id: '{{ .context.repository.id }}'
+```
+
+The contents of the context depend on where the process was started. When a process is started manually from the catalog, the context is empty and referencing its fields yields an empty value.
+
 ## Execution management
 
 ### Process statuses
