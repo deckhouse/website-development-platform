@@ -4,7 +4,7 @@ description: Audit log contents, storage, filtering, retention, and CSV export i
 weight: 40
 ---
 
-Audit logs record all operations that users perform through the Deckhouse Development Platform (DDP) API. The logs are stored in a PostgreSQL database and support auditing of user activity.
+Audit logs record all operations that users perform through the Deckhouse Development Portal (DDP) API. The logs are stored in a PostgreSQL database and support auditing of user activity.
 
 ## Components
 

@@ -111,17 +111,17 @@ module:
 languages:
   en:
     disabled: false
-    title: Deckhouse Development Platform
+    title: Deckhouse Development Portal
     weight: 0
     baseURL: https://deckhouse.io/products/development-platform/
     params:
       description: ""
-      pdfTitle: "Deckhouse Development Platform Documentation"
+      pdfTitle: "Deckhouse Development Portal Documentation"
   ru:
     disabled: false
     weight: 1
-    title: Deckhouse Development Platform
+    title: Deckhouse Development Portal
     baseURL: https://deckhouse.ru/products/development-platform/
     params:
       description: ""
-      pdfTitle: "Документация Deckhouse Development Platform"
+      pdfTitle: "Документация Deckhouse Development Portal"

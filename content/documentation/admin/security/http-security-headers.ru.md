@@ -3,7 +3,7 @@ title: HTTP-заголовки безопасности
 weight: 50
 ---
 
-Deckhouse Development Platform (DDP) поддерживает следующие HTTP-заголовки для повышения безопасности взаимодействия:
+Deckhouse Development Portal (DDP) поддерживает следующие HTTP-заголовки для повышения безопасности взаимодействия:
 
 1. `Content-Security-Policy`
    - Настраиваемая политика безопасности контента.

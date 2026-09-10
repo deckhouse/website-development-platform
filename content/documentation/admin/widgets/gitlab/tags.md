@@ -17,7 +17,7 @@ The widget displays data about GitLab project tags.
 
 ### Creating tags
 
-The widget lets you create GitLab tags directly from Deckhouse Development Platform (DDP).
+The widget lets you create GitLab tags directly from Deckhouse Development Portal (DDP).
 
 #### Configuration
 

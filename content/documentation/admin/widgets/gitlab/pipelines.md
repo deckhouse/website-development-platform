@@ -17,7 +17,7 @@ The widget displays data about GitLab pipelines.
 
 ### Starting pipelines
 
-The widget lets you start GitLab pipelines directly from Deckhouse Development Platform (DDP).
+The widget lets you start GitLab pipelines directly from Deckhouse Development Portal (DDP).
 
 #### Configuration
 

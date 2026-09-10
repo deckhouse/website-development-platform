@@ -1,10 +1,10 @@
 ---
 title: Overview
-description: Action configuration in Deckhouse Development Platform (DDP) — requests, form, entity updates, security, and authorization.
+description: Action configuration in Deckhouse Development Portal (DDP) — requests, form, entity updates, security, and authorization.
 weight: 10
 ---
 
-Actions are a platform mechanism for running operations in external infrastructure systems and services. For example, actions can:
+Actions are a DDP (portal) mechanism for running operations in external infrastructure systems and services. For example, actions can:
 
 - create projects, variables, branches, tags, releases, and merge requests in [GitLab](../gitlab/);
 - create resources in [Kubernetes](../kubernetes/) and retrieve them;
@@ -38,12 +38,12 @@ When creating or editing an action, specify the basic information:
 
 An action can be of the following types:
 
-- "Built-in (BuiltIn)" — the action's execution logic is defined within the platform. For built-in actions, you must select one of the preconfigured backends.
+- "Built-in (BuiltIn)" — the action's execution logic is defined within the portal. For built-in actions, you must select one of the preconfigured backends.
 - "Webhook" — the action's execution logic is fully configured by the user.
 
 #### Retry parameters
 
-If an action fails, the platform can automatically retry it.
+If an action fails, the portal can automatically retry it.
 
 ##### Number of retries
 
@@ -149,7 +149,7 @@ All updates are performed only after the action completes successfully. The foll
 
 #### Entity parameter update
 
-If the "Update entity parameters" option is enabled, the platform applies the update rules and writes the values to the entity's parameters.
+If the "Update entity parameters" option is enabled, the portal applies the update rules and writes the values to the entity's parameters.
 
 | Field               | Description                                                              |
 | ------------------- | ------------------------------------------------------------------------- |
@@ -172,7 +172,7 @@ If you need to immediately populate the entity's `repository_id` parameter after
 
 #### Entity creation
 
-If the "Create entities" option is enabled, the platform automatically creates new entities in the selected resources according to the specified rules. Rules are defined separately for each resource.
+If the "Create entities" option is enabled, the portal automatically creates new entities in the selected resources according to the specified rules. Rules are defined separately for each resource.
 
 | Field                                | Description                                                                                  |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------- |
@@ -205,7 +205,7 @@ If needed, add additional rules to populate entity parameters, for example map `
 
 #### Entity relation creation
 
-If the "Create entity relations" option is enabled, the platform automatically creates new relations for the selected entity according to the specified rules. The set of rules is defined separately for each resource.
+If the "Create entity relations" option is enabled, the portal automatically creates new relations for the selected entity according to the specified rules. The set of rules is defined separately for each resource.
 
 | Field                              | Description                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -325,7 +325,7 @@ For actions launched as automation events, specifying the account to run as is m
 
 #### Credentials
 
-For built-in actions, the platform predefines the set of required credentials. Their identifiers are loaded when the built-in backend is selected. For each identifier, you must select the type of credentials to be used.
+For built-in actions, the portal predefines the set of required credentials. Their identifiers are loaded when the built-in backend is selected. For each identifier, you must select the type of credentials to be used.
 
 For webhook actions, credentials can be accessed in the request body using the `{{ .credentials.<credentials type identifier> }}` construct.
 

@@ -10,7 +10,7 @@ Running this action requires credentials:
 - `username` — the username of the user on whose behalf the action will run.
 {{< /alert >}}
 
-CreateRepositoryFromTemplate — creates a new repository from a template in GitLab. The rendering mechanism is based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) and supports all built-in methods, as well as extensions added by the platform.
+CreateRepositoryFromTemplate — creates a new repository from a template in GitLab. The rendering mechanism is based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) and supports all built-in methods, as well as extensions added by DDP (portal).
 
 ### Request example
 
@@ -44,7 +44,7 @@ values:
 
 ### How it works
 
-The platform:
+The portal:
 
 1. Clones the template repository from the specified URL (`templateRepositoryUrl`), using `sourceTag`, `sourceBranch`, or the `main` branch as the ref, in that order of preference.
 1. Reads the `values.yaml` file stored at the root of the repository and determines the default templating variables.
@@ -103,8 +103,8 @@ docs/**
 #### Adding paths to ignore
 
 1. At the root of the template repository, create or edit the `.templateignore` file (one rule per line).
-1. Each line is a single rule: a path from the repository root. Regular path characters and masks are allowed: an asterisk `*` within a segment name, and the sequence `**` for arbitrary directory nesting. The platform matches the relative path against the mask according to built-in rules (similar to common conventions used for masks in ignore files in version control systems).
-1. To substitute a path fragment from `values.yaml` or from the `values` field of the action's request, use Go template constructs (`{{ ... }}`) in the line. If the line contains `{{`, the platform processes the entire line from start to finish as a single Go template: you cannot leave part of the line as "plain text" and template only the middle of the path. See examples in [Go template examples in .templateignore](#templateignore-go-examples).
+1. Each line is a single rule: a path from the repository root. Regular path characters and masks are allowed: an asterisk `*` within a segment name, and the sequence `**` for arbitrary directory nesting. The portal matches the relative path against the mask according to built-in rules (similar to common conventions used for masks in ignore files in version control systems).
+1. To substitute a path fragment from `values.yaml` or from the `values` field of the action's request, use Go template constructs (`{{ ... }}`) in the line. If the line contains `{{`, the portal processes the entire line from start to finish as a single Go template: you cannot leave part of the line as "plain text" and template only the middle of the path. See examples in [Go template examples in .templateignore](#templateignore-go-examples).
 1. Empty lines and lines starting with `#` are skipped when parsing the file — you can use them for comments.
 
 #### Examples without substitution (path masks only)
@@ -148,10 +148,10 @@ Secrets by extension across the entire tree:
 
 The variables available for expanding rules are the same ones merged from `values.yaml` at the root of the template repository and from the `values` field in the action's request (the `values` field in the request takes priority).
 
-For each non-empty line from `.templateignore` or from a file listed in `additionalIgnoreFiles`, the platform does the following.
+For each non-empty line from `.templateignore` or from a file listed in `additionalIgnoreFiles`, the portal does the following.
 
 1. The line is always added to the rule list exactly as it appears in the file, unchanged. This is the line that is compared with the file path first — this is needed for cases where the on-disk names still contain fragments like `{{ .module }}` before renaming.
-1. If the line contains `{{`, the platform runs the entire line once through the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) engine, with the same capabilities used when substituting into file and directory names (built-in platform functions and the Sprig set). If the line does not contain `{{`, this step is skipped.
+1. If the line contains `{{`, the portal runs the entire line once through the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) engine, with the same capabilities used when substituting into file and directory names (built-in portal functions and the Sprig set). If the line does not contain `{{`, this step is skipped.
 1. If the substitution step was performed and the resulting text differs from the line in the file (including the case where the result is empty), a second entry is added to the rule list — with this resulting text. As a result, a single line in the file can produce two entries in the list. When checking a file path, both are checked: a match with either one is enough for the file to be covered by the rule.
 
 Then, while traversing the tree, for each file path, the path relative to the root of the cloned copy is calculated (with forward slashes). The path is compared against each rule: first using mask-matching rules (including `*` and `**`), and, if necessary, by an exact match between the rule string and the relative path.
@@ -162,7 +162,7 @@ If the template in a line has a syntax error or references a missing field, rule
 
 The `additionalIgnoreFiles` field in the action specifies the names of additional files at the root of the repository; each of them contains rule lines just like `.templateignore`, with the same template expansion. However, the meaning is different: matched paths are removed from the working copy (the directory or file is deleted), and this is done twice — at the beginning and at the end of the processing chain — so that these objects do not participate in further steps and do not end up in the resulting repository.
 
-The `.templateignore` file, on the other hand, means "do not template": for matched paths, the platform does not substitute variables into file contents and does not apply template-based renaming to the corresponding directory paths. The files and directories themselves are not deleted just because of an entry in `.templateignore` — they remain in the copy, but are processed as plain text and plain names, without the templating step.
+The `.templateignore` file, on the other hand, means "do not template": for matched paths, the portal does not substitute variables into file contents and does not apply template-based renaming to the corresponding directory paths. The files and directories themselves are not deleted just because of an entry in `.templateignore` — they remain in the copy, but are processed as plain text and plain names, without the templating step.
 
 <a id="templateignore-go-examples"></a>
 

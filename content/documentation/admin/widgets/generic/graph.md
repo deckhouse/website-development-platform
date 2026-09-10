@@ -1,6 +1,6 @@
 ---
 title: Graph
-description: Configure charts that aggregate and visualize Deckhouse Development Platform object data.
+description: Configure charts that aggregate and visualize Deckhouse Development Portal object data.
 weight: 130
 ---
 

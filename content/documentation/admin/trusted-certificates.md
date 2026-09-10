@@ -1,10 +1,10 @@
 ---
 title: Trusted certificates
 menuTitle: Trusted certificates
-description: Add certificates for secure HTTPS connections from Deckhouse Development Platform to external services.
+description: Add certificates for secure HTTPS connections from Deckhouse Development Portal to external services.
 ---
 
-Trusted certificates allow you to upload root and intermediate certificate authority (CA) certificates or server certificates to Deckhouse Development Platform (DDP). The platform uses them for TLS/SSL verification when connecting to external services over HTTPS, for example when accessing external service APIs from data sources and widgets.
+Trusted certificates allow you to upload root and intermediate certificate authority (CA) certificates or server certificates to Deckhouse Development Portal (DDP, portal). The portal uses them for TLS/SSL verification when connecting to external services over HTTPS, for example when accessing external service APIs from data sources and widgets.
 
 This mechanism provides secure connections to services that use self-signed or corporate certificates without disabling SSL verification.
 
@@ -43,7 +43,7 @@ Uploaded trusted certificates are automatically added to the root certificate po
 - requests to external services from actions, widgets, data sources, and status checks;
 - requests to infrastructure system APIs such as GitLab, Kubernetes, Vault, and Prometheus.
 
-If an external service uses a certificate issued by your own or a corporate CA, add the corresponding root or intermediate certificate under "Trusted certificates". The platform then trusts the connection without disabling SSL verification.
+If an external service uses a certificate issued by your own or a corporate CA, add the corresponding root or intermediate certificate under "Trusted certificates". The portal then trusts the connection without disabling SSL verification.
 
 {{< alert level="info" >}}
 Instead of disabling SSL verification for an external service with the "Disable SSL verification" option, add the required certificates as trusted. This preserves authentication and connection security.

@@ -2,7 +2,7 @@
 title: Parameters
 ---
 
-For each resource, action, or workflow, the platform administrator can add an unlimited number of parameters of one of the following types:
+For each resource, action, or workflow, the DDP administrator can add an unlimited number of parameters of one of the following types:
 
 * "Array" — a list of values;
 * "Boolean" — a boolean value;

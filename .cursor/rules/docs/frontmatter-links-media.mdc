@@ -21,4 +21,4 @@ alwaysApply: false
 # Link Rules
 
 - Links to the project pages must be relative. Other links must be absolute.
-- Links to Deckhouse Kubernetes Platform documentation must be absolute without domain (`/products/kubernetes-platform/documentation/v1/...`).
+- Links to Deckhouse Platform documentation must be absolute without domain (`/products/kubernetes-platform/documentation/v1/...`).

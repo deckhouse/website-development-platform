@@ -25,7 +25,7 @@ including the hash, message, author, creation date, and a link to the commit in 
 
 ### Creating tags
 
-The widget can create tags in Bitbucket directly from Deckhouse Development Platform (DDP).
+The widget can create tags in Bitbucket directly from Deckhouse Development Portal (DDP).
 
 #### Configuration
 

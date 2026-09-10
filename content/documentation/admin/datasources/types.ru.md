@@ -12,7 +12,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа выполняет GET-запрос по URL: `/api/v2/products`. Возвращаются все доступные значения. [Спецификация ответа](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+DDP (портал) выполняет GET-запрос по URL: `/api/v2/products`. Возвращаются все доступные значения. [Спецификация ответа](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
 
 ### Конфигурация
 
@@ -32,7 +32,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа выполняет GET-запрос к API GitLab по URL: `/api/v4/groups`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/groups/#list-groups).
+Портал выполняет GET-запрос к API GitLab по URL: `/api/v4/groups`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/groups/#list-groups).
 
 ### Конфигурация
 
@@ -52,13 +52,13 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-В зависимости от [конфигурации параметров](#gitlabprojectsparameters), платформа выполняет GET-запрос к API GitLab и возвращает соответствующую спецификацию.
+В зависимости от [конфигурации параметров](#gitlabprojectsparameters), портал выполняет GET-запрос к API GitLab и возвращает соответствующую спецификацию.
 
 Если значение параметра `all` равно `true`, выполняется GET-запрос по URL: `/api/v4/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
 Если значение параметра `all` равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра `tags` равно `true`, платформа дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Платформа получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
+Если значение параметра `tags` равно `true`, портал дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Портал получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
 
 ### Конфигурация
 
@@ -72,7 +72,7 @@ title: Типы источников данных
 |-----------------|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 |all              |Опционально                                 |В явном виде указывает, что необходимо собирать репозитории всех групп, к которым есть доступ                                                                                                                                                                                                                            |true, false                                                                   |false                                                                         |
 |group_ids        |Обязательно, если `all` в значении `false`|Источник данных будет собирать проекты групп с указанным ID. ID групп указываются через запятую                                                                                                                                                                                                                          |Пример: 1001,1002                                                             |\-                                                                            |
-|tags             |Опционально                                 |Платформа дополнительно получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags)  |true, false                                                                   |false                                                                         |
+|tags             |Опционально                                 |Портал дополнительно получает список всех git тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags)  |true, false                                                                   |false                                                                         |
 |include_subgroups|Опционально                                 |Если указан параметр `group_ids`, то параметр `include_subgroups` определяет, собирать ли проекты подгрупп указанных групп                                                                                                                                                                                           |true, false                                                                   |false                                                                         |
 |tags_order_by    |Опционально                                 |Поле для сортировки тегов. Описание параметра — в [GitLab Tags API](https://docs.gitlab.com/api/tags/#list-project-repository-tags)                                                                                                                                                                                      |`updated`, `name`, `version`                                                  |`updated`                                                                     |
 |tags_sort        |Опционально                                 |Направление сортировки тегов. Описание параметра — в [GitLab Tags API](https://docs.gitlab.com/api/tags/#list-project-repository-tags)                                                                                                                                                                                   |`asc`, `desc`                                                                 |`desc`                                                                        |
@@ -88,7 +88,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
+Портал получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -108,7 +108,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
+Портал получает список всех доступных проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -128,7 +128,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
+Портал получает список всех проектов, затем получает список всех репозиториев в каждом из проектов, выполняя GET-запросы к API Harbor: `/api/v2.0/projects/{project_name}/repositories`. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -148,7 +148,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
+Портал получает список всех проектов и репозиториев, которые содержатся в этих проектах, затем по каждому из доступных проектов выполняется GET-запрос к API Harbor: `/api/v2.0/projects/{project_name}/repositories/{repository_name}/artifacts`. Затем происходит сбор всех тегов по всем артефактам (поле `tags`) и результат возвращается в виде массива. Спецификация ответа доступна [в интерфейсе Harbor](https://goharbor.io/docs/main/working-with-projects/using-api-explorer/).
 
 ### Конфигурация
 
@@ -170,7 +170,7 @@ title: Типы источников данных
 
 ### Спецификация ответа
 
-Платформа возвращает все HelmReleases в кластере Kubernetes. Спецификация:
+Портал возвращает все HelmReleases в кластере Kubernetes. Спецификация:
 
 ```json
 [
@@ -253,11 +253,11 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Портал поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
-Платформа запрашивает информацию о настроенных ACL в Kafka. Полученные данные предоставляются в следующем формате:
+Портал запрашивает информацию о настроенных ACL в Kafka. Полученные данные предоставляются в следующем формате:
 
 ```json
 [
@@ -294,11 +294,11 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Портал поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
-Платформа осуществляет несколько запросов к Kafka с целью получения сведений о доступных брокерах. Полученные данные предоставляются в следующем формате:
+Портал выполняет несколько запросов к Kafka с целью получения сведений о доступных брокерах. Полученные данные предоставляются в следующем формате:
 
 ```json
 {
@@ -352,11 +352,11 @@ title: Типы источников данных
 
 ### Авторизация
 
-Платформа поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
+Портал поддерживает аутентификацию в Kafka с помощью [SASL/PLAIN](https://kafka.apache.org/documentation/#security_sasl_plain), [SASL/SCRAM](https://kafka.apache.org/documentation/#security_sasl_scram).
 
 ### Спецификация ответа
 
-Платформа осуществляет несколько запросов к Kafka с целью получения сведений о доступных топиках. Полученные данные предоставляются в следующем формате:
+Портал осуществляет несколько запросов к Kafka с целью получения сведений о доступных топиках. Полученные данные предоставляются в следующем формате:
 
 ```json
 {
@@ -522,7 +522,7 @@ FIELDS:
 
 ### Спецификация ответа
 
-Платформа формирует список доступных репозиториев, затем по каждому репозиторию выполняется GET-запрос к API Nexus: `/service/rest/v1/components`. [Спецификация ответа](https://help.sonatype.com/en/components-api.html).
+Портал формирует список доступных репозиториев, затем по каждому репозиторию выполняется GET-запрос к API Nexus: `/service/rest/v1/components`. [Спецификация ответа](https://help.sonatype.com/en/components-api.html).
 
 ### Конфигурация
 
@@ -542,7 +542,7 @@ FIELDS:
 
 ### Спецификация ответа
 
-Платформа выполняет GET-запрос к API Nexus: `/service/rest/v1/repositories`. [Спецификация ответа](https://help.sonatype.com/en/repositories-api.html).
+Портал выполняет GET-запрос к API Nexus: `/service/rest/v1/repositories`. [Спецификация ответа](https://help.sonatype.com/en/repositories-api.html).
 
 ### Конфигурация
 
@@ -562,7 +562,7 @@ FIELDS:
 
 ### Спецификация ответа
 
-Платформа выполняет GET-запрос к API Prometheus: `/api/v1/query`. [Спецификация ответа](https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries).
+Портал выполняет GET-запрос к API Prometheus: `/api/v1/query`. [Спецификация ответа](https://prometheus.io/docs/prometheus/latest/querying/api/#instant-queries).
 
 ### Конфигурация
 
@@ -583,7 +583,7 @@ FIELDS:
 
 ### Спецификация ответа
 
-Платформа выполняет GET-запрос к API SonarQube: `/api/projects/search`. Система собирает все доступные `components` и возвращает их в виде массива. [Спецификация `components`](https://next.sonarqube.com/sonarqube/web_api/api/projects/search).
+Портал выполняет GET-запрос к API SonarQube: `/api/projects/search`. Система собирает все доступные `components` и возвращает их в виде массива. [Спецификация `components`](https://next.sonarqube.com/sonarqube/web_api/api/projects/search).
 
 ### Конфигурация
 

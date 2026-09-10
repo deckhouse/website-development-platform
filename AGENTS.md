@@ -50,7 +50,7 @@ Do not wrap values inside YAML files in backticks — YAML values are already co
 
 - Use meaningful link anchors (avoid "here" or "тут").
 - Links to project pages must be relative.
-- Links to Deckhouse Kubernetes Platform docs must be absolute without domain (`/products/kubernetes-platform/documentation/v1/...`).
+- Links to Deckhouse Platform docs must be absolute without domain (`/products/kubernetes-platform/documentation/v1/...`).
 
 ### Code blocks
 
@@ -98,7 +98,7 @@ Key rules:
 - Use "веб-интерфейс"
 - Use `IP-адрес`
 - Use "файлы cookie"
-- Avoid "платформа Deckhouse"; use explicit product names (e.g. Deckhouse Kubernetes Platform)
+- Avoid "платформа Deckhouse"; use explicit product names (e.g. Deckhouse Platform)
 - Deckhouse module names must be in lowercase kebab-case.
 - Do not translate product names and abbreviations that the glossary keeps in EN (e.g. `RBAC`)
 
