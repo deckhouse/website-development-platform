@@ -1,24 +1,24 @@
 ---
 title: MCP server
-description: Connect external AI clients to Deckhouse Development Platform and use built-in and collection tools over MCP.
+description: Connect external AI clients to Deckhouse Development Portal and use built-in and collection tools over MCP.
 ---
 
 {{< alert level="warning" >}}
 Experimental feature
 {{< /alert >}}
 
-The MCP server is a Deckhouse Development Platform (DDP) component that implements the Model Context Protocol (MCP). It enables external AI clients, such as LM Studio and Claude Desktop, to interact with the platform.
-The server uses JSON-RPC 2.0 and provides tools for working with platform resources and proxying requests to external infrastructure services.
+The MCP server is a Deckhouse Development Portal (DDP, portal) component that implements the Model Context Protocol (MCP). It enables external AI clients, such as LM Studio and Claude Desktop, to interact with the portal.
+The server uses JSON-RPC 2.0 and provides tools for working with portal resources and proxying requests to external infrastructure services.
 
 MCP is an open protocol for connecting AI models to external systems. For details, refer to the [official MCP website](https://modelcontextprotocol.io/).
 
 {{< alert level="info" >}}
-In addition to built-in platform tools, the MCP server can call tools from [MCP collections](../mcp-management/#mcp-collections) available to the user. Configure MCP servers, custom MCP tools, and collections under [MCP management](../mcp-management/).
+In addition to built-in portal tools, the MCP server can call tools from [MCP collections](../mcp-management/#mcp-collections) available to the user. Configure MCP servers, custom MCP tools, and collections under [MCP management](../mcp-management/).
 {{< /alert >}}
 
 ## Available tools
 
-The following **built-in** platform tools are available. Tools of the `external` and `custom` types become available after you [synchronize the catalog](../mcp-management/#mcp-servers) and [add them to an MCP collection](../mcp-management/#mcp-collections).
+The following **built-in** portal tools are available. Tools of the `external` and `custom` types become available after you [synchronize the catalog](../mcp-management/#mcp-servers) and [add them to an MCP collection](../mcp-management/#mcp-collections).
 
 ### get_resources
 
@@ -127,7 +127,7 @@ Parameters:
 | `method`                | String | No       | HTTP method. Default: `GET`                                                     |
 | `body`                  | String | No       | Request body for POST, PUT, or PATCH as a JSON string                           |
 
-Credentials and headers are taken from the external service settings in the platform.
+Credentials and headers are taken from the external service settings in the portal.
 
 Returns: The result of the HTTP request to the external service.
 
@@ -191,9 +191,9 @@ Get a list of processes
 
 1. Get the connection parameters:
 
-   - Sign in to Deckhouse Development Platform.
+   - Sign in to Deckhouse Development Portal.
    - Get an API token under **Profile**.
-   - Note the platform URL, for example, `https://ddp.example.com`.
+   - Note the portal URL, for example, `https://ddp.example.com`.
 
 1. Configure LM Studio:
 
@@ -210,7 +210,7 @@ Get a list of processes
    - **Authentication**:
      - **Type**: `Bearer Token` or an equivalent that uses the `Authorization` header.
      - **Header**: `Authorization: Bearer <your_api_token>`.
-     - **Token**: Enter the platform API token from **Profile**.
+     - **Token**: Enter the portal API token from **Profile**.
 
 1. Verify the connection:
 
@@ -233,7 +233,7 @@ All calls use your access permissions.
 
 ### Connecting other MCP clients
 
-The Deckhouse Development Platform MCP server is compatible with any client that supports MCP over JSON-RPC 2.0.
+The Deckhouse Development Portal MCP server is compatible with any client that supports MCP over JSON-RPC 2.0.
 
 To connect a client:
 
@@ -241,7 +241,7 @@ To connect a client:
 1. **Protocol**: JSON-RPC 2.0.
 1. **Authentication**:
    - Header: `Authorization: Bearer YOUR_API_TOKEN`.
-   - `YOUR_API_TOKEN` is your platform API token from **Profile**.
+   - `YOUR_API_TOKEN` is your portal API token from **Profile**.
 1. **Method**: POST.
 
 ### MCP server request example
@@ -291,7 +291,7 @@ Request body:
 Authentication:
 
 - Every MCP server request must be authenticated with an API token from **Profile**. Pass the token in the `Authorization: Bearer <api_token>` header.
-- Access permissions match your platform user permissions.
+- Access permissions match your portal user permissions.
 
 Access permissions:
 
@@ -307,7 +307,7 @@ If you cannot connect to the server:
 
 - Verify that the URL is correct and ends with `/api/v2/mcp`.
 - Verify that the API token is valid.
-- Verify that the platform is accessible from your computer.
+- Verify that the portal is accessible from your computer.
 - Check the firewall and proxy settings.
 
 ### Authentication error
@@ -324,7 +324,7 @@ If a tool returns an access error:
 
 - Verify that your user has permission to access the requested resource.
 - Verify the resource name or identifier.
-- Ask the platform administrator to verify your access permissions.
+- Ask the portal administrator to verify your access permissions.
 
 ### No data returned
 
@@ -332,4 +332,4 @@ If no data is returned:
 
 - Verify the request parameters.
 - Verify that the resource exists and contains entities.
-- Check the platform logs for detailed error information.
+- Check the portal logs for detailed error information.

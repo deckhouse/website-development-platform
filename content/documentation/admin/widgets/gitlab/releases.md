@@ -18,7 +18,7 @@ and a description with Markdown support.
 
 ### Creating a release
 
-The widget lets you create a release in GitLab directly from Deckhouse Development Platform (DDP):
+The widget lets you create a release in GitLab directly from Deckhouse Development Portal (DDP):
 
 | Name         | Required | Description                                                                 | Default value |
 | ------------ | -------- | --------------------------------------------------------------------------- | ------------- |

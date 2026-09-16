@@ -1,7 +1,7 @@
 ---
 title: External services
 menuTitle: External services
-description: Configure authentication for external infrastructure services used by platform objects.
+description: Configure authentication for external infrastructure services used by portal objects.
 ---
 
 External services configure authentication for external infrastructure systems such as GitLab, Kubernetes, and DefectDojo.
@@ -26,7 +26,7 @@ An external service has the following parameters:
 
 ## Using external services
 
-External services can be connected to the following platform objects:
+External services can be connected to the following DDP (portal) objects:
 
 - actions;
 - widgets;
@@ -68,7 +68,7 @@ Each object can explicitly override parameters configured for the external servi
 When configuring an external service, specify the HTTP headers required for authentication. The following sections list supported external services, authentication methods, and required headers.
 
 {{< alert level="info" >}}
-The examples below show possible authentication methods for each service. Some services may support other methods. The platform supports any method that can be passed through HTTP headers.
+The examples below show possible authentication methods for each service. Some services may support other methods. The portal supports any method that can be passed through HTTP headers.
 {{< /alert >}}
 
 ### CodeScoring

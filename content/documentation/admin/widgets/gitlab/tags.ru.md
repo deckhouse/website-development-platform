@@ -17,7 +17,7 @@ weight: 70
 
 ### Создание тегов
 
-Виджет позволяет создавать теги в GitLab напрямую из Deckhouse Development Platform (DDP).
+Виджет позволяет создавать теги в GitLab напрямую из Deckhouse Development Portal (DDP).
 
 #### Конфигурация
 

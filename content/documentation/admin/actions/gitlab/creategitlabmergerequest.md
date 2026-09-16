@@ -47,7 +47,7 @@ values:
 
 ### How it works
 
-The platform:
+The portal:
 
 1. Clones the template repository used to generate the MR, based on its identifier (`source_project_id`). For more information, see [Implementation details](createrepositoryfromtemplate/#implementation-details).
 1. Reads the `values.yaml` file stored at the root of the repository and determines the default templating variables.

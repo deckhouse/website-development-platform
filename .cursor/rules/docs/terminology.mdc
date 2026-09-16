@@ -16,7 +16,7 @@ alwaysApply: true
   - use "веб-интерфейс", not `web-интерфейс` or `Web-интерфейс`;
   - use `IP-адрес`;
   - use "файлы cookie", not "cookie-файлы";
-  - avoid "платформа Deckhouse"; use product names explicitly (for example, Deckhouse Kubernetes Platform).
+  - avoid "платформа Deckhouse"; use product names explicitly (for example, Deckhouse Platform).
 - For mixed EN/RU or abbreviation+RU compound terms, use a hyphen:
   - `S3-бакета` (not `S3 бакета`);
   - `managed-сервис` (not `managed сервис`);

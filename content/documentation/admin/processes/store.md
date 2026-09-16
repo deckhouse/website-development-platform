@@ -45,7 +45,7 @@ In the process task configuration, rules are shown in read-only mode; to change 
 | Merge JSON (shallow) | Merges the JSON object from the source with the object at the path: top-level keys are overwritten, nested objects are replaced entirely |
 | Delete | Deletes the key at the path |
 
-For the **Write JSON**, **Append JSON**, and **Merge JSON** operations, it is convenient to use the `toJSON` function together with a direct reference to a response field, e.g. `{{ .response.items }}` — the platform will substitute the value without extra serialization.
+For the **Write JSON**, **Append JSON**, and **Merge JSON** operations, it is convenient to use the `toJSON` function together with a direct reference to a response field, e.g. `{{ .response.items }}` — the portal will substitute the value without extra serialization.
 
 ### Rule examples
 

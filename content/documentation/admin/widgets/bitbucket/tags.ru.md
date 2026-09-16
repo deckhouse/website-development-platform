@@ -25,7 +25,7 @@ weight: 20
 
 ### Создание тегов
 
-Виджет позволяет создавать теги в Bitbucket напрямую из Deckhouse Development Platform (DDP).
+Виджет позволяет создавать теги в Bitbucket напрямую из Deckhouse Development Portal (DDP).
 
 #### Конфигурация
 

@@ -18,7 +18,7 @@ Access to **AI** is controlled by the global `view:ai-page` permission. Separate
 
 The AI assistant displays the following tool types:
 
-- `internal` — Built-in platform tools described in the [MCP server documentation](../mcp-server/).
+- `internal` — Built-in portal tools described in the [MCP server documentation](../mcp-server/).
 - `external` — Tools retrieved from a connected upstream MCP server.
 - `custom` — Custom MCP tools.
 
@@ -26,7 +26,7 @@ Tools of the `external` and `custom` types can be called only if they belong to 
 
 ## MCP servers
 
-Connect an upstream MCP server to import its tools into the platform catalog.
+Connect an upstream MCP server to import its tools into the portal catalog.
 
 1. Go to **AI** → **MCP** → **MCP servers**.
 1. Select **Connect**.
@@ -84,4 +84,4 @@ The **Catalog** section displays all tools available to the current user based o
 Tools from MCP collections are used as follows:
 
 - In the [AI assistant](../ai-assistant/#mcp-tools), **Available tools** displays built-in tools and tools from available collections.
-- The platform [MCP server](../mcp-server/) returns and calls the same collection tools available to the user based on their RBAC permissions.
+- The portal [MCP server](../mcp-server/) returns and calls the same collection tools available to the user based on their RBAC permissions.

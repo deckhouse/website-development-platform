@@ -4,7 +4,7 @@ description: Safely re-encrypt stored credentials and replace the DDP Backend en
 weight: 35
 ---
 
-Deckhouse Development Platform (DDP) lets you securely replace the encryption key (`security.secretKey`) without losing credentials or other encrypted values. The operation runs from the web interface and re-encrypts all data stored with the current key.
+Deckhouse Development Portal (DDP) lets you securely replace the encryption key (`security.secretKey`) without losing credentials or other encrypted values. The operation runs from the web interface and re-encrypts all data stored with the current key.
 
 ## Reasons to rotate the key
 

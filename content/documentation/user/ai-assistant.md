@@ -7,7 +7,7 @@ description: Configure AI providers, credentials, chats, context, and MCP tools 
 Experimental feature
 {{< /alert >}}
 
-The AI assistant is an intelligent helper built into Deckhouse Development Platform (DDP). It answers questions about the platform, analyzes catalog data, and performs tasks using Model Context Protocol (MCP) tools.
+The AI assistant is an intelligent helper built into Deckhouse Development Portal (DDP, portal). It answers questions about the portal, analyzes catalog data, and performs tasks using Model Context Protocol (MCP) tools.
 
 The AI assistant uses configurable AI providers to process requests. It supports various language models, including OpenAI GPT, Ollama, and any models available through a compatible REST API.
 
@@ -60,7 +60,7 @@ Here, `Authorization` is the header, `credentials` is the encrypted credential s
 
 ## Response field
 
-The **Response field** defines the path to the model response text in the JSON API response body, for example, `choices.0.message.content`. If the field is empty, the platform attempts to locate the response text automatically.
+The **Response field** defines the path to the model response text in the JSON API response body, for example, `choices.0.message.content`. If the field is empty, the portal attempts to locate the response text automatically.
 
 {{< alert level="info" >}}
 To determine the path, send a test API request, open the response, and locate the field containing the model response text in the JSON body.
@@ -188,7 +188,7 @@ Sending context increases token usage when interacting with the model.
 
 ### MCP tools
 
-The AI assistant uses built-in platform tools and tools from [MCP collections](../mcp-management/#mcp-collections) available to the user.
+The AI assistant uses built-in portal tools and tools from [MCP collections](../mcp-management/#mcp-collections) available to the user.
 
 Expand **Available tools** in the chat panel to view each tool's name, type (`internal`, `external`, or `custom`), arguments, and example. Select an example to insert its text into the input field. The model can call multiple tools in one request.
 

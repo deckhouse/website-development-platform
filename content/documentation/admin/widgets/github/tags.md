@@ -8,9 +8,9 @@ The widget displays GitHub repository tags with commit information, including th
 
 ## Account and action initiator
 
-Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
+Requests to GitHub use the token from the credentials of the DDP (portal) user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected portal user's credentials are used instead of the current user's credentials.
 
-For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the platform user who performed the action, as defined in the Deckhouse Development Platform (DDP) profile. If no name is specified, the email address may be used.
+For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the portal user who performed the action, as defined in the Deckhouse Development Portal (DDP) profile. If no name is specified, the email address may be used.
 
 For a lightweight tag without a description, no separate Git tag author is set. The tag is created as a reference to a commit.
 

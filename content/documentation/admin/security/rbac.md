@@ -1,10 +1,10 @@
 ---
 title: Role model
-description: Roles, permissions, bindings, ownership, and access control in Deckhouse Development Platform.
+description: Roles, permissions, bindings, ownership, and access control in Deckhouse Development Portal.
 weight: 20
 ---
 
-The Deckhouse Development Platform (DDP) role model defines which actions users can perform in the platform and which objects they can access. The model controls access to the API and web interface at both the platform and individual object levels.
+The Deckhouse Development Portal (DDP, portal) role model defines which actions users can perform in the portal and which objects they can access. The model controls access to the API and web interface at both the portal and individual object levels.
 
 The role model is implemented in DDP Backend and uses a PostgreSQL database to store roles, permissions, and their relationships.
 
@@ -19,14 +19,14 @@ The role model consists of the following components:
 Each DDP object has its own permissions, roles, and role bindings. Global roles, permissions, and role bindings allow operations at the platform level.
 
 {{< alert level="info" >}}
-Without the required permissions, a user cannot perform operations in the platform. The system checks permissions for every operation.
+Without the required permissions, a user cannot perform operations in the portal. The system checks permissions for every operation.
 {{< /alert >}}
 
 ## Object types and permissions
 
 ### Global permissions
 
-Global permissions apply across the platform and grant access to all objects of a specific type.
+Global permissions apply across the portal and grant access to all objects of a specific type.
 
 Resources:
 - `create:resources` — create resources.
@@ -137,7 +137,7 @@ The `update:team-variables` permission allows users to edit variables only for t
 
 #### Page view permissions
 
-Permissions with the `view:` prefix control access to sections of the platform interface:
+Permissions with the `view:` prefix control access to sections of the portal interface:
 
 - `view:admin-page` — access the "Administration" section.
 - `view:self-service-page` — access the "Self-Service" section.
@@ -174,7 +174,8 @@ For entities:
 #### MCP collections
 
 For MCP collections:
-- `use:mcp-collections` — call collection tools in the AI assistant and through the platform MCP server.
+
+- `use:mcp-collections` — call collection tools in the AI assistant and through the portal MCP server.
 - `edit:role-bindings` — edit role bindings for the collection.
 
 For other objects, including actions, automations, processes, webhooks, widgets, dashboards, and external services:
@@ -216,7 +217,7 @@ The role model is hierarchical. When processing a request, DDP Backend checks ac
 If the required permission is not found at any level, the action is denied.
 
 {{< alert level="info" >}}
-Ownership is checked only when `ownerIsAdmin` is enabled in the platform configuration. For details, see [Object ownership](#object-ownership).
+Ownership is checked only when `ownerIsAdmin` is enabled in the portal configuration. For details, see [Object ownership](#object-ownership).
 {{< /alert >}}
 
 ## Object ownership
@@ -241,12 +242,12 @@ The `ownerIsAdmin` option controls access rights for object owners.
 - "Disabled (`false`)" — object owners receive no automatic permissions; roles alone control access.
 
 {{< alert level="info" >}}
-A platform administrator must configure `ownerIsAdmin` in the configuration file. The option is disabled by default.
+A portal administrator must configure `ownerIsAdmin` in the configuration file. The option is disabled by default.
 {{< /alert >}}
 
 ### Automatic owner assignment on creation
 
-When a user creates an object, such as an action, data source, widget, or resource, the platform automatically assigns the current user as its owner. The owner can be reassigned, or the object can be created without an owner.
+When a user creates an object, such as an action, data source, widget, or resource, the portal automatically assigns the current user as its owner. The owner can be reassigned, or the object can be created without an owner.
 
 ### Ownership examples
 
@@ -270,7 +271,7 @@ If a team owns an object and `ownerIsAdmin` is enabled, all team members receive
 
 ## Default role
 
-The platform allows one global role to be set as the default. Its permissions apply to all authenticated users. Configure the default role under "Administration" → "Access control" by using the switch in the "Roles" table.
+The portal allows one global role to be set as the default. Its permissions apply to all authenticated users. Configure the default role under "Administration" → "Access control" by using the switch in the "Roles" table.
 
 Only a global role can be set as the default.
 
@@ -389,7 +390,7 @@ Team membership is synchronized from the external authentication system, Dex.
 
 ### Role presets
 
-The platform provides role presets for common access scenarios.
+The portal provides role presets for common access scenarios.
 
 #### Global presets
 
@@ -425,7 +426,7 @@ The platform provides role presets for common access scenarios.
 
 - Type: `Global`.
 - Permissions: full access to the catalog and the "Self-Service" page.
-- Purpose: engineers who configure the platform, including processes, data sources, and dashboards.
+- Purpose: engineers who configure the portal, including processes, data sources, and dashboards.
 
 #### Process presets
 

@@ -4,7 +4,7 @@ description: Widget purpose, scope, credentials, and configuration principles
 weight: 10
 ---
 
-Widgets are cards that visualize data stored in the platform and information from infrastructure services. Unlike data sources, widgets retrieve information from infrastructure services when they are displayed in the interface.
+Widgets are cards that visualize data stored in DDP (portal) and information from infrastructure services. Unlike data sources, widgets retrieve information from infrastructure services when they are displayed in the interface.
 
 Widgets can be added to dashboards. Dashboards can be linked to:
 

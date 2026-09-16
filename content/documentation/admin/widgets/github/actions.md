@@ -8,9 +8,9 @@ The widget displays GitHub Actions runs in a repository. It also displays jobs a
 
 ## Account and action initiator
 
-Requests to GitHub use the token from the credentials of the platform user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected platform user's credentials are used instead of the current user's credentials.
+Requests to GitHub use the token from the credentials of the DDP (portal) user on whose behalf the action is invoked. If **Select an account for the widget** is enabled in the widget settings, the selected portal user's credentials are used instead of the current user's credentials.
 
-When a workflow is started, canceled, or restarted, or when artifacts and logs are accessed, GitHub identifies the GitHub account that owns the token as the initiator. The login displayed in GitHub may differ from the name in the Deckhouse Development Platform (DDP) profile.
+When a workflow is started, canceled, or restarted, or when artifacts and logs are accessed, GitHub identifies the GitHub account that owns the token as the initiator. The login displayed in GitHub may differ from the name in the Deckhouse Development Portal (DDP) profile.
 
 ## Configuration
 

@@ -1,6 +1,6 @@
 ---
 title: График
-description: Настройка графиков для агрегации и визуализации данных объектов Deckhouse Development Platform.
+description: Настройка графиков для агрегации и визуализации данных объектов Deckhouse Development Portal.
 weight: 130
 ---
 

@@ -17,7 +17,7 @@ weight: 50
 
 ### Запуск пайплайнов
 
-Виджет позволяет запускать пайплайны в GitLab напрямую из Deckhouse Development Platform (DDP).
+Виджет позволяет запускать пайплайны в GitLab напрямую из Deckhouse Development Portal (DDP).
 
 #### Конфигурация
 

@@ -3,11 +3,11 @@ title: Installation
 weight: 11
 ---
 
-Deckhouse Development Platform can be installed in two ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster) or with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+Deckhouse Development Portal can be installed in two ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster) or with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
 
 ## Installation with internal instances
 
-To install Deckhouse Development Platform, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Kubernetes Platform. You can use [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
+To install Deckhouse Development Portal, enable the `development-platform` module in your Kubernetes cluster running on Deckhouse Platform. You can use [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig) with minimal settings:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -19,14 +19,14 @@ spec:
   version: 1
   settings:
     rbac:
-      superAdminEmail: admin@deckhouse.io # Super administrator email with full access to platform configuration. Can be changed at any time.
+      superAdminEmail: admin@deckhouse.io # Super administrator email with full access to portal configuration. Can be changed at any time.
     security:
       secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials.
 ```
 
-After installation, the Deckhouse Development Platform web UI will be available at `https://ddp.<your domain>`.
+After installation, the Deckhouse Development Portal web UI will be available at `https://ddp.<your domain>`.
 
-When you do not specify `postgres` and `redis` sections, the platform deploys internal PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
+When you do not specify `postgres` and `redis` sections, the portal deploys internal PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
 
 ### Configuring internal instances (optional)
 
@@ -57,7 +57,7 @@ spec:
 
 ## Installation with external instances
 
-This installation option is recommended for production: the platform connects to PostgreSQL and Redis deployed outside the cluster, which improves resilience and simplifies backup and scaling of databases.
+This installation option is recommended for production: the portal connects to PostgreSQL and Redis deployed outside the cluster, which improves resilience and simplifies backup and scaling of databases.
 
 ### Connecting external PostgreSQL
 
@@ -87,7 +87,7 @@ spec:
 
 #### pg_trgm extension
 
-The platform requires the PostgreSQL `pg_trgm` extension. If you use an external PostgreSQL instance, enable it before starting DDP: connect to the database as a user with permission to create extensions and run:
+The portal requires the PostgreSQL `pg_trgm` extension. If you use an external PostgreSQL instance, enable it before starting DDP: connect to the database as a user with permission to create extensions and run:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_trgm;

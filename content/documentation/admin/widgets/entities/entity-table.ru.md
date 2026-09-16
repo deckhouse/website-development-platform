@@ -1,10 +1,10 @@
 ---
 title: Таблица сущностей
-description: Настройка виджета для отображения сущностей Deckhouse Development Platform в таблице.
+description: Настройка виджета для отображения сущностей Deckhouse Development Portal в таблице.
 weight: 30
 ---
 
-Виджет отображает сущности, созданные в Deckhouse Development Platform (DDP), в виде таблицы.
+Виджет отображает сущности, созданные в Deckhouse Development Portal (DDP), в виде таблицы.
 
 ## Конфигурация
 

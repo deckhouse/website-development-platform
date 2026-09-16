@@ -3,11 +3,11 @@ title: Templating
 description: Go templates in DDP, built-in and sprig functions, global and team variables, action, entity, process, and workflow contexts, process store.
 ---
 
-Deckhouse Development Platform supports templating based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax): expressions in curly braces are substituted into configuration fields where this is supported (actions, widgets, data sources, etc.). Below are the built-in functions and context variables (`{{ .property.* }}`, `{{ .entity.* }}`, and others).
+Deckhouse Development Portal (portal) supports templating based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax): expressions in curly braces are substituted into configuration fields where this is supported (actions, widgets, data sources, etc.). Below are the built-in functions and context variables (`{{ .property.* }}`, `{{ .entity.* }}`, and others).
 
 In addition to the standard functions, the following are available:
 
-* Built-in platform functions.
+* Built-in portal functions.
 * Functions from the [sprig](https://masterminds.github.io/sprig/) library.
 
 {{< alert level="info" >}}
