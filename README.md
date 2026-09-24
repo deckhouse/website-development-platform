@@ -1,6 +1,6 @@
-# Deckhouse Development Platform documentation
+# Deckhouse Development Portal documentation
 
-This is the source for the Deckhouse Development Platform documentation website.  
+This is the source for the Deckhouse Development Portal documentation website.  
 
 The project uses [Hugo](https://gohugo.io/) SSG and the [hugo-web-product-module](https://github.com/deckhouse/hugo-web-product-module/) module for a theme.
 
