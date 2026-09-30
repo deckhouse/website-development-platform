@@ -3,7 +3,7 @@ title: Установка
 weight: 11
 ---
 
-Deckhouse Development Portal (DDP, портал) можно установить двумя способами: с [внешними инстансами](#установка-с-внешними-инстансами) PostgreSQL и Redis (подключение к уже развёрнутым базам данных вне кластера) или с [внутренними инстансами](#установка-с-внутренними-инстансами) (развёртывание PostgreSQL и Redis внутри кластера). Внешние инстансы рекомендуются для production, внутренние подходят для тестов и пилотной эксплуатации.
+Deckhouse Development Portal (DDP, портал) можно установить тремя способами: с [внешними инстансами](#установка-с-внешними-инстансами) PostgreSQL и Redis (подключение к уже развёрнутым базам данных вне кластера), с [внутренними инстансами](#установка-с-внутренними-инстансами) (развёртывание PostgreSQL и Redis внутри кластера) или с [managed-инстансами](#установка-с-managed-инстансами) (создание баз данных с помощью модулей Deckhouse). Внешние инстансы рекомендуются для production, внутренние подходят для тестов и пилотной эксплуатации.
 
 ## Установка с внутренними инстансами
 
@@ -93,7 +93,7 @@ spec:
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
-При установке с внутренними инстансами расширение создаётся автоматически.
+При установке с внутренними и managed-инстансами расширение создаётся автоматически.
 
 ### Подключение внешнего Redis
 
@@ -151,3 +151,60 @@ spec:
       database: "0"
       password: secure_redis_password
 ```
+
+## Установка с managed-инстансами
+
+В режиме `managed` портал создаёт экземпляры PostgreSQL, Valkey (совместим с Redis) и ClickHouse с помощью модулей Deckhouse `managed-postgres`, `managed-valkey` и `managed-clickhouse`. Режим задаётся для каждого инстанса отдельно, базы данных портал создаёт автоматически. Включите нужные модули до установки портала:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: managed-postgres  # Так же для managed-valkey и managed-clickhouse.
+spec:
+  enabled: true
+```
+
+Если модуль не включён, портал не установится, а в статусе модуля `development-platform` появится ошибка с названием модуля, который нужно включить.
+
+Пример конфигурации портала:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    postgres:
+      mode: managed
+    redis:
+      mode: managed
+    clickhouse:
+      mode: managed
+```
+
+Ресурсы экземпляра задаются в параметре `instance` каждого инстанса. Структура совпадает с `spec.instance` ресурсов managed-модулей, допустимые значения ограничивает класс, указанный в `className` (по умолчанию — `default`). Например:
+
+```yaml
+    postgres:
+      mode: managed
+      instance:
+        className: default
+        cpu:
+          cores: 2
+          coreFraction: 50              # Для redis и clickhouse — строка, например "50%".
+        memory:
+          size: 2Gi
+        persistentVolumeClaim:
+          size: 20Gi
+          storageClassName: replicated  # Необязательно, по умолчанию — StorageClass кластера.
+```
+
+Размер диска можно только увеличить, и только если StorageClass поддерживает расширение томов.
