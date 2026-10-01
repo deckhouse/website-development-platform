@@ -3,7 +3,7 @@ title: Installation
 weight: 11
 ---
 
-Deckhouse Development Portal can be installed in two ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster) or with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+Deckhouse Development Portal can be installed in three ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster), with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster), or with [managed instances](#installation-with-managed-instances) (creating databases with Deckhouse modules). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
 
 ## Installation with internal instances
 
@@ -93,7 +93,7 @@ The portal requires the PostgreSQL `pg_trgm` extension. If you use an external P
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
-If you deploy the built-in PostgreSQL instance, the extension is created automatically.
+If you deploy the built-in or managed PostgreSQL instance, the extension is created automatically.
 
 ### Connecting external Redis
 
@@ -151,3 +151,60 @@ spec:
       database: "0"
       password: secure_redis_password
 ```
+
+## Installation with managed instances
+
+In the `managed` mode, the portal creates PostgreSQL, Valkey (Redis-compatible) and ClickHouse instances using the Deckhouse modules `managed-postgres`, `managed-valkey` and `managed-clickhouse`. The mode is set separately for each instance, and the portal creates the databases automatically. Enable the required modules before installing the portal:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: managed-postgres  # The same for managed-valkey and managed-clickhouse.
+spec:
+  enabled: true
+```
+
+If a module is not enabled, the portal is not installed, and the `development-platform` module status shows an error with the name of the module to enable.
+
+Example of the portal configuration:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    postgres:
+      mode: managed
+    redis:
+      mode: managed
+    clickhouse:
+      mode: managed
+```
+
+Instance resources are set in the `instance` parameter of each instance. Its structure matches `spec.instance` of the managed module resources; the allowed values are limited by the class specified in `className` (`default` by default). For example:
+
+```yaml
+    postgres:
+      mode: managed
+      instance:
+        className: default
+        cpu:
+          cores: 2
+          coreFraction: 50              # For redis and clickhouse, a string, for example "50%".
+        memory:
+          size: 2Gi
+        persistentVolumeClaim:
+          size: 20Gi
+          storageClassName: replicated  # Optional, the cluster default StorageClass is used by default.
+```
+
+The disk size can only be increased, and only if the StorageClass supports volume expansion.
