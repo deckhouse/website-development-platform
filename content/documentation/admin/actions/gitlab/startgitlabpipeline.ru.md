@@ -29,6 +29,10 @@ variables:
 | variables.key               | Да               | Название переменной                                                          |
 | variables.value             | Да               | Значение переменной                                                          |
 
+### Ответ
+
+Ответ действия — объект созданного пайплайна GitLab с полями `id`, `iid`, `status`, `ref`, `web_url` и другими. Идентификатор `{{ .response.id }}` используется для отслеживания состояния пайплайна действием [GetGitlabPipeline](getgitlabpipeline/).
+
 ### Примечание
 
 Действие осуществляет POST-запрос по URL: `/api/v4/projects/:id/pipeline`.

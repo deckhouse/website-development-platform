@@ -119,6 +119,22 @@ MCP:
 - `update:team-variables` — редактирование переменных команд.
 - `edit:team-filter-rules` — настройка правил фильтрации групп при синхронизации из Dex.
 
+Наборы данных:
+- `read:seeds` — просмотр наборов данных.
+- `apply:seeds` — применение наборов данных, мастер первоначальной настройки и баннер первоначальной настройки на главной.
+- `delete:seeds` — удаление наборов данных.
+
+Правила маппинга главной:
+- `create:home-mapping-sets` — создание наборов маппинга главной.
+- `update:home-mapping-sets` — изменение наборов маппинга главной, выбор набора по умолчанию, включение и выключение главной. Подробнее — [в документации по правилам маппинга](../home/mapping/).
+- `delete:home-mapping-sets` — удаление наборов маппинга главной.
+
+Шаблоны микросервисов:
+- `read:template-packs` — просмотр версий шаблонов: галерея создания микросервиса и уведомления о новой версии шаблона.
+- `edit:template-packs` — отзыв, возврат и удаление версий шаблонов.
+- `read:template-registries` — просмотр подключений, настроек и запусков синхронизации реестра шаблонов.
+- `edit:template-registries` — изменение подключений и настроек реестра шаблонов, запуск синхронизации. Подробнее — [в документации по реестру шаблонов](../templates/registry/).
+
 Иконки:
 - `create:icons` — создание иконок.
 - `delete:icons` — удаление иконок.
@@ -407,7 +423,7 @@ MCP:
   - `read:actions`, `read:automations`, `read:dashboards`.
   - `read:datasources`, `read:entities`, `read:external-services`.
   - `read:processes`, `read:resource-relations`, `read:resources`.
-  - `read:seeds`, `read:system-alerts`, `read:trusted-certificates`, `read:webhooks`.
+  - `read:seeds`, `read:system-alerts`, `read:template-packs`, `read:trusted-certificates`, `read:webhooks`.
   - `read:widgets`, `read:workflows`.
   - `read:audit-logs`, `view:admin-page`, `view:self-service-page`.
 - Назначение: пользователи с правами только на просмотр.
@@ -417,7 +433,7 @@ MCP:
 - Тип: `глобальные`.
 - Разрешения:
   - `read:actions`, `read:dashboards`, `read:external-services`.
-  - `read:processes`, `read:widgets`, `read:workflows`.
+  - `read:processes`, `read:template-packs`, `read:widgets`, `read:workflows`.
   - `run:actions`, `run:widget-actions`, `control:processes`.
   - `update:team-variables`.
 - Назначение: разработчики, которым нужен доступ к просмотру информации и выполнению действий, но не требуется доступ к созданию, изменению или удалению объектов. Разработчики видят только те сущности, к которым им предоставлен доступ через привязки ролей на уровне ресурсов или сущностей.
