@@ -5,7 +5,9 @@ weight: 11
 
 Deckhouse Development Portal (DDP, портал) можно установить тремя способами: с [внешними инстансами](#установка-с-внешними-инстансами) PostgreSQL и Redis (подключение к уже развёрнутым базам данных вне кластера), с [внутренними инстансами](#установка-с-внутренними-инстансами) (развёртывание PostgreSQL и Redis внутри кластера) или с [managed-инстансами](#установка-с-managed-инстансами) (создание баз данных с помощью модулей Deckhouse). Внешние инстансы рекомендуются для production, внутренние подходят для тестов и пилотной эксплуатации.
 
-Дополнительно портал может использовать [ClickHouse](#clickhouse) — хранилище для больших объёмов данных. По умолчанию он отключён.
+Дополнительно портал может использовать [ClickHouse](#clickhouse) — хранилище для больших объёмов данных.
+
+Режим задаётся параметром `mode` отдельно для PostgreSQL, Redis и ClickHouse: `internal`, `external` или `managed`. Параметр обязателен в секциях `postgres`, `redis` и `clickhouse`.
 
 ## Установка с внутренними инстансами
 
@@ -18,21 +20,27 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io # Email супер-администратора, который будет иметь полный доступ к конфигурации портала. Может быть изменен в любой момент.
     security:
       secretKey: "16charssecretkey" # Секретный ключ для шифрования приватных данных. При изменении потребуется перегенерация токенов доступа к API портала и повторное заполнение учётных данных пользователями.
+    postgres:
+      mode: internal # Режим развёртывания: internal, external или managed.
+    redis:
+      mode: internal
+    clickhouse:
+      mode: internal
 ```
 
 После установки веб-интерфейс DDP будет доступен по адресу `https://ddp.<ваш домен>`.
 
-При развёртывании без указания секций `postgres` и `redis` портал разворачивает внутренние инстансы PostgreSQL и Redis внутри кластера. Такой сценарий не рекомендуется для production и подходит только для тестов и пилотной эксплуатации; для промышленной эксплуатации используйте [внешние ресурсы](#установка-с-внешними-инстансами).
+При `mode: internal` портал разворачивает PostgreSQL, Redis и ClickHouse внутри кластера. Такой сценарий не рекомендуется для production и подходит только для тестов и пилотной эксплуатации; для промышленной эксплуатации используйте [внешние ресурсы](#установка-с-внешними-инстансами).
 
 ### Настройка внутренних инстансов (опционально)
 
-Если вы используете внутренние инстансы, можно явно указать `mode: internal` и задать образы из приватного Docker registry:
+Для внутренних инстансов можно задать образы из приватного Docker registry:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -41,7 +49,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -53,6 +61,8 @@ spec:
     redis:
       mode: internal
       image: registry.example.com/redis:7.4.0    # Образ Redis из приватного registry.
+    clickhouse:
+      mode: internal
     additionalImagePullSecrets:
       - "custom-registry-secret"                 # (опционально) дополнительные секреты для доступа к приватному registry.
 ```
@@ -72,7 +82,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -85,6 +95,10 @@ spec:
       database: ddp               # Название базы данных.
       username: ddp_user          # Имя пользователя для подключения.
       password: secure_password   # Пароль для подключения.
+    redis:
+      mode: internal
+    clickhouse:
+      mode: internal
 ```
 
 #### Расширение pg_trgm
@@ -108,18 +122,22 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
     security:
       secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
     redis:
       mode: external
       host: redis.example.com       # Имя хоста или IP-адрес сервера Redis.
       port: 6379                    # Порт Redis (по умолчанию 6379).
       database: "0"                 # Индекс базы данных Redis (по умолчанию "0").
       password: redis_password      # Пароль для подключения (необязательно; если Redis без пароля — оставить пустым).
+    clickhouse:
+      mode: internal
 ```
 
 ### Полный пример с внешними инстансами
@@ -133,7 +151,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -152,13 +170,15 @@ spec:
       port: 6379
       database: "0"
       password: secure_redis_password
+    clickhouse:
+      mode: external                # Без параметра host портал работает без ClickHouse.
 ```
 
 ## ClickHouse
 
-ClickHouse — хранилище для больших объёмов данных, например [истории изменений параметров сущностей](../../user/catalog/#история-параметров). По умолчанию ClickHouse не развёртывается и не подключается — портал работает без него, но зависящие от него возможности остаются недоступными.
+ClickHouse — хранилище для больших объёмов данных, например [истории изменений параметров сущностей](../../user/catalog/#история-параметров). Портал может работать без ClickHouse: укажите `mode: external` и не задавайте параметр `host`. Зависящие от ClickHouse возможности при этом недоступны.
 
-ClickHouse можно развернуть внутри кластера в составе модуля либо подключить внешний инстанс. Для промышленной эксплуатации используйте внешний инстанс.
+ClickHouse можно развернуть внутри кластера в составе модуля, подключить внешний инстанс или создать [managed-инстанс](#установка-с-managed-инстансами). Для промышленной эксплуатации используйте внешний инстанс.
 
 ### Внутренний инстанс ClickHouse
 
@@ -171,12 +191,16 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
     security:
       secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
+    redis:
+      mode: internal
     clickhouse:
       mode: internal
       database: ddp                  # Название базы данных, создаётся при первом запуске сервера.
@@ -198,12 +222,16 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
     security:
       secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
+    redis:
+      mode: internal
     clickhouse:
       mode: external
       host: clickhouse.example.com  # Имя хоста или IP-адрес сервера ClickHouse.
@@ -243,7 +271,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
