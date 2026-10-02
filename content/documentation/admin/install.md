@@ -3,7 +3,9 @@ title: Installation
 weight: 11
 ---
 
-Deckhouse Development Portal can be installed in three ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster), with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster), or with [managed instances](#installation-with-managed-instances) (creating databases with Deckhouse modules). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+Deckhouse Development Portal can be installed in three ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster), with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster), or with [managed instances](#installation-with-managed-instances) (creating databases with Deckhouse modules). External instances are recommended for production; internal instances are suitable for testing and pilot use.
+
+The mode is set by the `mode` parameter separately for PostgreSQL, Redis and ClickHouse: `internal`, `external` or `managed`. The parameter is required in the `postgres`, `redis` and `clickhouse` sections. The portal can also use ClickHouse to store large volumes of data, such as the history of entity property changes. To run the portal without ClickHouse, set `clickhouse.mode: external` and do not set `clickhouse.host`; the features that depend on ClickHouse are unavailable in this case.
 
 ## Installation with internal instances
 
@@ -16,21 +18,27 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io # Super administrator email with full access to portal configuration. Can be changed at any time.
     security:
       secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials.
+    postgres:
+      mode: internal # Deployment mode: internal, external or managed.
+    redis:
+      mode: internal
+    clickhouse:
+      mode: internal
 ```
 
 After installation, the Deckhouse Development Portal web UI will be available at `https://ddp.<your domain>`.
 
-When you do not specify `postgres` and `redis` sections, the portal deploys internal PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
+With `mode: internal`, the portal deploys PostgreSQL, Redis and ClickHouse inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
 
 ### Configuring internal instances (optional)
 
-If you use internal instances, you can explicitly set `mode: internal` and specify images from a private Docker registry:
+For internal instances, you can specify images from a private Docker registry:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -39,7 +47,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -51,6 +59,8 @@ spec:
     redis:
       mode: internal
       image: registry.example.com/redis:7.4.0    # Redis image from private registry.
+    clickhouse:
+      mode: internal
     additionalImagePullSecrets:
       - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
 ```
@@ -70,7 +80,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -83,6 +93,10 @@ spec:
       database: ddp               # Database name.
       username: ddp_user          # Connection username.
       password: secure_password   # Connection password.
+    redis:
+      mode: internal
+    clickhouse:
+      mode: internal
 ```
 
 #### pg_trgm extension
@@ -106,18 +120,22 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
     security:
       secretKey: "16charssecretkey"
+    postgres:
+      mode: internal
     redis:
       mode: external
       host: redis.example.com       # Redis server hostname or IP address.
       port: 6379                    # Redis port (default 6379).
       database: "0"                 # Redis database index (default "0").
       password: redis_password      # Connection password (optional; leave empty if Redis has no password).
+    clickhouse:
+      mode: internal
 ```
 
 ### Full example with external instances
@@ -131,7 +149,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
@@ -150,6 +168,8 @@ spec:
       port: 6379
       database: "0"
       password: secure_redis_password
+    clickhouse:
+      mode: external                # Without the host parameter, the portal runs without ClickHouse.
 ```
 
 ## Installation with managed instances
@@ -176,7 +196,7 @@ metadata:
   name: development-platform
 spec:
   enabled: true
-  version: 1
+  version: 2
   settings:
     rbac:
       superAdminEmail: admin@deckhouse.io
