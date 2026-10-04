@@ -5,7 +5,7 @@ weight: 10
 
 {{< alert level="info" >}}
 The action does not use credentials. Authenticate in CodeScoring through the HTTP headers of the action:
-add the authentication header in the [URL and HTTP headers](../../overview/#url-and-http-headers) settings.
+add the authentication header in the [URL and HTTP headers](../overview/#url-and-http-headers) settings.
 {{< /alert >}}
 
 CreateCodeScoringProject — creates a new project in CodeScoring.
