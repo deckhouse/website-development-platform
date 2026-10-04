@@ -11,9 +11,9 @@ Use the `{{from}}` and `{{to}}` placeholders in the query.
 
 | Name          | Required | Description                                                                                       | Default value |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------- | ------------- |
-| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range                        | —             |
+| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range. The widget substitutes them with the interval boundaries in UTC in the `YYYY-MM-DD hh:mm:ss` format without quotes | —             |
 | Database      | No       | ClickHouse database name passed in the `X-ClickHouse-Database` header                             | —             |
-| Default range | No       | Range used when opening or refreshing the widget if no range is specified in the query parameters | Last hour     |
+| Default interval | No       | Interval used when opening or refreshing the widget if no interval is specified in the query parameters | Last hour     |
 | Page size     | Yes      | Number of rows loaded by each query                                                               | 50            |
 
 ## Authorization

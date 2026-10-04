@@ -3,7 +3,6 @@ title: AssignNexusRole
 weight: 70
 ---
 
-
 {{< alert level="info" >}}
 Для выполнения действия необходимо наличие токена — строки base64(`admin:password`), используемой как Basic Auth при запросах к Nexus.
 {{< /alert >}}

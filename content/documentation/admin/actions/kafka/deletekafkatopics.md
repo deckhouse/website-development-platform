@@ -3,11 +3,11 @@ title: DeleteKafkaTopics
 weight: 20
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `user` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `user` — the username under which the action runs.
+- `password` — the password for that user.
 {{< /alert >}}
 
 DeleteKafkaTopics — deletes existing topics in Kafka.

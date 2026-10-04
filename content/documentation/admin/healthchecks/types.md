@@ -1,12 +1,14 @@
 ---
 title: Health check types
+description: Health check rule types in DDP — Property, Prometheus, GitLab Pipeline, DefectDojo, CodeScoring, SonarQube, and URL.
+weight: 20
 ---
 
 ## Property
 
 A `Property` rule checks whether a specific entity parameter matches a template expression.
 
-The rule configuration contains one parameter: an expression written in [Go template syntax](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
+The rule configuration contains one parameter: an expression written in [Go template syntax](https://pkg.go.dev/text/template).
 
 Expression examples:
 
@@ -19,7 +21,7 @@ A Prometheus rule checks whether a specified metric meets a configured threshold
 
 Templating is supported. For example:
 
-```go
+```promql
 avg(ingress_nginx_detail_request_seconds_sum{location="/{{ .entity.slug }}"})
 ```
 
@@ -47,7 +49,7 @@ A `GitlabPipeline` rule checks whether the latest GitLab pipeline for the select
 
 All text fields support templating. For example, specify the following expression in the `Ref` field:
 
-```go
+```go-text-template
 {{ .entity.properties.mainBranch }}
 ```
 
@@ -77,7 +79,7 @@ The check uses the conditions in the `conditions` block. For each severity, you 
 
 All text fields support templating. For example, you can insert the product name from the entity parameters:
 
-```go
+```go-text-template
 {{ .entity.properties.defectdojo_product_key }}
 ```
 
@@ -120,7 +122,7 @@ The check uses the conditions in the `conditions` block. For each severity, you 
 
 All text fields support templating. For example, you can insert the project ID from the entity parameters:
 
-```go
+```go-text-template
 {{ .entity.properties.codescoring_project_id }}
 ```
 
@@ -162,11 +164,11 @@ Authorization is configured in the [CodeScoring external service](../external-se
 
 A `SonarqubeMetrics` rule checks SonarQube project metrics against configured conditions.
 
-The check calls the SonarQube REST API endpoint `/api/measures/component` and compares current metric values with the expected values specified under **Conditions**.
+The check calls the SonarQube REST API endpoint `/api/measures/component` and compares current metric values with the expected values specified under "Conditions".
 
 All text fields support templating. For example, you can insert the component key from the entity parameters:
 
-```go
+```go-text-template
 {{ .entity.properties.sonarqube_project_key }}
 ```
 
@@ -212,7 +214,7 @@ The rule returns `true` (passes) if the project Quality Gate has the `OK` status
 
 All text fields support templating. For example, you can insert the project key from the entity parameters:
 
-```go
+```go-text-template
 {{ .entity.properties.sonarqube_project_key }}
 ```
 
@@ -261,7 +263,7 @@ Conditions can use:
 
 Condition examples:
 
-```go
+```go-text-template
 {{ eq .status.code 200 }}
 {{ eq (index (index .status.headers "content-type") 0) "application/json" }}
 {{ gt .status.contentLength 0 }}
@@ -269,7 +271,7 @@ Condition examples:
 
 ### Request body example
 
-Specify the **Request body** field in YAML format. For example:
+Specify the "Request body" field in YAML format. For example:
 
 ```yaml
 id: "{{ .entity.id }}"

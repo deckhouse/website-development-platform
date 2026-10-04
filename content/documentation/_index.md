@@ -27,14 +27,14 @@ The portal helps IT professionals work more efficiently — it automates operati
 - **Unified development standards for teams**.
   The portal enables the creation of templates and standard configurations (CI/CD, Kubernetes, etc.) and ensures these standards are propagated across all development teams.
 - **Dynamic environments under control**.
-  Creating, updating, and deleting environments takes just minutes, with stand setup and removal performed automatically.
+  Creating, updating, and deleting environments takes minutes, and the infrastructure for them is set up and removed automatically.
 - **Integration of otherwise incompatible services**.
   Interaction can be configured with any infrastructure system that has an API (such as ticket management systems, firewall access management, etc.).
 - **Simplified onboarding of developers and teams**.
   New team members can start contributing quickly thanks to templates, documentation, and preconfigured project structures provided by the portal.
 - **Digitization of development processes and scenarios**.
   A BPMN-like process description engine helps automate and optimize all stages of development.
-- **Built-in CMDB**.
+- **Built-in configuration management database (CMDB)**.
   DDP automatically gathers data from infrastructure services, compiles it into a service catalog, and visualizes the dependencies between them.
 - **Service parameter monitoring**.
   The solution quickly verifies key service performance indicators using health checks and collects static analysis metrics, vulnerability data, CI/CD pipeline statuses, and more.

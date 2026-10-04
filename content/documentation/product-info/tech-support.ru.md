@@ -1,5 +1,6 @@
 ---
 title: Техническая поддержка
+description: Виды и условия технической поддержки Deckhouse Development Portal.
 weight: 50
 ---
 

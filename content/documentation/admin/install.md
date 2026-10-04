@@ -1,9 +1,12 @@
 ---
 title: Installation
+description: Install Deckhouse Development Portal with internal, external, or managed PostgreSQL, Redis, and ClickHouse instances.
 weight: 11
 ---
 
-Deckhouse Development Portal can be installed in three ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster), with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster), or with [managed instances](#installation-with-managed-instances) (creating databases with Deckhouse modules). External instances are recommended for production; internal instances are suitable for testing and pilot use. Both options are described below.
+Deckhouse Development Portal can be installed in three ways: with [external PostgreSQL and Redis instances](#installation-with-external-instances) (connecting to databases already deployed outside the cluster), with [internal instances](#installation-with-internal-instances) (deploying PostgreSQL and Redis inside the cluster), or with [managed instances](#installation-with-managed-instances) (creating databases with Deckhouse modules). External instances are recommended for production; internal instances are suitable for testing and pilot use.
+
+The portal also uses [ClickHouse](#clickhouse), a storage for large volumes of data. By default, ClickHouse is deployed inside the cluster.
 
 ## Installation with internal instances
 
@@ -19,18 +22,18 @@ spec:
   version: 1
   settings:
     rbac:
-      superAdminEmail: admin@deckhouse.io # Super administrator email with full access to portal configuration. Can be changed at any time.
+      superAdminEmail: admin@deckhouse.io # Superadministrator email with full access to portal configuration. Can be changed at any time.
     security:
       secretKey: "16charssecretkey" # Secret key for encrypting private data. If changed, API access tokens will need to be regenerated and users will need to re-enter their credentials.
 ```
 
 After installation, the Deckhouse Development Portal web UI will be available at `https://ddp.<your domain>`.
 
-When you do not specify `postgres` and `redis` sections, the portal deploys internal PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external resources](#installation-with-external-instances).
+When you do not specify `postgres` and `redis` sections, the portal deploys internal PostgreSQL and Redis instances inside the cluster. This scenario is not recommended for production and is suitable only for testing and pilot use; for production, use [external instances](#installation-with-external-instances).
 
 ### Configuring internal instances (optional)
 
-If you use internal instances, you can explicitly set `mode: internal` and specify images from a private Docker registry:
+If you use internal instances, you can explicitly set `mode: internal` and specify images from a private container registry:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -47,12 +50,12 @@ spec:
       secretKey: "16charssecretkey"
     postgres:
       mode: internal
-      image: registry.example.com/postgres:16.3  # PostgreSQL image from private registry
+      image: registry.example.com/postgres:16.3  # PostgreSQL image from a private container registry.
     redis:
       mode: internal
-      image: registry.example.com/redis:7.4.0    # Redis image from private registry.
+      image: registry.example.com/redis:7.4.0    # Redis image from a private container registry.
     additionalImagePullSecrets:
-      - "custom-registry-secret"                 # (optional) additional secrets for private registry access.
+      - "custom-registry-secret"                 # (optional) additional secrets for private container registry access.
 ```
 
 ## Installation with external instances
@@ -151,6 +154,85 @@ spec:
       database: "0"
       password: secure_redis_password
 ```
+
+## ClickHouse
+
+ClickHouse is a storage for large volumes of data, such as the history of entity property changes.
+
+You can deploy ClickHouse inside the cluster as part of the module or connect an external instance. By default (`clickhouse.mode: internal`), the portal deploys ClickHouse inside the cluster. For production, use an external instance.
+
+### Internal ClickHouse instance
+
+The `internal` mode is used by default. To change the parameters of the internal instance, set them in the `clickhouse` section. The `host` parameter is not used in this mode:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    clickhouse:
+      mode: internal
+      database: ddp                  # Database name, created on the first server start.
+      username: default              # Connection username.
+      password: clickhouse_password  # Password the in-cluster server is created with.
+      image: registry.example.com/clickhouse/clickhouse-server:24.3  # (optional) image from a private container registry.
+```
+
+In this mode, the portal deploys a single ClickHouse instance with persistent storage (a PersistentVolumeClaim of `10Gi`) and creates the database on the first start.
+
+### External ClickHouse instance
+
+To use an external ClickHouse instance, set `mode: external` and the connection parameters:
+
+```yaml
+apiVersion: deckhouse.io/v1alpha1
+kind: ModuleConfig
+metadata:
+  name: development-platform
+spec:
+  enabled: true
+  version: 1
+  settings:
+    rbac:
+      superAdminEmail: admin@deckhouse.io
+    security:
+      secretKey: "16charssecretkey"
+    clickhouse:
+      mode: external
+      host: clickhouse.example.com  # ClickHouse server hostname or IP address.
+      port: 9000                    # ClickHouse native protocol port (default 9000).
+      database: ddp                 # Database name.
+      username: ddp_user            # Connection username.
+      password: secure_password     # Connection password.
+```
+
+{{< alert level="warning" >}}
+Create the database before connecting an external instance: the portal applies schema migrations but does not create the database itself.
+{{< /alert >}}
+
+### Running without ClickHouse
+
+To run the portal without ClickHouse, set `mode: external` and leave the `host` parameter empty:
+
+```yaml
+    clickhouse:
+      mode: external
+      host: ""
+```
+
+In this case, the features that depend on ClickHouse are unavailable: for example, the history of entity property changes is not saved.
+
+### Data delivery to ClickHouse
+
+The portal workers deliver data from PostgreSQL to ClickHouse and clean it up afterwards, so at least one running worker is required to transfer data. Delivery parameters are set in the `clickhouse.replication` section, the retention period of the property history and the cleanup interval are set in the `clickhouse.propertyHistory` section.
 
 ## Installation with managed instances
 

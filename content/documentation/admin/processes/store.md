@@ -2,6 +2,14 @@
 title: Process store
 description: Update rules, nested paths, write operations, loop context, and viewing the store during a process run.
 weight: 20
+params:
+  relatedLinks:
+    - title: "Processes overview"
+      url: ../overview/
+    - title: "Updating the process store from actions"
+      url: ../../actions/overview/#process-store-update
+    - title: "Templating: process store"
+      url: ../../../user/templating/#process-store
 ---
 
 The process store is a JSON object shared by a single process run. Tasks use it to pass data to each other: identifiers, arrays for loop iteration, intermediate results, and generated text.
@@ -13,7 +21,7 @@ Writing is done **only via rules** in the configuration of actions and "Template
 - **One store per run** — each process instance has its own store; it is preserved between steps and available when viewing the run.
 - **Nested paths** — keys are specified as dot-paths without a leading dot: `notification.module_name`, `ctx.job.id`. Intermediate objects are created automatically.
 - **Array indices** — a path can reference an array element: `items[0].status`, `branches[2].name`.
-- **Value types** — depending on the operation, strings, numbers, objects, and JSON arrays can end up in the store. The "Write string" and "Append string" operations always work with strings; operations with the JSON suffix store the parsed structure.
+- **Value types** — depending on the operation, strings, numbers, objects, and JSON arrays can end up in the store. The "Set string" and "Append string" operations always work with strings; operations with the JSON suffix store the parsed structure.
 
 {{< alert level="info" >}}
 The service key `_loop` is populated by the process engine while a loop is running. Do not write to `_loop` manually using action rules — use it for reading in templates only.
@@ -21,7 +29,7 @@ The service key `_loop` is populated by the process engine while a loop is runni
 
 ## Store update rules
 
-Rules are configured in the action: "Configuration" → "Update" → "Process store update". They run **after the action completes successfully**, **in list order**. Each subsequent rule sees the changes made by the previous rules of the same action.
+Rules are configured in the action, on the "Update" tab, in the "Updating process store" section. They run **after the action completes successfully**, **in list order**. Each subsequent rule sees the changes made by the previous rules of the same action.
 
 In the process task configuration, rules are shown in read-only mode; to change them, open the action from the task's side panel.
 
@@ -29,7 +37,7 @@ In the process task configuration, rules are shown in read-only mode; to change 
 
 | Field | Required | Description |
 | ---- | -------------- | -------- |
-| Condition | No | A Go template. An empty value means the rule always runs. After rendering, the result must be `true`, `false`, `1`, or `0`; otherwise the rule is skipped |
+| When | No | A Go template. An empty value means the rule always runs. After rendering, the result must be `true`, `false`, `1`, or `0`; otherwise the rule is skipped |
 | Operation | Yes | The way the value at the "Target" path is changed |
 | Target | Yes | Dot-path in the store, without a leading dot |
 | Source | Yes* | Go template for the value. Not used for the "Delete" operation |
@@ -38,75 +46,75 @@ In the process task configuration, rules are shown in read-only mode; to change 
 
 | Operation | Result |
 | -------- | --------- |
-| Write string | Replaces the value at the path with the text string from the source; JSON is not parsed |
-| Write JSON | Replaces the value with the parsed JSON (object, array, number, boolean) from the source template |
+| Set string | Replaces the value at the path with the text string from the source; JSON is not parsed |
+| Set JSON | Replaces the value with the parsed JSON (object, array, number, boolean) from the source template |
 | Append string | Appends text to the existing string at the path; if the key doesn't exist, a string is created. Not applicable to numbers and arrays |
 | Append JSON | Adds a single JSON item to the array at the path; if the array doesn't exist, an empty array is created |
 | Merge JSON (shallow) | Merges the JSON object from the source with the object at the path: top-level keys are overwritten, nested objects are replaced entirely |
 | Delete | Deletes the key at the path |
 
-For the **Write JSON**, **Append JSON**, and **Merge JSON** operations, it is convenient to use the `toJSON` function together with a direct reference to a response field, e.g. `{{ .response.items }}` — the portal will substitute the value without extra serialization.
+For the **Set JSON**, **Append JSON**, and **Merge JSON** operations, the source must render valid JSON: pass the value through `toJSON`, for example, `{{ toJSON .response.items }}`. If the source is a single path, such as `{{ .response.items }}`, the portal substitutes the value at this path without serialization.
 
 ### Rule examples
 
 **Save an identifier from the action's response:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
-| | Write string | `deploy.job_id` | `{{ .response.id }}` |
+| | Set string | `deploy.job_id` | `{{ .response.id }}` |
 
 **Write an array for a subsequent loop:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
-| | Write JSON | `notification.engagements` | `{{ toJSON .response.engagements }}` |
+| | Set JSON | `notification.engagements` | `{{ toJSON .response.engagements }}` |
 
 **Append a string to a log:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
 | | Append string | `run.log` | `step {{ .store._loop.index }}: ok\n` |
 
 **Update only part of an object:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
 | | Merge JSON (shallow) | `meta` | `{{ toJSON (dict "status" "ready" "updated_by" .entity.slug) }}` |
 
 **Run a rule only on the first loop iteration:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
-| `{{ .store._loop.first }}` | Write string | `run.started_at` | `{{ now }}` |
+| `{{ .store._loop.first }}` | Set string | `run.started_at` | `{{ now }}` |
 
 **Delete a temporary key after use:**
 
-| Condition | Operation | Target | Source |
+| When | Operation | Target | Source |
 | ------- | -------- | ---- | -------- |
 | | Delete | `temp.payload` | |
 
-### "Store paths" panel
+### "Loop context" panel
 
-The action's rule editor has a **Store paths** panel: it shows the loop context keys (`_loop.item`, `_loop.index`, etc.).
+The action's rule editor has a **Loop context** panel: it shows the loop context keys (`_loop.item`, `_loop.index`, etc.). Click a key to insert it into a rule.
 
 ## Reading from the store
 
 In process templates, use:
 
-```go
+```go-text-template
 {{ .store.<path> }}
 ```
 
 For nested fields, the path matches the "Target" in the write rules:
 
-```go
+```go-text-template
 {{ .store.notification.module_name }}
 {{ .store.items[0].id }}
 ```
 
 Process launch parameters are available in a separate context:
 
-```go
+```go-text-template
 {{ .process.<parameter_identifier> }}
 ```
 
@@ -122,7 +130,7 @@ While the loop body is running, the `_loop` object is available in the store:
 
 | Key | Description |
 | ---- | -------- |
-| `_loop.item` | The current collection item ("By collection" mode) or the iteration number, starting from 1 ("Fixed number" mode) |
+| `_loop.item` | The current collection item ("Foreach collection" mode) or the iteration number, starting from 1 ("Fixed count" mode) |
 | `_loop.index` | The iteration index, starting from 0 |
 | `_loop.total` | The total number of iterations |
 | `_loop.first` | `true` on the first iteration |
@@ -132,7 +140,7 @@ While the loop body is running, the `_loop` object is available in the store:
 
 Examples in templates:
 
-```go
+```go-text-template
 {{ .store._loop.item.name }}
 {{ .store._loop.item.scan_type }}
 {{ .store._loop.index }}
@@ -140,7 +148,7 @@ Examples in templates:
 
 In exclusive gateway conditions inside a loop:
 
-```go
+```go-text-template
 {{ eq .store._loop.item.branch .store.current_branch_tag }}
 ```
 
@@ -148,35 +156,35 @@ In exclusive gateway conditions inside a loop:
 
 The "Loop" element supports two modes (the "Loop mode" field):
 
-1. **Fixed number** — the body runs a specified number of times (1–10000). `_loop.item` holds the iteration number (1, 2, 3…).
-1. **By collection** — when entering the loop, the "Collection template" Go template is evaluated; each element of the resulting **JSON array** is one iteration.
+1. **Fixed count** — the body runs a specified number of times (1–10000). `_loop.item` holds the iteration number (1, 2, 3…).
+1. **Foreach collection** — when entering the loop, the "Collection template" Go template is evaluated; each element of the resulting **JSON array** is one iteration. The array can contain up to 10,000 items.
 
 ### Collection template
 
 The recommended approach is a path to an array already written to the store by a previous task:
 
-```go
+```go-text-template
 {{ .store.notification.engagements }}
 ```
 
 An alternative is to build the array in the template:
 
-```go
+```go-text-template
 {{ toJSON .store.modules }}
 ```
 
 **Edge cases:**
 
-- An empty array or a missing key — 0 iterations, execution follows the "Loop exit" connection; a warning appears in the process log.
+- An empty array or a missing key — 0 iterations, execution follows the "Exit" connection; a warning appears in the process log.
 - A value at the path that is not a JSON array — a validation or loop execution error.
 
 ### Scenario: iterating over a list from an API
 
-1. **Task** "Get engagements" — a **Write JSON** rule, target `notification.engagements`, source `{{ toJSON .response.engagements }}`.
-1. **Loop**, **By collection** mode, collection template `{{ .store.notification.engagements }}`.
+1. **Task** "Get engagements" — a **Set JSON** rule, target `notification.engagements`, source `{{ toJSON .response.engagements }}`.
+1. **Loop**, **Foreach collection** mode, collection template `{{ .store.notification.engagements }}`.
 1. **Task** in the loop body — use `{{ .store._loop.item.id }}`, `{{ .store._loop.item.name }}` in the request body.
 1. **Exclusive gateway** in the body — a condition based on an item field, e.g. left value `{{ .store._loop.item.status }}`, right value `active`.
-1. **Loop exit** connection — continuation after iterating over all elements.
+1. **Exit** connection — continuation after iterating over all elements.
 
 ## The Template element
 
@@ -185,12 +193,12 @@ The "Template" element evaluates a Go template as the process runs and writes a 
 | Field | Description |
 | ---- | -------- |
 | Template body | A Go template; `{{ .store.* }}`, `{{ .process.* }}` are available, and, inside a loop, `{{ .store._loop.* }}` |
-| Store key | The destination dot-path, e.g. `rendered_message` or `notification.summary` |
+| Output store key | The destination dot-path, e.g. `rendered_message` or `notification.summary` |
 | Format hint | A hint used when viewing the run (`text`, `markdown`, `html`, `json`); does not affect the write |
 
 Example body:
 
-```go
+```go-text-template
 ## Report for {{ .store._loop.item.name }}
 
 Status: {{ .store._loop.item.status }}
@@ -208,7 +216,7 @@ On the process run visualization screen, open the **Store** tab:
 
 You can copy a value, refresh the data, and download the run's JSON (button on the run dialog panel).
 
-The task's side panel on the run diagram shows the selected action's **Process store update rules** — useful for comparing the store's actual contents against the configuration.
+The task's side panel on the run diagram shows the selected action's **Process store update rules**. Compare them with the actual contents of the store to find a rule that did not run.
 
 ## Process log and debugging
 
@@ -219,9 +227,3 @@ The visualization panel provides:
 - messages about an empty loop collection and skipped store rules.
 
 If a template error occurs, or invalid JSON is used in a rule with a JSON operation, that rule may be skipped (with a warning in the log), while the other rules of the same action continue to run.
-
-## Related sections
-
-- [Overview](overview/) — diagram elements, running, and management.
-- [Updating the store from actions](../../actions/overview/#process-store-update) — where the rules are enabled.
-- [Templating](../../../user/templating/#process-store) — Go template syntax and contexts.

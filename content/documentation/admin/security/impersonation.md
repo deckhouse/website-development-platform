@@ -40,7 +40,7 @@ If the user does not end impersonation manually, the portal ends it automaticall
 
 ## Audit
 
-For HTTP requests included in audit logs (`POST`, `PUT`, `DELETE`, and `PATCH`), the "Email" field identifies the operator and target user in the format `operator@example.com [as target@example.com]`.
+For HTTP requests included in audit logs (`POST`, `PUT`, `DELETE`, and `PATCH`, with the exceptions listed in [Audit log contents](../audit-logs/#audit-log-contents)), the "Email" field identifies the operator and target user in the format `operator@example.com [as target@example.com]`.
 
 This format lets you determine the following from an audit log entry:
 
@@ -48,4 +48,4 @@ This format lets you determine the following from an audit log entry:
 - Whose identity the session used to perform the operation.
 - The HTTP method, path, and response status.
 
-`GET` requests are not recorded in audit logs. For details, see [Audit logs](../audit-logs/).
+`GET` requests and the requests listed in [Audit log contents](../audit-logs/#audit-log-contents) are not recorded in audit logs.

@@ -13,7 +13,7 @@ CreateVaultKubernetesAuthRole — creates or updates a Kubernetes authentication
 
 ```yaml
 mountPath: kubernetes
-role: example
+name: example
 bound_service_account_names:
   - default
 bound_service_account_namespaces:
@@ -31,7 +31,7 @@ optional:
 | Name                                  | Required | Description                                                                          |
 | -------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
 | mountPath                             | Yes      | Mount path of the Kubernetes auth backend in Vault (e.g., kubernetes)                   |
-| role                                  | Yes      | Name of the role to create in Vault                                                     |
+| name                                  | Yes      | Name of the role to create in Vault                                                     |
 | bound_service_account_names           | Yes      | List of service account names allowed to access via this role                           |
 | bound_service_account_namespaces      | Yes      | List of namespaces allowed to access via this role                                      |
 | optional                              | No       | Additional role parameters (listed in the table below)                                  |

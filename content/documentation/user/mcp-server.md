@@ -18,7 +18,7 @@ In addition to built-in portal tools, the MCP server can call tools from [MCP co
 
 ## Available tools
 
-The following **built-in** portal tools are available. Tools of the `external` and `custom` types become available after you [synchronize the catalog](../mcp-management/#mcp-servers) and [add them to an MCP collection](../mcp-management/#mcp-collections).
+The following **built-in** portal tools are available. Tools of the `external` type become available after you [synchronize the MCP server catalog](../mcp-management/#mcp-servers) and [add the tools to an MCP collection](../mcp-management/#mcp-collections). Tools of the `custom` type are [created manually](../mcp-management/#mcp-tools) under **MCP tools** and become available after you add them to an MCP collection.
 
 ### get_resources
 
@@ -30,7 +30,7 @@ Returns: A list of resources.
 
 Example:
 
-```sh
+```text
 Get a list of resources
 ```
 
@@ -46,7 +46,7 @@ Returns: A list of external services.
 
 Example:
 
-```sh
+```text
 Get a list of external services
 ```
 
@@ -66,7 +66,7 @@ Returns: A list of resource entities.
 
 Example:
 
-```sh
+```text
 Get all services and show their names and creation dates
 ```
 
@@ -86,7 +86,7 @@ Returns: Data for one entity.
 
 Example:
 
-```sh
+```text
 Get the entity with UUID 3fa85f64-5717-4562-b3fc-2c963f66afa6
 ```
 
@@ -107,7 +107,7 @@ Returns: A list of entity relations.
 
 Example:
 
-```sh
+```text
 Get the relations of the "api-gateway" entity in the "Services" resource
 ```
 
@@ -133,7 +133,7 @@ Returns: The result of the HTTP request to the external service.
 
 Example:
 
-```sh
+```text
 Get a list of projects from the external GitLab service
 ```
 
@@ -149,7 +149,7 @@ Returns: A list of actions.
 
 Example:
 
-```sh
+```text
 Get a list of actions
 ```
 
@@ -165,7 +165,7 @@ Returns: A list of data sources.
 
 Example:
 
-```sh
+```text
 Get a list of data sources
 ```
 
@@ -181,7 +181,7 @@ Returns: A list of processes.
 
 Example:
 
-```sh
+```text
 Get a list of processes
 ```
 
@@ -189,67 +189,58 @@ Get a list of processes
 
 ### LM Studio
 
-1. Get the connection parameters:
+LM Studio 0.3.17 and later supports remote MCP servers. Servers are added in the `mcp.json` file.
 
-   - Sign in to Deckhouse Development Portal.
-   - Get an API token under **Profile**.
-   - Note the portal URL, for example, `https://ddp.example.com`.
+To connect LM Studio to the portal MCP server:
 
-1. Configure LM Studio:
+1. In the portal, open **Profile** and create an API token.
+1. In LM Studio, open the **Program** tab in the right sidebar and select **Install** → **Edit mcp.json**.
+1. Add the portal MCP server to the `mcpServers` object:
 
-   - Open LM Studio.
-   - Open **Settings**.
-   - Find **MCP Servers** or **Model Context Protocol**.
-   - Select **Add Server**.
+   ```json
+   {
+     "mcpServers": {
+       "ddp": {
+         "url": "https://<DOMAIN>/api/v2/mcp",
+         "headers": {
+           "Authorization": "Bearer <API_TOKEN>"
+         }
+       }
+     }
+   }
+   ```
 
-1. Configure the server:
+   Where:
 
-   - **Server Name**: `DDP MCP Server`, or another name.
-   - **Server URL**: `https://<DOMAIN>/api/v2/mcp`.
-   - **Transport**: `HTTP` or `JSON-RPC`.
-   - **Authentication**:
-     - **Type**: `Bearer Token` or an equivalent that uses the `Authorization` header.
-     - **Header**: `Authorization: Bearer <your_api_token>`.
-     - **Token**: Enter the portal API token from **Profile**.
+   - `<DOMAIN>` is the portal domain;
+   - `<API_TOKEN>` is the portal API token.
 
-1. Verify the connection:
+1. Save the file.
 
-   - Save the configuration.
-   - LM Studio connects to the server after saving.
-   - After a successful connection, the following tools are available:
-      - `get_resources` — Gets a list of resources.
-      - `get_external_services` — Gets a list of external services, such as GitLab and SonarQube.
-      - `get_resource_entities` — Gets all entities of the selected resource.
-      - `get_entity` — Gets one entity by UUID.
-      - `get_entity_relations` — Gets entity relations by resource and identifier.
-      - `get_external_data` — Sends an HTTP request to an external service using the user's credentials.
-      - `get_actions` — Gets a list of actions.
-      - `get_datasources` — Gets a list of data sources.
-      - `get_processes` — Gets a list of processes.
-
-After connecting, you can use these tools in conversations with models.
-
-All calls use your access permissions.
+After connecting, the model can call the built-in tools listed in [Available tools](#available-tools) and the tools from MCP collections available to you. All calls use your access permissions.
 
 ### Connecting other MCP clients
 
-The Deckhouse Development Portal MCP server is compatible with any client that supports MCP over JSON-RPC 2.0.
+The MCP server accepts JSON-RPC 2.0 requests over HTTP. To connect a client, use the following parameters:
 
-To connect a client:
+- Endpoint URL: `https://<DOMAIN>/api/v2/mcp`, where `<DOMAIN>` is the portal domain.
+- HTTP method: `POST`.
+- Authentication: the `Authorization: Bearer <API_TOKEN>` header, where `<API_TOKEN>` is your portal API token from **Profile**.
 
-1. **Endpoint URL**: `https://your-platform.com/api/v2/mcp`.
-1. **Protocol**: JSON-RPC 2.0.
-1. **Authentication**:
-   - Header: `Authorization: Bearer YOUR_API_TOKEN`.
-   - `YOUR_API_TOKEN` is your portal API token from **Profile**.
-1. **Method**: POST.
+The server supports the following JSON-RPC methods:
+
+- `initialize` — returns the server information and the protocol version `2024-11-05`.
+- `tools/list` — returns the list of tools available to the user.
+- `tools/call` — calls a tool.
+
+Other methods return the `-32601` (`Method not found`) error.
 
 ### MCP server request example
 
 HTTP headers:
 
-```sh
-Authorization: Bearer your-api-token-here
+```text
+Authorization: Bearer <API_TOKEN>
 Content-Type: application/json
 ```
 
@@ -263,7 +254,7 @@ Request body:
   "params": {
     "name": "get_resource_entities",
     "arguments": {
-      "resource_uuid": "target-resource-uuid"
+      "resource_uuid": "<RESOURCE_UUID>"
     }
   }
 }
@@ -290,7 +281,7 @@ Request body:
 
 Authentication:
 
-- Every MCP server request must be authenticated with an API token from **Profile**. Pass the token in the `Authorization: Bearer <api_token>` header.
+- Every MCP server request must be authenticated with an API token from **Profile**. Pass the token in the `Authorization: Bearer <API_TOKEN>` header.
 - Access permissions match your portal user permissions.
 
 Access permissions:
@@ -316,7 +307,7 @@ If authentication fails:
 
 - Verify the token format.
 - Verify that the token has not expired.
-- Verify that you use the `Authorization: Bearer <api_token>` header.
+- Verify that you use the `Authorization: Bearer <API_TOKEN>` header.
 
 ### Tool returns an access error
 

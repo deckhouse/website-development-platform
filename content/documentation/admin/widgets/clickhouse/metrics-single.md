@@ -13,17 +13,17 @@ Example of a valid widget query:
 ```sql
 SELECT count() AS value
 FROM events
-WHERE timestamp >= {{from}} AND timestamp < {{to}}
+WHERE timestamp >= '{{from}}' AND timestamp < '{{to}}'
 ```
 
 ## Configuration
 
 | Name                         | Required | Description                                                                                                             | Default value |
 | ---------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- |
-| Query                        | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range                                              | —             |
+| Query                        | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range. The widget substitutes them with the interval boundaries in UTC in the `YYYY-MM-DD hh:mm:ss` format without quotes | —             |
 | Database                     | No       | ClickHouse database name passed in the `X-ClickHouse-Database` header                                                   | —             |
-| Default range                | No       | Range used when opening or refreshing the widget if no range is specified in the query parameters                      | Last hour     |
-| Decimal places               | No       | Precision used to display the returned value                                                                           | —             |
+| Default interval | No       | Interval used when opening or refreshing the widget if no interval is specified in the query parameters                      | Last hour     |
+| Number of decimal places | No       | Precision used to display the returned value                                                                           | `0`           |
 | Unit                         | No       | Suffix displayed with the returned value                                                                                | —             |
 | Show threshold               | No       | Displays `<METRIC_VALUE> / <THRESHOLD>`, where `<METRIC_VALUE>` is the current metric value and `<THRESHOLD>` is the configured threshold | `false`       |
 | Threshold                    | No       | Threshold value                                                                                                         | —             |

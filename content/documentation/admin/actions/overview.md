@@ -4,7 +4,7 @@ description: Action configuration in Deckhouse Development Portal (DDP) — requ
 weight: 10
 ---
 
-Actions are a DDP (portal) mechanism for running operations in external infrastructure systems and services. For example, actions can:
+Actions are a Deckhouse Development Portal mechanism for running operations in external infrastructure systems and services. For example, actions can:
 
 - create projects, variables, branches, tags, releases, and merge requests in [GitLab](../gitlab/);
 - create resources in [Kubernetes](../kubernetes/) and retrieve them;
@@ -41,17 +41,14 @@ An action can be of the following types:
 - "Built-in (BuiltIn)" — the action's execution logic is defined within the portal. For built-in actions, you must select one of the preconfigured backends.
 - "Webhook" — the action's execution logic is fully configured by the user.
 
-#### Retry parameters
+#### Restart parameters
 
-If an action fails, the portal can automatically retry it.
+If an action fails, the portal can automatically retry it. Configure retries in the "Restart parameters" section:
 
-##### Number of retries
-
-How many times to retry execution after a failure. 0 means a single attempt with no retries.
-
-##### Base delay (sec.)
-
-The delay in seconds before the first retry; the pause doubles before each subsequent attempt (exponential backoff).
+| Field          | Description                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Max retries    | How many times to retry execution after a failure. `0` means a single attempt with no retries                     |
+| Base delay (s) | Delay in seconds before the first retry. The pause doubles before each subsequent attempt (exponential backoff)  |
 
 #### Request body format
 
@@ -64,15 +61,19 @@ For webhook actions, you can choose the format used to send the request body:
 When "Form URL Encoded" is selected, the request body must contain only flat key-value pairs. Nested structures and arrays are not supported in this format.
 {{< /alert >}}
 
+If the request body is empty, the webhook sends the request without a body and without the `Content-Type` header. Use this for `GET` and `DELETE` requests.
+
+If the external system returns an error response code, the response body is saved in the action response: JSON as an object, anything else in the `raw_body` field. The action error text has the form `unexpected status code: <CODE>, response: <RESPONSE_BODY>`; the response body is truncated to 8192 bytes.
+
 Example:
 
 ```yaml
 token: {{ .credentials.token }}
 ```
 
-#### Extended logging
+#### Verbose logging
 
-For webhook actions, you can enable an extended logging option that provides detailed logging of all HTTP request and response details:
+For webhook actions, you can enable the "Verbose logging" option that logs all HTTP request and response details:
 
 - request URL;
 - HTTP method;
@@ -85,14 +86,14 @@ For webhook actions, you can enable an extended logging option that provides det
 When this option is enabled, all this data is written to the action run log. When it is disabled, logging works in standard mode.
 
 {{< alert level="warning" >}}
-Enabling extended logging may result in sensitive information (tokens, passwords, etc.) being written to the logs. Use this option with caution and only when needed for debugging.
+Enabling verbose logging may result in sensitive information (tokens, passwords, etc.) being written to the logs. Use this option with caution and only when needed for debugging.
 {{< /alert >}}
 
 #### Request body
 
 Each action sends an HTTP request to a built-in backend or to a webhook backend URL. The request usually includes a request body (`body`) that describes what exactly will be sent. The request body is defined in YAML.
 
-Parameter values from the user form can be substituted into the request body using [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax) templates.
+Parameter values from the user form can be substituted into the request body using [Go template](https://pkg.go.dev/text/template) templates.
 
 Example:
 
@@ -108,7 +109,7 @@ For built-in actions, the "Request body" parameter is part of the action configu
 
 #### Parameters
 
-The "User form" section specifies the parameters that the user can fill in when launching the action. Parameter types are described in the [Parameters](../../user/properties/) section.
+The "User form" section specifies the parameters that the user can fill in when launching the action. Property types are described in the [Properties](../../user/properties/) section.
 
 The following options are available for each parameter:
 
@@ -119,16 +120,16 @@ The following options are available for each parameter:
 Each parameter can have a default value that is pre-filled in the form when the action is launched.
 
 {{< alert level="info" >}}
-For non-editable or hidden parameters, it is recommended to set a default value, since the user will not be able to change them when launching the action.
+Set a default value for non-editable and hidden parameters: the user cannot change them when launching the action.
 {{< /alert >}}
 
 The parameter description is shown when launching the action by clicking the "info" icon. Providing a description makes the parameter's purpose easier to understand and reduces the risk of errors when launching the action.
 
-Parameter values can use [Go template](https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax) template functions. For example, the expression `{{ .entity.name }}` in a parameter value means that when the action is launched, the name of the entity it is running for will be substituted.
+Parameter values can use [Go template](https://pkg.go.dev/text/template) template functions. For example, the expression `{{ .entity.name }}` in a parameter value means that when the action is launched, the name of the entity it is running for will be substituted.
 
-#### Parameter conditions
+#### Property conditions
 
-Parameters can be automatically hidden or shown in the user form depending on the value of a `Boolean`-type parameter. This is configured in the "Parameter conditions" section, where you define rules for showing or hiding selected parameters.
+Parameters can be automatically hidden or shown in the user form depending on the value of a `Boolean`-type parameter. This is configured in the "Property conditions" section, where you define rules for showing or hiding selected parameters.
 
 ### Update
 
@@ -146,10 +147,11 @@ All updates are performed only after the action completes successfully. The foll
 | `.global`   | Global variables (variable set identifier, then key)                        | `{{ .global.myGroup.apiUrl }}`        |
 | `.team`     | Variables of the team selected at launch                                    | `{{ .team.token }}`                   |
 | `.store`    | Variables from the process store                                            | `{{ .store.myKey }}`                  |
+| `.context`  | [Process launch context](../processes/overview/#launch-context), for example data of the environment selected on the home page | `{{ .context.environment.slug }}` |
 
 #### Entity parameter update
 
-If the "Update entity parameters" option is enabled, the portal applies the update rules and writes the values to the entity's parameters.
+To enable property update, turn on the switch in the "Entity property updates" section header. The portal then applies the update rules and writes the values to the entity's parameters.
 
 | Field               | Description                                                              |
 | ------------------- | ------------------------------------------------------------------------- |
@@ -172,12 +174,13 @@ If you need to immediately populate the entity's `repository_id` parameter after
 
 #### Entity creation
 
-If the "Create entities" option is enabled, the portal automatically creates new entities in the selected resources according to the specified rules. Rules are defined separately for each resource.
+To enable entity creation, turn on the switch in the "Creating entities" section header. The portal then automatically creates new entities in the selected resources according to the specified rules. Rules are defined separately for each resource.
 
 | Field                                | Description                                                                                  |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Owner is the run initiator            | The user who launched the action becomes the owner of created entities. If the initiator is unknown (a run by an automation or a webhook), the owner from the "Owner of created entities" field is used |
 | Owner of created entities             | Assigned as the owner of all entities the action creates in the catalog                       |
-| Owner team of created entities        | Assigned as the owner team of all entities the action creates in the catalog                   |
+| Owning team of created entities       | Assigned as the owner team of all entities the action creates in the catalog                   |
 | Resource                              | Catalog resource in which the entity will be created                                          |
 | Source (identifier)                   | Go template for the identifier of the entity being created                                     |
 | Source (name)                         | Go template for the name of the entity being created                                          |
@@ -203,9 +206,34 @@ To create an entity in the "GitLab projects" resource after the action completes
 
 If needed, add additional rules to populate entity parameters, for example map `{{ .response.path }}` to the `path` parameter.
 
+#### Entity deletion
+
+To enable entity deletion, turn on the switch in the "Deleting entities" section header. The portal then automatically deletes entities in the selected resources according to the specified rules. Rules are defined separately for each resource.
+
+| Field    | Description                                                                 |
+| -------- | --------------------------------------------------------------------------- |
+| Resource | Catalog resource that contains the entity to delete                         |
+| Source   | Go template for the entity identifier (for example, `{{ .response.id }}`)   |
+
+If the resource has no entity with the resulting identifier, deletion is skipped.
+
+For example, when the "Delete GitLab project" action is run, the response may contain:
+
+```json
+{
+  "id": "42",
+  "...": "..."
+}
+```
+
+To delete the entity in the "GitLab projects" resource after the action completes successfully, specify the following rules:
+
+1. Resource: "GitLab projects".
+1. Source: `{{ .response.id }}`.
+
 #### Entity relation creation
 
-If the "Create entity relations" option is enabled, the portal automatically creates new relations for the selected entity according to the specified rules. The set of rules is defined separately for each resource.
+To enable relation creation, turn on the switch in the "Creating relations for the entity" section header. The portal then automatically creates new relations for the selected entity according to the specified rules. The set of rules is defined separately for each resource.
 
 | Field                              | Description                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -214,9 +242,22 @@ If the "Create entity relations" option is enabled, the portal automatically cre
 | Parent entity identifier             | Go template for the identifier of the parent entity in the catalog                                                                                                                                                                                                                                                                          |
 | Child entity identifier              | Go template for the identifier of the child entity in the catalog                                                                                                                                                                                                                                                                           |
 
+#### Entity relation deletion
+
+To enable relation deletion, turn on the switch in the "Deleting relations for the entity" section header. The portal then automatically deletes relations for the selected entity according to the specified rules. The set of rules is defined separately for each resource.
+
+| Field                     | Description                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Resource                  | Either of the two resources involved in the required resource relation: the list of relations in which the selected resource is specified as the parent or the child is loaded based on the selected resource. You can choose the resource of the entity for which the action is running, or the resource on the other side of the relation — the list will contain the same relation if both resources are part of it |
+| Relation                  | The catalog resource relation: it defines the parent and child resources and entity roles when deleting the relation. The selected relation determines which side the launch entity is on and which of the fields below specifies the identifier of the second entity from the action's response                                         |
+| Parent entity identifier  | Go template for the identifier of the parent entity in the catalog                                                                                                                                                                                                                                                                          |
+| Child entity identifier   | Go template for the identifier of the child entity in the catalog                                                                                                                                                                                                                                                                           |
+
+If no matching relation exists, deletion is skipped.
+
 #### User credentials update
 
-If the user credentials update option is enabled, the action automatically updates the user's credentials according to the specified rules.
+To enable user credentials update, turn on the switch in the "Updating user credentials" section header. The action then automatically updates the user's credentials according to the specified rules.
 
 | Field               | Description                          |
 | ------------------- | --------------------------------------- |
@@ -237,15 +278,12 @@ To update the credentials, specify the following rules:
 1. Source: `{{ .response.apiKey }}`.
 1. Credentials type: select the type of credentials to be updated.
 
-##### Selecting a user for credentials update
-
 By default, credentials are updated for the user who launched the action (the initiator).
-
-To update the credentials of a different user, enable the "Update credentials of a specific user" option and select the desired user.
+To update the credentials of a different user, enable the "Update credentials for specific user" option and select the user in the "User for credentials update" field.
 
 #### Process store update
 
-Rules from the "Process store update" section only apply when the action is run as part of a process: after the action completes successfully, values are written to the run's store according to the specified rules, in list order.
+Rules from the "Updating process store" section only apply when the action is run as part of a process: after the action completes successfully, values are written to the run's store according to the specified rules, in list order.
 
 | Field      | Description                                                                                                       |
 | ----------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -259,6 +297,14 @@ Other actions and process elements read this data via `{{ .store.<path> }}`. Ins
 If there are no rules (the list is empty), nothing is written to the store when the action runs as part of a process.
 
 For a detailed description of operations, rule examples, iterating over a collection, and viewing the store, see [Process store](../processes/store/).
+
+#### Datasource synchronization
+
+Datasource synchronization after an action brings the object that the action created or deleted in the external system into the catalog without waiting for the scheduled synchronization.
+
+To enable synchronization, turn on the switch in the "Datasource synchronization" section header and select datasources in the "Datasources" field. Select the datasources that load the object created or deleted by the action into the catalog. If the switch is on, select at least one datasource.
+
+Synchronization starts after the action completes successfully and the update rules are applied. Synchronization runs in the background: the action does not wait for it to finish and does not fail if synchronization fails. Deleted datasources are skipped.
 
 ### Security
 
@@ -317,9 +363,9 @@ Specify the address to which the request will be sent and the HTTP headers.
 
 Headers support Go templates in the form `{{ .credentials.<credentials type identifier> }}` for substituting user credentials.
 
-#### Select an account to run as
+#### Select account for execution
 
-By default, external infrastructure services are accessed using the credentials of the user who launched the action. If needed, you can explicitly specify that the action should run on behalf of a specific account.
+By default, external infrastructure services are accessed using the credentials of the user who launched the action. To run the action on behalf of a specific account, enable the "Select account for execution" option and select the account in the "Account for execution" field.
 
 For actions launched as automation events, specifying the account to run as is mandatory.
 
@@ -345,7 +391,8 @@ A run record can be deleted, or the action can be re-run. Re-running creates a n
 
 For each action run, a record containing the full execution log is created in the database.
 
-The `actions.logging.enabled` parameter in the DDP configuration file controls whether run logs are output to `stdout`: when set to `true`, logs are output; when set to `false`, they are not.
+The `actions.logging.enabled` module parameter controls whether run logs are output to `stdout`: when set to `true`, logs are output; when set to `false` (default), they are not.
+Set the parameter in the `settings` section of ModuleConfig `development-platform` or in the Deckhouse Platform web interface.
 
 {{< alert level="info" >}}
 Records with the full run log are created in the database regardless of the value of `actions.logging.enabled`.
@@ -362,3 +409,7 @@ For each action run, a record with a status is created. Possible statuses:
 - `Update failed` — the action completed, but updating the entity's parameters failed.
 - `Success` — the action completed successfully.
 - `Retrying` — the action finished with an error and is being retried.
+- `Warning` — the action completed, but part of the operations failed. For example, the CreateGitlabProjectVariables action could not create some of the variables.
+- `Declined` — the action was not run because the entity status does not match the [execution conditions](#execution-conditions).
+- `Skipped` — the action was not run because it was disabled in the process launch configuration.
+- `Canceled` — the run was canceled by a user or because the process was stopped.

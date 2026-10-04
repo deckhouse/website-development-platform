@@ -1,5 +1,5 @@
 ---
-title: Helm releases
+title: Helm. Releases
 description: View Helm releases, manifests, values, and rollback history in Kubernetes.
 weight: 20
 ---

@@ -10,7 +10,7 @@ Running this action requires credentials:
 - `username` — the username of the user on whose behalf the action will run.
 {{< /alert >}}
 
-CreateRepositoryFromTemplate — creates a new repository from a template in GitLab. The rendering mechanism is based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) and supports all built-in methods, as well as extensions added by DDP (portal).
+CreateRepositoryFromTemplate — creates a new repository from a template in GitLab. The rendering mechanism is based on [Go template](https://pkg.go.dev/text/template) and supports all built-in methods, as well as extensions added by the portal.
 
 ### Request example
 
@@ -53,14 +53,26 @@ The portal:
 1. Renders the files from the templates, taking into account `values.yaml` and the variables passed to the action.
 1. Changes the repository remote to the target repository (`targetRepositoryUrl`) and pushes to the target branch (`targetBranch`) or to the `main` branch.
 
+### Response
+
+The action returns the templating variables in the `values` field:
+
+| Name                | Description                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `values.repository` | Variables from the `values.yaml` file of the template repository                    |
+| `values.request`    | Variables from the `values` field of the request                                    |
+| `values.merged`     | Merged variables used for rendering. Variables from the request take priority       |
+
+For example, `{{ .response.values.merged.module }}` returns the value of the `module` variable used for rendering.
+
 ### Implementation details
 
-The action supports templating of directory and file names. To do this, add an expression in [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) format to their name.
+The action supports templating of directory and file names. To do this, add an expression in [Go template](https://pkg.go.dev/text/template) format to their name.
 For example, the directory `src/{{ .module }}/utils`, given a `module` value of `example`, will be rendered as the directory `src/example/utils` in the target repository.
 
 If, after rendering from the template, a file's content is empty, the file is not created. For example, a file with the following content:
 
-```go
+```go-text-template
 {{- if .createContent }}
 - This is content that will be displayed if the createContent variable == true
 {{- end }}
@@ -87,7 +99,7 @@ The `values.yaml` file is optional.
 
 ### Excluding files
 
-Some files may contain variables in [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) format that need to be preserved when rendering the repository from a template, for example Helm charts in the `helm` directory. The `.git` directory is always ignored.
+Some files may contain variables in [Go template](https://pkg.go.dev/text/template) format that need to be preserved when rendering the repository from a template, for example Helm charts in the `helm` directory. The `.git` directory is always ignored.
 
 To exclude such files from the rendering mechanism, add a `.templateignore` file with the appropriate content to the root of the repository.
 
@@ -95,7 +107,7 @@ Each line of `.templateignore` defines a single rule — a path or a mask. If th
 
 Example of a `.templateignore` file containing only path masks, without substitution templates, to ignore the contents of the `helm` and `docs` directories:
 
-```sh
+```text
 helm/**
 docs/**
 ```
@@ -111,7 +123,7 @@ docs/**
 
 Individual files at the root:
 
-```sh
+```text
 package-lock.json
 yarn.lock
 LICENSE
@@ -120,7 +132,7 @@ LICENSE
 
 Entire directories and typical build artifacts:
 
-```sh
+```text
 vendor/**
 node_modules/**
 dist/**
@@ -129,7 +141,7 @@ build/tmp/**
 
 Nesting with a mask:
 
-```sh
+```text
 docs/**/*.pdf
 charts/*/values.schema.json
 .github/workflows/**
@@ -137,7 +149,7 @@ charts/*/values.schema.json
 
 Secrets by extension across the entire tree:
 
-```sh
+```text
 **/*.pem
 **/*.key
 ```
@@ -151,7 +163,7 @@ The variables available for expanding rules are the same ones merged from `value
 For each non-empty line from `.templateignore` or from a file listed in `additionalIgnoreFiles`, the portal does the following.
 
 1. The line is always added to the rule list exactly as it appears in the file, unchanged. This is the line that is compared with the file path first — this is needed for cases where the on-disk names still contain fragments like `{{ .module }}` before renaming.
-1. If the line contains `{{`, the portal runs the entire line once through the [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax) engine, with the same capabilities used when substituting into file and directory names (built-in portal functions and the Sprig set). If the line does not contain `{{`, this step is skipped.
+1. If the line contains `{{`, the portal runs the entire line once through the [Go template](https://pkg.go.dev/text/template) engine, with the same capabilities used when substituting into file and directory names (built-in portal functions and the Sprig set). If the line does not contain `{{`, this step is skipped.
 1. If the substitution step was performed and the resulting text differs from the line in the file (including the case where the result is empty), a second entry is added to the rule list — with this resulting text. As a result, a single line in the file can produce two entries in the list. When checking a file path, both are checked: a match with either one is enough for the file to be covered by the rule.
 
 Then, while traversing the tree, for each file path, the path relative to the root of the cloned copy is calculated (with forward slashes). The path is compared against each rule: first using mask-matching rules (including `*` and `**`), and, if necessary, by an exact match between the rule string and the relative path.
@@ -180,7 +192,7 @@ project: payment-gateway
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ .project }}/legacy/**
 ```
 
@@ -196,7 +208,7 @@ lang: ru
 
 `.templateignore`:
 
-```go
+```go-text-template
 apps/{{ .lang }}/messages.yaml
 ```
 
@@ -210,7 +222,7 @@ skipGenerated: false
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{- if .skipGenerated }}generated/**{{- end }}
 ```
 
@@ -224,7 +236,7 @@ tier: staging
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{- if ne .tier "prod" }}mock/**{{- end }}
 ```
 
@@ -238,7 +250,7 @@ chartName: wordpress
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ printf "charts/%s/**" .chartName }}
 ```
 
@@ -252,7 +264,7 @@ envName: ""
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ default "dev" .envName }}/secrets/**
 ```
 
@@ -268,7 +280,7 @@ analyticsModule: tracking
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ with .analyticsModule }}{{ . }}/vendor/**{{ end }}
 ```
 
@@ -285,7 +297,7 @@ regions:
 
 `.templateignore`:
 
-```go
+```go-text-template
 configs/{{ index .regions "primary" }}/bootstrap.yaml
 ```
 
@@ -299,7 +311,7 @@ serviceName: " billing-api "
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ trim .serviceName " " }}/logs/**
 ```
 
@@ -314,7 +326,7 @@ variant: canary
 
 `.templateignore`:
 
-```go
+```go-text-template
 {{ .base }}/{{ .variant }}/**/*.tmp
 ```
 
@@ -324,7 +336,7 @@ The action's specification lists the names of files at the root of the repositor
 
 The `.ship-ignore` file in the template:
 
-```sh
+```text
 # excluded from the target repository
 local/fixtures/**
 scratchpad.md
@@ -341,7 +353,7 @@ A template in a file used with `additionalIgnoreFiles` (removing a directory, wi
 
 The `.env-drop` file at the root of the template:
 
-```go
+```go-text-template
 {{ .obsoleteDir }}/**
 ```
 
@@ -349,13 +361,14 @@ With `obsoleteDir: legacy-ui` from `values`, after expansion, the deletion list 
 
 {{< alert level="info" >}}
 Note the difference:
+
 - `.templateignore` leaves files on disk but disables path renaming and content rendering for them;
 - lists from `additionalIgnoreFiles` remove matched paths from the working copy.
 {{< /alert >}}
 
 ### Example directory structure of a template repository
 
-```sh
+```text
 ├── example-folder-01
 │   ├── example-file-01
 │   └── {{ .example }}-file-02
@@ -367,7 +380,7 @@ Note the difference:
 
 If the `example` variable is set to `new` when the repository is rendered, the resulting structure after rendering will look as follows:
 
-```sh
+```text
 ├── example-folder-01
 │   ├── example-file-01
 │   └── new-file-02

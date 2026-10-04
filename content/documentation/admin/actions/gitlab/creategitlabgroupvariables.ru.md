@@ -27,6 +27,8 @@ variables:
 
 Список полей для переменных соответствует официальному GitLab Group-level Variables API, `/groups/:id/variables`, подробнее — [в документации GitLab](https://docs.gitlab.com/api/group_level_variables/#create-variable).
 
+Действие создаёт переменные по одной. Если GitLab не создал часть переменных, действие создаёт остальные, а запуск завершается со статусом `Warning`. Ответ GitLab для каждой несозданной переменной записывается в лог запуска.
+
 ### Примечание
 
 Действие осуществляет POST-запрос по URL: `/api/v4/groups/:id/variables`.

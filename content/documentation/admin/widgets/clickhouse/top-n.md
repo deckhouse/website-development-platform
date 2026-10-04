@@ -13,7 +13,7 @@ Example of a valid widget query:
 ```sql
 SELECT service AS label, count() AS value
 FROM events
-WHERE timestamp >= {{from}} AND timestamp < {{to}}
+WHERE timestamp >= '{{from}}' AND timestamp < '{{to}}'
 GROUP BY label
 ORDER BY value DESC
 ```
@@ -22,9 +22,9 @@ ORDER BY value DESC
 
 | Name          | Required | Description                                                                                       | Default value |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------- | ------------- |
-| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range                        | —             |
+| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range. The widget substitutes them with the interval boundaries in UTC in the `YYYY-MM-DD hh:mm:ss` format without quotes | —             |
 | Database      | No       | ClickHouse database name passed in the `X-ClickHouse-Database` header                             | —             |
-| Default range | No       | Range used when opening or refreshing the widget if no range is specified in the query parameters | Last hour     |
+| Default interval | No       | Interval used when opening or refreshing the widget if no interval is specified in the query parameters | Last hour     |
 | Label column  | Yes      | Column containing the bar labels                                                                  | —             |
 | Value column  | Yes      | Column containing numeric values that determine bar length                                        | —             |
 | Limit         | Yes      | Maximum number of rows in the chart                                                               | 10            |

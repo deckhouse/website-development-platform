@@ -188,7 +188,7 @@ description: Справочник по наборам маппинга глав�
 | `microservice_binding_template_upgrade_add_if_missing` | «Пути, добавляемые при обновлении» | Список добавляемых путей, заданный для микросервиса | `template_upgrade_add_if_missing` |
 | `microservice_vcs_provider` | «Провайдер системы контроля версий» | Провайдер репозитория микросервиса | `vcs_provider` |
 | `microservice_vcs_external_service_uuid` | «Внешний сервис системы контроля версий» | Внешний сервис GitLab, в котором находится репозиторий | `vcs_external_service_uuid` |
-| `microservice_default_branch` | «Ветка по умолчанию микросервиса» | Ветка, в которую создаётся merge request обновления | `default_branch` |
+| `microservice_default_branch` | «Ветка по умолчанию микросервиса» | Ветка, в которую создаётся запрос на слияние с обновлением | `default_branch` |
 | `microservice_open_mr_count` | «Открытые merge request» | Показатель «Открытые MR» | `open_mr_count` |
 | `microservice_last_pipeline_status` | «Статус последнего пайплайна» | Показатель «Последний пайплайн» | `last_pipeline_status` |
 | `microservice_last_pipeline_id` | «ID последнего пайплайна» | Номер пайплайна в показателе «Последний пайплайн» | `last_pipeline_id` |

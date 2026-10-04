@@ -3,12 +3,18 @@ title: CreateCodeScoringProject
 weight: 10
 ---
 
+{{< alert level="info" >}}
+The action does not use credentials. Authenticate in CodeScoring through the HTTP headers of the action:
+add the authentication header in the [URL and HTTP headers](../../overview/#url-and-http-headers) settings.
+{{< /alert >}}
+
 CreateCodeScoringProject — creates a new project in CodeScoring.
 The action uses the CodeScoring API to register a project with the specified parameters:
-- project name,
-- repository URL,
-- VCS ID,
-- an option to automatically run SCA analysis after cloning the repository.
+
+- project name
+- repository URL
+- VCS ID
+- option to automatically run SCA analysis after cloning the repository
 
 ### Request example
 

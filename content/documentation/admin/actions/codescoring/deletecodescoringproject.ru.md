@@ -3,6 +3,11 @@ title: DeleteCodeScoringProject
 weight: 20
 ---
 
+{{< alert level="info" >}}
+Действие не использует учётные данные. Аутентификация в CodeScoring выполняется через HTTP-заголовки действия:
+добавьте заголовок аутентификации в настройках [URL и HTTP-заголовков](../../overview/#url-и-http-заголовки).
+{{< /alert >}}
+
 DeleteCodeScoringProject — удаляет проект в системе CodeScoring по его ID.
 
 ### Пример запроса

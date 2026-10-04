@@ -17,7 +17,7 @@ Configure the following fields for each quick question:
 
 | Name          | Required | Description                                                                                       |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------- |
-| Question name | Yes      | A short label displayed in the widget's bottom panel and in the chat                              |
+| Question title | Yes     | A short label displayed in the widget's bottom panel and in the chat                              |
 | Prompt        | Yes      | Instructions sent to the model when the user selects the button. Go templating is supported       |
 
 When writing a prompt, explicitly specify the names of the Model Context Protocol (MCP) tools that the model must call to prepare the response.
@@ -38,4 +38,4 @@ The chat does not retain history:
 - It displays only one response to the most recent question.
 - The response is not retained when the user navigates to another page or refreshes the page.
 
-Before sending a question, the user can customize the prompt by selecting **Send with prompt changes** from the question button menu.
+Before sending a question, the user can customize the prompt by selecting **Send with customization** from the question button menu.

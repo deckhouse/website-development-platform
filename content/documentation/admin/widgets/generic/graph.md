@@ -4,7 +4,7 @@ description: Configure charts that aggregate and visualize Deckhouse Development
 weight: 130
 ---
 
-The widget displays information about DDP objects using one of the following chart types:
+The widget displays information about Deckhouse Development Portal (DDP) objects using one of the following chart types:
 
 * Bar chart.
 * Doughnut chart.

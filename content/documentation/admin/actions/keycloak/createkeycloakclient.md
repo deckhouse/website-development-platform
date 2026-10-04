@@ -3,11 +3,14 @@ title: CreateKeycloakClient
 weight: 10
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `username` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `username` — the username under which the action runs.
+- `password` — the password for that user.
+
+The portal obtains a token through the `admin-cli` client in the realm specified in `realm`, the same realm in which the client is created.
+The user must exist in that realm and have permission to create clients in it.
 {{< /alert >}}
 
 CreateKeycloakClient — creates a new client in Keycloak.

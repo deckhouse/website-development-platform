@@ -12,6 +12,7 @@ and a description with Markdown support.
 
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
+| URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
 | Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Additional widget features

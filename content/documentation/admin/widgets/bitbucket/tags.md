@@ -11,9 +11,10 @@ The widget displays data about tags in a Bitbucket repository.
 | Name        | Required | Description                                                    | Example                                                    |
 | ----------- | -------- | -------------------------------------------------------------- | ---------------------------------------------------------- |
 | Project key | Yes      | The part of the repository URL immediately after `/projects/` | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `MYTEAM` |
-| Repository  | Yes      | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
+| Repository identifier | Yes | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
 
 where:
+
 - `<BITBUCKET_HOST>` — the hostname of the Bitbucket server.
 
 ## Displayed data

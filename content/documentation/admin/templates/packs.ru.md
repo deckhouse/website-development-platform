@@ -67,7 +67,8 @@ update:
 | `language` | Да | Язык шаблона: `Go`, `Vue`, `TypeScript`, `Python`, `Java` или `Other` |
 | `tags` | Нет | Теги для поиска в галерее |
 | `minDdpVersion` | Нет | Минимальная версия DDP в формате semver. На более ранней версии DDP версия шаблона получает статус «недоступна» |
-| `update.strategy` | Нет | Стратегия обновления: `selective`, `additive`, `selective_additive`, `full` или `merge`. Если не задана, используется `selective` |
+| `update` | Да | Правила обновления репозитория до новой версии шаблона: поля `strategy`, `overwrite` и `addIfMissing` |
+| `update.strategy` | Нет | Стратегия обновления: `selective`, `additive`, `selective_additive`, `full` или `merge`. Если не задана, используется `selective`, и тогда `update.overwrite` обязателен. Для стратегии `full` списки путей не нужны: `update: {strategy: full}` |
 | `update.overwrite` | Зависит от стратегии | Glob-шаблоны путей, которые перезаписываются при обновлении |
 | `update.addIfMissing` | Зависит от стратегии | Glob-шаблоны путей, которые добавляются при обновлении, если их нет в репозитории |
 
@@ -157,7 +158,8 @@ properties:
 Правила применения аннотации:
 
 - значение из контекста заменяет значение, переданное в параметрах процесса;
-- если пути нет в контексте, значение по пути `null` или аннотация пустая, создание завершается ошибкой `values_invalid: values.yaml property "k": x-ddp-from "context.x" : path not found in launch context`;
+- если пути нет в контексте или значение по пути `null`, создание завершается ошибкой `values_invalid: values.yaml property "k": x-ddp-from "context.x": path not found in launch context`;
+- если аннотация пустая, создание завершается ошибкой `values_invalid: values.yaml property "k": x-ddp-from is empty`;
 - аннотация применяется только при создании репозитория. При обновлении используются значения из lock-файла.
 
 ## Шаблонизация файлов
