@@ -27,6 +27,8 @@ variables:
 
 The fields for each variable correspond to the official GitLab project-level CI/CD variables API, `/projects/:id/variables`. For details, see the [GitLab documentation](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
 
+The action creates the variables one by one. If GitLab does not create some of the variables, the action creates the remaining ones, and the run ends with the `Warning` status. The GitLab response for each failed variable is written to the run log.
+
 ### Note
 
 The action performs a POST request to the URL: `/api/v4/projects/:id/variables`.

@@ -29,6 +29,10 @@ variables:
 | variables.key               | Yes      | Variable name                                                                        |
 | variables.value             | Yes      | Variable value                                                                       |
 
+### Response
+
+The action response is the object of the created GitLab pipeline with the `id`, `iid`, `status`, `ref`, `web_url` and other fields. Use the identifier `{{ .response.id }}` to track the pipeline status with the GetGitlabPipeline action.
+
 ### Note
 
 The action performs a POST request to the URL: `/api/v4/projects/:id/pipeline`.

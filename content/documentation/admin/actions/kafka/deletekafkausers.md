@@ -3,11 +3,11 @@ title: DeleteKafkaUsers
 weight: 40
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `user` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `user` — the username under which the action runs.
+- `password` — the password for that user.
 {{< /alert >}}
 
 DeleteKafkaUsers — deletes existing SASL/SCRAM users in Kafka.

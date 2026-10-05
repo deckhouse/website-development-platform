@@ -1,5 +1,6 @@
 ---
 title: Сведения о персонале
+description: Требования к персоналу, который разрабатывает и поддерживает Deckhouse Development Portal.
 weight: 30
 ---
 

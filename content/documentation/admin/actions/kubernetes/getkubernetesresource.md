@@ -3,7 +3,6 @@ title: GetKubernetesResource
 weight: 20
 ---
 
-
 {{< alert level="info" >}}
 This action requires a Kubernetes service account token.
 {{< /alert >}}
@@ -18,6 +17,7 @@ version: v1alpha1
 resource_type: postgres
 resource_name: example-postgres
 namespace: default
+ignore_not_found: true
 ```
 
 ### Request specification
@@ -29,13 +29,15 @@ namespace: default
 | resource_type               | Yes      | Type of resource to retrieve                                                           | -                                                                                 |
 | resource_name               | Yes      | Name of the resource to retrieve                                                       | -                                                                                 |
 | namespace                   | Yes      | Namespace containing the resource                                                     | -                                                                                 |
+| ignore_not_found            | No       | If `true`, a missing object is not treated as an error. Defaults to `false`         | `true`, `false` |
 
 ### Response
 
-On success, the action returns the resource object in the `resource` field. If the resource is not found, the action fails with an error.
+On success, the action returns the `found` flag and the object in the `resource` field. If the object is not found and `ignore_not_found` is not enabled, the action fails with an error. With `ignore_not_found: true`, the action succeeds with `found: false` and without the `resource` field.
 
 | Name         | Description                                      |
 | ------------ | --------------------------------------------------- |
+| `found`      | `true` if the object is found                     |
 | `resource`   | Resource object in Kubernetes format              |
 
 ### Determining the required Group and Version

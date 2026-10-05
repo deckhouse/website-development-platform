@@ -5,10 +5,11 @@ weight: 10
 
 CreateCodeScoringProject — creates a new project in CodeScoring.
 The action uses the CodeScoring API to register a project with the specified parameters:
-- project name,
-- repository URL,
-- VCS ID,
-- an option to automatically run SCA analysis after cloning the repository.
+
+- project name
+- repository URL
+- VCS ID
+- option to automatically run SCA analysis after cloning the repository
 
 ### Request example
 

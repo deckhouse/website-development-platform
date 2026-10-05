@@ -2,6 +2,7 @@
 title: Trusted certificates
 menuTitle: Trusted certificates
 description: Add certificates for secure HTTPS connections from Deckhouse Development Portal to external services.
+weight: 73
 ---
 
 Trusted certificates allow you to upload root and intermediate certificate authority (CA) certificates or server certificates to Deckhouse Development Portal (DDP, portal). The portal uses them for TLS/SSL verification when connecting to external services over HTTPS, for example when accessing external service APIs from data sources and widgets.
@@ -9,7 +10,7 @@ Trusted certificates allow you to upload root and intermediate certificate autho
 This mechanism provides secure connections to services that use self-signed or corporate certificates without disabling SSL verification.
 
 {{< alert level="info" >}}
-Add certificates for Dex, PostgreSQL, and Redis through the module configuration. DDP connects to these internal services before enabling the trusted certificate mechanism.
+Add certificates for Dex, PostgreSQL, and Redis to the `extraCA` module parameter in ModuleConfig `development-platform` (`spec.settings.extraCA`) or in the module settings in the Deckhouse Platform web interface. DDP connects to these internal services before enabling the trusted certificate mechanism.
 {{< /alert >}}
 
 Configure trusted certificates under "Administration" → "Trusted certificates".
@@ -25,7 +26,7 @@ Specify the following parameters when adding a trusted certificate:
 
 Specify the certificate in PEM format:
 
-```sh
+```text
 -----BEGIN CERTIFICATE-----
 MIIDXTCCAkWgAwIBAgIJAKL...
 ...

@@ -30,12 +30,12 @@ Connect an upstream MCP server to import its tools into the portal catalog.
 
 1. Go to **AI** → **MCP** → **MCP servers**.
 1. Select **Connect**.
-1. On the **General information** tab, specify **Name**, **Identifier**, **Description**, **Owner**, and **Team**.
-1. On the **Configuration** tab:
-   1. Enable the **Enabled** toggle.
+1. On the **Main information** tab, specify **Name**, **Identifier**, **Description**, **Owner**, and **Owning team**.
+1. On the **Config** tab:
+   1. Enable the **Enable** toggle.
    1. Select a **Transport**: `HTTP` or `SSE`.
    1. Specify the upstream MCP server **URL**.
-   1. If necessary, add **HTTP headers** and **Credentials** for authentication.
+   1. If necessary, add **Headers** and **Credentials** for authentication.
 1. Select **Save**.
 
 After saving, open the server card and select **Synchronize** to load the tool catalog. On the **Tools** tab, enable the required tools and add **Tags** if necessary.
@@ -46,18 +46,23 @@ Create a custom MCP tool that the AI assistant calls directly without an upstrea
 
 1. Go to **AI** → **MCP** → **MCP tools**.
 1. Select **Add**.
-1. On the **General information** tab, specify **Name**, **Description**, **Owner**, **Team**, and **Tags**.
-1. On the **Configuration** tab:
-   1. Enable the **Enabled** toggle.
-   1. Define the **Argument schema** as a `JSON Schema` with the root type `object`.
-   1. If necessary, specify **Path parameter mapping** as a `JSON` object that maps argument names to `{placeholder}` segments in the executor URL.
-   1. If necessary, specify **Query parameter mapping** as a `JSON` object that maps argument names to URL query parameter names.
-1. On the **Authorization** tab, specify the executor endpoint **URL**, **HTTP method**, **HTTP headers**, and **Credentials**. The URL can contain `{placeholder}` segments for path parameters and credential placeholders such as `{{ .credentials.tenant_id }}`.
+1. On the **Main information** tab, specify **Name**, **Description**, **Owner**, **Owning team**, and **Tags**.
+1. On the **Config** tab:
+   1. Enable the **Enable** toggle.
+   1. Define the **Input schema** as a `JSON Schema` with the root type `object`.
+   1. If necessary, specify **Path mapping** as a `JSON` object that maps argument names to `{placeholder}` segments in the executor URL.
+   1. If necessary, specify **Query mapping** as a `JSON` object that maps argument names to URL query parameter names.
+   1. If necessary, specify **Body mapping** as a `JSON` object that maps argument names to JSON request body field names.
+1. On the **Authorization** tab, specify the executor endpoint **URL**, **HTTP method**, **Headers**, and **Credentials**. The URL can contain `{placeholder}` segments for path parameters and credential placeholders such as `{{ .credentials.tenant_id }}`.
 1. Select **Save**.
 
-For example, assume the argument schema defines the `space_id` argument, the executor URL is `https://api.example.com/v1/spaces/{spaceId}/boards`, and the path parameter mapping is `{"space_id": "spaceId"}`. If the tool is called with `space_id=42`, the request is sent to `https://api.example.com/v1/spaces/42/boards`.
+For example, assume the input schema defines the `space_id` argument, the executor URL is `https://api.example.com/v1/spaces/{spaceId}/boards`, and the path mapping is `{"space_id": "spaceId"}`. If the tool is called with `space_id=42`, the request is sent to `https://api.example.com/v1/spaces/42/boards`.
 
-For `GET` and `DELETE`, arguments not mapped to path parameters are passed only as query parameters. For `POST`, `PUT`, and `PATCH`, arguments not mapped to path or query parameters are passed in the JSON request body.
+Arguments are passed to the executor endpoint as follows:
+
+- Path mapping and query mapping apply to all HTTP methods. Only arguments listed in **Query mapping** are added to the URL as query parameters.
+- For `GET` and `DELETE`, the request body is not sent. Arguments that are not listed in **Path mapping** or **Query mapping** are not passed.
+- For `POST`, `PUT`, and `PATCH`, the JSON request body is built from **Body mapping**. If **Body mapping** is empty, the body contains all tool arguments, including the ones used in the path and query. If **Body mapping** is set, the body contains only the mapped arguments.
 
 ## MCP collections
 
@@ -65,13 +70,13 @@ An MCP collection groups catalog tools and determines which tools are available 
 
 1. Go to **AI** → **MCP** → **MCP collections**.
 1. Select **Create**.
-1. On the **General information** tab, specify **Name**, **Identifier**, **Description**, **Owner**, and **Team**.
-1. On the **Configuration** tab:
-   1. Enable the **Enabled** toggle.
+1. On the **Main information** tab, specify **Name**, **Identifier**, **Description**, **Owner**, and **Owning team**.
+1. On the **Config** tab:
+   1. Enable the **Enable** toggle.
    1. Under **Tools**, select tools from the available catalog. Each item includes the MCP server identifier in parentheses.
 1. Select **Save**.
 
-To let a user call collection tools, open the collection card menu and select **Configure access**. Assign users or teams a role with the `use:mcp-collections` permission. For the permission list, refer to the [role model](../../admin/security/rbac/#mcp-collections).
+To let a user call collection tools, open the collection card menu and select **Edit role bindings**. Assign users or teams a role with the `use:mcp-collections` permission. For the permission list, refer to the [role model](../../admin/security/rbac/#mcp-collections).
 
 The collection owner and super administrator automatically receive access to the collection.
 

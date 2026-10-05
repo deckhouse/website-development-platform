@@ -14,13 +14,13 @@ If at least one check returns an error, the entity status is set to `error`, reg
 
 ## Schedule
 
-The check scheduler runs every minute. For each rule, you can specify a five-field cron expression in the **Schedule** field. The rule then runs only at the specified times. If the field is empty, the rule runs every time the scheduler starts (once a minute).
+The check scheduler runs every minute. For each rule, you can specify a five-field cron expression in the "Schedule" field. The rule then runs only at the specified times. The schedule is evaluated in UTC. If the field is empty, the rule runs every time the scheduler starts (once a minute).
 
 Example: `0 * * * *` runs the check at the beginning of every hour.
 
 If a rule is not scheduled to run at the current time, its latest check result is used to calculate the entity status.
 
-Logs for the latest checks are available under **Health checks** in the resource menu.
+Logs for the latest checks are available under "Health checks" in the resource menu.
 
 ## Entity statuses
 

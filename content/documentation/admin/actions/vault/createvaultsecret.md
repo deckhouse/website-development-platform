@@ -3,7 +3,6 @@ title: CreateVaultSecret
 weight: 10
 ---
 
-
 {{< alert level="info" >}}
 Running this action requires a Vault token with permission to create secrets.
 {{< /alert >}}

@@ -3,7 +3,6 @@ title: GetKubernetesResource
 weight: 20
 ---
 
-
 {{< alert level="info" >}}
 Для выполнения действий необходимо наличие токена сервисного аккаунта Kubernetes.
 {{< /alert >}}

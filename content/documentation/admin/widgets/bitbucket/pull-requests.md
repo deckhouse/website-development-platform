@@ -11,9 +11,10 @@ The widget displays Bitbucket Pull Request (PR) data and provides actions for ma
 | Name          | Required | Description                                                    | Example                                                                      |
 | ------------- | -------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Project key   | Yes      | The part of the repository URL immediately after `/projects/` | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `MYTEAM` |
-| Repository ID | Yes      | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
+| Repository identifier | Yes | The part of the repository URL immediately after `/repos/`    | For `https://<BITBUCKET_HOST>/projects/MYTEAM/repos/backend`, specify `backend` |
 
 where:
+
 - `<BITBUCKET_HOST>` — the hostname of the Bitbucket server.
 
 ## Filtering by status
@@ -29,11 +30,11 @@ By default, the widget displays only open PRs.
 
 ## Additional widget features
 
-When actions are enabled in the settings, the widget provides the following Pull Request actions:
+The widget provides the following actions:
 
 - **Merge** — merges an open Pull Request. This action is available only for open PRs.
 - **Close** — declines a Pull Request.
-- **View changes** — displays the diff for a Pull Request.
+- **Changes** — displays the diff for a Pull Request.
 - **Comments** — displays and adds comments to a PR.
 - **Create PR** — creates a Pull Request with a source branch, target branch, reviewers, title, and description.
 

@@ -12,22 +12,22 @@ The widget displays static code analysis results for a project branch in Svacer:
 | --------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- | ------- |
 | Project name                | Yes      | Project name in Svacer                                                                                                       | —       |
 | Branch name                 | Yes      | Branch name in Svacer, used as the default branch when the widget opens                                                      | —       |
-| Cache the full marker list  | No       | Caches the selected Svacer snapshot's full marker list in the DDP backend to speed up pagination on the **Findings** tab    | Enabled |
-| Cache lifetime (seconds)    | No       | Number of seconds to keep the response in DDP memory when caching is enabled. Valid range: 30–86400                          | 180     |
+| Cache full marker list      | No       | Caches the selected Svacer snapshot's full marker list on the Deckhouse Development Portal (DDP) backend to speed up pagination on the **Findings** tab    | Enabled |
+| Cache TTL (seconds)         | No       | Number of seconds to keep the response in DDP memory when caching is enabled. Valid range: 30–86400                          | 180     |
 | Snapshot marker threshold   | No       | Number of markers above which a snapshot is considered large                                                                | 10,000  |
 | Large snapshot strategy     | No       | Behavior when the marker threshold is exceeded                                                                               | Hybrid  |
 
 Large snapshot strategies:
 
 * **Hybrid** — The unfiltered **Findings** tab is unavailable. The overview is generated using lightweight Svacer requests.
-* **Unlimited** — The full marker list is always loaded. For a large snapshot, the widget only displays a warning.
+* **Unrestricted** — The full marker list is always loaded. For a large snapshot, the widget only displays a warning.
 
 ## Query parameters
 
 The following parameters are available when viewing the widget:
 
 * **Branch** — Svacer branch from which data is loaded. The list is generated for the project in the widget configuration. The configured branch is selected by default.
-* **Snapshot** — Branch snapshot from which data is loaded. **Latest snapshot** refers to the current branch snapshot when the widget is refreshed.
+* **Snapshot** — Branch snapshot from which data is loaded. **Last snapshot** refers to the current branch snapshot when the widget is refreshed.
 * **Filters**:
   * **Review status** — Marker review status: confirmed, false positive, unclear, no decision, or will not fix.
   * **Severity** — Finding severity.

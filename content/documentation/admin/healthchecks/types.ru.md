@@ -1,12 +1,14 @@
 ---
 title: Типы проверок статуса
+description: Типы правил проверки статуса в DDP — Property, Prometheus, GitLab Pipeline, DefectDojo, CodeScoring, SonarQube и URL.
+weight: 20
 ---
 
 ## Property
 
 Правило типа `Property` проверяет, соответствует ли конкретный параметр сущности заданному шаблонному выражению.
 
-Конфигурация правила состоит из одного параметра — выражения. Для описания выражения используется синтаксис [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax).
+Конфигурация правила состоит из одного параметра — выражения. Для описания выражения используется синтаксис [Go template](https://pkg.go.dev/text/template).
 
 Примеры выражений:
 
@@ -19,7 +21,7 @@ title: Типы проверок статуса
 
 Поддерживается шаблонизация, например:
 
-```go
+```promql
 avg(ingress_nginx_detail_request_seconds_sum{location="/{{ .entity.slug }}"})
 ```
 
@@ -41,13 +43,13 @@ avg(ingress_nginx_detail_request_seconds_sum{location="/{{ .entity.slug }}"})
 
 Конфигурация авторизации описана в разделе [внешний сервис Prometheus](../external-services/#prometheus).
 
-## Gitlab Pipeline
+## GitLab Pipeline
 
-Правило типа `GitlabPipeline` проверяет, соответствует ли статус последнего pipeline в Gitlab для выбранного Ref (ветка или тег) заданному статусу.
+Правило типа `GitlabPipeline` проверяет, соответствует ли статус последнего pipeline в GitLab для выбранного Ref (ветка или тег) заданному статусу.
 
 Во всех текстовых полях поддерживается шаблонизация, например, при подобном выражении в поле `Ref`:
 
-```go
+```go-text-template
 {{ .entity.properties.mainBranch }}
 ```
 
@@ -57,12 +59,12 @@ avg(ingress_nginx_detail_request_seconds_sum{location="/{{ .entity.slug }}"})
 
 | Название            | Описание                                                    | Возможные значения                                                                                                |
 |---------------------|-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| ID проекта          | ID проекта в Gitlab                                         |                                                                                                                   |
-| Ref                 | Ветка или тег для которых будет искаться последний pipeline |                                                                                                                   |
+| ID проекта          | ID проекта в GitLab                                         |                                                                                                                   |
+| Ref                 | Ветка или тег, для которых будет искаться последний pipeline |                                                                                                                   |
 | Статус              | Статус pipeline, который будет считаться успешным           | created, waiting_for_resource, preparing, pending, running, success, failed, canceled, skipped, manual, scheduled |
 
 {{< alert level="info" >}}
-Для проверки каждой сущности выполняется отдельный запрос к Gitlab. Рекомендуется учитывать это при планировании нагрузки на систему.
+Для проверки каждой сущности выполняется отдельный запрос к GitLab. Рекомендуется учитывать это при планировании нагрузки на систему.
 {{< /alert >}}
 
 ### Авторизация
@@ -77,7 +79,7 @@ avg(ingress_nginx_detail_request_seconds_sum{location="/{{ .entity.slug }}"})
 
 Во всех текстовых полях поддерживается шаблонизация. Например, можно подставить название продукта из параметров сущности:
 
-```go
+```go-text-template
 {{ .entity.properties.defectdojo_product_key }}
 ```
 
@@ -120,7 +122,7 @@ conditions:
 
 Во всех текстовых полях поддерживается шаблонизация. Например, можно подставить ID проекта из параметров сущности:
 
-```go
+```go-text-template
 {{ .entity.properties.codescoring_project_id }}
 ```
 
@@ -166,7 +168,7 @@ conditions:
 
 Во всех текстовых полях поддерживается шаблонизация, например, можно подставить ключ компонента из параметров сущности:
 
-```go
+```go-text-template
 {{ .entity.properties.sonarqube_project_key }}
 ```
 
@@ -212,7 +214,7 @@ conditions:
 
 Во всех текстовых полях поддерживается шаблонизация, например, можно подставить ключ проекта из параметров сущности:
 
-```go
+```go-text-template
 {{ .entity.properties.sonarqube_project_key }}
 ```
 
@@ -261,7 +263,7 @@ conditions:
 
 Примеры условий:
 
-```go
+```go-text-template
 {{ eq .status.code 200 }}
 {{ eq (index (index .status.headers "content-type") 0) "application/json" }}
 {{ gt .status.contentLength 0 }}

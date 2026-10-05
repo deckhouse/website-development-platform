@@ -3,11 +3,11 @@ title: CreateKafkaUsers
 weight: 30
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `user` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `user` — the username under which the action runs.
+- `password` — the password for that user.
 {{< /alert >}}
 
 CreateKafkaUsers — creates new SASL/SCRAM users in Kafka.

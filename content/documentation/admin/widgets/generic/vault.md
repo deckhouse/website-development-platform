@@ -1,5 +1,5 @@
 ---
-title: Vault secrets
+title: Vault Secrets
 description: Browse KV v2 secret metadata and key structures without exposing secret values.
 weight: 60
 ---

@@ -99,10 +99,10 @@ The "Loop" element repeats a branch of the process either a fixed number of time
 
 Two modes are available:
 
-- "Fixed number" — the "Number of iterations" field, from 1 to 10000. On each iteration, `{{ .store._loop.item }}` holds the iteration number (1, 2, 3…).
-- "By collection" — the "Collection template" field: a Go template that, when entering the loop, must produce a JSON array. Typically, this is a path to an array written by a previous task: `{{ .store.notification.engagements }}`. Each array element is one iteration; the current element is available as `{{ .store._loop.item }}`.
+- "Fixed count" — the "Number of iterations" field, from 1 to 10000. On each iteration, `{{ .store._loop.item }}` holds the iteration number (1, 2, 3…).
+- "Foreach collection" — the "Collection template" field: a Go template that, when entering the loop, must produce a JSON array. Typically, this is a path to an array written by a previous task: `{{ .store.notification.engagements }}`. Each array element is one iteration; the current element is available as `{{ .store._loop.item }}`. The array can contain up to 10,000 items; a larger array fails the loop with an error.
 
-If the array is empty or the key is missing, the loop body is not executed, and the process immediately follows the "Loop exit" connection.
+If the array is empty or the key is missing, the loop body is not executed, and the process immediately follows the "Exit" connection.
 
 For more information, see [Process store](store/#looping-over-a-collection-from-the-store).
 
@@ -111,16 +111,16 @@ For more information, see [Process store](store/#looping-over-a-collection-from-
 Exactly two connections to different elements must originate from the "Loop" element:
 
 1. "Loop body" — the branch built from this port is executed on each iteration.
-1. "Loop exit" — execution continues along this branch after the last iteration.
+1. "Exit" — execution continues along this branch after the last iteration.
 
-The "Loop body" and "Loop exit" ports can be placed on any side of the element; a connection can be moved to a different port.
+The "Loop body" and "Exit" ports can be placed on any side of the element; a connection can be moved to a different port.
 
 ###### Usage
 
 Typical scenarios:
 
 - repeatedly checking the status of an external system with a fixed number of attempts;
-- iterating over a list of objects from an API response: a task writes the array to the store, and a loop in "By collection" mode processes each element;
+- iterating over a list of objects from an API response: a task writes the array to the store, and a loop in "Foreach collection" mode processes each element;
 - nested loops — the parent context is available via `{{ .store._loop.parent }}`.
 
 ##### Template
@@ -130,7 +130,7 @@ The "Template" element evaluates a Go template without calling an additional act
 Configure:
 
 - "Template body" — text with placeholders `{{ .store.* }}`, `{{ .process.* }}`, and, inside a loop, `{{ .store._loop.* }}`;
-- "Store key" — the destination dot-path, e.g. `rendered_message`;
+- "Output store key" — the destination dot-path, e.g. `rendered_message`;
 - "Format hint" — how to display the value when viewing the run (`text`, `markdown`, `html`, `json`); does not affect the store's content.
 
 For examples and limitations, see [Process store](store/#the-template-element).
@@ -139,7 +139,7 @@ For examples and limitations, see [Process store](store/#the-template-element).
 
 The "Timer" element pauses process execution until a specified point in time, after which the next element is activated.
 
-While the process is only waiting for the timer to fire (no other active tasks), the run is placed in the "Wait" status. The run visualization panel shows a banner with the estimated resumption time.
+While the process is only waiting for the timer to fire (no other active tasks), the run is placed in the `Wait` status. The run visualization panel shows the banner "Waiting on timer — not before {ends} ({remaining})" with the estimated resumption time.
 
 ###### Outgoing connections
 
@@ -151,13 +151,13 @@ If the timer is passed through again within the same run (for example, via a loo
 
 In the timer's configuration, select a "Schedule":
 
-- "Delay after entering the element" — a fixed pause from the moment the process reaches the timer. Set the "Delay (seconds)" from 1 to 1,209,600 (14 days).
+- "Delay after this element starts" — a fixed pause from the moment the process reaches the timer. Set the "Delay (seconds)" from 1 to 1,209,600 (14 days).
 - "Custom schedule" — triggers at a specified calendar time in the selected time zone (IANA, e.g. `Europe/Moscow`).
 
 For "Custom schedule" mode, specify a "Pattern":
 
-- "Specific day of the week" — "Day of the week", "Time of day" (hour and minute), "Time zone".
-- "Specific day of each month" — "Day of month" (1–31), "Time of day", "Time zone". If the month does not have that day, the last day of the month is used.
+- "Specific weekday" — "Day of week", "Time of day" (hour and minute), "Time zone".
+- "Specific day each month" — "Day of month" (1–31), "Time of day", "Time zone". If the month does not have that day, the last day of the month is used.
 - "Every N days" — "Every N days" (1–365), "Time of day", "Time zone". The first trigger is no earlier than N calendar days from the day the process reached the timer; upon re-entering the element, the calculation is redone.
 
 "Time of day" is set in the selected time zone (the "Time zone" field), if it differs from the browser's time zone.
@@ -200,8 +200,8 @@ In brief:
 
 - **One store per run** — each process instance has its own store; it can be viewed on the "Store" tab when visualizing a run.
 - **Nested paths** — keys are specified with dots: `notification.module_name`, `ctx.job.id`; array indices are supported: `items[0].status`.
-- **Rule-based writes** — data is written to the store after an action completes successfully (see [Process store update](../../actions/overview/#process-store-update)), or when the "Template" element runs. Available operations include writing strings and JSON, appending, merging, and deleting, plus a condition for each rule.
-- **Reading** — Go templates `{{ .store.<path> }}` in action configuration and gateway conditions (see [Process store](../../user/templating/#process-store)).
+- **Rule-based writes** — data is written to the store after an action completes successfully, or when the "Template" element runs. Available operations include setting strings and JSON, appending, merging, and deleting, plus a condition for each rule. Action rules are configured as described in [Process store update](../../actions/overview/#process-store-update).
+- **Reading** — Go templates `{{ .store.<path> }}` in action configuration and gateway conditions. The syntax is described in the [Process store](../../user/templating/#process-store) section of the "Templating" page.
 
 If a key is not present in the store, the template `{{ .store.<path> }}` will cause the step to fail with an error.
 
@@ -213,43 +213,68 @@ To run a process manually:
 
 1. Go to the entity for which the process needs to be run.
 1. In the entity's menu, select "Run process".
-1. Choose the desired process from the list.
+1. Choose the desired process from the list. If only one process is available, it is selected automatically and the list is not shown.
 1. Fill in the process parameters.
 1. Click "Run".
 
+After the run starts, the notification "Process "{name}" started" is shown.
+
 ### Launch parameters
 
-The following are available when launching a process:
+The "Run process" dialog opens in simplified mode. It shows only the process parameters with the ["Show in simplified form"](../../user/properties/#configuration) flag and the required parameters that have no value. The other parameters keep their default values and are passed at launch.
 
-* "Common process parameters" — parameters defined in the process configuration.
-* "Action parameters" — parameters for each action in the process.
-* "Environment variables" — additional variables for execution.
+Above the parameters, the hint "Showing important parameters: {important} of {total}" is shown. If there are no important parameters, "No important parameters" is shown. If nothing needs to be filled in, the message "This process has no parameters to fill in — click "Run" to start it" is shown.
+
+The "All process parameters" button switches the dialog to full mode, and the "Important parameters only" button switches it back. Full mode has the following sections:
+
+* "Common process properties" — parameters defined in the process configuration;
+* "Process team properties" — the team whose variables are used during execution;
+* "Configuration" — the process diagram. Click a task to enable or disable its action and fill in its parameters.
+
+The process description is shown under the title in a shortened form; the "more" link expands it.
+
+If a required process parameter is not filled in, clicking "Run" shows the error "Fill all required process properties". If a required field of an enabled task is not filled in, the dialog switches to full mode and shows the error "Fill all required fields for all enabled tasks".
+
+### Launch context
+
+The launch context is a set of values that a portal section passes to the process at launch, for example, the environment and the system selected on the home page. The user does not enter the context, and it is not stored in the process configuration.
+
+In process templates, the context is available via the `.context` root, for example, `{{ .context.environment.slug }}`. A process run from the catalog receives an empty context.
 
 ## Execution management
 
 ### Process statuses
 
-A process can be in one of the following statuses:
+The run status is shown as one of the following values:
 
-* "Created" — the process has been created but not run.
-* "Running" — the process is currently running.
-* "Paused" — process execution has been paused.
-* "Completed" — the process completed successfully.
-* "Failed" — the process finished with an error.
-* "Cancelled" — process execution was cancelled.
+* `Running` — the process is running.
+* `Wait` — the process is only waiting for a timer to fire.
+* `Unapproved` — all active tasks are waiting for action approval.
+* `Paused` — process execution is paused.
+* `Resuming` — the run is being restored after a portal restart.
+* `Completed` — the process reached an "End" element, and no task failed or was declined.
+* `Partially Completed` — the process reached at least one "End" element, but some tasks failed or were declined.
+* `Failed` — the process finished with an error: no "End" element was reached, or the process reached an "Error" element.
+* `Canceled` — the run was stopped or canceled by a user.
 
 ### Management operations
 
-The following operations are available for active processes:
+Run management buttons are shown on the run card in the "My Activities" panel, on the "Processes" tab. The set of buttons depends on the run status:
 
-* "Pause" — temporarily stop execution.
-* "Resume" — continue execution after pausing.
-* "Stop" — completely stop execution.
-* "Force restart" — restart the process from the beginning.
+* "Retry process" — restarts the process from the "Start" element; the run timeline is preserved. A run in the `Running`, `Wait`, `Paused`, `Resuming` or `Unapproved` status cannot be retried: stop it first.
+* "Pause process" — pauses a run in the `Running` status.
+* "Resume process" — resumes a run in the `Paused` status.
+* "Cancel process" — cancels a run in the `Running` or `Paused` status. The run gets the `Canceled` status.
+* "Stop process" — stops a run in another non-final status, for example, `Wait` or `Unapproved`. The run gets the `Canceled` status.
+* "Delete process" — deletes the run.
+
+The same operations are available on the "Process history" tab of the entity. There, canceling and stopping are performed by one button.
 
 ### State tracking
 
-In the "Process runs" section, you can view:
+While the user has running processes, the "My Activities" panel icon in the top bar of the portal is replaced by an indicator. The "Processes" tab of the panel shows the number of running processes and the line "Processes running: {count}"; the list is updated when a process starts and finishes.
+
+On the "Process history" tab of the entity, you can view:
 
 * A list of all process runs for the entity.
 * Detailed information about each run.
@@ -295,7 +320,8 @@ Typical process diagram:
 
 The following limitations apply to processes:
 
-* Processes cannot contain more than 100 elements.
-* The maximum process execution time is 24 hours.
-* The number of concurrent process runs is limited by system settings.
-* Some actions may not be available for use in processes.
+* A "Loop" element in "Fixed count" mode runs from 1 to 10,000 iterations.
+* The collection of a "Loop" element in "Foreach collection" mode can contain up to 10,000 items. A larger collection fails the loop with an error.
+* The "Delay (seconds)" field of a "Timer" element accepts values from 1 to 1,209,600 (14 days), and the "Every N days" field accepts values from 1 to 365.
+* The body of a "Template" element is limited to 1 MiB.
+* If the "Timeout (sec)" field of a task is greater than zero, the task is interrupted after this time and gets the `Timeout` status.

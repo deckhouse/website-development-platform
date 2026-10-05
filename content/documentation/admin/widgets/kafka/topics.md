@@ -20,15 +20,16 @@ The following information and actions are available for each topic:
 | Name                    | Required | Description                                                                                                                                                                  | Default value |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | URL                     | Yes      | Kafka cluster URL                                                                                                                                                            | —             |
-| Authentication protocol | Yes      | Protocol used to connect to Kafka. [Authentication protocol reference](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                         | —             |
-| SASL mechanism          | No       | Authentication mechanism used by SASL. Required when using the `SASL_PLAINTEXT` or `SASL_SSL` protocol. [SASL reference](https://kafka.apache.org/documentation/#security_sasl_mechanism) | —             |
-| Kafka user              | Yes      | Username of the account used to interact with Kafka                                                                                                                          | —             |
-| Password                | Yes      | Password of the account used to interact with Kafka                                                                                                                          | —             |
+| Authentication protocol | No       | Protocol used to connect to Kafka. [Authentication protocol reference](https://kafka.apache.org/documentation/#adminclientconfigs_security.protocol)                         | `PLAINTEXT`   |
+| SASL mechanism          | No       | Authentication mechanism used by SASL. Required when using the `SASL_PLAINTEXT` or `SASL_SSL` protocol. [SASL reference](https://kafka.apache.org/documentation/#security_sasl_mechanism) | `PLAIN`       |
+| User                    | No       | Username of the account used to interact with Kafka. Needed for the `SASL_PLAINTEXT` and `SASL_SSL` protocols | —             |
+| Password                | No       | Password of the account used to interact with Kafka. Needed for the `SASL_PLAINTEXT` and `SASL_SSL` protocols | —             |
+| Enable widget actions   | No       | Shows the widget actions: creating and deleting topics, sending messages and purging a topic | `true`        |
 | Kafka topics            | No       | Topic name or regular expression used to filter topics displayed in the widget. If empty, all topics available to the user are displayed                                    | —             |
 
 ## Additional widget capabilities
 
-When actions are enabled in the settings, the widget allows users to:
+When **Enable widget actions** is on, the widget allows users to:
 
 * Create topics.
 * Delete topics.
@@ -37,11 +38,18 @@ When actions are enabled in the settings, the widget allows users to:
 
 ## Authentication
 
-The widget requires a user account.
-The system supports the following authentication methods:
+The widget connects to Kafka with the account set in the **User** and **Password** fields. These fields are needed for the `SASL_PLAINTEXT` and `SASL_SSL` protocols.
 
-* `PLAINTEXT`.
-* `SCRAM-SHA-256`.
+The following authentication protocols are supported:
+
+* `PLAINTEXT`;
+* `SASL_PLAINTEXT`;
+* `SASL_SSL`.
+
+The following SASL mechanisms are supported for the `SASL_PLAINTEXT` and `SASL_SSL` protocols:
+
+* `PLAIN`;
+* `SCRAM-SHA-256`;
 * `SCRAM-SHA-512`.
 
 {{< alert level="info" >}}
