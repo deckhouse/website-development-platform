@@ -3,10 +3,6 @@ title: CreateCodeScoringProject
 weight: 10
 ---
 
-{{< alert level="info" >}}
-This action does not use the DDP credentials mechanism. If CodeScoring requires authentication, add the required HTTP header, such as `Authorization`, in the [URL and HTTP headers](../overview/#url-and-http-headers) settings. DDP passes this header in the request to CodeScoring.
-{{< /alert >}}
-
 CreateCodeScoringProject — creates a new project in CodeScoring.
 The action uses the CodeScoring API to register a project with the specified parameters:
 
