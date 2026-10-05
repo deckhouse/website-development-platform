@@ -390,20 +390,6 @@ Content-Type: application/json
 }
 ```
 
-## Запуск процесса из Coder
-
-Если MCP-клиент Coder передаёт заголовки Coder (опция пересылки заголовков Coder), портал сохраняет их значения для процессов, запущенных инструментом `run_process`.
-В шаблонах такого процесса значения доступны через корень `.caller`:
-
-| Заголовок | Выражение |
-|---|---|
-| `X-Coder-Owner-Id` | `{{ .caller.owner_id }}` |
-| `X-Coder-Chat-Id` | `{{ .caller.chat_id }}` |
-| `X-Coder-Subchat-Id` | `{{ .caller.subchat_id }}` |
-| `X-Coder-Workspace-Id` | `{{ .caller.workspace_id }}` |
-
-При запуске процесса из интерфейса портала корень `.caller` пуст.
-
 ## Безопасность
 
 Аутентификация:
