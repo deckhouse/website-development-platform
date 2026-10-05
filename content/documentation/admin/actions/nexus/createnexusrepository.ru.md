@@ -3,12 +3,11 @@ title: CreateNexusRepository
 weight: 10
 ---
 
-
 {{< alert level="info" >}}
 Для выполнения действия необходимо наличие токена — строки base64(`admin:password`), используемой как Basic Auth при запросах к Nexus.
 {{< /alert >}}
 
-`CreateNexusRepository` — создаёт новый репозиторий любого поддерживаемого типа (maven, docker, npm и др.) в Nexus Repository Manager 3 с помощью REST API.  
+`CreateNexusRepository` — создаёт новый репозиторий любого поддерживаемого типа (maven, docker, npm и др.) в Nexus Repository Manager 3 с помощью REST API.
 Параметры формата, типа и другие ключевые настройки полностью настраиваются и соответствуют Nexus API.
 
 ### Пример запроса (Maven hosted)
@@ -63,13 +62,13 @@ docker:
 | format        | Да               | Формат (`maven`, `docker`, `npm`, `raw` и т. д.)                                                    | maven                                  |
 | type          | Да               | Тип: `hosted`, `proxy` или `group`                                                                  | hosted                                 |
 | online        | Да               | Доступен ли репозиторий (`true`/`false`)                                                            | true                                   |
-| storage       | Да               | Объект storage: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                       | [Пример](#пример-запроса-maven-hosted) |
+| storage       | Да               | Объект storage: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                       | [Пример Maven hosted](#пример-запроса-maven-hosted) |
 | cleanup       | Нет              | Привязанные политики очистки (`policyNames`)                                                        | policyNames: [maven-cleanup]           |
-| maven         | Для maven        | Только для maven: `versionPolicy`, `layoutPolicy`                                                   | [Пример](#пример-запроса-maven-hosted) |
+| maven         | Для maven        | Только для maven: `versionPolicy`, `layoutPolicy`                                                   | [Пример Maven hosted](#пример-запроса-maven-hosted) |
 | proxy         | Для proxy        | Прокси-репозиторий: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                  | -                                      |
-| group         | Для group        | Список значений `memberNames`                                                                       | [Пример](#пример-запроса-docker-group) |
-| docker        | Для docker       | Специфичные для Docker параметры: `httpPort`, `v1Enabled`, `forceBasicAuth`                         | [Пример](#пример-запроса-docker-group) |
-| component     | Очень редко      | Только для некоторых нестандартных сценариев                                                        | -                                      |
+| group         | Для group        | Список значений `memberNames`                                                                       | [Пример Docker group](#пример-запроса-docker-group) |
+| docker        | Для docker       | Специфичные для Docker параметры: `httpPort`, `v1Enabled`, `forceBasicAuth`                         | [Пример Docker group](#пример-запроса-docker-group) |
+| component     | Нет              | Параметры компонентов, которые передаются в API Nexus без изменений. Указывайте их, только если API Nexus требует их для формата репозитория | -                                      |
 | attributes    | Нет              | Любые кастомные поля                                                                                | -                                      |
 
 ### Требования

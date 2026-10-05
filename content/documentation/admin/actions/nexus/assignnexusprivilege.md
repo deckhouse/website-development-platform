@@ -3,7 +3,6 @@ title: AssignNexusPrivilege
 weight: 40
 ---
 
-
 {{< alert level="info" >}}
 Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}

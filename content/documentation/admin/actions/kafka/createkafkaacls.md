@@ -3,11 +3,11 @@ title: CreateKafkaACLs
 weight: 50
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `user` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `user` — the username under which the action runs.
+- `password` — the password for that user.
 {{< /alert >}}
 
 CreateKafkaACLs — creates a set of ACLs in Kafka.
@@ -65,7 +65,7 @@ acls:
 | acls.tokens              | No       | List of tokens to which the rule applies                                                                                                                                                                                             | -                                                         | -                        |
 | acls.allow               | No       | List of principals (users or groups) allowed by the rule                                                                                                                                                                             | -                                                         | -                        |
 | acls.deny                | No       | List of principals (users or groups) denied by the rule                                                                                                                                                                              | -                                                         | -                        |
-| acls.hosts               | No       | List of hosts for which the operation is allowed                                                                                                                                                                                     | -                                                         | -                        |
+| acls.allow_hosts         | No       | List of hosts for which the operation is allowed                                                                                                                                                                                     | -                                                         | -                        |
 | acls.deny_hosts          | No       | List of hosts for which the operation is denied                                                                                                                                                                                      | -                                                         | -                        |
 
 ### List of possible patterns

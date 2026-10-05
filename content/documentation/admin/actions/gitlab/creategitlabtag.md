@@ -25,7 +25,7 @@ message: Tag description
 | project_id             | Yes      | Identifier of the project in which to create the tag                                  |
 | tag_name               | Yes      | Name of the tag                                                                        |
 | ref                    | Yes      | Name of the branch or tag, or the commit SHA, that the new tag will point to           |
-| message                | Yes      | Tag description                                                                        |
+| message                | No       | Tag description                                                                        |
 
 ### Note
 

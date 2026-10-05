@@ -15,7 +15,7 @@ SELECT
   avg(value) AS value,
   service AS series
 FROM metrics
-WHERE timestamp >= {{from}} AND timestamp < {{to}}
+WHERE timestamp >= '{{from}}' AND timestamp < '{{to}}'
 GROUP BY time, series
 ORDER BY time
 ```
@@ -24,9 +24,9 @@ ORDER BY time
 
 | Name          | Required | Description                                                                                     | Default value |
 | ------------- | -------- | ----------------------------------------------------------------------------------------------- | ------------- |
-| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range                       | —             |
+| Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range. The widget substitutes them with the interval boundaries in UTC in the `YYYY-MM-DD hh:mm:ss` format without quotes | —             |
 | Database      | No       | ClickHouse database name passed in the `X-ClickHouse-Database` header                            | —             |
-| Default range | No       | Range used when opening or refreshing the widget if no range is specified in the query parameters | Last hour     |
+| Default interval | No       | Interval used when opening or refreshing the widget if no interval is specified in the query parameters | Last hour     |
 | Time column   | Yes      | Column containing timestamps for the chart's X-axis                                             | —             |
 | Value column  | Yes      | Column containing numeric values for the chart's Y-axis                                         | —             |
 | Series column | No       | Column used as the series name in the chart legend                                              | —             |

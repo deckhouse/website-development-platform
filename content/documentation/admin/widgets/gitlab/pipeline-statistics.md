@@ -5,7 +5,7 @@ weight: 40
 ---
 
 The widget displays GitLab pipeline statistics,
-including overall statistics and breakdowns by status, source, member, and branch.
+including overall statistics and breakdowns by status, source, contributor, and branch.
 
 ## Configuration
 
@@ -40,11 +40,11 @@ The widget displays the following statistics:
 - Scheduled runs.
 - Web interface.
 
-### Top members
+### Top contributors
 
-- Members who started the most pipelines.
-- Member avatars, if available.
-- Number of pipelines for each member.
+- Contributors who started the most pipelines.
+- Contributor avatars, if available.
+- Number of pipelines for each contributor.
 
 ### Branch activity
 

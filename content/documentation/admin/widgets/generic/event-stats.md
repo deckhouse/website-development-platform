@@ -4,7 +4,7 @@ description: Monitor entity events, Redis streams, and event trends with the Eve
 weight: 140
 ---
 
-The widget displays statistics about events involving DDP entities. It contains three tabs:
+The widget displays statistics about events involving entities in Deckhouse Development Portal (DDP). It contains three tabs:
 
 1. **Event statistics** — A chart showing the number of events by type over the selected time range, with configurable time grouping.
 1. **Top entities** — A table of entities that generated the most events.

@@ -1,5 +1,7 @@
 ---
 title: Типы источников данных
+description: Встроенные типы источников данных DDP — авторизация, спецификация ответа, конфигурация и параметры.
+weight: 20
 ---
 
 ## DefectdojoProducts
@@ -16,7 +18,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL DefectDojo в формате `https://example.com`.
+- `URL` — URL DefectDojo в формате `https://example.com`.
 
 ### Параметры
 
@@ -32,11 +34,11 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Спецификация ответа
 
-Портал выполняет GET-запрос к API GitLab по URL: `/api/v4/groups`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/groups/#list-groups).
+Портал выполняет GET-запрос к API GitLab по URL: `/api/v4/groups`. Портал возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/groups/#list-groups).
 
 ### Конфигурация
 
-* `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+- `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 ### Параметры
 
@@ -54,15 +56,15 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 В зависимости от [конфигурации параметров](#gitlabprojectsparameters), портал выполняет GET-запрос к API GitLab и возвращает соответствующую спецификацию.
 
-Если значение параметра `all` равно `true`, выполняется GET-запрос по URL: `/api/v4/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
+Если значение параметра `all` равно `true`, выполняется GET-запрос по URL: `/api/v4/projects`. Портал возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
-Если значение параметра `all` равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Платформа возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
+Если значение параметра `all` равно `false`, выполняется GET-запрос по URL: `/api/v4/groups/:id/projects`. Портал возвращает все доступные значения. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-all-projects).
 
 Если значение параметра `tags` равно `true`, портал дополнительно получает git-теги. Для получения git-тегов выполняется GET-запрос по URL: `/api/v4/projects/:id/repository/tags`. Портал получает список всех git-тегов и расширяет [спецификацию ответа](https://docs.gitlab.com/api/projects/#list-all-projects) полем `ddp_repository_tags`, которое соответствует [спецификации ответа list-project-repository-tags](https://docs.gitlab.com/api/tags/#list-project-repository-tags).
 
 ### Конфигурация
 
-* `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+- `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
 
 <a id="gitlabprojectsparameters"></a>
 
@@ -111,7 +113,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/graphql`.
+- `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/graphql`.
 
 ### Параметры
 
@@ -122,6 +124,80 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 | include_subgroups | Опционально                                | Собирать проекты подгрупп указанных групп                                                      | true, false                 | false        |
 
 Если группа не найдена или недоступна, синхронизация завершается ошибкой `gitlab group "<id>" not found or not accessible`.
+
+## GitlabRepositoryFiles
+
+Источник данных типа `GitlabRepositoryFiles` читает структурированные файлы (YAML или JSON) из репозиториев проектов GitLab и возвращает по одной записи на каждый документ файла или на каждый элемент списка в документе.
+
+### Авторизация
+
+Конфигурация авторизации описана в разделе [«Внешний сервис GitLab»](../external-services/#gitlab).
+
+### Спецификация ответа
+
+Портал получает список проектов GET-запросом к API GitLab по URL `/api/v4/projects`, если значение параметра `all` равно `true`, или по URL `/api/v4/groups/:id/projects` для каждой группы из параметра `group_ids`. [Спецификация ответа](https://docs.gitlab.com/api/projects/#list-projects).
+
+Затем для каждого проекта портал определяет файлы для чтения:
+
+- если задан параметр `file_path`, читается только указанный файл;
+- если задан параметр `file_pattern`, портал получает дерево репозитория GET-запросом по URL `/api/v4/projects/:id/repository/tree` и выбирает файлы, подходящие под маску.
+
+Содержимое каждого файла портал получает GET-запросом по URL `/api/v4/projects/:id/repository/files/:file_path`. Файл может содержать несколько YAML-документов, разделённых `---`. Каждый документ должен быть объектом.
+
+Каждая запись содержит поля документа (при `document_mode: file`) или поля элемента списка (при `document_mode: list`), а также служебные поля:
+
+| Поле              | Описание                                                                 |
+| ----------------- | ------------------------------------------------------------------------ |
+| `_file_path`      | Путь файла в репозитории                                                 |
+| `_file_name`      | Имя файла                                                                |
+| `_dir`            | Директория файла в репозитории                                           |
+| `_ref`            | Ветка или тег, из которых прочитан файл                                  |
+| `_project_id`     | Числовой ID проекта                                                      |
+| `_project_path`   | Полный путь проекта (`path_with_namespace`)                              |
+| `_project_name`   | Название проекта                                                         |
+| `_default_branch` | Ветка по умолчанию проекта                                               |
+| `_project_url`    | Ссылка на проект. Отсутствует, если GitLab не вернул ссылку на проект    |
+| `_web_url`        | Ссылка на файл в веб-интерфейсе GitLab. Отсутствует вместе с `_project_url` |
+| `_document`       | Весь документ, из которого получена запись                               |
+| `_index`          | Номер элемента в списке, начиная с `0`. Только при `document_mode: list` |
+
+Проекты, файлы которых не удалось прочитать, пропускаются. Файл с синтаксической ошибкой пропускается целиком. Сведения о пропущенных проектах и файлах записываются в лог синхронизации.
+
+### Конфигурация
+
+- `URL` — URL GitLab в формате `https://gitlab.com`, без части `/api/v4`.
+
+### Параметры
+
+| Название          | Обязательность                                 | Описание                                                                                                                                                                         | Возможные значения               | По умолчанию |
+| ----------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------ |
+| all               | Опционально                                    | Читать файлы из проектов всех групп, к которым есть доступ. Параметр `group_ids` при этом не используется                                                                        | true, false                      | false        |
+| group_ids         | Обязательно, если `all` в значении `false`     | ID групп через запятую                                                                                                                                                           | Пример: `1001,1002`              | \-           |
+| include_subgroups | Опционально                                    | Если указан параметр `group_ids`, определяет, читать ли файлы из проектов подгрупп указанных групп                                                                               | true, false                      | false        |
+| topic             | Опционально                                    | Читать файлы только из проектов с указанной темой (topic) GitLab. Фильтрация выполняется на стороне GitLab                                                                       | Строка                           | \-           |
+| project_pattern   | Опционально                                    | Регулярное выражение для полного пути проекта (`path_with_namespace`). Проекты, путь которых не совпадает с выражением, пропускаются                                             | Регулярное выражение             | \-           |
+| max_projects      | Опционально                                    | Максимальное число проектов, из которых читаются файлы. Остальные проекты не обрабатываются, в лог синхронизации записывается предупреждение. `0` — без ограничения              | Целое неотрицательное число      | `0`          |
+| ref               | Опционально                                    | Ветка или тег, из которых читаются файлы. Если не задан, используется ветка по умолчанию каждого проекта                                                                         | Строка                           | \-           |
+| file_path         | Обязательно, если не задан `file_pattern`      | Точный путь файла в репозитории. Дерево репозитория при этом не запрашивается                                                                                                    | Пример: `catalog/service.yaml`   | \-           |
+| path              | Опционально                                    | Директория в репозитории, с которой начинается поиск файлов по маске `file_pattern`. Пустое значение — корень репозитория                                                        | Пример: `catalog`                | `""`         |
+| file_pattern      | Обязательно, если не задан `file_path`         | Маска имени файла в формате [path.Match](https://pkg.go.dev/path#Match). Если маска содержит `/`, она сопоставляется с полным путём файла в репозитории                          | Пример: `*.yaml`                 | \-           |
+| recursive         | Опционально                                    | Искать файлы по маске `file_pattern` во вложенных директориях                                                                                                                    | true, false                      | true         |
+| document_mode     | Опционально                                    | Способ преобразования документа в записи: `file` — документ становится одной записью, `list` — записью становится каждый элемент списка по ключу `list_path`                      | `file`, `list`                   | `file`       |
+| list_path         | Обязательно, если `document_mode` равен `list` | Ключ верхнего уровня документа, по которому находится список элементов                                                                                                           | Пример: `items`                  | \-           |
+
+Должен быть задан ровно один из параметров `file_path` и `file_pattern`. Если параметры заданы некорректно, синхронизация завершается ошибкой.
+
+### Пример
+
+Получить записи из списка `services` в файле `catalog/services.yaml` проектов группы `1001` с темой `ddp`:
+
+```yaml
+group_ids: "1001"
+topic: ddp
+file_path: catalog/services.yaml
+document_mode: list
+list_path: services
+```
 
 ## HarborArtifacts
 
@@ -137,7 +213,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Harbor в формате `https://example.com`.
+- `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -157,7 +233,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Harbor в формате `https://example.com`.
+- `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -177,7 +253,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Harbor в формате `https://example.com`.
+- `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -197,7 +273,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Harbor в формате `https://example.com`.
+- `URL` — URL Harbor в формате `https://example.com`.
 
 ### Параметры
 
@@ -286,7 +362,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Kubernetes API в формате `https://api.example.com`.
+- `URL` — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -322,7 +398,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Kafka в формате `example.com`.
+- `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -380,7 +456,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Kafka в формате `example.com`.
+- `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -422,7 +498,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 ### Конфигурация
 
-* `URL` — URL Kafka в формате `example.com`.
+- `URL` — URL Kafka в формате `example.com`.
 
 ### Параметры
 
@@ -453,7 +529,7 @@ DDP (портал) выполняет GET-запрос по URL: `/api/v2/produc
 
 Примерный вывод:
 
-```yaml
+```console
 GROUP:      apps
 KIND:       Deployment
 VERSION:    v1
@@ -474,7 +550,7 @@ FIELDS:
 
 ### Конфигурация
 
-* `URL` — URL Kubernetes API в формате `https://api.example.com`.
+- `URL` — URL Kubernetes API в формате `https://api.example.com`.
 
 ### Параметры
 
@@ -545,7 +621,7 @@ d8 k explain deployment
 
 Вывод:
 
-```yaml
+```console
 GROUP:      apps
 KIND:       Deployment
 VERSION:    v1
@@ -571,7 +647,7 @@ FIELDS:
 
 ### Конфигурация
 
-* `URL` — URL Nexus в формате `https://example.com`.
+- `URL` — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -591,7 +667,7 @@ FIELDS:
 
 ### Конфигурация
 
-* `URL` — URL Nexus в формате `https://example.com`.
+- `URL` — URL Nexus в формате `https://example.com`.
 
 ### Параметры
 
@@ -611,8 +687,8 @@ FIELDS:
 
 ### Конфигурация
 
-* `URL` — URL Prometheus API в формате `https://example.com/api/v1/query`.
-* «Query» — запрос [в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), на основе которого будет сформирован ответ.
+- `URL` — URL Prometheus API в формате `https://example.com/api/v1/query`.
+- «Query» — запрос [в формате PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), на основе которого будет сформирован ответ.
 
 ### Параметры
 
@@ -632,7 +708,7 @@ FIELDS:
 
 ### Конфигурация
 
-* `URL` — URL SonarQube в формате `https://example.com`.
+- `URL` — URL SonarQube в формате `https://example.com`.
 
 ### Параметры
 
@@ -648,27 +724,27 @@ GenericAPI поддерживает любые типы аутентификац
 
 Bearer Token:
 
-```sh
+```text
 Authorization: Bearer <токен>
 ```
 
 Basic Authentication:
 
-```sh
+```text
 Authorization: Basic <base64-encoded-credentials>
 ```
 
 API Key:
 
-```sh
+```text
 X-API-Key: <ключ>
 ```
 
 ### Конфигурация
 
-* `URL` — базовый URL API в формате `https://api.example.com`.
-* `Method` — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
-* `Query` — дополнительные query-параметры (например, для фильтрации или поиска).
+- `URL` — базовый URL API в формате `https://api.example.com`.
+- `Method` — HTTP-метод (GET, POST, PUT, PATCH, DELETE).
+- `Query` — дополнительные query-параметры (например, для фильтрации или поиска).
 
 ### Параметры
 
@@ -685,6 +761,8 @@ X-API-Key: <ключ>
 | `sizeParam`         | Опционально    | Название параметра для размера страницы (для page-пагинации)                              | Любая строка                                      | `size`, `pageSize`, `_size`           | `size`       |
 | `cursorParam`       | Опционально    | Название параметра для курсора (для cursor-пагинации)                                     | Любая строка                                      | `cursor`, `after`, `next`             | `cursor`     |
 | `pageSize`          | Опционально    | Количество элементов на странице для пагинации                                            | Положительное целое число                         | `10`, `20`, `50`, `100`               | `100`        |
+| `maxPages`          | Опционально    | Максимальное количество загружаемых страниц для всех типов пагинации. `0` — без ограничения | Целое неотрицательное число                       | `10`, `50`                            | `0`          |
+| `nextCursorPath`    | Обязательно при `paginationType: cursor` | Название поля в последнем элементе полученных данных, в котором содержится курсор следующей страницы | Любая строка                                      | `next_cursor`, `cursor`               | `""`         |
 | `requestBody`       | Опционально    | Тело запроса для POST/PUT/PATCH-методов                                                   | Любая строка                                      | `{"query": "example"}`                | `""`         |
 
 ### Спецификация ответа
@@ -753,7 +831,8 @@ X-API-Key: <ключ>
   - Пример: `?page=1&size=20`.
 
 - `cursor` — пагинация по курсору:
-  - Использует параметр `cursorParam`.
+  - Использует параметры `cursorParam` и `nextCursorPath`. Параметр `nextCursorPath` обязателен: если он не задан, загружается только первая страница.
+  - Курсор следующей страницы берётся из поля `nextCursorPath` последнего элемента полученных данных и передаётся в query-параметре `cursorParam`. Загрузка завершается, когда поле с курсором отсутствует, пустое или не является строкой.
   - Пример: `?cursor=eyJpZCI6MTIzfQ==`.
 
 - `link_header` — пагинация через заголовок Link:

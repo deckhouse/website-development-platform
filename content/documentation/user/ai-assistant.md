@@ -19,7 +19,7 @@ Users configure AI providers in their profiles.
 
 To connect a new AI provider:
 
-1. Open **Profile** → **AI providers**.
+1. Open **Profile** → **AI Providers**.
 1. Select **Add**.
 1. Fill in **Name**, **Model**, **URL**, **Method**, and **Headers**. If necessary, specify the [Response field](#response-field) and [Request body template](#request-body-template).
 1. When using tokens in headers, store the credentials and insert them through [templating](#templating-in-headers).
@@ -35,8 +35,8 @@ The credential system securely stores tokens and keys: it encrypts them in the d
 
 To add credentials:
 
-1. In the provider creation or editing form, select **Manage credentials**.
-1. In the dialog, select **Add credentials**.
+1. In the provider creation or editing form, select **Manage Credentials**.
+1. In the dialog, select **Add Credential**.
 1. Enter a **Key** and **Value** pair, for example, `api_key` and its secret.
 1. Select **Save**.
 
@@ -52,7 +52,7 @@ Consider the following:
 
 Use a substitution instead of a plaintext token:
 
-```sh
+```text
 Authorization: Bearer {{ .credentials.api_key }}
 ```
 
@@ -128,16 +128,16 @@ The template must be valid JSON. You can add fields such as `temperature` and `m
 1. **Model** — For example, `gpt-4` or `gpt-3.5-turbo`.
 1. **URL** — `https://api.openai.com/v1/chat/completions`.
 1. **Method** — `POST`.
-1. **Headers** — For example, `Authorization: Bearer {{ .credentials.openai_api_key }}`. Add the `openai_api_key` key under **Manage credentials**.
+1. **Headers** — For example, `Authorization: Bearer {{ .credentials.openai_api_key }}`. Add the `openai_api_key` key under **Manage Credentials**.
 1. **Response field** — `choices.0.message.content`.
-1. **Body template** — Use the [first example](#structure-examples) under **Request body template**.
+1. **Request body template** — Use the [first example](#structure-examples) under **Request body template**.
 
 ### Ollama (`/api/generate`)
 
 1. **URL** — `http://localhost:11434/api/generate`, or your Ollama address.
 1. **Method** — `POST`.
 1. **Response field** — `response`.
-1. **Body template**:
+1. **Request body template**:
 
    ```json
    {
@@ -153,15 +153,17 @@ The template must be valid JSON. You can add fields such as `temperature` and `m
 - **Method** — Usually `POST`.
 - **Headers** — For example, `Authorization: Bearer {{ .credentials.api_key }}` and `Content-Type: application/json`.
 - **Response field** — Path to the text field in your JSON response.
-- **Body template** — Base it on the first example under [Request body template](#request-body-template). Add fields such as `max_tokens` if necessary.
+- **Request body template** — Base it on the first example under [Request body template](#request-body-template). Add fields such as `max_tokens` if necessary.
 
 ## Using the AI assistant
 
-The assistant panel opens on the right. Use the button in the lower-right corner of the screen to open it.
+To open the **AI Assistant** window, select the button with the "AI Assistant" tooltip on the right side of the portal top bar. Drag the window by its header to move it and drag its edges and corners to resize it. The window position and size are saved in the browser.
+
+When you close the window, the conversation is kept: reopening the window continues the same chat.
 
 ### Selecting a provider
 
-The provider list is at the top of the chat panel. If only one provider is available, it is selected automatically.
+The provider list is at the top of the window. If only one provider is available, it is selected automatically.
 
 ### Chats
 
@@ -175,7 +177,7 @@ Chats have the following constraints:
 
 ### Sending context
 
-Configure **Send context** separately for each chat:
+Configure the **Pass context** toggle separately for each chat:
 
 1. **Enabled** — Sends the conversation context for this chat with the request.
 1. **Disabled** — Sends only the current message. This uses fewer tokens but does not retain chat context.
@@ -190,7 +192,7 @@ Sending context increases token usage when interacting with the model.
 
 The AI assistant uses built-in portal tools and tools from [MCP collections](../mcp-management/#mcp-collections) available to the user.
 
-Expand **Available tools** in the chat panel to view each tool's name, type (`internal`, `external`, or `custom`), arguments, and example. Select an example to insert its text into the input field. The model can call multiple tools in one request.
+Expand **Available tools** in the assistant window to view each tool's name, type (`internal`, `external`, or `custom`), arguments, and example. Select an example to insert its text into the input field. The model can call multiple tools in one request.
 
 - Built-in tools (`internal`) and their parameters are described in the [MCP server documentation](../mcp-server/).
 - To connect MCP servers, create custom MCP tools, and configure collections, refer to [MCP management](../mcp-management/).

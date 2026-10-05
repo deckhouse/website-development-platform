@@ -29,4 +29,6 @@ branches:
 
 ### Note
 
-The action performs a POST request to the URL: `/api/v4/projects/:id/repository/branches`. Upon successful creation, GitLab returns information about the created branches.
+The action performs a POST request to the URL `/api/v4/projects/:id/repository/branches` for each branch in the list, in order.
+If GitLab does not create a branch, the action fails, and the branches created before it remain in the project.
+The action does not return a response: `{{ .response }}` is empty.

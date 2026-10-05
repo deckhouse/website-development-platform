@@ -3,7 +3,6 @@ title: DeleteDefectdojoProduct
 weight: 20
 ---
 
-
 {{< alert level="info" >}}
 This action requires an API v2 key for the user on whose behalf it will run.
 {{< /alert >}}

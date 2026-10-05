@@ -1,6 +1,8 @@
 ---
 title: Внешние сервисы
 menuTitle: Внешние сервисы
+description: Настройка авторизации во внешних инфраструктурных сервисах, которые используют объекты портала.
+weight: 72
 ---
 
 Внешние сервисы — это механизм, позволяющий настраивать параметры авторизации для внешних инфраструктурных систем (например, GitLab, Kubernetes, DefectDojo и др.).
@@ -20,22 +22,21 @@ menuTitle: Внешние сервисы
 | «URL» | Базовый URL для обращения к внешнему сервису                                                                                                                                                                   |
 | «Учётные данные» | Список доступных учётных данных (например, токенов), которые могут быть подставлены в запросы                                                                                                                  |
 | «Заголовки» | HTTP-заголовки, автоматически добавляемые к запросам                                                                                                                                                           |
-| «Отключить проверку SSL» | Отключение проверки SSL-сертификата внешнего сервиса (например, при использовании самоподписанных сертификатов). Рекомендуется вместо этого добавить нужные сертификаты в [«доверенные»](../trusted-certificates/) |
-| «Системная учётная запись» | Учётная запись, которая будет использоваться для периодически запускаемых заданий: источников данных, проверок статуса и т. д                                                                                  |
+| «Выключить проверку SSL» | Отключение проверки SSL-сертификата внешнего сервиса (например, при использовании самоподписанных сертификатов). Вместо отключения проверки добавьте нужные сертификаты в [доверенные сертификаты](../trusted-certificates/) |
+| «Системная учётная запись» | Учётная запись, которая будет использоваться для периодически запускаемых заданий: источников данных, проверок статуса и т. д.                                                                                 |
 
 ## Использование внешних сервисов
 
 Внешние сервисы могут быть подключены к различным объектам DDP (портала):
 
-- действиям,
-- виджетам,
-- источникам данных,
+- действиям;
+- виджетам;
+- источникам данных;
 - проверкам статуса сущностей.
 
 Подключение сервиса выполняется на вкладке «Авторизация» в настройках соответствующего объекта.
 
-Для каждого объекта можно в явном виде переопределить параметры, заданные во внешнем сервисе.  
-Например, если внешний сервис содержит токен авторизации, но в конкретном действии используются другие учётные данные, можно указать альтернативные значения. В этом случае будет переопределён только указанный параметр, остальные значения будут взяты из конфигурации внешнего сервиса.
+Для каждого объекта можно в явном виде переопределить параметры, заданные во внешнем сервисе. Например, если внешний сервис содержит токен авторизации, но в конкретном действии используются другие учётные данные, можно указать альтернативные значения. В этом случае будет переопределён только указанный параметр, остальные значения будут взяты из конфигурации внешнего сервиса.
 
 ## Особенности подключения к объектам
 
@@ -50,7 +51,6 @@ menuTitle: Внешние сервисы
 
 - Для одного виджета также поддерживается подключение нескольких внешних сервисов.
 - Один из них может быть выбран как используемый по умолчанию.
-- В последующих релизах будет добавлена возможность изменения сервиса во время просмотра виджета.
 - Параметр «Системная учётная запись» не используется в виджетах.
 
 ### Источники данных
@@ -79,12 +79,12 @@ menuTitle: Внешние сервисы
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `<токен>` |
+| `Authorization` | `<TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: <ваш-api-token>
+```text
+Authorization: <API_TOKEN>
 ```
 
 ### ClickHouse
@@ -95,9 +95,9 @@ Authorization: <ваш-api-token>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
-| `X-ClickHouse-User` | `<имя-пользователя>` |
-| `X-ClickHouse-Key` | `<пароль>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
+| `X-ClickHouse-User` | `<USERNAME>` |
+| `X-ClickHouse-Key` | `<PASSWORD>` |
 
 Пример Basic Authentication:
 
@@ -105,15 +105,15 @@ Authorization: <ваш-api-token>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 Пример с заголовками ClickHouse:
 
-```sh
-X-ClickHouse-User: <имя-пользователя>
-X-ClickHouse-Key: <пароль>
+```text
+X-ClickHouse-User: <USERNAME>
+X-ClickHouse-Key: <PASSWORD>
 ```
 
 ### DefectDojo
@@ -124,12 +124,12 @@ X-ClickHouse-Key: <пароль>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Token <токен>` |
+| `Authorization` | `Token <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Token <ваш-defectdojo-api-v2-key>
+```text
+Authorization: Token <DEFECTDOJO_API_KEY>
 ```
 
 ### Bitbucket
@@ -140,12 +140,12 @@ Authorization: Token <ваш-defectdojo-api-v2-key>
 
 | Заголовок       | Формат значения  |
 |-----------------|------------------|
-| `Authorization` | `Bearer <токен>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-bitbucket-personal-access-token>
+```text
+Authorization: Bearer <BITBUCKET_TOKEN>
 ```
 
 ### Docker Registry
@@ -156,7 +156,7 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -164,8 +164,8 @@ Authorization: Bearer <ваш-bitbucket-personal-access-token>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### GitLab
@@ -176,12 +176,12 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Private-Token` | `<токен>` |
+| `Private-Token` | `<TOKEN>` |
 
 Пример:
 
-```sh
-Private-Token: <ваш-gitlab-token>
+```text
+Private-Token: <GITLAB_TOKEN>
 ```
 
 Подробнее о том, как получить GitLab token можно узнать в официальной документации [GitLab](https://docs.gitlab.com/api/rest/authentication/).
@@ -194,12 +194,12 @@ Private-Token: <ваш-gitlab-token>
 
 | Заголовок       | Формат значения    |
 |-----------------|--------------------|
-| `Authorization` | `Bearer <токен>`   |
+| `Authorization` | `Bearer <TOKEN>`   |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-github-token>
+```text
+Authorization: Bearer <GITHUB_TOKEN>
 ```
 
 Токен создаётся в настройках GitHub: «Settings» → «Developer settings» → «Personal access tokens».
@@ -212,7 +212,7 @@ Authorization: Bearer <ваш-github-token>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -220,8 +220,8 @@ Authorization: Bearer <ваш-github-token>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Jenkins
@@ -232,7 +232,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -242,8 +242,8 @@ Authorization: Basic <base64-encoded-credentials>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Jira
@@ -254,7 +254,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -262,8 +262,8 @@ Authorization: Basic <base64-encoded-credentials>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Kaiten
@@ -274,12 +274,12 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Bearer <токен>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-kaiten-api-token>
+```text
+Authorization: Bearer <KAITEN_API_TOKEN>
 ```
 
 ### Kubernetes
@@ -290,12 +290,12 @@ Authorization: Bearer <ваш-kaiten-api-token>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Bearer <токен>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-kubernetes-token>
+```text
+Authorization: Bearer <KUBERNETES_TOKEN>
 ```
 
 ### Nexus
@@ -306,7 +306,7 @@ Authorization: Bearer <ваш-kubernetes-token>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -314,8 +314,8 @@ Authorization: Bearer <ваш-kubernetes-token>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### OpenSearch
@@ -326,7 +326,7 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Пример:
 
@@ -334,8 +334,8 @@ Authorization: Basic <base64-encoded-credentials>
 1. Закодируйте её в Base64: `echo -n "username:password" | base64`.
 1. Добавьте заголовок:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Prometheus
@@ -346,18 +346,18 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Bearer <токен>` или `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Bearer <TOKEN>` или `Basic <BASE64_CREDENTIALS>` |
 
 Пример Bearer Token:
 
-```sh
-Authorization: Bearer <ваш-токен>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 Пример Basic Authentication:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### SonarQube
@@ -368,12 +368,12 @@ Authorization: Basic <base64-encoded-credentials>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Bearer <токен>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-токен>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 ### Svacer
@@ -384,12 +384,12 @@ Authorization: Bearer <ваш-токен>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `Authorization` | `Bearer <токен>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Пример:
 
-```sh
-Authorization: Bearer <ваш-токен>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 ### Vault
@@ -400,10 +400,10 @@ Authorization: Bearer <ваш-токен>
 
 | Заголовок | Формат значения |
 |-----------|-----------------|
-| `X-Vault-Token` | `<токен>` |
+| `X-Vault-Token` | `<TOKEN>` |
 
 Пример:
 
-```sh
-X-Vault-Token: <ваш-vault-token>
+```text
+X-Vault-Token: <VAULT_TOKEN>
 ```

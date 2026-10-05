@@ -12,11 +12,11 @@ The role model is implemented in DDP Backend and uses a PostgreSQL database to s
 
 The role model consists of the following components:
 
-* A permission corresponds to a specific action in DDP.
-* A role combines a set of permissions.
-* A role binding associates a role with users or teams.
+- A permission corresponds to a specific action in DDP.
+- A role combines a set of permissions.
+- A role binding associates a role with users or teams.
 
-Each DDP object has its own permissions, roles, and role bindings. Global roles, permissions, and role bindings allow operations at the platform level.
+Each DDP object has its own permissions, roles, and role bindings. Global roles, permissions, and role bindings allow operations at the portal level.
 
 {{< alert level="info" >}}
 Without the required permissions, a user cannot perform operations in the portal. The system checks permissions for every operation.
@@ -29,19 +29,29 @@ Without the required permissions, a user cannot perform operations in the portal
 Global permissions apply across the portal and grant access to all objects of a specific type.
 
 Resources:
+
 - `create:resources` — create resources.
 - `read:resources` — view resources.
 - `update:resources` — edit resources.
 - `update:resources-order` — change the order and grouping of resources in the catalog.
 - `delete:resources` — delete resources.
 
+Resource relations:
+
+- `create:resource-relations` — create relations between resources.
+- `read:resource-relations` — view relations between resources.
+- `update:resource-relations` — edit relations between resources.
+- `delete:resource-relations` — delete relations between resources.
+
 Entities:
+
 - `create:entities` — create entities.
 - `read:entities` — view entities.
 - `update:entities` — edit entities.
 - `delete:entities` — delete entities.
 
 Data sources:
+
 - `create:datasources` — create data sources.
 - `read:datasources` — view data sources.
 - `update:datasources` — edit data sources.
@@ -49,6 +59,7 @@ Data sources:
 - `delete:datasources` — delete data sources.
 
 Actions:
+
 - `create:actions` — create actions.
 - `read:actions` — view actions.
 - `update:actions` — edit actions.
@@ -56,24 +67,28 @@ Actions:
 - `delete:actions` — delete actions.
 
 Automations:
+
 - `create:automations` — create automations.
 - `read:automations` — view automations.
 - `update:automations` — edit automations.
 - `delete:automations` — delete automations.
 
 Workflows:
+
 - `create:workflows` — create workflows.
 - `read:workflows` — view workflows.
 - `update:workflows` — edit workflows.
 - `delete:workflows` — delete workflows.
 
 Webhooks:
+
 - `create:webhooks` — create webhooks.
 - `read:webhooks` — view webhooks.
 - `update:webhooks` — edit webhooks.
 - `delete:webhooks` — delete webhooks.
 
 Widgets:
+
 - `create:widgets` — create widgets.
 - `read:widgets` — view widgets.
 - `update:widgets` — edit widgets.
@@ -81,12 +96,16 @@ Widgets:
 - `delete:widgets` — delete widgets.
 
 Dashboards:
+
 - `create:dashboards` — create dashboards.
 - `read:dashboards` — view dashboards.
 - `update:dashboards` — edit dashboards.
 - `delete:dashboards` — delete dashboards.
+- `create:page-dashboards` — add dashboards to the "Administration", "Catalog", and "Self-Service" pages.
+- `delete:page-dashboards` — remove dashboards from the "Administration", "Catalog", and "Self-Service" pages.
 
 MCP:
+
 - `read:mcp-servers` — view connected MCP servers.
 - `edit:mcp-servers` — connect, edit, synchronize the catalog of, and delete MCP servers.
 - `read:mcp-collections` — view MCP collections.
@@ -95,41 +114,91 @@ MCP:
 - `edit:mcp-tools` — create, edit, and delete custom MCP tools.
 
 External services:
+
 - `create:external-services` — create external services.
 - `read:external-services` — view external services.
 - `update:external-services` — edit external services.
 - `delete:external-services` — delete external services.
 
 Trusted certificates:
+
 - `create:trusted-certificates` — add trusted certificates.
 - `read:trusted-certificates` — view trusted certificates.
 - `update:trusted-certificates` — edit trusted certificates.
 - `delete:trusted-certificates` — delete trusted certificates.
 
 Processes:
+
 - `create:processes` — create processes.
 - `read:processes` — view processes.
 - `update:processes` — edit processes.
 - `delete:processes` — delete processes.
+- `control:processes` — run, pause, resume, stop, retry, and delete process instances for entities.
 
 Teams:
+
 - `create:teams` — create teams.
 - `update:teams` — edit teams.
 - `delete:teams` — delete teams.
 - `update:team-variables` — edit team variables.
 - `edit:team-filter-rules` — configure group filtering rules during synchronization from Dex.
 
+Datasets:
+
+- `read:seeds` — view datasets.
+- `apply:seeds` — apply datasets, run the initial setup wizard, and use the initial setup banner on the home page.
+- `delete:seeds` — delete datasets.
+
+Home page mapping rules:
+
+- `create:home-mapping-sets` — create home page mapping sets.
+- `update:home-mapping-sets` — edit home page mapping sets, select the default set, and enable or disable the home page.
+- `delete:home-mapping-sets` — delete home page mapping sets.
+
+Microservice templates:
+
+- `read:template-packs` — view template versions: the microservice creation gallery and new template version notifications.
+- `edit:template-packs` — deprecate, restore, and delete template versions.
+- `read:template-registries` — view template registry connections, settings, and synchronization runs.
+- `edit:template-registries` — edit template registry connections and settings, and run synchronization.
+
+Tags:
+
+- `create:tags` — create tags.
+- `update:tags` — edit tags.
+- `delete:tags` — delete tags.
+
+System alerts:
+
+- `create:system-alerts` — create system alerts.
+- `read:system-alerts` — view system alerts.
+- `update:system-alerts` — edit system alerts.
+- `delete:system-alerts` — delete system alerts.
+
 Icons:
+
 - `create:icons` — create icons.
 - `delete:icons` — delete icons.
 
 User credential types:
+
 - `edit:user-access-credentials-types` — create, edit, and delete credential types; configure the Vault integration, including viewing and changing the configuration and testing the connection.
 - `rotate:encryption-key` — rotate the encryption key. For details, see [Encryption key rotation](../encryption-key-rotation/).
 
 Users:
+
 - `edit:users` — create, block, unblock, and delete users.
+- `create:users` — the permission is listed in the role form, but the portal does not check it. Creating users requires `edit:users`.
 - `impersonate:users` — start and end user impersonation. For details, see [Impersonation](../impersonation/).
+
+Roles and role bindings:
+
+- `edit:roles` — create, edit, and delete roles.
+- `edit:role-bindings` — create, edit, and delete role bindings for any object.
+
+Audit logs:
+
+- `read:audit-logs` — view audit logs and export them to CSV. For details, see [Audit logs](../audit-logs/).
 
 {{< alert level="info" >}}
 The `update:team-variables` permission allows users to edit variables only for teams of which they are members. Even a super administrator cannot change variables for a team to which they do not belong.
@@ -152,6 +221,7 @@ Without the corresponding `view:` permission, a user cannot see a section in the
 Each object type has permissions that apply only to a specific object.
 
 For resources:
+
 - `read:resource` — view a specific resource.
 - `update:resource` — edit a specific resource.
 - `delete:resource` — delete a specific resource.
@@ -164,6 +234,7 @@ For resources:
 - `edit:role-bindings` — edit role bindings for the resource.
 
 For entities:
+
 - `read:entity` — view a specific entity.
 - `update:entity` — edit a specific entity.
 - `delete:entity` — delete a specific entity.
@@ -171,18 +242,25 @@ For entities:
 - `control:processes` — control processes for the entity.
 - `edit:role-bindings` — edit role bindings for the entity.
 
+For actions, automations, data sources, workflows, webhooks, widgets, dashboards, and processes:
+
+- `read:[object-type]` — view the object, for example, `read:action`.
+- `update:[object-type]` — edit the object.
+- `delete:[object-type]` — delete the object.
+- `edit:role-bindings` — edit role bindings for the object.
+
+Some object types have additional permissions:
+
+- `run:action` — run a specific action.
+- `sync:datasource` — synchronize a specific data source.
+- `run:widget-action` — run actions of a specific widget.
+
 #### MCP collections
 
 For MCP collections:
 
 - `use:mcp-collections` — call collection tools in the AI assistant and through the portal MCP server.
 - `edit:role-bindings` — edit role bindings for the collection.
-
-For other objects, including actions, automations, processes, webhooks, widgets, dashboards, and external services:
-- `read:[object-type]` — view the object.
-- `update:[object-type]` — edit the object.
-- `delete:[object-type]` — delete the object.
-- `edit:role-bindings` — edit role bindings for the object.
 
 ## Permission check hierarchy
 
@@ -254,6 +332,7 @@ When a user creates an object, such as an action, data source, widget, or resour
 #### Resource ownership
 
 When a user creates a resource, they automatically become its owner. If `ownerIsAdmin` is enabled, the user receives all administrator permissions for that resource, including:
+
 - Managing resource entities.
 - Configuring role bindings.
 - Editing and deleting the resource.
@@ -261,6 +340,7 @@ When a user creates a resource, they automatically become its owner. If `ownerIs
 #### Entity ownership
 
 When a user creates an entity, they become its owner and can:
+
 - View and edit the entity.
 - Manage role bindings for the entity.
 - Delete the entity.
@@ -271,7 +351,7 @@ If a team owns an object and `ownerIsAdmin` is enabled, all team members receive
 
 ## Default role
 
-The portal allows one global role to be set as the default. Its permissions apply to all authenticated users. Configure the default role under "Administration" → "Access control" by using the switch in the "Roles" table.
+The portal allows one global role to be set as the default. Its permissions apply to all authenticated users. Configure the default role under "Administration" → "RBAC" by using the switch in the "Roles" table.
 
 Only a global role can be set as the default.
 
@@ -280,14 +360,14 @@ Only a global role can be set as the default.
 Teams group users and allow roles to be assigned collectively. A user can belong to multiple teams, and their permissions are combined from all teams of which they are a member.
 
 {{< alert level="info" >}}
-Teams and team membership are synchronized from the external authentication system, Dex. Teams cannot be managed through the DDP interface.
+Teams and team membership are synchronized from the external authentication system, Dex, each time a user signs in. You can also create, edit, and delete teams in the web interface under "Administration" → "Teams" with the `create:teams`, `update:teams`, and `delete:teams` permissions. Team membership changed manually is overwritten from Dex the next time the user signs in.
 {{< /alert >}}
 
 ## Configuring roles and managing access
 
 ### Creating a role
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Roles" tab.
 1. Click "Create role".
 1. Complete the form:
@@ -304,7 +384,7 @@ Teams and team membership are synchronized from the external authentication syst
 
 ### Assigning a role to users
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Role bindings" tab.
 1. Click "Create role binding".
 1. Complete the form:
@@ -318,7 +398,7 @@ Teams and team membership are synchronized from the external authentication syst
 
 ### Configuring the default role
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Roles" tab.
 1. Find the global role to set as the default.
 1. Enable the "Default role" switch.
@@ -330,7 +410,7 @@ Only a global role can be the default.
 
 ### Editing roles
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Roles" tab.
 1. Find the required role and click "Edit".
 1. Make the required changes:
@@ -340,7 +420,7 @@ Only a global role can be the default.
 
 ### Editing role bindings
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Role bindings" tab.
 1. Find the required role binding and click "Edit".
 1. Make the required changes:
@@ -365,24 +445,22 @@ Deleting a role also deletes all associated role bindings.
 #### For a user
 
 1. Go to "Administration" → "Users".
-1. Open the target user's profile.
-1. Select the "Permissions" tab.
-1. Review:
-    - Global permissions.
-    - Object-level permissions.
-    - Roles assigned to the user.
-    - Teams of which the user is a member.
+1. In the target user's row, click "View user permissions".
+1. In the "User permissions" dialog, review:
+    - "Global permissions" — the user's global permissions.
+    - "Permissions for ..." — object-level permissions, one block per object. Each block shows the object type, the object name, and the role binding that grants the permissions.
+
+   To filter the permissions, use the "Search" field.
 
 #### For a team
 
 1. Go to "Administration" → "Teams".
-1. Open the target team's profile.
-1. Select the "Permissions" tab.
-1. Review:
-    - The team's global permissions.
-    - Object-level permissions.
-    - Roles assigned to the team.
-    - Users who belong to the team.
+1. In the target team's row, click "View team permissions".
+1. In the "Team permissions" dialog, review:
+    - "Global permissions" — the team's global permissions.
+    - "Permissions for ..." — object-level permissions, one block per object. Each block shows the object type, the object name, and the role binding that grants the permissions.
+
+   To filter the permissions, use the "Search" field.
 
 {{< alert level="info" >}}
 Team membership is synchronized from the external authentication system, Dex.
@@ -407,9 +485,10 @@ The portal provides role presets for common access scenarios.
   - `read:actions`, `read:automations`, `read:dashboards`.
   - `read:datasources`, `read:entities`, `read:external-services`.
   - `read:processes`, `read:resource-relations`, `read:resources`.
-  - `read:seeds`, `read:system-alerts`, `read:trusted-certificates`, `read:webhooks`.
+  - `read:seeds`, `read:system-alerts`, `read:template-packs`, `read:trusted-certificates`, `read:webhooks`.
   - `read:widgets`, `read:workflows`.
-  - `read:audit-logs`, `view:admin-page`, `view:self-service-page`.
+  - `read:mcp-collections`, `read:mcp-servers`, `read:mcp-tools`.
+  - `read:audit-logs`, `view:admin-page`, `view:ai-page`, `view:self-service-page`.
 - Purpose: users with read-only access.
 
 ##### "Developer" preset
@@ -417,7 +496,7 @@ The portal provides role presets for common access scenarios.
 - Type: `Global`.
 - Permissions:
   - `read:actions`, `read:dashboards`, `read:external-services`.
-  - `read:processes`, `read:widgets`, `read:workflows`.
+  - `read:processes`, `read:template-packs`, `read:widgets`, `read:workflows`.
   - `run:actions`, `run:widget-actions`, `control:processes`.
   - `update:team-variables`.
 - Purpose: developers who need to view information and run actions but do not need to create, edit, or delete objects. Developers see only entities to which role bindings at the resource or entity level grant them access.
@@ -425,7 +504,11 @@ The portal provides role presets for common access scenarios.
 ##### "Platform engineer" preset
 
 - Type: `Global`.
-- Permissions: full access to the catalog and the "Self-Service" page.
+- Permissions:
+  - Catalog: all permissions for resources, resource relations, and entities, including `update:resources-order`.
+  - "Self-Service" page: `view:self-service-page` and all permissions for actions, automations, dashboards, data sources, webhooks, workflows, processes, and widgets, including `run:actions`, `sync:datasources`, `control:processes`, `run:widget-actions`, `create:page-dashboards`, and `delete:page-dashboards`.
+  - `update:team-variables`.
+  - "AI" page: `view:ai-page`, `read:mcp-collections`, `edit:mcp-collections`, `read:mcp-servers`, `edit:mcp-servers`, `read:mcp-tools`, and `edit:mcp-tools`.
 - Purpose: engineers who configure the portal, including processes, data sources, and dashboards.
 
 #### Process presets
@@ -452,7 +535,7 @@ The portal provides role presets for common access scenarios.
 
 #### Using presets
 
-1. Go to "Administration" → "Access control".
+1. Go to "Administration" → "RBAC".
 1. Select the "Roles" tab.
 1. Click "Create role".
 1. Select an object type.

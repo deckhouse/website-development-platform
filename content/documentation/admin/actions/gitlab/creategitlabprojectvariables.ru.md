@@ -27,6 +27,8 @@ variables:
 
 Список полей для переменных соответствует официальному GitLab Project-level CI/CD variables API, `/projects/:id/variables`, подробнее — [в документации GitLab](https://docs.gitlab.com/api/project_level_variables/#create-a-variable).
 
+Действие создаёт переменные по одной. Если GitLab не создал часть переменных, действие создаёт остальные, а запуск завершается со статусом `Warning`. Ответ GitLab для каждой несозданной переменной записывается в лог запуска.
+
 ### Примечание
 
 Действие осуществляет POST-запрос по URL: `/api/v4/projects/:id/variables`.

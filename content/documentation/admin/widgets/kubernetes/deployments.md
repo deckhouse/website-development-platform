@@ -21,6 +21,7 @@ The following actions are available for each Deployment:
 | Kubernetes API | Yes      | Kubernetes API server URL used to retrieve data from Kubernetes                                                                                                  | —             |
 | Namespace      | No       | Kubernetes namespace from which Deployments are loaded. If no namespace is specified, the widget attempts to load all Deployments in the cluster. Example: `default` | —             |
 | Label selector | No       | Comma-separated selectors used to filter Deployments. Example: `app.kubernetes.io/name=example`                                                                  | —             |
+| Min replicas   | No       | Minimum number of replicas that can be set when scaling a Deployment in the widget                                                                               | `0`           |
 
 ## Authorization
 

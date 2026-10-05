@@ -3,7 +3,7 @@ title: Templating
 description: Go templates in DDP, built-in and sprig functions, global and team variables, action, entity, process, and workflow contexts, process store.
 ---
 
-Deckhouse Development Portal (portal) supports templating based on [Go template](https://developer.hashicorp.com/nomad/docs/reference/go-template-syntax): expressions in curly braces are substituted into configuration fields where this is supported (actions, widgets, data sources, etc.). Below are the built-in functions and context variables (`{{ .property.* }}`, `{{ .entity.* }}`, and others).
+Deckhouse Development Portal (portal) supports templating based on [Go templates](https://pkg.go.dev/text/template): expressions in curly braces are substituted into configuration fields where this is supported (actions, widgets, data sources, etc.). Below are the built-in functions and context variables (`{{ .property.* }}`, `{{ .entity.* }}`, and others).
 
 In addition to the standard functions, the following are available:
 
@@ -11,7 +11,7 @@ In addition to the standard functions, the following are available:
 * Functions from the [sprig](https://masterminds.github.io/sprig/) library.
 
 {{< alert level="info" >}}
-Functions from the [sprig](https://masterminds.github.io/sprig/) library are not supported in data sources.
+Functions from the [sprig](https://masterminds.github.io/sprig/) library are not supported in data sources. The `env`, `expandenv`, and `getHostByName` functions are unavailable in all portal templates.
 {{< /alert >}}
 
 ## Built-in functions
@@ -33,7 +33,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ extractPart "ddp/demo-service" "/" 1 }} // Output: "demo-service"
 ```
 
@@ -52,7 +52,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ extractLastPart "ddp/demo-service" "/" }} // Output: "demo-service"
 ```
 
@@ -71,7 +71,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ toJSON . }} // Output: JSON representation of the object in the current context
 ```
 
@@ -90,7 +90,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ toYAML . }} // Output: YAML representation of the object in the current context
 ```
 
@@ -110,7 +110,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ index (fromYAML "first: a\nsecond: b\n") "first" }} // Output: "a"
 ```
 
@@ -130,7 +130,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ replaceChar "hello/world" "/" "-" }} // Output: "hello-world"
 ```
 
@@ -154,7 +154,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ toSlug "My Service/Name!" }} // Output: "my-service-name"
 ```
 
@@ -175,7 +175,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ filteredItems .items "name" "Alice" }} // Output: [{"name": "Alice", "age": 30}]
 ```
 
@@ -196,7 +196,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ anyOf "eq" "value" "key" .data }} // Output: true if at least one record satisfies the condition
 ```
 
@@ -217,7 +217,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ allOf "gt" 10 "age" .users }} // Output: true if all users are older than 10
 ```
 
@@ -233,11 +233,11 @@ Parameters:
 Returns:
 
 * The value obtained by the key.
-* An error if the structure is missing or the key is not found.
+* An error if the structure is empty or missing. If the key is not found, an empty value is returned without an error.
 
 Example in a template:
 
-```go
+```go-text-template
 {{ getFieldValue .item "name" }} // Output: the value of the "name" field from the .item structure
 ```
 
@@ -259,7 +259,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ findValueInDictArray .items "environment" "test" "url" }}  // Output: the value of the "url" key from the first found dictionary where "environment" equals "test".
 ```
 
@@ -281,7 +281,7 @@ Returns:
 
 Examples in a template:
 
-```go
+```go-text-template
 {{ generatePassword }}                                   // Output: a random 16-character password
 {{ generatePassword 12 }}                                // Output: a random 12-character password
 {{ generatePassword 8 true true true }}                  // Output: an 8-character password
@@ -302,7 +302,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ encodeUnicode "Привет" }} // Output: "\u041f\u0440\u0438\u0432\u0435\u0442"
 {{ encodeUnicode "Hello" }}  // Output: "\u0048\u0065\u006c\u006c\u006f"
 ```
@@ -322,7 +322,7 @@ Returns:
 
 Example in a template:
 
-```go
+```go-text-template
 {{ decodeUnicode "\u041f\u0440\u0438\u0432\u0435\u0442" }} // Output: "Привет"
 {{ decodeUnicode "\u0048\u0065\u006c\u006c\u006f" }}      // Output: "Hello"
 ```
@@ -336,7 +336,7 @@ Parameters:
 * `claims` — a `map` or a JSON string. Standard fields: "sub", "iss", "aud", "exp", "iat", "nbf".
 * `signingKey` — the signing key: for HS256/HS384/HS512, a secret string; for RS256/ES256 and others, the PEM-encoded private key.
 * `algorithm` — the signing algorithm: HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512, PS256, etc.
-* `headers` — JWT headers (optional): a `map` or a JSON string, e.g. "kid", "cty". An empty string or empty `map` means no headers are set.
+* `headers` — JWT headers: a `map` or a JSON string, for example "kid", "cty". The argument is required: to set no headers, pass an empty string `""` or an empty `map`.
 
 Returns:
 
@@ -345,7 +345,7 @@ Returns:
 
 Examples in a template:
 
-```go
+```go-text-template
 {{ jwtSign (dict "sub" "user-123" "iss" "ddp") .credentials.secret "HS256" "" }}
 ```
 
@@ -355,18 +355,18 @@ Global variables are shared variables that can be reused in templating when acti
 
 To substitute the value of a global variable, use the following construct in a field that supports templates:
 
-```go
-{{ .global.<slug>.<key> }}
+```go-text-template
+{{ .global.<SLUG>.<KEY> }}
 ```
 
 where:
 
 - `global` — indicates that a global variable is being accessed.
-- `slug` — the identifier of the global variable set.
-- `key` — the key of the variable whose value should be substituted.
+- `<SLUG>` — the identifier of the global variable set.
+- `<KEY>` — the key of the variable whose value should be substituted.
 
 {{< alert level="warning" >}}
-Global variables are stored in the DDP database in plain text, and their values can be retrieved by users through the web interface. It is not recommended to store sensitive data in global variables.
+Global variables are stored in the DDP database in plain text, and their values can be retrieved by users through the web interface. Do not store sensitive data in global variables.
 {{< /alert >}}
 
 ### Configuring global variables
@@ -388,16 +388,17 @@ The following naming rules apply:
 
 Team variables can be used in all actions, workflows, and processes.
 
-Team variables are configured in the "Administration" → "Teams" section, in the team editing menu.  
-Each user can edit the variables of the teams they belong to — this can be done in the user's profile.
+Team variables are configured in the "Administration" → "Teams" section, in the team editing menu, or in the user's profile. To edit team variables, a user must be a member of the team and have the global `update:team-variables` permission. For details, refer to the [role model](../../admin/security/rbac/#global-permissions).
 
 To get the value of a team variable, use the following construct:
 
-```go
-{{ .team.<variable_name> }}
+```go-text-template
+{{ .team.<VARIABLE_NAME> }}
 ```
 
-When launching an action, the user must select the team whose variables will be substituted.  
+where `<VARIABLE_NAME>` is the name of the team variable.
+
+When launching an action, the user must select the team whose variables will be substituted.
 When launching a workflow or process, the team is selected once — its variables are used in all actions within it.
 
 ## Action variables
@@ -408,20 +409,20 @@ Action parameters are available through the `{{ .property.* }}` context and cont
 
 To get the value of an action parameter, use the following construct:
 
-```go
-{{ .property.<property_slug> }}
+```go-text-template
+{{ .property.<PROPERTY_SLUG> }}
 ```
 
 where:
 
 - `property` — indicates that an action parameter is being accessed.
-- `property_slug` — the identifier of the parameter whose value should be substituted.
+- `<PROPERTY_SLUG>` — the identifier of the parameter whose value should be substituted.
 
 Parameter identifiers can be viewed on the "User form" tab in the action configuration window.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .property.environment }}   // Value of the "environment" parameter
 {{ .property.count }}         // Value of the "count" parameter
 {{ .property.url }}           // Value of the "url" parameter
@@ -433,25 +434,25 @@ The action response is available through the `{{ .response.* }}` context and con
 
 To get a value from the action's response, use the following construct:
 
-```go
-{{ .response.<field_name> }}
+```go-text-template
+{{ .response.<FIELD_NAME> }}
 ```
 
 where:
 
 - `response` — indicates that the action's response is being accessed.
-- `field_name` — the name of the field in the response whose value should be substituted.
+- `<FIELD_NAME>` — the name of the field in the response whose value should be substituted.
 
 For the response format, see the documentation for the specific action, or check it in the DDP interface:
 
 1. Open the action's menu (the three-dot button on the action card).
-1. Select "Action runs".
+1. Select "Action launch history".
 1. Open the configuration of one of the action's runs.
 1. Find the "Response" column in the table.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .response.status }}        // Response status
 {{ .response.data.id }}       // ID from the response data
 {{ .response.headers.auth }}  // Value of the authorization header
@@ -467,20 +468,20 @@ Credentials are available in all actions, workflows, processes, widgets, data so
 
 To get the value of credentials, use the following construct:
 
-```go
-{{ .credentials.<credentials_slug> }}
+```go-text-template
+{{ .credentials.<CREDENTIALS_SLUG> }}
 ```
 
 where:
 
 - `credentials` — indicates that credentials are being accessed.
-- `credentials_slug` — the identifier of the credentials whose value should be substituted.
+- `<CREDENTIALS_SLUG>` — the identifier of the credentials whose value should be substituted.
 
-The `credentials_slug` identifier matches the one specified on the "Authorization" tab, in the "Credentials" section, in the DDP object configuration dialogs.
+The `<CREDENTIALS_SLUG>` identifier matches the one specified on the "Authorization" tab, in the "Credentials" section, in the DDP object configuration dialogs.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .credentials.token }}             // Access token
 {{ .credentials.username }}          // Username
 {{ .credentials.password }}          // Password
@@ -490,24 +491,26 @@ Usage examples:
 {{ .credentials.bearerToken }}       // Bearer token
 ```
 
+Access to `.credentials` works only if the expression is written directly in the body or configuration of an object. If a `{{ .credentials.* }}` expression comes in a substituted value, such as a global or team variable, a parameter, the launch context, or an action response, the portal removes it from the value.
+
 ## Entity
 
 An entity is available in widgets with `Resource` scope, actions, processes, and workflows through the `{{ .entity.* }}` context.
 
 To get the value of an entity field, use the following construct:
 
-```go
-{{ .entity.<field_name> }}
+```go-text-template
+{{ .entity.<FIELD_NAME> }}
 ```
 
 where:
 
 - `entity` — indicates that an entity is being accessed.
-- `field_name` — the name of the entity field whose value should be substituted.
+- `<FIELD_NAME>` — the name of the entity field whose value should be substituted.
 
 ### Basic entity fields
 
-```go
+```go-text-template
 {{ .entity.uuid }}           // Entity UUID
 {{ .entity.slug }}           // Entity identifier
 {{ .entity.name }}           // Entity name
@@ -520,19 +523,19 @@ Entity parameters are available through the `{{ .entity.properties.* }}` context
 
 To get the value of an entity parameter, use the following construct:
 
-```go
-{{ .entity.properties.<property_slug> }}
+```go-text-template
+{{ .entity.properties.<PROPERTY_SLUG> }}
 ```
 
 where:
 
 - `entity` — indicates that an entity is being accessed.
 - `properties` — indicates the entity's parameters.
-- `property_slug` — the identifier of the entity parameter whose value should be substituted.
+- `<PROPERTY_SLUG>` — the identifier of the entity parameter whose value should be substituted.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .entity.properties.projectId }}     // Project ID from the entity's parameters
 {{ .entity.properties.branch }}        // Git branch from the entity's parameters
 {{ .entity.properties.environment }}   // Environment from the entity's parameters
@@ -546,24 +549,54 @@ For each process, you can define shared parameters whose values can be used in a
 
 To get the value of a process parameter, use the following construct:
 
-```go
-{{ .process.<property_slug> }}
+```go-text-template
+{{ .process.<PROPERTY_SLUG> }}
 ```
 
 where:
 
 - `process` — indicates that the process is being accessed.
-- `property_slug` — the identifier of the process parameter whose value should be substituted.
+- `<PROPERTY_SLUG>` — the identifier of the process parameter whose value should be substituted.
 
 The parameter type and default value are set in the process editing interface. For each specific parameter, the user can override the default value when launching the process, if editing the parameter is allowed.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .process.deploymentUrl }}    // Deployment URL from the process parameters
 {{ .process.branch }}           // Git branch from the process parameters
 {{ .process.environment }}      // Environment from the process parameters
 ```
+
+## Process launch context
+
+The launch context contains the data of the objects selected when a process is launched from the home page: system, microservice, environment, deployment, template. The context is available in default values of process parameters, in action bodies, in entity creation and update rules, in gateway conditions, and in loops.
+
+To get a value from the context, use the following construct:
+
+```go-text-template
+{{ .context.<KEY> }}
+```
+
+where `<KEY>` is the path to the value in the context, for example `environment.slug`.
+
+Entities are passed in the context with the `name`, `slug`, `uuid`, and `properties` fields. The `properties` keys are the identifiers of the entity parameters in the catalog.
+
+Usage examples:
+
+```go-text-template
+{{ .context.environment.slug }}               // Identifier of the environment selected at launch
+{{ .context.microservice.name }}              // Microservice name
+{{ .context.environment.properties.domain }}  // The domain parameter of the environment
+```
+
+The behavior for a missing key depends on where the template is used:
+
+- In process parameter values, a missing key is substituted as an empty string. If a required parameter is empty after substitution, the process does not start.
+- In action bodies, gateway conditions, and loops, a missing key fails the step.
+- If the context is empty, for example, when the process is launched from the catalog, a `{{ .context.* }}` expression in an action body is not substituted and remains in the text as is.
+
+To make a process work when launched from the catalog too, set values from the context in process parameters and use the process parameters in actions: `{{ .process.<PROPERTY_SLUG> }}`.
 
 ## Workflow parameters
 
@@ -571,20 +604,20 @@ For each workflow, you can define shared parameters whose values can be used in 
 
 To get the value of a workflow parameter, use the following construct:
 
-```go
-{{ .workflow.<property_slug> }}
+```go-text-template
+{{ .workflow.<PROPERTY_SLUG> }}
 ```
 
 where:
 
 - `workflow` — indicates that the workflow is being accessed.
-- `property_slug` — the identifier of the workflow parameter whose value should be substituted.
+- `<PROPERTY_SLUG>` — the identifier of the workflow parameter whose value should be substituted.
 
 The parameter type and default value are set in the workflow editing interface. For each specific parameter, the user can override the default value when launching the workflow, if editing the parameter is allowed.
 
 Usage examples:
 
-```go
+```go-text-template
 {{ .workflow.apiEndpoint }}       // API endpoint from the workflow parameters
 {{ .workflow.notificationEmail }} // Notification email from the workflow parameters
 {{ .workflow.retryAttempts }}     // Number of retry attempts from the workflow parameters
@@ -596,23 +629,28 @@ The store is only available in processes and is used to pass data between steps.
 
 To read a value, use:
 
-```go
-{{ .store.<path> }}
+```go-text-template
+{{ .store.<PATH> }}
 ```
 
-The path matches the "Target" field in the write rules. Nested keys and array indices are supported:
+where `<PATH>` is the path to the value in the store. It matches the "Target" field in the write rules. Nested keys are separated by dots:
 
-```go
+```go-text-template
 {{ .store.projectId }}
 {{ .store.notification.engagements }}
-{{ .store.items[0].status }}
+```
+
+The "Target" field of write rules supports array indices in square brackets, for example `items[0].status`. In placeholders, square brackets are not supported; use the `index` function to read an array item:
+
+```go-text-template
+{{ (index .store.items 0).status }}
 ```
 
 ### Process loop context
 
 While a loop body inside a process is running, the `_loop` object is available in templates:
 
-```go
+```go-text-template
 {{ .store._loop.item }}    // current collection item or iteration number
 {{ .store._loop.index }}   // 0-based index
 {{ .store._loop.total }}   // total number of iterations

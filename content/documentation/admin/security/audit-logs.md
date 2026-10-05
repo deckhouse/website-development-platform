@@ -15,19 +15,25 @@ The following components create and store audit logs:
 
 ## Audit log contents
 
-Each HTTP request except `GET` creates an audit log entry with the following fields:
+Each HTTP request to the API, except `GET` requests, creates an audit log entry with the following fields:
 
 - "Email" — email address of the user who made the request.
 - "IP" — client IP address.
-- "Request body" — HTTP request body.
-- "Path" — requested API path.
+- "Body" — HTTP request body.
+- "Endpoint" — requested API path.
 - "Method" — request HTTP method (`POST`, `PUT`, `DELETE`, or `PATCH`).
 - "Status" — response HTTP status code.
-- "Date" — request date.
+- "Timestamp" — request date and time.
+
+The following requests are not recorded in audit logs:
+
+- `POST /api/v2/users/access-credentials` — saving user credentials.
+- `POST /api/v2/security/encryption-key/rotate` — [encryption key rotation](../encryption-key-rotation/).
+- `POST /api/v2/widgets/data/<WIDGET_UUID>` and `POST /api/v2/widgets/data/<WIDGET_UUID>/stream` — loading widget data.
 
 ## How it works
 
-DDP Backend automatically creates audit logs through request-processing middleware for all HTTP requests except `GET`.
+DDP Backend automatically creates audit logs through request-processing middleware for the HTTP requests listed in [Audit log contents](#audit-log-contents).
 
 To reduce database load, entries are buffered with the following settings:
 
@@ -39,7 +45,7 @@ To reduce database load, entries are buffered with the following settings:
 
 Audit logs are stored in the PostgreSQL `audit_logs` table. The table is partitioned by day based on the `timestamp` field.
 
-The table structure is maintained automatically. Every day at `00:00` server time, the system prepares space for logs for the next 7 days.
+The table structure is maintained automatically. Every day at `00:00` UTC, the system prepares space for logs for the next 7 days.
 
 Logs are retained indefinitely and old entries are not deleted automatically. To control retention, configure external tools, such as cron jobs or database cleanup scripts, to delete old log partitions automatically.
 
@@ -47,12 +53,12 @@ Logs are retained indefinitely and old entries are not deleted automatically. To
 
 Audit logs are available in the web interface under "Administration" → "Audit". You can filter logs by the following fields:
 
-- Period, including start and end date and time.
-- User email.
-- IP address.
-- Path.
-- Request method.
-- Response status.
+- "Start of period" and "End of period" — date and time range.
+- "Email" — user email.
+- "Path" — beginning of the API path.
+- "Method" — request method.
+- "Status" — response status.
+- "Search" — a substring of the email, IP address, path, method, or status.
 
 ## Exporting to CSV
 

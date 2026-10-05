@@ -3,11 +3,11 @@ title: DeleteKafkaACLs
 weight: 60
 ---
 
-
 {{< alert level="info" >}}
 This action requires the following credentials:
-* `user` — the username under which the action runs.
-* `password` — the password for that user.
+
+- `user` — the username under which the action runs.
+- `password` — the password for that user.
 {{< /alert >}}
 
 DeleteKafkaACLs — deletes a set of ACLs in Kafka.

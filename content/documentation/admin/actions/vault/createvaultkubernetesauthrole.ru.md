@@ -13,7 +13,7 @@ CreateVaultKubernetesAuthRole — создаёт или обновляет ро�
 
 ```yaml
 mountPath: kubernetes
-role: example
+name: example
 bound_service_account_names:
   - default
 bound_service_account_namespaces:
@@ -31,7 +31,7 @@ optional:
 | Название                              | Обязательность   | Описание                                                                            |
 | ------------------------------------- | ---------------- | ----------------------------------------------------------------------------------- |
 | mountPath                             | Да               | Путь монтирования Kubernetes auth backend в Vault (например, kubernetes)            |
-| role                                  | Да               | Название роли, которая создаётся в Vault                                            |
+| name                                  | Да               | Название роли, которая создаётся в Vault                                            |
 | bound_service_account_names           | Да               | Список имён service account'ов, которым разрешён доступ через данную роль           |
 | bound_service_account_namespaces      | Да               | Список неймспейсов (namespaces), в которых разрешён доступ через данную роль        |
 | optional                              | Нет              | Дополнительные параметры роли (приведены в следующей таблице)                       |

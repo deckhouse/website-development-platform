@@ -3,12 +3,17 @@ title: CreateCodeScoringProject
 weight: 10
 ---
 
+{{< alert level="info" >}}
+This action does not use the DDP credentials mechanism. If CodeScoring requires authentication, add the required HTTP header, such as `Authorization`, in the [URL and HTTP headers](../overview/#url-and-http-headers) settings. DDP passes this header in the request to CodeScoring.
+{{< /alert >}}
+
 CreateCodeScoringProject — creates a new project in CodeScoring.
 The action uses the CodeScoring API to register a project with the specified parameters:
-- project name,
-- repository URL,
-- VCS ID,
-- an option to automatically run SCA analysis after cloning the repository.
+
+- project name
+- repository URL
+- VCS ID
+- option to automatically run SCA analysis after cloning the repository
 
 ### Request example
 

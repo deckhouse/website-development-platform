@@ -2,6 +2,7 @@
 title: External services
 menuTitle: External services
 description: Configure authentication for external infrastructure services used by portal objects.
+weight: 72
 ---
 
 External services configure authentication for external infrastructure systems such as GitLab, Kubernetes, and DefectDojo.
@@ -17,12 +18,12 @@ An external service has the following parameters:
 | "Name" | External service name displayed in the interface |
 | "Identifier" | Unique human-readable identifier (slug) |
 | "Owner" | User responsible for the external service |
-| "Owner team" | Team that owns the external service |
+| "Owning team" | Team that owns the external service |
 | "URL" | Base URL for requests to the external service |
 | "Credentials" | Available credentials, such as tokens, that can be included in requests |
 | "Headers" | HTTP headers automatically added to requests |
 | "Disable SSL verification" | Disables verification of the external service's SSL certificate, for example when using self-signed certificates. Instead, add the required certificates to [trusted certificates](../trusted-certificates/) |
-| "System credential" | Credential used for scheduled jobs such as data source synchronization and status checks |
+| "System Account" | Account used for scheduled jobs such as data source synchronization and status checks |
 
 ## Using external services
 
@@ -43,25 +44,24 @@ Each object can explicitly override parameters configured for the external servi
 
 - Multiple external services can be connected to one action.
 - One service can be selected as the default.
-- The "System credential" parameter is not used for actions.
+- The "System Account" parameter is not used for actions.
 - When running an action, you can select the external service to use. If you do not select a service, the default service is used. If no default is configured, the first external service in the list is used.
 
 ### Widgets
 
 - Multiple external services can be connected to one widget.
 - One service can be selected as the default.
-- A future release will allow users to change the service while viewing a widget.
-- The "System credential" parameter is not used for widgets.
+- The "System Account" parameter is not used for widgets.
 
 ### Data sources
 
 - Only one external service can be connected.
-- If the service has a system credential, it is used by default during synchronization.
+- If the service has a system account, it is used by default during synchronization.
 
 ### Status checks
 
 - One external service can be assigned to a status check.
-- If the service has a system credential, it is used for automatic checks.
+- If the service has a system account, it is used for automatic checks.
 
 ## Authorization headers for external services
 
@@ -79,12 +79,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `<token>` |
+| `Authorization` | `<TOKEN>` |
 
 Example:
 
-```sh
-Authorization: <your-api-token>
+```text
+Authorization: <API_TOKEN>
 ```
 
 ### ClickHouse
@@ -95,9 +95,9 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
-| `X-ClickHouse-User` | `<username>` |
-| `X-ClickHouse-Key` | `<password>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
+| `X-ClickHouse-User` | `<USERNAME>` |
+| `X-ClickHouse-Key` | `<PASSWORD>` |
 
 Basic Authentication example:
 
@@ -105,15 +105,15 @@ Basic Authentication example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 Example using ClickHouse headers:
 
-```sh
-X-ClickHouse-User: <username>
-X-ClickHouse-Key: <password>
+```text
+X-ClickHouse-User: <USERNAME>
+X-ClickHouse-Key: <PASSWORD>
 ```
 
 ### DefectDojo
@@ -124,12 +124,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Token <token>` |
+| `Authorization` | `Token <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Token <your-defectdojo-api-v2-key>
+```text
+Authorization: Token <DEFECTDOJO_API_KEY>
 ```
 
 ### Bitbucket
@@ -140,12 +140,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-bitbucket-personal-access-token>
+```text
+Authorization: Bearer <BITBUCKET_TOKEN>
 ```
 
 ### Docker Registry
@@ -156,7 +156,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -164,8 +164,8 @@ Example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### GitLab
@@ -176,12 +176,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Private-Token` | `<token>` |
+| `Private-Token` | `<TOKEN>` |
 
 Example:
 
-```sh
-Private-Token: <your-gitlab-token>
+```text
+Private-Token: <GITLAB_TOKEN>
 ```
 
 For instructions on creating a GitLab token, refer to the [GitLab authentication documentation](https://docs.gitlab.com/api/rest/authentication/).
@@ -194,12 +194,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-github-token>
+```text
+Authorization: Bearer <GITHUB_TOKEN>
 ```
 
 Create the token in GitHub under "Settings" → "Developer settings" → "Personal access tokens".
@@ -212,7 +212,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -220,8 +220,8 @@ Example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Jenkins
@@ -232,7 +232,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -242,8 +242,8 @@ Example:
 1. Encode the string in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Jira
@@ -254,7 +254,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -262,8 +262,8 @@ Example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Kaiten
@@ -274,12 +274,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-kaiten-api-token>
+```text
+Authorization: Bearer <KAITEN_API_TOKEN>
 ```
 
 ### Kubernetes
@@ -290,12 +290,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-kubernetes-token>
+```text
+Authorization: Bearer <KUBERNETES_TOKEN>
 ```
 
 ### Nexus
@@ -306,7 +306,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -314,8 +314,8 @@ Example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### OpenSearch
@@ -326,7 +326,7 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Basic <BASE64_CREDENTIALS>` |
 
 Example:
 
@@ -334,8 +334,8 @@ Example:
 1. Encode it in Base64: `echo -n "username:password" | base64`.
 1. Add the header:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### Prometheus
@@ -346,18 +346,18 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` or `Basic <base64-encoded-credentials>` |
+| `Authorization` | `Bearer <TOKEN>` or `Basic <BASE64_CREDENTIALS>` |
 
 Bearer token example:
 
-```sh
-Authorization: Bearer <your-token>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 Basic Authentication example:
 
-```sh
-Authorization: Basic <base64-encoded-credentials>
+```text
+Authorization: Basic <BASE64_CREDENTIALS>
 ```
 
 ### SonarQube
@@ -368,12 +368,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-token>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 ### Svacer
@@ -384,12 +384,12 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `Authorization` | `Bearer <token>` |
+| `Authorization` | `Bearer <TOKEN>` |
 
 Example:
 
-```sh
-Authorization: Bearer <your-token>
+```text
+Authorization: Bearer <TOKEN>
 ```
 
 ### Vault
@@ -400,10 +400,10 @@ Headers:
 
 | Header | Value format |
 |--------|--------------|
-| `X-Vault-Token` | `<token>` |
+| `X-Vault-Token` | `<TOKEN>` |
 
 Example:
 
-```sh
-X-Vault-Token: <your-vault-token>
+```text
+X-Vault-Token: <VAULT_TOKEN>
 ```

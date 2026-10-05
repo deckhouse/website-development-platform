@@ -36,15 +36,15 @@ The query runs at the end of this time range.
 | ---------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- |
 | URL                          | Yes      | Prometheus URL                                                                                                          | —             |
 | Query                        | Yes      | PromQL query that returns one value                                                                                     | —             |
-| Default range                | No       | Range used when loading or refreshing the widget unless the user selects another range in the widget panel             | Last hour     |
-| Decimal places               | No       | Precision used to display the returned value                                                                           | —             |
+| Default interval | No       | Interval used when loading or refreshing the widget unless the user selects another interval in the widget panel             | Last hour     |
+| Number of decimal places | No       | Precision used to display the returned value | `0` |
 | Unit                         | No       | Suffix displayed with the returned value                                                                                | —             |
 | Show threshold               | No       | Displays `<METRIC_VALUE> / <THRESHOLD>`, where `<METRIC_VALUE>` is the current metric value and `<THRESHOLD>` is the configured threshold | `false`       |
 | Threshold                    | No       | Threshold value                                                                                                         | —             |
 | Lower value is better        | No       | Considers the metric healthy when its value is below the configured threshold                                          | `false`       |
 | Warning threshold (%)        | No       | Boundary between red and orange. A metric value above this percentage of the threshold is displayed in orange          | 60            |
 | Success threshold (%)        | No       | Boundary between orange and green. A metric value above this percentage of the threshold is displayed in green         | 90            |
-| `InsecureSkipVerify`         | No       | Disables verification of the Prometheus TLS/SSL certificate                                                            | `false`       |
+| Disable SSL verification | No       | Disables verification of the Prometheus TLS/SSL certificate                                                            | `false`       |
 
 ## Authorization
 

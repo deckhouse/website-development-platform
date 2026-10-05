@@ -17,6 +17,7 @@ version: v1
 resource_type: deployments
 resource_name: nginx-deployment
 namespace: example
+ignore_not_found: true
 ```
 
 ### Request specification
@@ -28,3 +29,8 @@ namespace: example
 | resource_type               | Yes                | Type of resource to delete                                                       | pods, services, deployments, statefulsets, daemonsets, replicasets, jobs, cronjobs, nodes, namespaces, configmaps, secrets, persistentvolumes, persistentvolumeclaims, limitranges, resourcequotas, horizontalpodautoscalers, ingresses, networkpolicies, serviceaccounts, roles, clusterroles, rolebindings, clusterrolebindings, podsecuritypolicies, storageclasses, volumeattachments, events, endpoints, customresourcedefinitions |
 | resource_name               | Yes                | Name of the resource to delete                                                   | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | namespace                   | Yes                | Namespace containing the resource                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ignore_not_found            | No                 | If `true`, deleting an object that does not exist in the cluster succeeds. Defaults to `false`: deleting a missing object fails | `true`, `false` |
+
+### Note
+
+The `ignore_not_found` parameter does not suppress other Kubernetes API errors. Use it in deletion processes that can run more than once.
