@@ -10,23 +10,17 @@ Allocate the following CPU, memory and disk for the installation scenarios:
 
 | Profile | DDP: CPU / memory | PostgreSQL: CPU / memory / disk | Redis: CPU / memory / disk | ClickHouse: CPU / memory / disk |
 | --- | --- | --- | --- | --- |
-| Demo installation | 4 CPU / 8 GB, including managed database instances | CPU and memory included in the demo installation. Disk 8 GB | CPU and memory included in the demo installation. Disk 8 GB | CPU and memory included in the demo installation. Disk 16 GB |
-| 10 users | 8 CPU / 32 GB | 2 CPU / 8 GB / 16 GB | 2 CPU / 4 GB / 8 GB | 4 CPU / 16 GB / 32 GB |
+| Demo installation | 4 CPU / 8 GB | 2 CPU / 4 GB / 20 GB | 1 CPU / 2 GB / 10 GB | 2 CPU / 8 GB / 50 GB |
+| 10 users | 8 CPU / 32 GB | 2 CPU / 8 GB / 32 GB | 2 CPU / 4 GB / 16 GB | 4 CPU / 16 GB / 64 GB |
 | 100 users | 16 CPU / 32 GB | 2 CPU / 16 GB / 64 GB | 2 CPU / 8 GB / 16 GB | 4 CPU / 16 GB / 64 GB |
 | 200 users | 16 CPU / 64 GB | 2 CPU / 16 GB / 64 GB | 2 CPU / 16 GB / 32 GB | 4 CPU / 16 GB / 128 GB |
 | 500 users | 32 CPU / 64 GB | 4 CPU / 64 GB / 256 GB | 2 CPU / 32 GB / 64 GB | 4 CPU / 16 GB / 256 GB |
 | 1000 users | 32 CPU / 128 GB | 16 CPU / 64 GB / 512 GB | 2 CPU / 32 GB / 128 GB | 4 CPU / 32 GB / 512 GB |
 
-A budget is the sum of the component resources rounded up to the nearest power of two.
-The table lists budgets.
+The DDP budget includes the API, the web interface, the platform AI agent and workers.
+The `managed` mode is recommended for databases in the demo installation; the `external` mode is recommended for the other profiles.
 
-For the demo installation, the volume sizes are taken from the configuration example below.
-In the demo installation, the DDP budget includes the API, the web interface, the platform AI agent, one worker
-and the managed PostgreSQL, Valkey and ClickHouse instances.
-In the other profiles, the resources of the portal and of each external database are listed separately.
-The databases in these profiles are connected in the `external` mode.
-
-The budget for each database is given per server.
+The budget for each external database is given per server.
 It is sized according to the scenarios and assumptions below.
 CPU is sized by the rate and cost of operations, memory by the working set and concurrency,
 disk by the accumulated data and the space for maintenance.
@@ -57,13 +51,20 @@ For DDP together with the managed database instances, allocate the following res
 | Parameter | Value |
 | --- | --- |
 | User load | 1 user |
-| CPU | 4 CPU |
-| Memory | 8 GB |
+| CPU | 16 CPU including managed instances |
+| Memory | 32 GB including managed instances |
 | Processes running at the same time | 1–2 |
-| Persistent disk | 32 GB for PostgreSQL, Valkey and ClickHouse |
+| Persistent disk | 80 GB: PostgreSQL — 20 GB, Valkey — 10 GB, ClickHouse — 50 GB |
 | `workers.replicas` | `1` |
 | `workers.maxTasks` | `5` |
 | ClickHouse | Enabled, `managed` mode |
+
+The portal component budget for the demo is 4 CPU and 8 GB of memory.
+The managed instances add 5 CPU by the sum of their default limits and about 14 GB of memory.
+The total is 9 CPU and about 22 GB of memory; rounding up gives a budget of 16 CPU and 32 GB.
+With `coreFraction: 50` for PostgreSQL and `coreFraction: "50%"` for Valkey and ClickHouse,
+the guaranteed CPU request of the managed instances totals 2.5 CPU.
+The budget uses the full CPU limits.
 
 With two processes that have two active steps each, the worker runs four process tasks
 and one additional background task at the same time.
@@ -76,28 +77,18 @@ spec:
   settings:
     postgres:
       mode: managed
-      instance:
-        persistentVolumeClaim:
-          size: 8G
     redis:
       mode: managed
-      instance:
-        persistentVolumeClaim:
-          size: 8G
     clickhouse:
       mode: managed
-      instance:
-        persistentVolumeClaim:
-          size: 16G
     workers:
       replicas: 1
       maxTasks: 5
 ```
 
-Set the CPU and memory of the managed instances in `instance.cpu` and `instance.memory`
-and include them in the total demo installation budget together with the portal components.
-Set the volume sizes in `instance.persistentVolumeClaim.size`.
-The `G` suffix in the example sets the size in decimal GB.
+The example uses the default managed instance resources.
+To change them, set the CPU in `instance.cpu`, memory in `instance.memory`
+and volume sizes in `instance.persistentVolumeClaim.size`, then recalculate the total budget.
 The class of the managed instance must allow the selected CPU, memory and volume sizes.
 The instance parameters are described in the [installation guide for managed instances](install/#installation-with-managed-instances).
 
@@ -347,14 +338,19 @@ The demo installation uses the following persistent volume sizes of the managed 
 
 | Component | Volume size in the demo installation |
 | --- | --- |
-| PostgreSQL | 8 GB |
-| Valkey | 8 GB |
-| ClickHouse | 16 GB |
-| Total | 32 GB |
+| PostgreSQL | 20 GB |
+| Valkey | 10 GB |
+| ClickHouse | 50 GB |
+| Total | 80 GB |
 
-The demo installation configuration sets these sizes. They do not grow with the number of users or workers.
+These sizes are the managed instance defaults. They do not grow with the number of users or workers.
 When the data grows, increase the volumes or switch to a profile with dedicated databases.
 When the databases are hosted in the cluster, additionally account for storage replication and backups.
+
+In the 10–1000-user profiles, each database disk must be at least as large as its volume in the demo installation.
+After rounding up to a power of two, the minimum budgets are
+32 GB for PostgreSQL, 16 GB for Redis and 64 GB for ClickHouse.
+For each profile, choose the larger of the minimum budget and the budget calculated below.
 
 ### PostgreSQL disk
 
@@ -372,6 +368,7 @@ The daily write volume is made up of catalog changes
 `number of entities × 5 × (2 + 8 + 1) KiB`
 and run data `number of users × 2 × 256 KiB` per working day.
 The disk budget is `(2 × D + WAL margin) / 0.7`, rounded up to a power of two.
+The minimum budget is 32 GB, covering the 20 GB volume from the demo installation.
 Dividing by 0.7 leaves 30% of free space.
 
 For 1000 users, the payload takes about 88.83 GB.
@@ -399,7 +396,7 @@ The sizing additionally adds one hour of writes at the peak rate of events and t
 With `p` events and `q` task completions per second, the hourly write volume is
 `(p × 8 KiB + q × (16 + 64) KiB) × 3600`.
 The disk budget is `(3 × 1.3 × B + hourly write volume) / 0.7`,
-rounded up to a power of two, with a minimum of 8 GB.
+rounded up to a power of two, with a minimum of 16 GB, covering the 10 GB volume from the demo installation.
 For the 1000-user profile, the sizing gives about 79 GB and is rounded up to 128 GB.
 
 The budget is sized for enabled persistence with regular AOF log rewrites.
@@ -422,14 +419,14 @@ The `clickhouse.propertyHistory.retentionDays` parameter sets the period.
 
 The profiles assume 5 property changes per entity per day and a record size of 1 KiB before compression.
 The compression gain is not taken into account in the sizing.
-The disk budget includes 16 GB of base margin, as in the demo installation,
+The disk budget includes 16 GB of base margin,
 the space for the history and its temporary copy during maintenance, and 30% of free space.
 The resulting budget is `(16 + 2 × history volume) / 0.7` GB,
-rounded up to a power of two:
+rounded up to a power of two, with a minimum of 64 GB, covering the 50 GB volume from the demo installation:
 
 | Number of entities | Number of history records over 180 days | Volume of records before compression | ClickHouse disk budget |
 | --- | --- | --- | --- |
-| 1000 | 900,000 | About 0.92 GB | 32 GB |
+| 1000 | 900,000 | About 0.92 GB | 64 GB |
 | 10,000 | 9,000,000 | About 9.2 GB | 64 GB |
 | 20,000 | 18,000,000 | About 18.4 GB | 128 GB |
 | 50,000 | 45,000,000 | About 46.1 GB | 256 GB |
