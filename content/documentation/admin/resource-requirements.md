@@ -51,8 +51,8 @@ For DDP together with the managed database instances, allocate the following res
 | Parameter | Value |
 | --- | --- |
 | User load | 1 user |
-| CPU | 16 CPU including managed instances |
-| Memory | 32 GB including managed instances |
+| CPU | 9 CPU including managed instances |
+| Memory | 22 GB including managed instances |
 | Processes running at the same time | 1–2 |
 | Persistent disk | 80 GB: PostgreSQL — 20 GB, Valkey — 10 GB, ClickHouse — 50 GB |
 | `workers.replicas` | `1` |
@@ -60,8 +60,8 @@ For DDP together with the managed database instances, allocate the following res
 | ClickHouse | Enabled, `managed` mode |
 
 The portal component budget for the demo is 4 CPU and 8 GB of memory.
-The managed instances add 5 CPU by the sum of their default limits and about 14 GB of memory.
-The total is 9 CPU and about 22 GB of memory; rounding up gives a budget of 16 CPU and 32 GB.
+The managed instances add 5 CPU by the sum of their default limits and 14 GB of memory.
+The total is 9 CPU and 22 GB of memory.
 With `coreFraction: 50` for PostgreSQL and `coreFraction: "50%"` for Valkey and ClickHouse,
 the guaranteed CPU request of the managed instances totals 2.5 CPU.
 The budget uses the full CPU limits.
@@ -136,23 +136,22 @@ If these parameters change, recalculate the corresponding part of the budget:
 | Property history views | 10% of active users at the same time. Up to 1 request per second per such user |
 | Process runs | 2 runs per user per working day |
 | Run accumulation horizon | 180 calendar days, approximately 129 working days |
-| Data size of one run | 256 KiB in total for the process, its actions, context, results and logs |
-| Size of a current entity | 2 KiB |
+| Data size of one run | 256 KB in total for the process, its actions, context, results and logs |
+| Size of a current entity | 2 KB |
 | Entity changes | 5 changes per day, each creates an event and a property history record |
-| Size of a full event | 8 KiB, including the old and new state of the entity |
+| Size of a full event | 8 KB, including the old and new state of the entity |
 | Event retention in PostgreSQL | 4 days plus up to 1 day waiting for the next cleanup |
 | Redis event streams | About 10,000 events per catalog resource. New events extend the lifetime of the stream |
 | Synchronization peak | 100 times the average daily change rate |
-| Size of a property history record | 1 KiB before compression |
+| Size of a property history record | 1 KB before compression |
 | Property history retention | 180 days |
-| Task queue | Up to 10,000 tasks of 16 KiB each |
-| Temporary task result | 64 KiB, kept for 3 minutes |
+| Task queue | Up to 10,000 tasks of 16 KB each |
+| Temporary task result | 64 KB, kept for 3 minutes |
 | Task duration for the exchange sizing | 5 seconds. The number of completions per second equals the number of worker slots divided by 5 |
 | Event-driven automations | Up to 2 recipients per event. The tasks they create count towards the shared concurrency limit |
 | Free disk | 30% after placing the data and the maintenance margin |
 
 The record sizes are profile parameters and include the payload.
-Record sizes use KiB: 1 KiB equals 1024 bytes.
 The sizing covers indexes, service structures, caches and temporary copies with the additional factors below.
 Process and action records keep accumulating after the selected horizon.
 Plan further disk expansion.
@@ -189,8 +188,8 @@ For history queries, the history of one entity with 900 records over 180 days wa
 | --- | --- |
 | PostgreSQL: batch of catalog and event reads | 2 ms. For related object queries and access checks, 4 ms |
 | PostgreSQL: search across 100,000 entities | 40 ms. Scales proportionally to the catalog size |
-| PostgreSQL: entity update with history and event | 1 ms, with a margin for an 8 KiB event |
-| Redis: write or delivery of an 8 KiB event | 0.03 ms |
+| PostgreSQL: entity update with history and event | 1 ms, with a margin for an 8 KB event |
+| Redis: write or delivery of an 8 KB event | 0.03 ms |
 | Redis: short coordination command | 0.01 ms |
 | Redis: task and result exchange between a worker and the backend | 0.4 ms, with a margin for separate commands and additional requests |
 | ClickHouse: query of a page, a history window or the state on a date | 16 ms |
@@ -212,8 +211,8 @@ The memory working set includes the current catalog, 5 days of events
 and the run data for the last 30 calendar days, approximately 22 working days.
 The working set volume is multiplied by 1.5 for indexes and caching.
 The sizing additionally adds a service margin of 2 GB,
-32 MiB for the reads of each active user
-and 8 MiB for each of the 10 parallel updates of one background task.
+32 MB for the reads of each active user
+and 8 MB for each of the 10 parallel updates of one background task.
 The minimum memory budget in the model is 8 GB.
 Account for parallel operations and connections in the PostgreSQL settings as well.
 PostgreSQL consumes the memory for sorts and hash operations per operation, as described
@@ -248,7 +247,7 @@ With a value of `0` or less, the length limit is disabled.
 The sizing adds a queue of 10,000 tasks and the results of tasks completed in the last 3 minutes to the events.
 The total volume is multiplied by 1.3 for Redis structures
 and by another 2 for the temporary copy during persistence.
-The sizing adds 0.5 GB of service margin and 1 MiB of buffers per active user.
+The sizing adds 0.5 GB of service margin and 1 MB of buffers per active user.
 The minimum memory budget in the model is 4 GB.
 
 In the 1000-user profile, the payload takes about 8.54 GB.
@@ -356,17 +355,17 @@ For each profile, choose the larger of the minimum budget and the budget calcula
 
 The payload volume `D` is made up of:
 
-- The current catalog: `number of entities × 2 KiB`.
-- Events: `number of entities × 5 changes × 5 days × 8 KiB`.
-- Process and action runs: `number of users × 2 runs × 129 working days × 256 KiB`.
-- The daily history transfer queue: `number of entities × 5 changes × 1 KiB`.
+- The current catalog: `number of entities × 2 KB`.
+- Events: `number of entities × 5 changes × 5 days × 8 KB`.
+- Process and action runs: `number of users × 2 runs × 129 working days × 256 KB`.
+- The daily history transfer queue: `number of entities × 5 changes × 1 KB`.
 
 In the model, `D` is doubled for indexes and the space that record updates consume.
 For the write-ahead log (WAL), the sizing adds the larger of two margins:
 8 GB or twice the daily volume of written data.
 The daily write volume is made up of catalog changes
-`number of entities × 5 × (2 + 8 + 1) KiB`
-and run data `number of users × 2 × 256 KiB` per working day.
+`number of entities × 5 × (2 + 8 + 1) KB`
+and run data `number of users × 2 × 256 KB` per working day.
 The disk budget is `(2 × D + WAL margin) / 0.7`, rounded up to a power of two.
 The minimum budget is 32 GB, covering the 20 GB volume from the demo installation.
 Dividing by 0.7 leaves 30% of free space.
@@ -394,7 +393,7 @@ the persisted data and the space for the snapshot, the AOF log and its rewrite.
 The sizing additionally adds one hour of writes at the peak rate of events and task completions.
 
 With `p` events and `q` task completions per second, the hourly write volume is
-`(p × 8 KiB + q × (16 + 64) KiB) × 3600`.
+`(p × 8 KB + q × (16 + 64) KB) × 3600`.
 The disk budget is `(3 × 1.3 × B + hourly write volume) / 0.7`,
 rounded up to a power of two, with a minimum of 16 GB, covering the 10 GB volume from the demo installation.
 For the 1000-user profile, the sizing gives about 79 GB and is rounded up to 128 GB.
@@ -417,7 +416,7 @@ A repeated synchronization of a value that has not changed does not count as a p
 By default, the history is kept for 180 days.
 The `clickhouse.propertyHistory.retentionDays` parameter sets the period.
 
-The profiles assume 5 property changes per entity per day and a record size of 1 KiB before compression.
+The profiles assume 5 property changes per entity per day and a record size of 1 KB before compression.
 The compression gain is not taken into account in the sizing.
 The disk budget includes 16 GB of base margin,
 the space for the history and its temporary copy during maintenance, and 30% of free space.
