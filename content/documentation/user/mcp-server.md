@@ -4,7 +4,7 @@ description: Connect external AI clients to Deckhouse Development Portal and use
 ---
 
 {{< alert level="warning" >}}
-Experimental feature
+The MCP server is a Preview feature. The set of tools and the API may change in future releases without backward compatibility.
 {{< /alert >}}
 
 The MCP server is a Deckhouse Development Portal (DDP, portal) component that implements the Model Context Protocol (MCP). It enables external AI clients, such as LM Studio and Claude Desktop, to interact with the portal.

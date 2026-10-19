@@ -3,10 +3,6 @@ title: AI assistant
 description: Configure AI providers, credentials, chats, context, and MCP tools for the AI assistant.
 ---
 
-{{< alert level="warning" >}}
-Experimental feature
-{{< /alert >}}
-
 The AI assistant is an intelligent helper built into Deckhouse Development Portal (DDP, portal). It answers questions about the portal, analyzes catalog data, and performs tasks using Model Context Protocol (MCP) tools.
 
 The AI assistant uses configurable AI providers to process requests. It supports various language models, including OpenAI GPT, Ollama, and any models available through a compatible REST API.
