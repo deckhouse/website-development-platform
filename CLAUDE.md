@@ -25,6 +25,8 @@ Write new pages and release notes only in Russian (`.ru.md`). Add the English ve
 
 - When you document a feature, also add it to the release notes of the latest version in `content/documentation/release-notes/`, unless the user says otherwise.
 - A release notes item is a short description of the change in one or two lines with a link to the detailed documentation page.
+- Keep release notes brief and selective: include only changes that matter to users — new features, changed behaviour that users must act on, fixes of noticeable problems.
+  Leave out interface details, minor fixes and anything already described on the documentation pages; one item per change, not per screen element.
 
 ## Repository notes
 
