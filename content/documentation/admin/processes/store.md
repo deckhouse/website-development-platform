@@ -109,8 +109,15 @@ For nested fields, the path matches the "Target" in the write rules:
 
 ```go-text-template
 {{ .store.notification.module_name }}
-{{ .store.items[0].id }}
 ```
+
+Read an array element with the `index` function:
+
+```go-text-template
+{{ (index .store.items 0).id }}
+```
+
+An index in square brackets, such as `items[0].id`, works only in write paths, for example in the "Target" field of write rules. In a Go template it fails the step with an error.
 
 Process launch parameters are available in a separate context:
 
