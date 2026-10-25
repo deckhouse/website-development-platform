@@ -113,15 +113,24 @@ MCP:
 - `read:mcp-tools` — просмотр пользовательских MCP-инструментов.
 - `edit:mcp-tools` — создание, редактирование и удаление пользовательских MCP-инструментов.
 
-AI-агенты:
-- `run:ai-agents` — работа с AI-ассистентом и виджетом «AI-чат», запуск платформенного агента.
-- `run:ai-agents-a2a` — запуск платформенного агента в шагах процессов без доступа к AI-ассистенту и виджету «AI-чат».
-- `read:ai-agents` — просмотр каталога AI-агентов и источников агентов.
-- `edit:ai-agents` — подключение, изменение и удаление внешних агентов и источников агентов, синхронизация источников.
-- `read:ai-agent-runs` — просмотр истории своих запусков агентов.
-- `cancel:ai-agent-runs` — остановка своих запусков агентов.
-- `read:ai-provider-templates` — просмотр шаблонов AI-провайдеров, включая отключённые.
-- `edit:ai-provider-templates` — создание, изменение и удаление шаблонов AI-провайдеров. Подробнее — [в документации по AI-агентам](../ai-agents/overview/#разрешения).
+AI-агенты и навыки:
+
+- `use:ai-agents` — использование доступных агентов в чате, виджете и процессе.
+- `read:ai-agents`, `edit:ai-agents` — просмотр и управление подключениями и источниками агентов.
+- `read:ai-agent-runs`, `cancel:ai-agent-runs` — просмотр и остановка своих запусков.
+- `read:ai-provider-templates`, `edit:ai-provider-templates`, `use:ai-provider-templates` — просмотр, управление и использование шаблонов AI-провайдеров.
+- `read:agent-skills`, `edit:agent-skills` — просмотр и управление навыками.
+- `read:agent-skill-sources`, `edit:agent-skill-sources` — просмотр и управление источниками навыков.
+- `read:ai-statistics` — общая статистика использования AI.
+
+Рабочие пространства:
+
+- `create:workspaces`, `read:workspaces` — создание и просмотр рабочих пространств.
+- `update:workspaces` — запуск, обновление и открытие IDE.
+- `cancel:workspaces`, `delete:workspaces` — остановка и удаление.
+- `create:workspace-templates`, `read:workspace-templates`, `edit:workspace-templates`, `use:workspace-templates` — создание, просмотр, изменение и использование шаблонов.
+- `read:workspace-template-sources`, `edit:workspace-template-sources` — просмотр и управление источниками шаблонов.
+- `read:workspace-policy`, `edit:workspace-policy` — просмотр и изменение лимитов установки.
 
 Внешние сервисы:
 
@@ -220,7 +229,7 @@ AI-агенты:
 
 - `view:admin-page` — доступ к разделу «Администрирование».
 - `view:self-service-page` — доступ к разделу «Самообслуживание».
-- `view:ai-page` — доступ к разделу «AI». Для работы с AI-ассистентом также требуется разрешение `run:ai-agents`.
+- `view:ai-page` — доступ к разделу «AI». Для работы с AI-ассистентом требуется доступ хотя бы к одному включённому агенту через `use:ai-agents`, `use:ai-agent` или владение при включённом `owner-is-admin`.
 
 {{< alert level="info" >}}
 Без соответствующих `view:` разрешений пользователь не сможет увидеть разделы в навигационном меню, даже если у него есть другие разрешения для работы с объектами в этих разделах.
@@ -267,23 +276,40 @@ AI-агенты:
 
 #### MCP-коллекции
 
-Для MCP-коллекций:
+Для MCP-коллекций действуют разрешения:
 
 - `use:mcp-collections` — вызов инструментов коллекции в AI-ассистенте и через MCP-сервер портала.
 - `edit:role-bindings` — редактирование привязок ролей для коллекции.
 
 #### Шаблоны AI-провайдеров
 
-Для шаблонов AI-провайдеров:
-
-- `use:ai-provider-templates` — использование шаблона с общим токеном: провайдер из шаблона появляется у пользователя без подключения.
-- `edit:role-bindings` — редактирование привязок ролей для шаблона.
+Для конкретного шаблона используются `read:ai-provider-template`, `edit:ai-provider-template`, `use:ai-provider-template` и `edit:role-bindings`. Глобальное `use:ai-provider-templates` разрешает использование шаблонов на уровне установки.
 
 #### AI-агенты
 
-Для AI-агентов:
+Для конкретного подключения используются `read:ai-agent`, `edit:ai-agent`, `use:ai-agent` и `edit:role-bindings`. Для источника — `read:ai-agent-source`, `edit:ai-agent-source` и `edit:role-bindings`.
 
-- `edit:role-bindings` — редактирование привязок ролей для агента.
+Использование агента не ограничено владельцем: выдайте `use:ai-agent` нужным пользователям или командам через привязку роли. Владение и участие в команде-владельце предоставляют права при включённой настройке `owner-is-admin`.
+
+#### Навыки агентов
+
+Для навыка используются `read:agent-skill`, `edit:agent-skill` и `edit:role-bindings`. Для источника навыков — `read:agent-skill-source`, `edit:agent-skill-source` и `edit:role-bindings`.
+
+Назначенный агенту навык не выдаёт дополнительных разрешений. Чтение навыка в запуске требует инструмента `get_skill`, доступного через MCP-коллекции агента и запускающего пользователя.
+
+#### Рабочие пространства и шаблоны
+
+Разрешения можно выдать на отдельный объект:
+
+| Объект | Разрешения |
+| --- | --- |
+| Рабочее пространство | `read:workspace`, `update:workspace`, `cancel:workspace`, `delete:workspace`, `edit:role-bindings` |
+| Шаблон | `read:workspace-template`, `edit:workspace-template`, `use:workspace-template`, `edit:role-bindings` |
+| Источник шаблонов | `read:workspace-template-source`, `edit:workspace-template-source`, `edit:role-bindings` |
+
+`update:workspace` разрешает запуск, обновление и открытие IDE, `cancel:workspace` — остановку. Повтор операции дополнительно проверяет право на её вид. Создание рабочего пространства всегда требует глобального `create:workspaces` и права использования выбранного шаблона.
+
+Прикрепление к чату и выполнение заданий процесса требуют пространства самого пользователя. Для процесса также необходима привязка к его сущности.
 
 Для других объектов (действия, автоматизации, процессы, вебхуки, виджеты, дашборды, внешние сервисы и т. д.):
 - `read:[object-type]` — просмотр объекта.
@@ -528,7 +554,7 @@ AI-агенты:
   - `read:datasources`, `read:entities`, `read:external-services`.
   - `read:processes`, `read:resource-relations`, `read:resources`.
   - `read:seeds`, `read:system-alerts`, `read:template-packs`, `read:trusted-certificates`, `read:webhooks`.
-  - `read:ai-provider-templates`.
+  - `read:ai-provider-templates`, `read:agent-skills`, `read:agent-skill-sources`.
   - `read:widgets`, `read:workflows`.
   - `read:mcp-collections`, `read:mcp-servers`, `read:mcp-tools`.
   - `read:audit-logs`, `view:admin-page`, `view:ai-page`, `view:self-service-page`.
@@ -544,7 +570,7 @@ AI-агенты:
   - `update:team-variables`.
 - Назначение: разработчики, которым нужен доступ к просмотру информации и выполнению действий, но не требуется доступ к созданию, изменению или удалению объектов. Разработчики видят только те сущности, к которым им предоставлен доступ через привязки ролей на уровне ресурсов или сущностей.
 
-Пресет «Developer» не содержит разрешений для AI-агентов. Чтобы разработчики работали с AI-ассистентом, добавьте в роль `run:ai-agents`.
+Пресет «Developer» также включает `view:ai-page`, `use:ai-agents`, просмотр агентов, шаблонов AI-провайдеров и MCP, просмотр и остановку своих запусков, чтение журнала MCP-вызовов, `create:workspaces`, `read:workspace-templates` и `use:workspace-templates`. Доступ к своим пространствам предоставляется владением при включённом `owner-is-admin`; глобальные права управления всеми пространствами в пресет не входят. Инструменты MCP и использование AI-провайдеров из шаблонов предоставляются отдельно.
 
 ##### Пресет «Platform engineer»
 
@@ -553,8 +579,11 @@ AI-агенты:
   - Каталог: все разрешения для ресурсов, связей ресурсов и сущностей, включая `update:resources-order`.
   - Страница «Самообслуживание»: `view:self-service-page` и все разрешения для действий, автоматизаций, дашбордов, источников данных, вебхуков, сценариев, процессов и виджетов, включая `run:actions`, `sync:datasources`, `control:processes`, `run:widget-actions`, `create:page-dashboards` и `delete:page-dashboards`.
   - `update:team-variables`.
-  - Страница «AI»: `view:ai-page`, разрешения на работу с AI-агентами, источниками агентов, историей запусков и шаблонами AI-провайдеров, а также `read:mcp-collections`, `edit:mcp-collections`, `read:mcp-servers`, `edit:mcp-servers`, `read:mcp-tools` и `edit:mcp-tools`.
-- Назначение: инженеры, которые настраивают портал (процессы, источники данных, дашборды и т. д.).
+  - Страница «AI»: права из «Developer», управление агентами, источниками агентов и шаблонами AI-провайдеров, использование шаблонов AI-провайдеров и MCP-коллекций, чтение и изменение MCP, навыков и их источников, общая статистика AI, просмотр, запуск, остановка, обновление и удаление рабочих пространств.
+
+Создание и редактирование шаблонов рабочих пространств, управление их источниками и лимитами установки предоставляются отдельно. Созданные ранее роли не обновляются при изменении пресета: проверьте их фактический состав.
+
+Пресет предназначен для инженеров, которые настраивают портал.
 
 #### Пресеты для процессов
 
