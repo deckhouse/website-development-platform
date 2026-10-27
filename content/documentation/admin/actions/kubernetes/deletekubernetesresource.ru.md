@@ -4,12 +4,14 @@ weight: 30
 ---
 
 {{< alert level="info" >}}
-Для выполнения действий необходимо наличие токена сервисного аккаунта Kubernetes.
+Для выполнения действий требуется токен сервисного аккаунта Kubernetes.
 {{< /alert >}}
 
 DeleteKubernetesResource — удаляет существующий ресурс в кластере Kubernetes.
 
-### Пример запроса
+## Пример запроса
+
+Пример тела запроса действия:
 
 ```yaml
 group: apps
@@ -20,17 +22,20 @@ namespace: example
 ignore_not_found: true
 ```
 
-### Спецификация запроса
+## Спецификация запроса
+
+Тело запроса действия поддерживает следующие параметры:
 
 | Название                    | Обязательность    | Описание                                                                       | Возможные значения                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | --------------------------- | ----------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| group                       | Да                | API-группа ресурса. Указывает, к какой группе API относится удаляемый объект   | [Определение требуемых Group и Version](getkubernetesresource/#определение-требуемых-group-и-version)                                                                                                                                                                                                                                                                                                                                     |
-| version                     | Да                | Версия API ресурса                                                             | [Определение требуемых Group и Version](getkubernetesresource/#определение-требуемых-group-и-version)                                                                                                                                                                                                                                                                                                                                     |
-| resource_type               | Да                | Тип удаляемого ресурса                                                         | pods, services, deployments, statefulsets, daemonsets, replicasets, jobs, cronjobs, nodes, namespaces, configmaps, secrets, persistentvolumes, persistentvolumeclaims, limitranges, resourcequotas, horizontalpodautoscalers, ingresses, networkpolicies, serviceaccounts, roles, clusterroles, rolebindings, clusterrolebindings, podsecuritypolicies, storageclasses, volumeattachments, events, endpoints, customresourcedefinitions   |
-| resource_name               | Да                | Название конкретного ресурса, который необходимо удалить                       | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| namespace                   | Да                | Неймспейс, в котором находится ресурс                                          | -                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ignore_not_found            | Нет               | При значении `true` удаление объекта, которого нет в кластере, завершается успешно. По умолчанию `false`: удаление отсутствующего объекта завершается ошибкой | `true`, `false` |
+| `group`                     | Да                | API-группа ресурса. Указывает, к какой группе API относится удаляемый объект   | [Определение требуемых Group и Version](getkubernetesresource/#определение-требуемых-group-и-version)                                                                                                                                                                                                                                                                                                                                     |
+| `version`                   | Да                | Версия API ресурса                                                             | [Определение требуемых Group и Version](getkubernetesresource/#определение-требуемых-group-и-version)                                                                                                                                                                                                                                                                                                                                     |
+| `resource_type`             | Да                | Тип удаляемого ресурса                                                         | `pods`, `services`, `deployments`, `statefulsets`, `daemonsets`, `replicasets`, `jobs`, `cronjobs`, `nodes`, `namespaces`, `configmaps`, `secrets`, `persistentvolumes`, `persistentvolumeclaims`, `limitranges`, `resourcequotas`, `horizontalpodautoscalers`, `ingresses`, `networkpolicies`, `serviceaccounts`, `roles`, `clusterroles`, `rolebindings`, `clusterrolebindings`, `podsecuritypolicies`, `storageclasses`, `volumeattachments`, `events`, `endpoints`, `customresourcedefinitions` |
+| `resource_name`             | Да                | Название конкретного ресурса, который необходимо удалить                       | —                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `namespace`                 | Да                | Неймспейс, в котором находится ресурс                                          | —                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `ignore_not_found`          | Нет               | При значении `true` удаление объекта, которого нет в кластере, завершается успешно. По умолчанию `false`: удаление отсутствующего объекта завершается ошибкой | `true`, `false` |
 
-### Примечание
+## Особенности работы
 
-Параметр `ignore_not_found` не подавляет другие ошибки API Kubernetes. Используйте его в процессах удаления, которые могут запускаться повторно.
+Параметр `ignore_not_found` не подавляет другие ошибки API Kubernetes.
+Используйте его в процессах удаления, которые могут запускаться повторно.

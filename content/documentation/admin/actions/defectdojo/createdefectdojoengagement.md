@@ -9,7 +9,9 @@ This action requires an API v2 key for the user on whose behalf it will run.
 
 CreateDefectdojoEngagement — creates a new engagement in DefectDojo. The action uses the DefectDojo API v2.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 name: example engagement
@@ -19,6 +21,7 @@ target_end: '2024-06-30'
 lead: '1'
 ```
 
-### Request specification
+## Request specification
 
-The fields correspond to the official DefectDojo API endpoint `/api/v2/engagements`. For details, see the [DefectDojo documentation](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).
+The fields correspond to the official DefectDojo API endpoint `/api/v2/engagements`.
+For details, see the [DefectDojo documentation](https://demo.defectdojo.org/api/v2/oa3/swagger-ui/).

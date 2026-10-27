@@ -9,6 +9,8 @@ and create merge requests with the changes.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
 | URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
@@ -21,11 +23,15 @@ and a diff view of the original and edited configuration.
 
 ## Additional widget features
 
+In addition to displaying data, the widget supports the actions described below.
+
 ### Creating a merge request
 
 The widget lets you create a merge request containing pipeline configuration changes.
 
 #### Merge request parameters
+
+When creating a merge request, specify the following parameters:
 
 | Name            | Required | Description                                           | Default value |
 | --------------- | -------- | ----------------------------------------------------- | ------------- |
@@ -37,10 +43,12 @@ The widget lets you create a merge request containing pipeline configuration cha
 
 ### Limitations
 
+The widget has the following limitations:
+
 - The widget supports only the `.gitlab-ci.yml` file in the project root.
 - Creating a merge request requires write access to the repository.
 - The maximum configuration file size is limited by the GitLab API.
 
-## Authentication
+## Authorization
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

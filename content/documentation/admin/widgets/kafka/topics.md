@@ -17,6 +17,8 @@ The following information and actions are available for each topic:
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name                    | Required | Description                                                                                                                                                                  | Default value |
 | ----------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | URL                     | Yes      | Kafka cluster URL                                                                                                                                                            | —             |
@@ -36,21 +38,22 @@ When **Enable widget actions** is on, the widget allows users to:
 * Send a message to a topic.
 * Remove all messages from a topic.
 
-## Authentication
+## Authorization
 
-The widget connects to Kafka with the account set in the **User** and **Password** fields. These fields are needed for the `SASL_PLAINTEXT` and `SASL_SSL` protocols.
+The widget connects to Kafka with the account set in the **User** and **Password** fields.
+These fields are needed for the `SASL_PLAINTEXT` and `SASL_SSL` protocols.
 
 The following authentication protocols are supported:
 
-* `PLAINTEXT`;
-* `SASL_PLAINTEXT`;
-* `SASL_SSL`.
+* `PLAINTEXT`
+* `SASL_PLAINTEXT`
+* `SASL_SSL`
 
 The following SASL mechanisms are supported for the `SASL_PLAINTEXT` and `SASL_SSL` protocols:
 
-* `PLAIN`;
-* `SCRAM-SHA-256`;
-* `SCRAM-SHA-512`.
+* `PLAIN`
+* `SCRAM-SHA-256`
+* `SCRAM-SHA-512`
 
 {{< alert level="info" >}}
 The connected account's permissions determine which information is available in the widget.

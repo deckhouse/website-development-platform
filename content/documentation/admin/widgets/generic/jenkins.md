@@ -8,7 +8,9 @@ The widget displays Jenkins pipeline data and lets you manage builds.
 
 ## Configuration
 
-| Name | Required | Description                                                                          | Default |
+When adding the widget, specify the following parameters:
+
+| Name | Required | Description                                                                          | Default value |
 | ---- | -------- | ------------------------------------------------------------------------------------ | ------- |
 | URL  | Yes      | Jenkins URL used to retrieve data                                                    | —       |
 | Name | Yes      | Jenkins pipeline name. Nested paths are supported: `folder1/folder2/jobName`        | —       |
@@ -21,17 +23,15 @@ The widget automatically detects the pipeline type and displays the appropriate 
 
 For regular pipelines, the widget displays:
 
-* **Build list** — A table of all pipeline builds with their number, status, duration, execution time, and user.
-* **Latest build** — Information about the latest completed build.
-* **Latest successful build** — Information about the latest successful build.
-* **Latest failed build** — Information about the latest failed build.
+* **Build list**: A table of all pipeline builds with their number, status, duration, execution time, and user.
+* **Latest build**: Information about the latest completed build.
+* **Latest successful build**: Information about the latest successful build.
+* **Latest failed build**: Information about the latest failed build.
 
 ### Multibranch pipelines
 
-For multibranch pipelines, the widget displays:
-
-* **Branch list** — A table of all branches with their status, build count, and latest build.
-* All information described for regular pipelines, grouped by branch.
+For multibranch pipelines, the widget displays the **Branch list** table with the status, build count, and latest build of each branch.
+It also displays all information described for regular pipelines, grouped by branch.
 
 ## Additional widget features
 
@@ -39,21 +39,26 @@ The widget supports the following actions.
 
 ### Regular pipelines
 
-* **Start build** — Starts a new build. If the build has parameters, the widget opens a dialog for entering:
+For regular pipelines, the following actions are available:
+
+* **Start build**: Starts a new build. If the build has parameters, the widget opens a dialog for entering:
   * String parameters.
   * Passwords.
   * List selections.
   * Boolean values.
-* **Cancel build** — Cancels a running build.
-* **Rebuild** — Runs the latest build again.
-* **View logs** — Displays build execution logs.
+* **Cancel build**: Cancels a running build.
+* **Rebuild**: Runs the latest build again.
+* **View logs**: Displays build execution logs.
 
 ### Multibranch pipelines
 
-* **Start branch build** — Starts a new build for a specific branch. If the build has parameters, the widget opens a dialog for entering them.
-* **Get branch builds** — Loads the build list for a specific branch.
-* **Scan multibranch** — Starts a multibranch pipeline scan to discover new branches.
-* **View logs** — Displays build execution logs.
+For multibranch pipelines, the following actions are available:
+
+* **Start branch build**: Starts a new build for a specific branch.
+  If the build has parameters, the widget opens a dialog for entering them.
+* **Get branch builds**: Loads the build list for a specific branch.
+* **Scan multibranch**: Starts a multibranch pipeline scan to discover new branches.
+* **View logs**: Displays build execution logs.
 
 ## Authorization
 

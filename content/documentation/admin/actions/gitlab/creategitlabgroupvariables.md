@@ -9,7 +9,9 @@ This action requires a token for the user on whose behalf it will run.
 
 CreateGitlabGroupVariables — creates group-level variables in GitLab.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 group_id: '0'
@@ -18,17 +20,22 @@ variables:
     value: value
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name              | Required | Description                                                                     |
 | ----------------- | -------- | ---------------------------------------------------------------------------------- |
-| group_id          | Yes      | Identifier of the group in which to create the variables                            |
-| variables         | Yes      | List of variables to create                                                         |
+| `group_id`        | Yes      | Identifier of the group in which to create the variables                            |
+| `variables`       | Yes      | List of variables to create                                                         |
 
-The fields for each variable correspond to the official GitLab group-level variables API, `/groups/:id/variables`. For details, see the [GitLab documentation](https://docs.gitlab.com/api/group_level_variables/#create-variable).
+The fields for each variable correspond to the official GitLab group-level variables API, `/groups/:id/variables`.
+For details, see the [GitLab documentation](https://docs.gitlab.com/api/group_level_variables/#create-variable).
 
-The action creates the variables one by one. If GitLab does not create some of the variables, the action creates the remaining ones, and the run ends with the `Warning` status. The GitLab response for each failed variable is written to the run log.
+The action creates the variables one by one.
+If GitLab does not create some of the variables, the action creates the remaining ones, and the run ends with the `Warning` status.
+The GitLab response for each failed variable is written to the run log.
 
-### Note
+## GitLab API request
 
 The action performs a POST request to the URL: `/api/v4/groups/:id/variables`.

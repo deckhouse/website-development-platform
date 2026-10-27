@@ -9,6 +9,8 @@ Use the `{{from}}` and `{{to}}` placeholders in the query.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name          | Required | Description                                                                                       | Default value |
 | ------------- | -------- | ------------------------------------------------------------------------------------------------- | ------------- |
 | Query         | Yes      | Read-only SQL query. Use `{{from}}` and `{{to}}` to specify the time range. The widget substitutes them with the interval boundaries in UTC in the `YYYY-MM-DD hh:mm:ss` format without quotes | —             |

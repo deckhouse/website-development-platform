@@ -35,10 +35,12 @@ Deckhouse Development Portal (DDP) поддерживает следующие H
 1. `Strict-Transport-Security` (HSTS)
    - Принудительное использование HTTPS.
    - Значение: `max-age=31536000; includeSubDomains; preload`.
-   - DDP Backend добавляет заголовок, только если TLS-соединение завершается на самом DDP Backend. DDP Frontend этот заголовок не добавляет.
+   - DDP Backend добавляет заголовок, только если TLS-соединение завершается на самом DDP Backend.
+     DDP Frontend этот заголовок не добавляет.
 
 {{< alert level="info" >}}
-При стандартной установке TLS-соединение завершается на Ingress-контроллере, поэтому DDP не добавляет заголовок `Strict-Transport-Security`. Чтобы включить HSTS, настройте его на Ingress-контроллере, например в параметре [`hsts`](/modules/ingress-nginx/cr.html#ingressnginxcontroller-v1-spec-hsts) IngressNginxController.
+При стандартной установке TLS-соединение завершается на Ingress-контроллере, поэтому DDP не добавляет заголовок `Strict-Transport-Security`.
+Чтобы включить HSTS, настройте его на Ingress-контроллере, например в параметре [`hsts`](/modules/ingress-nginx/cr.html#ingressnginxcontroller-v1-spec-hsts) IngressNginxController.
 {{< /alert >}}
 
 ## Конфигурация
@@ -70,15 +72,17 @@ spec:
         xFrameOptions: "SAMEORIGIN"
 ```
 
-Параметр `enabled` включает или отключает все заголовки безопасности. При значении `true` заголовки добавляются к HTTP-ответам, при значении `false` заголовки не добавляются.
+Параметр `enabled` включает или отключает все заголовки безопасности.
+При значении `true` заголовки добавляются к HTTP-ответам, при значении `false` заголовки не добавляются.
 
 ## Применение
 
-- DDP Frontend: заголовки добавляются на уровне веб-сервера для раздачи статических файлов и HTML-страниц.
-- DDP Backend: заголовки добавляются через middleware для всех ответов API.
+DDP Frontend добавляет заголовки на уровне веб-сервера для раздачи статических файлов и HTML-страниц.
+DDP Backend добавляет заголовки через middleware для всех ответов API.
 
 {{< alert level="info" >}}
-Все заголовки безопасности включены по умолчанию (`enabled: true`). При необходимости их можно отключить или настроить в параметре модуля `security.headers`.
+Все заголовки безопасности включены по умолчанию (`enabled: true`).
+При необходимости их можно отключить или настроить в параметре модуля `security.headers`.
 {{< /alert >}}
 
 ## Content Security Policy
@@ -128,12 +132,16 @@ upgrade-insecure-requests
 
 Параметры `security.headers.csp` изменяют политику следующим образом:
 
-- `allowExternalImages: true` — разрешает изображения из любых источников: в политике DDP Frontend директива `img-src` принимает значение `'self' data: *`, в политике DDP Backend — `*`. Используется, например, для иконок объектов DDP из внешних источников.
-- `allowIframe: true` — задаёт значение `*` для директив `frame-src` и `frame-ancestors` в обеих политиках. Используется, например, для iframe-виджетов.
+- `allowExternalImages: true` — разрешает изображения из любых источников: в политике DDP Frontend директива `img-src` принимает значение `'self' data: *`, в политике DDP Backend — `*`.
+  Используется, например, для иконок объектов DDP из внешних источников.
+- `allowIframe: true` — задаёт значение `*` для директив `frame-src` и `frame-ancestors` в обеих политиках.
+  Используется, например, для iframe-виджетов.
 - `additionalSources` — добавляет перечисленные источники к директивам `img-src`, `connect-src`, `frame-src` и `frame-ancestors` в обеих политиках.
 
 {{< alert level="warning" >}}
-При `allowIframe: true` портал можно встроить в iframe на любом сайте, а в iframe-виджетах портала можно открыть любой сайт. Заголовок `X-Frame-Options` при этом по-прежнему отправляется, но современные браузеры при наличии директивы `frame-ancestors` его не учитывают. Это снижает защиту от clickjacking-атак.
+При `allowIframe: true` портал можно встроить в iframe на любом сайте, а в iframe-виджетах портала можно открыть любой сайт.
+Заголовок `X-Frame-Options` при этом по-прежнему отправляется, но современные браузеры при наличии директивы `frame-ancestors` его не учитывают.
+Это снижает защиту от clickjacking-атак.
 
 Чтобы разрешить только доверенные сайты, оставьте `allowIframe: false` и перечислите их в параметре `additionalSources`.
 {{< /alert >}}

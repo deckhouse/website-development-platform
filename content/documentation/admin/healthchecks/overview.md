@@ -3,10 +3,8 @@ title: Overview
 weight: 10
 ---
 
-For each resource, you can configure any number of rules that determine the status of its entities. The `Condition` field determines whether:
-
-- all rules must pass (`AllOf`);
-- at least one rule must pass (`AnyOf`).
+For each resource, you can configure any number of rules that determine the status of its entities.
+The `Condition` field determines whether all rules must pass (`AllOf`) or at least one rule must pass (`AnyOf`).
 
 {{< alert level="info" >}}
 If at least one check returns an error, the entity status is set to `error`, regardless of the other check results and the condition.
@@ -14,7 +12,11 @@ If at least one check returns an error, the entity status is set to `error`, reg
 
 ## Schedule
 
-The check scheduler runs every minute. For each rule, you can specify a five-field cron expression in the "Schedule" field. The rule then runs only at the specified times. The schedule is evaluated in UTC. If the field is empty, the rule runs every time the scheduler starts (once a minute).
+The check scheduler runs every minute.
+For each rule, you can specify a five-field cron expression in the "Schedule" field.
+The rule then runs only at the specified times.
+The schedule is evaluated in UTC.
+If the field is empty, the rule runs every time the scheduler starts (once a minute).
 
 Example: `0 * * * *` runs the check at the beginning of every hour.
 
@@ -26,12 +28,13 @@ Logs for the latest checks are available under "Health checks" in the resource m
 
 An entity can have one of four statuses:
 
-- `healthy` — rules are configured, and the entity parameters satisfy them;
-- `unhealthy` — rules are configured, but the entity parameters do not satisfy them;
-- `unknown` — no rules are configured, or the check cannot run;
-- `error` — an error occurred while at least one rule was running.
+- `healthy`: Rules are configured, and the entity properties satisfy them.
+- `unhealthy`: Rules are configured, but the entity properties do not satisfy them.
+- `unknown`: No rules are configured, or the check cannot run.
+- `error`: An error occurred while at least one rule was running.
 
-Click an entity status badge to open a table with rule results and additional information. The table shows only rules that have run at least once.
+Click an entity status badge to open a table with rule results and additional information.
+The table shows only rules that have run at least once.
 
 {{< alert level="info" >}}
 The `ENTITY_UPDATED` event is generated only when the entity status changes.

@@ -8,7 +8,9 @@ The widget displays a list of artifacts in a Nexus repository.
 
 ## Configuration
 
-| Name       | Required | Description                                                                           | Default |
+When adding the widget, specify the following parameters:
+
+| Name       | Required | Description                                                                           | Default value |
 | ---------- | -------- | ------------------------------------------------------------------------------------- | ------- |
 | URL        | Yes      | Nexus API URL used to retrieve data                                                   | —       |
 | Repository | Yes      | Name of the repository whose data is displayed in the widget. Example: `my-repo`     | —       |

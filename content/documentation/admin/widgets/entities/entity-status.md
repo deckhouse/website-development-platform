@@ -6,6 +6,13 @@ weight: 50
 
 The widget displays the entity status and status check results.
 
+## Configuration
+
+The widget requires no additional configuration.
+
+To use the widget, configure status checks for the resource associated with the entity.
+For details, refer to [status check configuration](../../healthchecks/overview/).
+
 ## Displayed data
 
 The widget displays the following information.
@@ -19,21 +26,21 @@ The **successful check count** shows the number of successful checks out of all 
 
 The following information is displayed for each status check:
 
-- **Check name** — the name of the check rule.
-- **Status** — the check result:
-  - **Passed** — the check completed successfully.
-  - **Failed** — the check did not pass, but no execution error occurred.
-  - **Error** — an error occurred while running the check.
-- **Last check time** — the date and time when the check last ran.
-- **Error message** — the error text, displayed if the check ended with an error.
+- **Check name**: The name of the check rule.
+- **Status**: The check result:
+  - **Passed**: The check completed successfully.
+  - **Failed**: The check did not pass, but no execution error occurred.
+  - **Error**: An error occurred while running the check.
+- **Last check time**: The date and time when the check last ran.
+- **Error message**: The error text, displayed if the check ended with an error.
 
 ### Statistics
 
 The bottom of the widget displays summary check statistics:
 
-- **Passed** — the number of successful checks.
-- **Failed** — the number of checks that did not pass without execution errors.
-- **Error** — the number of checks that ended with an error.
+- **Passed**: The number of successful checks.
+- **Failed**: The number of checks that did not pass without execution errors.
+- **Error**: The number of checks that ended with an error.
 
 ### Blocked actions
 
@@ -46,13 +53,6 @@ Display conditions:
 - The entity's current status must not be in the action's list of allowed statuses.
 
 The widget displays the action name and description, if specified.
-
-## Configuration
-
-The widget requires no additional configuration.
-
-To use the widget, configure status checks for the resource associated with the entity.
-For details, refer to [status check configuration](../../healthchecks/overview/).
 
 ## Notes
 

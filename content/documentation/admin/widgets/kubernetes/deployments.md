@@ -10,11 +10,19 @@ You can filter Deployments by namespace, label selector, or both.
 The following actions are available for each Deployment:
 
 - View the Deployment specification and status.
-- Scale the number of Deployment replicas. After selecting the required number of replicas, apply the change by clicking the floppy-disk **Save** button.
+- Scale the number of Deployment replicas.
+  After selecting the required number of replicas, apply the change by clicking the floppy-disk **Save** button.
 - View information about pods managed by the Deployment and their containers, including logs for each container.
-- View and edit container resources. The widget displays all configured container resources, including CPU, memory, `ephemeral-storage`, and other resource types. You can edit only CPU and memory in the `requests` and `limits` sections. Changes are applied at the Deployment level and propagated to all pods managed by that Deployment. Clearing a CPU or memory value removes the corresponding resource from the container configuration. Other resources, such as `ephemeral-storage`, are displayed but cannot be edited in the widget.
+- View and edit container resources.
+  The widget displays all configured container resources, including CPU, memory, `ephemeral-storage`, and other resource types.
+  You can edit only CPU and memory in the `requests` and `limits` sections.
+  Changes are applied at the Deployment level and propagated to all pods managed by that Deployment.
+  Clearing a CPU or memory value removes the corresponding resource from the container configuration.
+  Other resources, such as `ephemeral-storage`, are displayed but cannot be edited in the widget.
 
 ## Configuration
+
+When adding the widget, specify the following parameters:
 
 | Name           | Required | Description                                                                                                                                                      | Default value |
 | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

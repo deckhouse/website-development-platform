@@ -8,7 +8,9 @@ The widget displays entities created in Deckhouse Development Portal (DDP) as a 
 
 ## Configuration
 
-| Name         | Required | Description                                                                                                   | Default |
+When adding the widget, specify the following parameters:
+
+| Name         | Required | Description                                                                                                   | Default value |
 |--------------|----------|---------------------------------------------------------------------------------------------------------------|---------|
 | Resource     | Yes      | Resource whose entities are displayed in the table                                                           | —       |
 | Show actions | No       | Whether to display entity actions, such as running actions and scenarios or deleting entities                 | `false` |

@@ -4,13 +4,16 @@ weight: 10
 ---
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
+Running this action requires a token: the `admin:password` string encoded in Base64.
+The token is used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
-`CreateNexusRepository` — creates a new repository of any supported type (maven, docker, npm, etc.) in Nexus Repository Manager 3 using the REST API.
+`CreateNexusRepository` — creates a new repository of any supported type, for example, `maven`, `docker`, or `npm`, in Nexus Repository Manager 3 using the REST API.
 The format, type, and other key settings are fully configurable and correspond to the Nexus API.
 
-### Request example (Maven hosted)
+## Request example (Maven hosted)
+
+Example of the action request body:
 
 ```yaml
 description: |
@@ -31,7 +34,9 @@ maven:
   layoutPolicy: PERMISSIVE
 ```
 
-### Request example (Docker group)
+## Request example (Docker group)
+
+Example of the action request body:
 
 ```yaml
 description: |
@@ -53,27 +58,31 @@ docker:
   httpPort: 5001
 ```
 
-### Request specification
+## Request specification
 
-| Field         | Required     | Description                                                                                            | Example                                    |
+The action request body supports the following parameters:
+
+| Name          | Required     | Description                                                                                            | Example                                    |
 | ------------- | ------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| description   | No           | Description of the action or repository's purpose. Used only in the UI, not by Nexus itself                  | -                                          |
-| name          | Yes          | Name of the repository to create. Must be unique within Nexus                                               | my-maven-repo                              |
-| format        | Yes          | Format (`maven`, `docker`, `npm`, `raw`, etc.)                                                              | maven                                      |
-| type          | Yes          | Type: `hosted`, `proxy`, or `group`                                                                        | hosted                                     |
-| online        | Yes          | Whether the repository is available (`true`/`false`)                                                       | true                                       |
-| storage       | Yes          | Storage object: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                               | [Maven hosted example](#request-example-maven-hosted) |
-| cleanup       | No           | Linked cleanup policies (`policyNames`)                                                                     | policyNames: [maven-cleanup]               |
-| maven         | For maven    | Maven-only: `versionPolicy`, `layoutPolicy`                                                                 | [Maven hosted example](#request-example-maven-hosted) |
-| proxy         | For proxy    | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                            | -                                          |
-| group         | For group    | List of `memberNames` values                                                                                | [Docker group example](#request-example-docker-group) |
-| docker        | For docker   | Docker-specific parameters: `httpPort`, `v1Enabled`, `forceBasicAuth`                                       | [Docker group example](#request-example-docker-group) |
-| component     | No           | Component settings passed to the Nexus API as is. Specify them only if the Nexus API requires them for the repository format | -                                          |
-| attributes    | No           | Any custom fields                                                                                            | -                                          |
+| `description` | No           | Description of the action or repository's purpose. Used only in the UI, not by Nexus itself                  | —                                          |
+| `name`        | Yes          | Name of the repository to create. Must be unique within Nexus                                               | `my-maven-repo`                            |
+| `format`      | Yes          | Format, for example, `maven`, `docker`, `npm`, or `raw`                                                              | `maven`                                    |
+| `type`        | Yes          | Type: `hosted`, `proxy`, or `group`                                                                        | `hosted`                                   |
+| `online`      | Yes          | Whether the repository is available (`true`/`false`)                                                       | `true`                                     |
+| `storage`     | Yes          | Storage object: `blobStoreName`, `strictContentTypeValidation`, `writePolicy`                               | [Maven hosted example](#request-example-maven-hosted) |
+| `cleanup`     | No           | Linked cleanup policies (`policyNames`)                                                                     | `policyNames: [maven-cleanup]`             |
+| `maven`       | For maven    | Maven-only: `versionPolicy`, `layoutPolicy`                                                                 | [Maven hosted example](#request-example-maven-hosted) |
+| `proxy`       | For proxy    | Proxy repository: `remoteUrl`, `contentMaxAge`, `metadataMaxAge`                                            | —                                          |
+| `group`       | For group    | List of `memberNames` values                                                                                | [Docker group example](#request-example-docker-group) |
+| `docker`      | For docker   | Docker-specific parameters: `httpPort`, `v1Enabled`, `forceBasicAuth`                                       | [Docker group example](#request-example-docker-group) |
+| `component`   | No           | Component settings passed to the Nexus API as is. Specify them only if the Nexus API requires them for the repository format | —                                          |
+| `attributes`  | No           | Any custom fields                                                                                            | —                                          |
 
-### Requirements
+## Requirements
 
-- Use only the blocks (`maven`, `group`, `proxy`, `docker`, etc.) supported by the selected type and format.
+When preparing the request, follow these requirements:
+
+- Use only the blocks supported by the selected type and format, for example, `maven`, `group`, `proxy`, or `docker`.
 - For Maven hosted repositories, `maven: {versionPolicy, layoutPolicy}` is required.
 - For group repositories, `group.memberNames` is required.
 - For proxy repositories, `proxy.remoteUrl` is required.

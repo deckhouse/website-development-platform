@@ -9,7 +9,9 @@ This action requires a Kubernetes service account token.
 
 GetKubernetesResource — retrieves a resource from a Kubernetes cluster.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 group: managed-services.deckhouse.io
@@ -20,27 +22,31 @@ namespace: default
 ignore_not_found: true
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name                        | Required | Description                                                                        | Possible values                                                                  |
 | --------------------------- | -------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| group                       | Yes      | API group of the resource. Specifies the API group to which the requested object belongs | [Determining the required Group and Version](#determining-the-required-group-and-version) |
-| version                     | Yes      | API version of the resource                                                           | [Determining the required Group and Version](#determining-the-required-group-and-version) |
-| resource_type               | Yes      | Type of resource to retrieve                                                           | -                                                                                 |
-| resource_name               | Yes      | Name of the resource to retrieve                                                       | -                                                                                 |
-| namespace                   | Yes      | Namespace containing the resource                                                     | -                                                                                 |
-| ignore_not_found            | No       | If `true`, a missing object is not treated as an error. Defaults to `false`         | `true`, `false` |
+| `group`                     | Yes      | API group of the resource. Specifies the API group to which the requested object belongs | [Determining the required group and version](#determining-the-required-group-and-version) |
+| `version`                   | Yes      | API version of the resource                                                           | [Determining the required group and version](#determining-the-required-group-and-version) |
+| `resource_type`             | Yes      | Type of resource to retrieve                                                           | —                                                                                 |
+| `resource_name`             | Yes      | Name of the resource to retrieve                                                       | —                                                                                 |
+| `namespace`                 | Yes      | Namespace containing the resource                                                     | —                                                                                 |
+| `ignore_not_found`          | No       | If `true`, a missing object is not treated as an error. Defaults to `false`         | `true`, `false` |
 
-### Response
+## Response
 
-On success, the action returns the `found` flag and the object in the `resource` field. If the object is not found and `ignore_not_found` is not enabled, the action fails with an error. With `ignore_not_found: true`, the action succeeds with `found: false` and without the `resource` field.
+On success, the action returns the `found` flag and the object in the `resource` field.
+If the object is not found and `ignore_not_found` is not enabled, the action fails with an error.
+With `ignore_not_found: true`, the action succeeds with `found: false` and without the `resource` field.
 
 | Name         | Description                                      |
 | ------------ | --------------------------------------------------- |
 | `found`      | `true` if the object is found                     |
 | `resource`   | Resource object in Kubernetes format              |
 
-### Determining the required Group and Version
+## Determining the required group and version
 
 Each resource type has its own API group (Group) and version (Version).
 A complete list of API resources, groups, and versions is available [in the Kubernetes documentation](https://kubernetes.io/docs/reference/kubernetes-api/).
@@ -48,7 +54,7 @@ A complete list of API resources, groups, and versions is available [in the Kube
 If you do not know which API groups and versions are required, you can look up the current values.
 There are several ways to determine them:
 
-#### Using the `d8 k` utility
+### Using the d8 k utility
 
 The `d8 k explain` command shows the `apiVersion` for a resource.
 
@@ -72,7 +78,9 @@ FIELDS:
 ...
 ```
 
-#### Using the documentation
+### Using the documentation
+
+To find the API group and version in the Kubernetes documentation, follow these steps:
 
 1. Find the resource you need (for example, Deployment).
 1. Find the API group and version in the header. For example, for Deployment:
@@ -82,5 +90,5 @@ FIELDS:
    ```
 
    Here:
-    * `API Group` is `apps`;
-    * `Version` is `v1`.
+    * `API Group` is `apps`
+    * `Version` is `v1`

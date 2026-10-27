@@ -4,9 +4,12 @@ description: Configuration and usage of the language-model chat widget
 weight: 10
 ---
 
-The AI chat widget sends requests to a language model through the selected AI provider. You can configure general instructions (the Global prompt) and a set of quick-question buttons (Quick questions).
+The AI chat widget sends requests to a language model through the selected AI provider.
+You can configure general instructions (the Global prompt) and a set of quick-question buttons (Quick questions).
 
 ## Configuration
+
+When adding the widget, specify the following parameters:
 
 | Name            | Required | Description                                                                                                                           |
 | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,9 +36,7 @@ Example prompt for a quick question:
 
 To use the widget, add at least one [AI provider](../../../../user/ai-assistant/#connecting-an-ai-provider).
 
-The chat does not retain history:
-
-- It displays only one response to the most recent question.
-- The response is not retained when the user navigates to another page or refreshes the page.
+The chat does not retain history.
+It displays only one response to the most recent question, and the response is not retained when the user navigates to another page or refreshes the page.
 
 Before sending a question, the user can customize the prompt by selecting **Send with customization** from the question button menu.

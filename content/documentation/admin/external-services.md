@@ -13,7 +13,7 @@ Configure external services under "Administration" → "External services".
 
 An external service has the following parameters:
 
-| Parameter | Description |
+| Name      | Description |
 |-----------|-------------|
 | "Name" | External service name displayed in the interface |
 | "Identifier" | Unique human-readable identifier (slug) |
@@ -23,52 +23,65 @@ An external service has the following parameters:
 | "Credentials" | Available credentials, such as tokens, that can be included in requests |
 | "Headers" | HTTP headers automatically added to requests |
 | "Disable SSL verification" | Disables verification of the external service's SSL certificate, for example when using self-signed certificates. Instead, add the required certificates to [trusted certificates](../trusted-certificates/) |
-| "System Account" | Account used for scheduled jobs such as data source synchronization and status checks |
+| "System Account" | Account used for scheduled jobs such as datasource synchronization and status checks |
 
 ## Using external services
 
-External services can be connected to the following DDP (portal) objects:
+External services can be connected to the following Deckhouse Development Portal (DDP, portal) objects:
 
-- actions;
-- widgets;
-- data sources;
-- entity status checks.
+- Actions
+- Widgets
+- Datasources
+- Entity status checks
 
 Connect a service on the "Authorization" tab in the settings of the corresponding object.
 
-Each object can explicitly override parameters configured for the external service. For example, if an external service contains an authentication token but an action requires different credentials, specify alternative values. Only the specified parameter is overridden; all other values come from the external service configuration.
+Each object can explicitly override parameters configured for the external service.
+For example, if an external service contains an authentication token but an action requires different credentials, specify alternative values.
+Only the specified parameter is overridden; all other values come from the external service configuration.
 
 ## Object-specific behavior
 
+The behavior of external services depends on the object they are connected to.
+
 ### Actions
+
+External services are connected to actions as follows:
 
 - Multiple external services can be connected to one action.
 - One service can be selected as the default.
 - The "System Account" parameter is not used for actions.
-- When running an action, you can select the external service to use. If you do not select a service, the default service is used. If no default is configured, the first external service in the list is used.
+- When running an action, you can select the external service to use.
+  If you do not select a service, the default service is used.
+  If no default is configured, the first external service in the list is used.
 
 ### Widgets
+
+External services are connected to widgets as follows:
 
 - Multiple external services can be connected to one widget.
 - One service can be selected as the default.
 - The "System Account" parameter is not used for widgets.
 
-### Data sources
+### Datasources
 
-- Only one external service can be connected.
-- If the service has a system account, it is used by default during synchronization.
+Only one external service can be connected to a datasource.
+If the service has a system account, it is used by default during synchronization.
 
 ### Status checks
 
-- One external service can be assigned to a status check.
-- If the service has a system account, it is used for automatic checks.
+One external service can be assigned to a status check.
+If the service has a system account, it is used for automatic checks.
 
 ## Authorization headers for external services
 
-When configuring an external service, specify the HTTP headers required for authentication. The following sections list supported external services, authentication methods, and required headers.
+When configuring an external service, specify the HTTP headers required for authentication.
+The following sections list supported external services, authentication methods, and required headers.
 
 {{< alert level="info" >}}
-The examples below show possible authentication methods for each service. Some services may support other methods. The portal supports any method that can be passed through HTTP headers.
+The examples below show possible authentication methods for each service.
+Some services may support other methods.
+The portal supports any method that can be passed through HTTP headers.
 {{< /alert >}}
 
 ### CodeScoring

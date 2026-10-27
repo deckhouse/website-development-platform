@@ -4,19 +4,24 @@ weight: 80
 ---
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
+Running this action requires a token: the `admin:password` string encoded in Base64.
+The token is used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
 DeleteNexusRole — deletes a role from Nexus Repository Manager 3.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 id: example-role
 ```
 
-### Request specification
+## Request specification
 
-| Field  | Required          | Description                                    |
+The action request body supports the following parameters:
+
+| Name   | Required          | Description                                    |
 | ------ | ----------------- | --------------------------------------------- |
-| id     | Yes                | Identifier of the role to delete                |
+| `id`   | Yes                | Identifier of the role to delete                |

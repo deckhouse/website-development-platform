@@ -8,6 +8,8 @@ The widget displays product vulnerabilities from DefectDojo, grouped by engageme
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name           | Required | Description                                                                                              | Default value                    |
 | -------------- | -------- | -------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | URL            | Yes      | DefectDojo URL without the API path (`/api/v2`)                                                          | —                                         |
@@ -16,24 +18,35 @@ The widget displays product vulnerabilities from DefectDojo, grouped by engageme
 
 ## Request parameters
 
-In the widget request settings, select the severity levels to load only vulnerabilities with those levels. By default, the widget uses the levels from its configuration. Changing the levels reloads data from DefectDojo.
+In the widget request settings, select the severity levels to load only vulnerabilities with those levels.
+By default, the widget uses the levels from its configuration.
+Changing the levels reloads data from DefectDojo.
 
 ## Additional widget features
 
+In addition to displaying data, the widget supports the actions described below.
+
 ### Filters
 
-- **Engagement** — selects a product engagement. By default, the most recently created engagement, with the highest ID, is selected. Changing the engagement reloads the data.
-- **Filters** — filters vulnerabilities by severity, tags, tests, and components. Tag, test, and component filters apply only to already loaded vulnerabilities and do not send new requests to DefectDojo.
+The **Engagement** list selects a product engagement.
+By default, the most recently created engagement, with the highest ID, is selected.
+Changing the engagement reloads the data.
+
+The **Filters** panel filters vulnerabilities by severity, tags, tests, and components.
+Tag, test, and component filters apply only to already loaded vulnerabilities and do not send new requests to DefectDojo.
 
 ### Tabs
 
-- **Overview** — displays vulnerabilities by severity, tags (top 10), tests (top 10), and components (top 10). Charts use the filtered vulnerability set.
-- **Details** — displays a table with details for each vulnerability.
+The **Overview** tab displays vulnerabilities by severity, tags (top 10), tests (top 10), and components (top 10).
+Charts use the filtered vulnerability set.
+
+The **Details** tab displays a table with details for each vulnerability.
 
 {{< alert level="info" >}}
-If the selected Engagement and severity levels contain more than 1,000 vulnerabilities, the widget displays the first 1,000 records and a partial-load warning. Tag, test, and component filters apply only to the loaded set.
+If the selected Engagement and severity levels contain more than 1,000 vulnerabilities, the widget displays the first 1,000 records and a partial-load warning.
+Tag, test, and component filters apply only to the loaded set.
 {{< /alert >}}
 
-## Authentication
+## Authorization
 
 Authentication is described in [External services](../../external-services/#defectdojo).

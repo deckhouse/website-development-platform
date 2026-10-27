@@ -1,0 +1,141 @@
+﻿Русское название (бэкенд),Английский перевод в документации,Где встречается (страницы admin)
+1 день,1 day,home/processes
+1 месяц,1 month,home/processes
+14 дней,14 days,home/processes
+Admin,Admin,examples/home-quick-start
+Deckhouse managed Kafka,Deckhouse managed Kafka,"home/processes, home/setup"
+Deckhouse managed PostgreSQL,Deckhouse managed PostgreSQL,"home/processes, home/setup"
+Deckhouse managed Valkey,Deckhouse managed Valkey,"home/processes, home/setup"
+Deployment — окружение,Deployment — environment,home/mapping
+Deployments,Deployments,"home/mapping, home/setup"
+Developer,Developer,home/overview
+GitLab username,GitLab username,"datasets, home/setup"
+GitLab токен,GitLab token,"datasets, home/setup"
+GitLab: merge requests репозитория,GitLab: repository merge requests,home/setup
+GitLab: активность репозиториев,GitLab: repository activity,"datasets, datasources/types, examples/home-widget-slot, home/setup"
+GitLab: виджеты,GitLab: widgets,"datasets, examples/home-widget-slot, home/setup"
+GitLab: группы,GitLab: groups,"datasets, home/setup"
+GitLab: пайплайны репозитория,GitLab: repository pipelines,home/setup
+Go service,Go service,"examples/microservice-lifecycle, examples/template-first-pack"
+Groups,Groups,"home/mapping, home/setup"
+HTTP port,HTTP port,examples/template-first-pack
+ID групп GitLab,GitLab group IDs,home/setup
+ID репозитория,Repository ID,examples/service-autoupdates
+Ingress — микросервис,Ingress — microservice,home/mapping
+Ingresses,Ingresses,"home/mapping, home/setup"
+Kubernetes токен,Kubernetes token,"datasets, home/setup"
+"Kubernetes: deployments, ingresses и namespaces","Kubernetes: deployments, ingresses, and namespaces","examples/home-quick-start, home/setup"
+Merge request,Merge request,ai-agents/runs
+Namespace — ingress,Namespace — ingress,home/mapping
+Namespaces,Namespaces,"home/mapping, home/setup"
+Object,Object,widgets/entities/entity-card
+Patch,Patch,ai-agents/runs
+Store процесса,Process store,ai-agents/runs
+URL GitLab,GitLab URL,"datasets, examples/home-quick-start, home/setup"
+URL Kubernetes API,Kubernetes API URL,"datasets, examples/home-quick-start, home/setup"
+URL Vault,Vault URL,"datasets, examples/home-quick-start, home/setup"
+URL сервисного репозитория,Service repository URL,examples/service-autoupdates
+URL шаблонного репозитория,Template repository URL,examples/service-autoupdates
+Vault токен,Vault token,"datasets, home/setup"
+Workload — стенд,Workload — stand,examples/home-custom-catalog
+Workloads,Workloads,examples/home-custom-catalog
+Автозаполнение правил обновления,Auto-fill update rules,datasources/overview
+Автосоздание параметров ресурса,Auto-create resource parameters,datasources/overview
+Активировать v1,Activate v1,workspaces/templates
+Безопасность / Учётные данные,Security / Credentials,datasources/overview
+Ветка обновляемого репозитория,Target repository branch,examples/service-autoupdates
+Включать подгруппы,Include subgroups,home/setup
+Внешний сервис DefectDojo,DefectDojo external service,datasources/types
+Внешний сервис Harbor,Harbor external service,datasources/types
+Внешний сервис Kubernetes,Kubernetes external service,"datasets, datasources/types, home/setup"
+Внешний сервис Nexus,Nexus external service,datasources/types
+Внешний сервис Prometheus,Prometheus external service,datasources/types
+Внешний сервис SonarQube,SonarQube external service,datasources/types
+Внешний сервис Vault или Stronghold,Vault or Stronghold external service,"datasets, home/setup"
+Внешний сервис VCS,VCS external service,templates/updates
+Все репозитории,All repositories,home/setup
+Выполняются процессы,Processes running,examples/microservice-lifecycle
+Главная (по умолчанию),Home (default),"examples/home-quick-start, home/setup"
+Группа GitLab,GitLab group,home/processes
+Группа репозиториев,Repository group,examples/service-autoupdates
+Детали запуска агента,Agent run details,ai-agents/runs
+Добавляемые пути обновления,Update add-if-missing paths,templates/updates
+доступна / Доступна,Available,"actions/gitlab/createrepositoryfromtemplatepack, examples/home-quick-start, examples/template-first-pack, templates/registry, templates/updates"
+Заказать Redis,Order Redis,examples/home-custom-process
+Запуски действий,Action runs,examples/service-autoupdates
+Идентификатор окружения,Environment ID,home/processes
+Идентификатор шаблона,Template ID,templates/updates
+Идентификатор шаблонного репозитория,Template repository ID,examples/service-autoupdates
+Из источника,From source,ai-agents/agent-sources
+Интеграция — система,Integration — system,home/mapping
+Источник данных Deployments,Deployments data source,home/setup
+Источник данных Ingresses,Ingresses data source,home/setup
+Источник данных Namespaces,Namespaces data source,home/setup
+Источник шаблона,Template source,templates/updates
+Каноничная архитектура,Canonical architecture,"datasets, examples/home-custom-catalog, examples/overview, home/processes, home/setup"
+Каноничная архитектура (демоданные),Canonical architecture (demo data),home/setup
+Каноничная архитектура (привязки главной),Canonical architecture (Home bindings),home/setup
+Каноничная архитектура (схема),Canonical architecture (schema),"home/mapping, home/overview, home/setup"
+Каноничный ресурс,Canonical resource,home/mapping
+Кластер — окружение,Cluster — environment,home/mapping
+Краткое описание,Short description,datasets
+Легенда,Legend,widgets/entities/property-history
+Микросервис — deployment,Microservice — deployment,home/mapping
+Нужен для: …,Required for: …,home/setup
+Обновление из шаблона,Template updates,"actions/gitlab/upgraderepositoryfromtemplatepack, templates/registry"
+Обновление репозитория из шаблона,Update repository from template,"home/processes, templates/updates"
+Обновление сервиса из шаблона,Update service from template,examples/service-autoupdates
+Обновляемый репозиторий,Target repository,examples/service-autoupdates
+Общий ресурс — deployment,Shared resource — deployment,home/mapping
+Опубликовать v1,Publish v1,workspaces/templates
+Перезаписываемые пути обновления,Update overwrite paths,templates/updates
+Переменные использованные при шаблонизации,Variables used for templating,examples/service-autoupdates
+Переменные используемые при шаблонизации,Variables used in templating,examples/service-autoupdates
+Подключение AI-провайдера,Connecting an AI provider,ai-agents/provider-templates
+Подключить секреты к приложению,Connect secrets to application,"home/processes, home/setup"
+"Поиск по агенту, провайдеру или ошибке","Search by agent, provider, or error",ai-agents/runs
+Последний тег,Latest tag,examples/service-autoupdates
+Префикс пути Vault,Vault path prefix,"datasets, home/setup"
+Привязка общих ресурсов,Shared resource binding,"home/processes, home/setup"
+Привязки секретов,Secret bindings,home/setup
+Провайдер VCS,VCS provider,home/setup
+Продукт — сервис,Product — service,examples/home-custom-catalog
+Продукты,Products,examples/home-custom-catalog
+Процесс „{name}“ запущен,Process '{name}' started,home/processes
+Процессы главной,Home page processes,templates/packs
+Развёртывания / Развертывания,Deployments,"examples/home-custom-catalog, examples/microservice-lifecycle, home/mapping"
+Ревью автоматически,Auto review,"examples/template-release-update, templates/updates"
+Регистрация entity microservice,Register microservice entity,home/processes
+Реестр шаблонов микросервисов,Microservice template registry,"examples/home-quick-start, home/processes, home/setup, templates/updates"
+Ресурс каталога для процессов,Catalog resource for processes,datasets
+Сервис — workload,Service — workload,examples/home-custom-catalog
+Сервисы,Services,"examples/home-custom-catalog, examples/service-autoupdates"
+"Синхронизировано: создано {created}, обновлено {updated}, пропущено {skipped}","Synced: {created} created, {updated} updated, {skipped} skipped",ai-agents/agent-sources
+Система — deployment,System — deployment,home/mapping
+Система — ingress,System — ingress,home/mapping
+Система — интеграция,System — integration,home/mapping
+Система — микросервис,System — microservice,home/mapping
+Система — общий ресурс,System — shared resource,home/mapping
+Создание код-ревью,Create code review,"home/processes, templates/updates"
+Создание проекта GitLab,Create GitLab project,home/processes
+Создание репозитория из шаблона,Create repository from template,home/processes
+Создать действия,Create actions,datasets
+Создать микросервис из шаблона,Create microservice from template,"examples/home-quick-start, examples/template-first-pack, home/processes, home/setup"
+Создать проект в GitLab,Create GitLab project,examples/service-autoupdates
+Создать процессы,Create processes,datasets
+Создать ресурс каталога,Create catalog resource,datasets
+Стенды,Stands,examples/home-custom-catalog
+Стратегии обновления,Update strategies,"actions/gitlab/upgraderepositoryfromtemplatepack, templates/packs"
+Стратегия обновления,Update strategy,templates/updates
+Тип deliverable,Deliverable type,ai-agents/runs
+Тип стенда,Stand type,examples/home-custom-catalog
+Типы источников данных,Data source types,datasources/overview
+Точка на графике,Chart point,widgets/entities/property-history
+Удалить Redis,Delete Redis,examples/home-custom-process
+Управление окружениями,Environment management,"home/processes, home/setup"
+Устранение ошибок,Troubleshooting,actions/gitlab/upgraderepositoryfromtemplatepack
+шаблон и реестр,template and registry,templates/updates
+Шаблонизация,Templating,workflows
+Шаблонный репозиторий,Template repository,examples/service-autoupdates
+Шаблоны-Сервисы,Templates-Services,examples/service-autoupdates
+Языковая модель агента,Agent language model,ai-agents/external-agents

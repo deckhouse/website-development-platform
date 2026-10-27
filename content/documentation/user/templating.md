@@ -303,7 +303,6 @@ Returns:
 Example in a template:
 
 ```go-text-template
-{{ encodeUnicode "Привет" }} // Output: "\u041f\u0440\u0438\u0432\u0435\u0442"
 {{ encodeUnicode "Hello" }}  // Output: "\u0048\u0065\u006c\u006c\u006f"
 ```
 
@@ -323,7 +322,6 @@ Returns:
 Example in a template:
 
 ```go-text-template
-{{ decodeUnicode "\u041f\u0440\u0438\u0432\u0435\u0442" }} // Output: "Привет"
 {{ decodeUnicode "\u0048\u0065\u006c\u006c\u006f" }}      // Output: "Hello"
 ```
 

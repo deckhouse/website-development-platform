@@ -4,11 +4,17 @@ description: Search and inspect records from an OpenSearch index or index patter
 weight: 40
 ---
 
-The OpenSearch index widget displays data from a specific index or index pattern in the portal. By default, data is sorted from newest to oldest. Full-text search is available to filter the displayed data. Each record (table row) can be displayed as key-value pairs or as JSON. When an index pattern is specified, the widget provides a link to the Discover page in OpenSearch Dashboards.
+The OpenSearch index widget displays data from a specific index or index pattern in the portal.
+By default, data is sorted from newest to oldest.
+Full-text search is available to filter the displayed data.
+Each record (table row) can be displayed as key-value pairs or as JSON.
+When an index pattern is specified, the widget provides a link to the Discover page in OpenSearch Dashboards.
 
 ## Configuration
 
-| Name            | Required | Description                                                                                                                               | Default      |
+When adding the widget, specify the following parameters:
+
+| Name            | Required | Description                                                                                                                               | Default value |
 | --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | API URL         | Yes      | OpenSearch API URL used to retrieve data                                                                                                  | —            |
 | Dashboards URL  | Yes      | OpenSearch Dashboards URL used to generate a link for viewing data directly in OpenSearch                                                 | —            |
