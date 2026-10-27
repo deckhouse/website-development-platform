@@ -15,7 +15,7 @@ Pods can run in multiple replicas, but the diagram shows each pod as a single re
 
 The following diagram shows the Deckhouse Development Portal (DDP, portal) architecture at level 2 of the C4 model and its interaction with other components:
 
-![DDP architecture](../images/functional-architecture/c4-l2-ddp.ru.svg)
+![DDP architecture](../images/functional-architecture/c4-l2-ddp.svg)
 
 ## Components
 
@@ -31,8 +31,8 @@ DDP consists of the following components:
 
     Technical details:
 
-    * Serves the web interface files to the browser through the Ingress controller or Gateway
-    * Does not access the backend itself: the user's browser sends REST API requests through the same Ingress controller or Gateway
+    * It serves the web interface files to the browser through the Ingress controller or Gateway
+    * It does not access the backend itself: the user's browser sends REST API requests through the same Ingress controller or Gateway
 
 1. **Backend** is the server side of the portal, written in Go.
    The component provides a REST API for managing all portal mechanisms.
@@ -54,15 +54,17 @@ DDP consists of the following components:
     * Connects to PostgreSQL to store and manage data
     * Connects to ClickHouse, if configured, to read the data stored there
 
-    Consists of the following containers:
+    It consists of the following containers:
 
-    * **wait-for-storage**: An init container that waits until PostgreSQL, Redis, and ClickHouse (if configured) start accepting connections. For managed PostgreSQL and ClickHouse instances, it also runs initial SQL scripts, for example, to create the required PostgreSQL extensions.
-    * **migrations**: An init container that updates the database schema when the component starts.
-    * **backend**: The main container.
+    * **wait-for-postgres**: Init container that waits until PostgreSQL starts accepting connections. For managed PostgreSQL instance, it also runs initial SQL scripts, for example, to create the required PostgreSQL extensions.
+    * **wait-for-redis**: Init container that waits until Redis starts accepting connections.
+    * **wait-for-clickhouse**: Init container that waits until ClickHouse (if configured) starts accepting connections. For managed ClickHouse instance, it also runs initial SQL scripts.
+    * **migrations**: Init container that updates the database schema when the component starts.
+    * **backend**: Main container.
 
-1. **Worker** is a component for running background tasks and asynchronous operations, written in Go.
+1. **Worker** is a component written in Go for running background tasks and asynchronous operations.
    Worker processes tasks from Redis Streams queues: it runs actions and processes and synchronizes datasources.
-   For details, see [Workers](workers/).
+   For details, see ["Workers"](workers/) section.
 
     Main functions:
 
@@ -80,10 +82,12 @@ DDP consists of the following components:
     * Assigns tasks to the agent when running "AI agent" process elements
     * Moves data from PostgreSQL to ClickHouse, if configured
 
-    Consists of the following containers:
+    It consists of the following containers:
 
-    * **wait-for-storage**: An init container that waits until PostgreSQL, Redis, and ClickHouse (if configured) start accepting connections.
-    * **worker**: The main container.
+    * **wait-for-postgres**: Init container that waits until PostgreSQL starts accepting connections. For managed PostgreSQL instance, it also runs initial SQL scripts, for example, to create the required PostgreSQL extensions.
+    * **wait-for-redis**: Init container that waits until Redis starts accepting connections.
+    * **wait-for-clickhouse**: Init container that waits until ClickHouse (if configured) starts accepting connections. For managed ClickHouse instance, it also runs initial SQL scripts.
+    * **worker**: Main container.
 
 1. **Agent** is the component that implements the [platform agent](../ai-agents/platform-agent/).
    The component consists of a single **agent** container.
@@ -144,7 +148,7 @@ The data storage components perform the following functions:
 
 The following component is not part of DDP:
 
-1. **Dex** is an authentication and authorization component that acts as an identity provider.
+1. **Dex**: An authentication and authorization component that acts as an identity provider.
    Dex provides a single sign-in point for users and integrates with various external authentication providers.
 
     {{< alert level="info" >}}
@@ -175,9 +179,9 @@ The starter template creates a pod with the following containers:
 
 | Container | Purpose |
 | --- | --- |
-| `bootstrap` | Init container: clones the repository, delivers files and skills, and runs scripts |
+| `bootstrap` | Init container: It clones the repository, delivers files and skills, and runs scripts |
 | `runtime` | OpenCode agent that runs tasks from the chat and processes |
-| `ide` | code-server IDE with files from the same persistent volume |
+| `ide` | Code-server IDE with files from the same persistent volume |
 | `gate` | Checks IDE access through the portal |
 
 The browser opens the IDE on a separate HTTPS domain through the Ingress of the target cluster.
@@ -187,7 +191,7 @@ The setup is described in the [network and storage examples](../workspaces/netwo
 
 ## Network interactions
 
-![DDP component network interactions](../images/functional-architecture/ddp-network-flows.ru.svg)
+![DDP components network interactions](../images/functional-architecture/ddp-network-flows.ru.svg)
 
 ### Incoming connections
 
