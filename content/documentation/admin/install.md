@@ -24,6 +24,8 @@ In the `managed` mode, the module creates PostgreSQL, Valkey (Redis-compatible) 
 | `redis.mode: managed` | `managed-valkey` |
 | `clickhouse.mode: managed` | `managed-clickhouse` |
 
+With `redis.mode: managed`, the `managed-valkey` module version 0.1.6 or later is required. DDP connects to Valkey as the `ddp` user; the module generates the password and stores it in the `redis-credentials` Secret in the `d8-development-platform` namespace.
+
 For the demo configuration below, enable all three modules using ModuleConfig:
 
 ```yaml
@@ -169,6 +171,8 @@ spec:
     clickhouse:
       mode: internal
 ```
+
+If Redis uses ACL users, set the username in the `redis.username` parameter. With an empty value, DDP authenticates with the password only.
 
 ### Full example with external instances
 

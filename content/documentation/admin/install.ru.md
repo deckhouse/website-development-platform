@@ -24,6 +24,8 @@ ClickHouse хранит исторические данные портала. Ч
 | `redis.mode: managed` | `managed-valkey` |
 | `clickhouse.mode: managed` | `managed-clickhouse` |
 
+Для `redis.mode: managed` нужен модуль `managed-valkey` версии 0.1.6 или новее. DDP подключается к Valkey от имени пользователя `ddp`; пароль модуль генерирует и хранит в Secret `redis-credentials` в неймспейсе `d8-development-platform`.
+
 Для демо-конфигурации ниже включите все три модуля с помощью ModuleConfig:
 
 ```yaml
@@ -169,6 +171,8 @@ spec:
     clickhouse:
       mode: internal
 ```
+
+Если Redis использует ACL-пользователей, укажите имя пользователя в параметре `redis.username`. С пустым значением DDP подключается только по паролю.
 
 ### Полный пример с внешними экземплярами
 
