@@ -39,12 +39,14 @@ Secret `operations-registry` должен существовать в `d8-develo
 
 ## Публикация IDE
 
-IDE каждого рабочего пространства публикуется на собственном HTTPS-хосте. Для домена `ide.example.com` стартовый шаблон создаёт адрес вида `https://ddp-ws-<суффикс>.ide.example.com`.
+IDE каждого рабочего пространства публикуется на собственном HTTPS-хосте. Приложения и опубликованные порты получают соседние хосты, например `terminal-ddp-ws-<суффикс>.example-workspaces.com` и `p1-ddp-ws-<суффикс>.example-workspaces.com`. Для домена `example-workspaces.com` стартовый шаблон создаёт адрес вида `https://ddp-ws-<суффикс>.example-workspaces.com`.
 
-Перед запуском подготовьте wildcard-запись `*.ide.example.com`, которая указывает на ingress-контроллер целевого кластера. В `main.tf` задайте:
+Домен рабочих пространств должен быть отдельным от родительского домена DDP и Dex, для которого браузер допускает cookie. Например, при портале `ddp.example.com` используйте `example-workspaces.com`; адреса под `ide.example.com` этого разделения не обеспечивают.
+
+Перед запуском подготовьте wildcard-запись `*.example-workspaces.com`, которая указывает на ingress-контроллер целевого кластера. В `main.tf` задайте:
 
 ```hcl
-ide_domain     = "ide.example.com"
+ide_domain     = "example-workspaces.com"
 ingress_class  = "nginx"
 ide_tls_secret = "workspace-ide-tls"
 ingress_annotations = {
@@ -53,7 +55,9 @@ ingress_annotations = {
 }
 ```
 
-Замените `nginx` на существующий IngressClass. Значение `null` выбирает класс по умолчанию. Secret `workspace-ide-tls` должен находиться в неймспейсе шаблона и содержать сертификат для `*.ide.example.com` с доверенной браузером цепочкой.
+Замените `nginx` на существующий IngressClass. Значение `null` выбирает класс по умолчанию. Secret `workspace-ide-tls` должен находиться в неймспейсе шаблона и содержать сертификат для `*.example-workspaces.com` с доверенной браузером цепочкой.
+
+Wildcard-сертификат покрывает IDE, приложения и адреса портов. При изменении правил Ingress сохраните все хосты из `local.app_hosts` и `local.slot_hosts`, их TLS и маршрут через шлюз. Схема адресов описана [в настройке приложений](apps/).
 
 Аннотации в примере предназначены для ingress-nginx и увеличивают тайм-ауты длительных соединений IDE. Для другого контроллера задайте поддерживаемые им аннотации.
 
@@ -63,10 +67,10 @@ ingress_annotations = {
 
 ## Выдача сертификата через cert-manager
 
-При установленном cert-manager и настроенном ClusterIssuer можно получать отдельный сертификат для каждого пространства. Замените значения в `main.tf`:
+При установленном cert-manager и настроенном ClusterIssuer можно получать сертификат для каждого пространства, включающий хост IDE, хосты приложений и все зарезервированные адреса портов. Замените значения в `main.tf`:
 
 ```hcl
-ide_domain     = "ide.example.com"
+ide_domain     = "example-workspaces.com"
 ingress_class  = "nginx"
 ide_tls_secret = "${local.name}-ide-tls"
 ingress_annotations = {
