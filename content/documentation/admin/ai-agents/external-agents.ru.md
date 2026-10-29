@@ -97,7 +97,7 @@ API-ключ хранится в базе данных в зашифрованн
 Пример вызова инструмента:
 
 ```shell
-curl -s -X POST "https://<DOMAIN>/api/v2/agent-mcp/tools/call" -H "X-Agent-Run-Token: <RUN_TOKEN>" -H "Content-Type: application/json" -d '{"tool": "ddp_get_resources", "arguments": {}}'
+curl -s -X POST "https://<DOMAIN>/api/v2/agent-mcp/tools/call" -H "X-Agent-Run-Token: <RUN_TOKEN>" -H "Content-Type: application/json" -d '{"tool": "get_resources", "arguments": {}}'
 ```
 
 где:
@@ -106,6 +106,8 @@ curl -s -X POST "https://<DOMAIN>/api/v2/agent-mcp/tools/call" -H "X-Agent-Run-T
 - `<RUN_TOKEN>` — значение `ddp.mcp.runToken` из метаданных сообщения.
 
 Инструмент, которого нет в `ddp.mcp.toolAllowlist`, возвращает ошибку `403`. Недействительный или отозванный токен — ошибку `401`.
+
+Этот эндпоинт принимает имена из списка инструментов без префикса агента: `get_resources`, `query_catalog`, `curated_get_skill`. Префикс `ddp_` платформенный агент добавляет только при передаче инструментов модели. При реализации внешнего агента сохраняйте соответствие между именем для модели и именем, отправляемым порталу.
 
 ### Обращение к модели через портал
 
