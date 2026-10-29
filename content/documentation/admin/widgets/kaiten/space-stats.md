@@ -9,13 +9,17 @@ Use it to analyze team performance and identify bottlenecks in business processe
 
 ## Configuration
 
-| Name     | Required | Description                        | Default |
+When adding the widget, specify the following parameters:
+
+| Name     | Required | Description                        | Default value |
 |----------|----------|------------------------------------|---------|
 | Space ID | Yes      | Kaiten space identifier            | —       |
 
 ## Query parameters
 
-| Name           | Required | Description                       | Default     |
+The widget supports the following query parameters:
+
+| Name           | Required | Description                       | Default value |
 |----------------|----------|-----------------------------------|-------------|
 | Created after  | Yes      | Start date of the analysis period | 1 month ago |
 | Created before | Yes      | End date of the analysis period   | Now         |
@@ -28,25 +32,27 @@ The widget contains four tabs.
 
 Primary metrics:
 
-- **Queued** — tasks waiting to be processed.
-- **Completed** — completed tasks.
-- **In progress** — active tasks.
+- **Queued**: Tasks waiting to be processed.
+- **Completed**: Completed tasks.
+- **In progress**: Active tasks.
 
 Additional metrics:
 
-- **Blocked** — number of blocked tasks.
-- **Blocking** — number of tasks that block other tasks.
-- **Archived** — number of archived tasks.
-- **Urgent** — number of urgent tasks.
-- **Average completion time** — average time to complete a task, in minutes.
+- **Blocked**: Number of blocked tasks.
+- **Blocking**: Number of tasks that block other tasks.
+- **Archived**: Number of archived tasks.
+- **Urgent**: Number of urgent tasks.
+- **Average completion time**: Average time to complete a task, in minutes.
 
 Checklist statistics:
 
-- **Total with checklists** — total number of tasks that have checklists.
-- **Checklist completed** — tasks with fully completed checklists.
-- **Checklist incomplete** — tasks with incomplete checklists.
+- **Total with checklists**: Total number of tasks that have checklists.
+- **Checklist completed**: Tasks with fully completed checklists.
+- **Checklist incomplete**: Tasks with incomplete checklists.
 
 ### By user
+
+The statistics by user include the following data:
 
 - List of users and their assigned task counts.
 - Progress bar visualization.

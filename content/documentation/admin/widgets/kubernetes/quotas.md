@@ -10,6 +10,8 @@ For each quota, the widget visualizes the resources in use.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name      | Required | Description                                                             | Default value |
 | --------- | -------- | ----------------------------------------------------------------------- | ------------- |
 | URL       | Yes      | Kubernetes API server URL used to retrieve data from Kubernetes         | —             |

@@ -6,9 +6,13 @@ weight: 160
 
 The widget visualizes technologies, tools, and practices used in the company, grouped by maturity level: Adopt, Trial, Assess, and Hold.
 
-The widget displays a circular chart with four quadrants, four rings, and a set of items. Each item has a number, name, quadrant, and ring. Configure the radar contents in the widget settings.
+The widget displays a circular chart with four quadrants, four rings, and a set of items.
+Each item has a number, name, quadrant, and ring.
+Configure the radar contents in the widget settings.
 
 ## Configuration
+
+When adding the widget, specify the following parameters:
 
 | Name      | Required | Description                                     |
 | --------- | -------- | ----------------------------------------------- |
@@ -16,6 +20,8 @@ The widget displays a circular chart with four quadrants, four rings, and a set 
 | Items     | No       | List and configuration of up to 200 radar items |
 
 ### Item configuration
+
+For each radar item, specify the following parameters:
 
 | Name        | Required | Description                                                         |
 | ----------- | -------- | ------------------------------------------------------------------- |

@@ -4,7 +4,7 @@ description: Start, end, restrict, and audit temporary sessions performed as ano
 weight: 25
 ---
 
-DDP (portal) supports impersonation: a user with the global `impersonate:users` permission can temporarily use the web interface as another user.
+Deckhouse Development Portal (DDP, portal) supports impersonation: a user with the global `impersonate:users` permission can temporarily use the web interface as another user.
 
 {{< alert level="info" >}}
 Impersonation is available only for browser sign-in through a Dex session. API tokens are not supported.
@@ -12,9 +12,12 @@ Impersonation is available only for browser sign-in through a Dex session. API t
 
 ## Starting and ending impersonation
 
+To start impersonation, follow these steps:
+
 1. Go to "Administration" → "Users".
 1. In the target user's row, click "Sign in as this user".
-1. The portal switches the session to the selected user. A "Signed in as: …" banner at the bottom of the screen shows the time remaining before the session ends automatically.
+1. The portal switches the session to the selected user.
+   A "Signed in as: …" banner at the bottom of the screen shows the time remaining before the session ends automatically.
 1. To end impersonation early, click "End session" in the banner.
 
 The "Sign in as this user" button is unavailable for blocked users and your own account.

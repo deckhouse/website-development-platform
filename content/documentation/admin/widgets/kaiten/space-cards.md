@@ -10,13 +10,17 @@ including status, urgency, blocking state, and assignees.
 
 ## Configuration
 
-| Name     | Required | Description                        | Default |
+When adding the widget, specify the following parameters:
+
+| Name     | Required | Description                        | Default value |
 |----------|----------|------------------------------------|---------|
 | Space ID | Yes      | Kaiten space identifier            | —       |
 
 ## Query parameters
 
-| Name          | Required | Description                    | Default     |
+The widget supports the following query parameters:
+
+| Name          | Required | Description                    | Default value |
 |---------------|----------|--------------------------------|-------------|
 | My tasks      | No       | Filters by the current user    | `false`     |
 | Created after | Yes      | Start date of the query period | 1 month ago |

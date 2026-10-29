@@ -9,14 +9,18 @@ This action requires an API v2 key for the user on whose behalf it will run.
 
 DeleteDefectdojoProduct — deletes a product from DefectDojo. The action uses the DefectDojo API v2.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 id: 1
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name          | Required | Description                                   | Default value             |
 | ------------- | -------- | ------------------------------------------------ | ------------------------ |
-| id            | Yes      | Identifier of the product to delete               | -                        |
+| `id`          | Yes      | Identifier of the product to delete               | —                        |

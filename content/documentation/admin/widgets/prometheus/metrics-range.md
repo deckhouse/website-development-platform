@@ -28,6 +28,8 @@ The chart contains no more than 1100 points, and the minimum step is 30 seconds.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name               | Required | Description                                                                                                     | Default value |
 | ------------------ | -------- | --------------------------------------------------------------------------------------------------------------- | ------------- |
 | URL                | Yes      | Prometheus URL                                                                                                  | —             |

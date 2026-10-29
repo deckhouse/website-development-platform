@@ -8,7 +8,9 @@ The widget displays SonarQube metrics.
 
 ## Configuration
 
-| Name        | Required | Description                                                               | Default                               |
+When adding the widget, specify the following parameters:
+
+| Name        | Required | Description                                                               | Default value                         |
 | ----------- | -------- | ------------------------------------------------------------------------- | ------------------------------------- |
 | URL         | Yes      | SonarQube URL, for example, `https://sonarqube.example.com`               | —                                     |
 | Project key | Yes      | Project identifier in SonarQube                                           | —                                     |

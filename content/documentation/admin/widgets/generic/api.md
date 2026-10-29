@@ -4,25 +4,33 @@ description: Configure the API widget to display OpenAPI and Protobuf specificat
 weight: 10
 ---
 
-The widget displays an API specification from a file in a GitLab repository or from a URL in OpenAPI (Swagger) or Protobuf format. For an OpenAPI specification in a YAML or JSON file, the widget displays the Swagger UI. In all other cases, it displays the specification as text.
+The widget displays an API specification from a file in a GitLab repository or from a URL in OpenAPI (Swagger) or Protobuf format.
+For an OpenAPI specification in a YAML or JSON file, the widget displays the Swagger UI.
+In all other cases, it displays the specification as text.
 
 ## General configuration
 
-| Name               | Required | Description                                      | Possible values                     | Default |
+When adding the widget, specify the following parameters:
+
+| Name               | Required | Description                                      | Possible values                     | Default value |
 | ------------------ | -------- | ------------------------------------------------ | ----------------------------------- | ------- |
 | Specification type | Yes      | Specification type                               | OpenAPI (Swagger), Protocol Buffers | —       |
 | Source type        | Yes      | Source from which the specification file is loaded | URL, GitLab                       | —       |
 
 ## Source type configuration: URL
 
-| Name    | Required | Description                                      | Default |
+For the URL source type, specify the following parameters:
+
+| Name    | Required | Description                                      | Default value |
 | ------- | -------- | ------------------------------------------------ | ------- |
 | URL     | Yes      | URL of the specification file                    | —       |
 | Headers | No       | Headers used to access the specification file    | —       |
 
 ## Source type configuration: GitLab
 
-| Name        | Required | Description                                                   | Default |
+For the GitLab source type, specify the following parameters:
+
+| Name        | Required | Description                                                   | Default value |
 | ----------- | -------- | ------------------------------------------------------------- | ------- |
 | GitLab URL  | Yes      | GitLab URL                                                    | —       |
 | Project ID  | Yes      | ID of the project containing the specification file           | —       |

@@ -4,24 +4,31 @@ weight: 20
 ---
 
 {{< alert level="info" >}}
-Running this action requires a token — a base64(`admin:password`) string used for HTTP Basic authentication in requests to Nexus.
+Running this action requires a token: the `admin:password` string encoded in Base64.
+The token is used for HTTP Basic authentication in requests to Nexus.
 {{< /alert >}}
 
 DeleteNexusRepository — deletes an existing repository from Nexus Repository Manager 3.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 name: my-repo-to-delete
 ```
 
-### Request specification
+## Request specification
 
-| Field  | Required          | Description                                       |
+The action request body supports the following parameters:
+
+| Name   | Required          | Description                                       |
 | ------ | ----------------- | ------------------------------------------------ |
 | `name` | Yes                | Name of the repository to delete                    |
 
-### Algorithm
+## How it works
+
+The action runs in the following order:
 
 - Sends a `DELETE` request to `/service/rest/v1/repositories/{name}`, where `{name}` is the value of the `name` field.
 - If the repository is found and deleted, the request returns status code 204.

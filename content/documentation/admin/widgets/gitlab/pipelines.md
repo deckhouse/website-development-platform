@@ -8,6 +8,8 @@ The widget displays GitLab project pipelines with their stages and jobs and lets
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name       | Required | Description                                                              | Default value |
 | ---------- | -------- | ------------------------------------------------------------------------ | ------------- |
 | URL        | Yes      | GitLab API URL used to retrieve data from GitLab                         | —             |
@@ -17,33 +19,38 @@ The widget displays GitLab project pipelines with their stages and jobs and lets
 
 The table contains the following columns:
 
-- **ID** — pipeline number with a link to GitLab;
-- **Status** — pipeline state;
-- **Ref** — branch or tag;
-- **Source** — event that started the pipeline;
-- **Initiator** — user who started the pipeline;
-- **Duration** and **Finished**;
-- the **Actions** menu.
+- **ID**: Pipeline number with a link to GitLab.
+- **Status**: Pipeline state.
+- **Ref**: Branch or tag.
+- **Source**: Event that started the pipeline.
+- **Initiator**: User who started the pipeline.
+- **Duration** and **Finished**.
+- The **Actions** menu.
 
 The **Actions** menu contains:
 
-- **Rerun pipeline**;
-- **Cancel pipeline** — for pending and running pipelines;
+- **Rerun pipeline**.
+- **Cancel pipeline**: For pending and running pipelines.
 - **Open in GitLab**.
 
 ## Stages and jobs
 
-Click a pipeline row to expand the creation, start and finish times and the pipeline stages. For each stage, the widget displays the status, the number of failed jobs and the stage jobs. If a stage has more than eight jobs, the rest are hidden: to show them, click **Show N more**, where N is the number of hidden jobs.
+Click a pipeline row to expand the creation, start and finish times and the pipeline stages.
+For each stage, the widget displays the status, the number of failed jobs and the stage jobs.
+If a stage has more than eight jobs, the rest are hidden: to show them, click **Show N more**, where N is the number of hidden jobs.
 
-Click a job to open the job panel. The panel displays the job name, the job number with a link to GitLab, the stage, the duration and the following buttons:
+Click a job to open the job panel.
+The panel displays the job name, the job number with a link to GitLab, the stage, the duration and the following buttons:
 
-- **Run job** — for manual jobs;
-- **Rerun job** — unavailable for manual and pending jobs;
-- **Cancel job** — for pending, scheduled and running jobs.
+- **Run job**: For manual jobs.
+- **Rerun job**: Unavailable for manual and pending jobs.
+- **Cancel job**: For pending, scheduled and running jobs.
 
 ### Job log
 
-The job panel displays the job log: the last 50 lines by default. The **Full log** button shows the entire log, the **Last lines** button returns the shortened view. The job output colors are preserved.
+The job panel displays the job log: the last 50 lines by default.
+The **Full log** button shows the entire log, the **Last lines** button returns the shortened view.
+The job output colors are preserved.
 
 If the job has not started yet, the widget displays the message "The job has not started yet — no log".
 
@@ -60,9 +67,9 @@ Run parameters:
 
 ## Home page placement
 
-The widget is displayed on the **Pipelines** tab of a microservice card on the home page if it is selected in the `microservice_repository_widget` slot of the mapping rules.
+The widget is displayed on the **Pipelines** tab of a microservice card on the Home page if it is selected in the `microservice_repository_widget` slot of the mapping rules.
 In this case, set the **Project ID** field to `{{ .context.repository.id }}`: the microservice card passes the project ID of its repository to the widget.
 
-## Authentication
+## Authorization
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

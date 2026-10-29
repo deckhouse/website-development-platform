@@ -10,12 +10,16 @@ and a description with Markdown support.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name       | Required | Description                                                        | Default value |
 | ---------- | -------- | ------------------------------------------------------------------ | ------------- |
 | URL        | Yes      | GitLab API URL used to retrieve data from GitLab                   | —             |
 | Project ID | Yes      | ID of the project from which the widget retrieves data. Example: `12345` | —             |
 
 ## Additional widget features
+
+In addition to displaying data, the widget supports the actions described below.
 
 ### Creating a release
 
@@ -29,6 +33,6 @@ The widget lets you create a release in GitLab directly from Deckhouse Developme
 
 The created release appears in the list automatically, and the latest release is highlighted.
 
-## Authentication
+## Authorization
 
 Authentication configuration is described in the [External services](../../external-services/#gitlab) section.

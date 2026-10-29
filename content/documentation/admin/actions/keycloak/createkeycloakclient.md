@@ -4,10 +4,8 @@ weight: 10
 ---
 
 {{< alert level="info" >}}
-This action requires the following credentials:
-
-- `username` — the username under which the action runs.
-- `password` — the password for that user.
+Running this action requires credentials: `username` (the username under which the action runs)
+and `password` (the password for that user).
 
 The portal obtains a token through the `admin-cli` client in the realm specified in `realm`, the same realm in which the client is created.
 The user must exist in that realm and have permission to create clients in it.
@@ -15,7 +13,9 @@ The user must exist in that realm and have permission to create clients in it.
 
 CreateKeycloakClient — creates a new client in Keycloak.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 realm: master
@@ -35,9 +35,11 @@ config:
   - offline_access
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name       | Required | Description                                                                                                                                                                       | Possible values                                                                                     |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| realm      | Yes      | Keycloak realm in which to create the client                                                                                                                                        | -                                                                                                   |
-| config     | Yes      | Parameters for the client to create, as defined in the [Keycloak ClientRepresentation specification](https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation) | -                                                                                                   |
+| `realm`    | Yes      | Keycloak realm in which to create the client                                                                                                                                        | —                                                                                                   |
+| `config`   | Yes      | Parameters for the client to create, as defined in the [Keycloak ClientRepresentation specification](https://www.keycloak.org/docs-api/latest/rest-api/index.html#ClientRepresentation) | —                                                                                                   |

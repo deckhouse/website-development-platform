@@ -4,11 +4,15 @@ description: Configure the Docker widget to browse container images, tags, and p
 weight: 70
 ---
 
-The widget displays available images in a Docker registry. It shows all available tags and the `docker pull` command. Search is supported.
+The widget displays available images in a Docker registry.
+It shows all available tags and the `docker pull` command.
+Search is supported.
 
 ## Configuration
 
-| Name | Required | Description                                                                                                            | Default |
+When adding the widget, specify the following parameters:
+
+| Name | Required | Description                                                                                                            | Default value |
 | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------- | ------- |
 | URL  | Yes      | Docker Registry URL used to retrieve available image data                                                              | —       |
 | Name | No       | Name of the repository from which the widget loads data. Example: `repo`. If omitted, all available images are loaded | —       |

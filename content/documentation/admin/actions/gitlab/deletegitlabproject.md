@@ -7,20 +7,25 @@ weight: 110
 This action requires a token for the user on whose behalf it will run.
 {{< /alert >}}
 
-DeleteGitlabProject — deletes an existing project in GitLab through the GitLab API. Authentication uses a GitLab token provided in the credentials.
+DeleteGitlabProject — deletes an existing project in GitLab through the GitLab API.
+Authentication uses a GitLab token provided in the credentials.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 project_id: 0
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name                        | Required | Description                                          |
 | --------------------------- | -------- | -------------------------------------------------------- |
-| project_id                  | Yes      | Identifier of the project to delete                       |
+| `project_id`                | Yes      | Identifier of the project to delete                       |
 
-### Note
+## GitLab API request
 
 The action performs a DELETE request to the URL: `/api/v4/projects/:id`.

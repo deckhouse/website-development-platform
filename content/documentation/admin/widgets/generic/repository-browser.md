@@ -8,7 +8,9 @@ The widget displays the structure and contents of files in GitLab, Bitbucket, an
 
 ## Configuration
 
-| Name         | Required | Description                                                    | Default |
+When adding the widget, specify the following parameters:
+
+| Name         | Required | Description                                                    | Default value |
 | ------------ | -------- | -------------------------------------------------------------- | ------- |
 | Provider     | Yes      | Service hosting the repository: GitLab, GitHub, or Bitbucket   | —       |
 | Branch / Tag | No       | Branch name, tag, or commit SHA                                | `main`  |
@@ -17,20 +19,26 @@ The widget displays the structure and contents of files in GitLab, Bitbucket, an
 
 ## GitLab configuration
 
-| Name       | Required | Description                              | Default |
+For GitLab, specify the following parameters:
+
+| Name       | Required | Description                              | Default value |
 | ---------- | -------- | ---------------------------------------- | ------- |
 | Project ID | Yes      | GitLab project ID, for example, `12345`  | —       |
 
 ## Bitbucket configuration
 
-| Name          | Required | Description                                              | Example | Default |
+For Bitbucket, specify the following parameters:
+
+| Name          | Required | Description                                              | Example | Default value |
 | ------------- | -------- | -------------------------------------------------------- | ------- | ------- |
 | Project key   | Yes      | Bitbucket project key, for example, `MYPROJ`             | `MYPROJ` | —       |
 | Repository ID | Yes      | Bitbucket repository ID, for example, `my-repo`          | `my-repo` | —       |
 
 ## GitHub configuration
 
-| Name             | Required | Description                                                                                                          | Default |
+For GitHub, specify the following parameters:
+
+| Name             | Required | Description                                                                                                          | Default value |
 | ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
 | Repository owner | Yes      | Repository owner: an organization or user. For `https://github.com/example/my-repo`, specify `example`              | —       |
 | Repository       | Yes      | Repository name without `.git`. For `https://github.com/example/my-repo`, specify `my-repo`                         | —       |

@@ -9,7 +9,9 @@ This action requires a token for the user on whose behalf it will run.
 
 CreateGitlabBranches — creates new branches in the target repository.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 project_id: '0'
@@ -18,16 +20,18 @@ branches:
     ref: main
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name              | Required | Description                                                                    |
 | ----------------- | -------- | -------------------------------------------------------------------------------- |
-| project_id        | Yes      | Identifier of the project in which to create the branches                        |
-| branches          | Yes      | List of branches to create                                                        |
-| branches.branch   | Yes      | Name of the new branch                                                            |
-| branches.ref      | Yes      | Name of an existing branch or a commit SHA                                        |
+| `project_id`      | Yes      | Identifier of the project in which to create the branches                        |
+| `branches`        | Yes      | List of branches to create                                                        |
+| `branches.branch` | Yes      | Name of the new branch                                                            |
+| `branches.ref`    | Yes      | Name of an existing branch or a commit SHA                                        |
 
-### Note
+## GitLab API request
 
 The action performs a POST request to the URL `/api/v4/projects/:id/repository/branches` for each branch in the list, in order.
 If GitLab does not create a branch, the action fails, and the branches created before it remain in the project.

@@ -4,19 +4,26 @@ description: Repository tag details and tag creation settings for GitHub.
 weight: 30
 ---
 
-The widget displays GitHub repository tags with commit information, including the author, date, and description. It can also create tags.
+The widget displays GitHub repository tags with commit information, including the author, date, and description.
+It can also create tags.
 
 ## Account and action initiator
 
-Requests to GitHub use the token from the credentials of the Deckhouse Development Portal (DDP) user on whose behalf the action is invoked. If **Select account for widget** is enabled in the widget settings, the selected portal user's credentials are used instead of the current user's credentials.
+Requests to GitHub use the token from the credentials of the Deckhouse Development Portal (DDP) user on whose behalf the action is invoked.
+If **Select account for widget** is enabled in the widget settings, the selected portal user's credentials are used instead of the current user's credentials.
 
-For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the portal user who performed the action, as defined in the DDP profile. If no name is specified, the email address may be used.
+For an annotated tag, where **Description** is provided, the annotation author fields (`tagger`) in the Git tag metadata are populated with the name and email address of the portal user who performed the action, as defined in the DDP profile.
+If no name is specified, the email address may be used.
 
-For a lightweight tag without a description, no separate Git tag author is set. The tag is created as a reference to a commit.
+For a lightweight tag without a description, no separate Git tag author is set.
+The tag is created as a reference to a commit.
 
-The API creates the tag using the GitHub account associated with the token. However, the `tagger` data comes from the DDP profile and may not match the GitHub login.
+The API creates the tag using the GitHub account associated with the token.
+However, the `tagger` data comes from the DDP profile and may not match the GitHub login.
 
 ## Configuration
+
+When adding the widget, specify the following parameters:
 
 | Name             | Required | Description                                           | Example                                                       |
 | ---------------- | -------- | ----------------------------------------------------- | ------------------------------------------------------------- |
@@ -25,9 +32,12 @@ The API creates the tag using the GitHub account associated with the token. Howe
 
 ## Displayed data
 
-The table displays the tag, description, commit author, commit link, and commit creation date. The **View** action displays the commit description for each tag.
+The table displays the tag, description, commit author, commit link, and commit creation date.
+The **View** action displays the commit description for each tag.
 
 ## Additional widget features
+
+In addition to displaying data, the widget supports the actions described below.
 
 ### Creating a tag
 
@@ -43,7 +53,7 @@ The widget can create tags in GitHub. Specify the following fields in the **Crea
 Creating tags requires write permissions in the GitHub repository.
 {{< /alert >}}
 
-## Authentication
+## Authorization
 
 Authentication is described in [External services](../../external-services/#github).
 In the external service settings, set **URL** to `https://api.github.com`.

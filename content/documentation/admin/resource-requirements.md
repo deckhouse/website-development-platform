@@ -100,7 +100,7 @@ switch to the profiles with user load.
 Select a profile by the expected number of active users and the catalog size.
 In the examples, one running process has two steps active at the same time,
 each of which takes one worker slot.
-Background tasks include data source synchronizations, status checks and other operations from the shared queue:
+Background tasks include datasource synchronizations, status checks and other operations from the shared queue:
 
 | Scenario parameter | 10 users | 100 users | 200 users | 500 users | 1000 users |
 | --- | --- | --- | --- | --- | --- |
@@ -285,7 +285,7 @@ Before selecting a profile, collect the following parameters:
 | --- | --- | --- |
 | User activity | Number of active users, request rate, catalog search and filtering, number of open widgets | API and PostgreSQL. Widgets also call external systems |
 | Process execution | Number of processes running at the same time, parallel branches, action duration, size of the context and results | API keeps the execution state. Workers run the tasks. PostgreSQL stores the run records |
-| Catalog synchronization | Number of data sources, schedule, number and size of objects in one fetch, entity matching and relation creation | Worker memory and CPU, PostgreSQL, external APIs |
+| Catalog synchronization | Number of datasources, schedule, number and size of objects in one fetch, entity matching and relation creation | Worker memory and CPU, PostgreSQL, external APIs |
 | Status checks | Number of entities and rules, frequency, check duration | Workers and external systems |
 | Property history | Number of changes, size of the old and new value, retention period, queries over long periods | PostgreSQL before the transfer, ClickHouse after the transfer, background worker operations |
 | Events and task exchange | Rate and size of events, number of streams, queue length, locks, size of results and number of task completions | Redis: CPU, memory and disk. PostgreSQL stores the events |

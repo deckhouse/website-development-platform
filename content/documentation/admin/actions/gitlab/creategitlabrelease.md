@@ -9,7 +9,9 @@ This action requires a token for the user on whose behalf it will run.
 
 CreateGitlabRelease — creates a GitLab release based on an existing tag.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 project_id: '0'
@@ -21,15 +23,17 @@ description: |
   - Bug fixes.
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name           | Required | Description                                                                                   |
 | -------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| project_id     | Yes      | Identifier of the project in which to create the release                                          |
-| tag_name       | Yes      | Name of the existing tag on which the release will be based                                       |
-| name           | Yes      | Name of the release as displayed in GitLab                                                        |
-| description    | No       | Release description in Markdown format                                                           |
+| `project_id`   | Yes      | Identifier of the project in which to create the release                                          |
+| `tag_name`     | Yes      | Name of the existing tag on which the release will be based                                       |
+| `name`         | Yes      | Name of the release as displayed in GitLab                                                        |
+| `description`  | No       | Release description in Markdown format                                                           |
 
-### Note
+## GitLab API request
 
 The action performs a POST request to the URL: `/api/v4/projects/:id/releases`.

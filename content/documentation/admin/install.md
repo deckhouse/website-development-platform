@@ -4,19 +4,24 @@ description: Install Deckhouse Development Portal with internal, external, or ma
 weight: 11
 ---
 
-Deckhouse Development Portal (DDP) is installed by the `development-platform` module in a Deckhouse Platform cluster. Before installing it, check the [resource requirements](resource-requirements/).
+Deckhouse Development Portal (DDP) is installed by the `development-platform` module in a Deckhouse Platform cluster.
+Before installing it, check the [resource requirements](resource-requirements/).
 
-Managed instances are recommended for [demo installations](#installation-with-managed-instances); [external instances](#installation-with-external-instances) are recommended for production. [Internal instances](#installation-with-internal-instances) are available as a separate installation option.
+Managed instances are recommended for [demo installations](#installation-with-managed-instances); [external instances](#installation-with-external-instances) are recommended for production.
+[Internal instances](#installation-with-internal-instances) are available as a separate installation option.
 
 Set `managed`, `external` or `internal` separately for PostgreSQL, Redis and ClickHouse; modes can be combined.
 
-The `postgres.mode`, `redis.mode` and `clickhouse.mode` parameters are required and have no default value. Without them, installation and upgrade fail settings validation.
+The `postgres.mode`, `redis.mode` and `clickhouse.mode` parameters are required and have no default value.
+Without them, installation and upgrade fail settings validation.
 
-ClickHouse stores the historical data of the portal. To run without features that require ClickHouse, explicitly set `clickhouse.mode: external` and leave `clickhouse.host` empty, as described [below](#running-without-clickhouse).
+ClickHouse stores the historical data of the portal.
+To run without features that require ClickHouse, explicitly set `clickhouse.mode: external` and leave `clickhouse.host` empty, as described [below](#running-without-clickhouse).
 
 ## Installation with managed instances
 
-In the `managed` mode, the module creates PostgreSQL, Valkey (Redis-compatible) and ClickHouse instances. Before installing DDP, the corresponding Deckhouse modules must be enabled in the cluster for each service with `mode: managed`:
+In the `managed` mode, the module creates PostgreSQL, Valkey (Redis-compatible) and ClickHouse instances.
+Before installing DDP, the corresponding Deckhouse modules must be enabled in the cluster for each service with `mode: managed`:
 
 | DDP setting | Module that must be enabled |
 |---|---|
@@ -76,9 +81,12 @@ spec:
       mode: managed
 ```
 
-With `mode: managed`, the connection host and port are resolved automatically. The `host`, `port` and `image` parameters are not used in this mode.
+With `mode: managed`, the connection host and port are resolved automatically.
+The `host`, `port` and `image` parameters are not used in this mode.
 
-Set instance resources in `instance.cpu`, `instance.memory` and `instance.persistentVolumeClaim`. Select the class with `instance.className`, `default` by default; it defines allowed sizes and placement of the instance. Specify memory and disk sizes as Kubernetes quantities, such as `512Mi` or `20Gi`.
+Set instance resources in `instance.cpu`, `instance.memory` and `instance.persistentVolumeClaim`.
+Select the class with `instance.className`, `default` by default; it defines allowed sizes and placement of the instance.
+Specify memory and disk sizes as Kubernetes quantities, such as `512Mi` or `20Gi`.
 
 Example of PostgreSQL resource settings:
 
@@ -101,7 +109,8 @@ The disk size can only be increased, and only if the StorageClass supports volum
 
 ## Installation with external instances
 
-For production, connect existing PostgreSQL, Redis and ClickHouse instances with `mode: external`. The sections are independent: the other services can explicitly use `internal` or `managed`.
+For production, connect existing PostgreSQL, Redis and ClickHouse instances with `mode: external`.
+The sections are independent: the other services can explicitly use `internal` or `managed`.
 
 ### Connecting external PostgreSQL
 
@@ -135,7 +144,8 @@ spec:
 
 #### pg_trgm extension
 
-The portal requires the PostgreSQL `pg_trgm` extension. If you use an external PostgreSQL instance, enable it before starting DDP: connect to the database as a user with permission to create extensions and run:
+The portal requires the PostgreSQL `pg_trgm` extension.
+If you use an external PostgreSQL instance, enable it before starting DDP: connect to the database as a user with permission to create extensions and run:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -215,7 +225,8 @@ spec:
 
 ## Installation with internal instances
 
-With `mode: internal`, the module deploys PostgreSQL, Redis and ClickHouse in the cluster. Enable `development-platform` with [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig), specifying the super administrator, the encryption key and the mode of each service:
+With `mode: internal`, the module deploys PostgreSQL, Redis and ClickHouse in the cluster.
+Enable `development-platform` with [ModuleConfig](/products/kubernetes-platform/documentation/v1/reference/api/cr.html#moduleconfig), specifying the super administrator, the encryption key and the mode of each service:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -238,13 +249,17 @@ spec:
       mode: internal
 ```
 
-The web interface address is built from the `publicDomainTemplate` cluster parameter and the `domain.prefix` module parameter, `ddp` by default. For example, with `publicDomainTemplate: "%s.example.com"`, the web interface is available at `https://ddp.example.com`. To use another domain, set `domain.useCustomDomain` and `domain.customDomain`. All parameters are listed in the [module settings](/modules/development-platform/configuration.html).
+The web interface address is built from the `publicDomainTemplate` cluster parameter and the `domain.prefix` module parameter, `ddp` by default.
+For example, with `publicDomainTemplate: "%s.example.com"`, the web interface is available at `https://ddp.example.com`.
+To use another domain, set `domain.useCustomDomain` and `domain.customDomain`.
+All parameters are listed in the [module settings](/modules/development-platform/configuration.html).
 
 This option deploys services through the module itself, without managed operators.
 
 ### Configuring internal instances (optional)
 
-To pull internal PostgreSQL, Redis and ClickHouse images from a private registry, create a Secret of the `kubernetes.io/dockerconfigjson` type with the registry credentials in the `d8-development-platform` namespace. Set the images in the `image` parameters and the Secret name in `additionalImagePullSecrets`:
+To pull internal PostgreSQL, Redis and ClickHouse images from a private registry, create a Secret of the `kubernetes.io/dockerconfigjson` type with the registry credentials in the `d8-development-platform` namespace.
+Set the images in the `image` parameters and the Secret name in `additionalImagePullSecrets`:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -274,11 +289,15 @@ spec:
 
 ## ClickHouse
 
-ClickHouse stores historical data, such as the history of entity property changes. Select `internal` for an instance deployed by the module, `managed` to create an instance with the `managed-clickhouse` module, or `external` to connect to an existing server. Use an external instance for production.
+ClickHouse stores historical data, such as the history of entity property changes.
+Select `internal` for an instance deployed by the module, `managed` to create an instance with the `managed-clickhouse` module, or `external` to connect to an existing server.
+Use an external instance for production.
 
 ### Internal ClickHouse instance
 
-To deploy ClickHouse as part of the module, explicitly set `clickhouse.mode: internal`. The following example pulls the image from a private registry; first create the `custom-registry-secret` Secret with the registry credentials in the `d8-development-platform` namespace. The `host` parameter is not used in this mode:
+To deploy ClickHouse as part of the module, explicitly set `clickhouse.mode: internal`.
+The following example pulls the image from a private registry; first create the `custom-registry-secret` Secret with the registry credentials in the `d8-development-platform` namespace.
+The `host` parameter is not used in this mode:
 
 ```yaml
 apiVersion: deckhouse.io/v1alpha1
@@ -307,7 +326,9 @@ spec:
       - custom-registry-secret
 ```
 
-In this mode, the portal deploys one ClickHouse instance with `10Gi` of persistent storage. The database is created on the first start with an empty volume. After restoring data from a backup or changing the `database` parameter, create the database manually as described [below](#creating-the-clickhouse-database).
+In this mode, the portal deploys one ClickHouse instance with `10Gi` of persistent storage.
+The database is created on the first start with an empty volume.
+After restoring data from a backup or changing the `database` parameter, create the database manually as described [below](#creating-the-clickhouse-database).
 
 ### External ClickHouse instance
 
@@ -347,13 +368,16 @@ Create the database before connecting an external instance: the portal applies s
 
 With `mode: managed`, the module creates the database automatically.
 
-When connecting an external instance, create the database before starting DDP. Replace `ddp` with the value of `clickhouse.database`:
+When connecting an external instance, create the database before starting DDP.
+Replace `ddp` with the value of `clickhouse.database`:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS ddp;
 ```
 
-With `mode: internal`, the database is created on the first start with an empty volume. If the volume already contains data or you change the `database` parameter, create the database manually. Replace `ddp` with the database name:
+With `mode: internal`, the database is created on the first start with an empty volume.
+If the volume already contains data or you change the `database` parameter, create the database manually.
+Replace `ddp` with the database name:
 
 ```shell
 d8 k -n d8-development-platform exec clickhouse-0 -c clickhouse -- \
@@ -374,18 +398,23 @@ In this case, the features that depend on ClickHouse are unavailable: for exampl
 
 ### Data delivery to ClickHouse
 
-The portal workers deliver data from PostgreSQL to ClickHouse and clean it up afterwards, so at least one running worker is required to transfer data. Delivery parameters are set in the `clickhouse.replication` section, the property history retention period and the cleanup interval are set in the `clickhouse.propertyHistory` section.
+The portal workers deliver data from PostgreSQL to ClickHouse and clean it up afterwards, so at least one running worker is required to transfer data.
+Delivery parameters are set in the `clickhouse.replication` section, the property history retention period and the cleanup interval are set in the `clickhouse.propertyHistory` section.
 
 ## Changing the encryption key
 
-DDP encrypts stored credentials with the key from the `security.secretKey` parameter. Replacing the key without re-encryption makes stored data unavailable.
+DDP encrypts stored credentials with the key from the `security.secretKey` parameter.
+Replacing the key without re-encryption makes stored data unavailable.
 
 To change the key:
 
-1. In the DDP web interface, open "Administration" → "Credentials" and click "Rotate encryption key". The button is available to users with the `rotate:encryption-key` permission.
+1. In the DDP web interface, open "Administration" → "Credentials" and click "Rotate encryption key".
+   The button is available to users with the `rotate:encryption-key` permission.
 1. Enter the current key in "Old encryption key" and the new key in "New encryption key", then click "Re-encrypt".
 1. Check that the results table has no records in the "Failed" column.
-1. Set the new key in the `security.secretKey` parameter of ModuleConfig `development-platform`. The DDP pods restart automatically.
+1. Set the new key in the `security.secretKey` parameter of ModuleConfig `development-platform`.
+   The DDP pods restart automatically.
 
-Stored credentials are unavailable between re-encryption and the pod restart with the new key. Changing the key invalidates current user sessions.
+Stored credentials are unavailable between re-encryption and the pod restart with the new key.
+Changing the key invalidates current user sessions.
 The full procedure and operation results are described in the [key rotation guide](security/encryption-key-rotation/).

@@ -32,6 +32,8 @@ The query runs at the end of this time range.
 
 ## Configuration
 
+When adding the widget, specify the following parameters:
+
 | Name                         | Required | Description                                                                                                             | Default value |
 | ---------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- |
 | URL                          | Yes      | Prometheus URL                                                                                                          | —             |

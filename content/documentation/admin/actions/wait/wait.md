@@ -3,9 +3,12 @@ title: Wait
 weight: 10
 ---
 
-Wait pauses execution for a specified number of seconds and can optionally add a random duration (jitter). It is intended for use in processes as a delay element, including while waiting for the results of a previous action to be applied.
+Wait pauses execution for a specified number of seconds and can optionally add a random duration (jitter).
+It is intended for use in processes as a delay element, including while waiting for the results of a previous action to be applied.
 
-### Request example
+## Request example
+
+Example of the action request body:
 
 ```yaml
 duration_seconds: 10
@@ -13,17 +16,19 @@ max_jitter_seconds: 0
 description: "Waiting for release"
 ```
 
-### Request specification
+## Request specification
+
+The action request body supports the following parameters:
 
 | Name                  | Required | Description                                                                        | Default value          |
 | --------------------- | -------- | ------------------------------------------------------------------------------------- | ---------------------- |
-| duration_seconds      | No       | Base wait duration in seconds, from `0` to `86400` (24 hours)                           | `0`                    |
-| max_jitter_seconds    | No       | Maximum random addition to the wait time in seconds (0–N). 0 disables jitter            | `0`                    |
-| description           | No       | Description shown in the logs and the action's response                                | -                      |
+| `duration_seconds`    | No       | Base wait duration in seconds, from `0` to `86400` (24 hours)                           | `0`                    |
+| `max_jitter_seconds`  | No       | Maximum random addition to the wait time in seconds (0–N). 0 disables jitter            | `0`                    |
+| `description`         | No       | Description shown in the logs and the action's response                                | —                      |
 
 The total wait time, including jitter, does not exceed 86400 seconds.
 
-### Response
+## Response
 
 The action returns the following fields:
 

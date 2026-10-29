@@ -4,11 +4,12 @@ description: Monitor entity events, Redis streams, and event trends with the Eve
 weight: 140
 ---
 
-The widget displays statistics about events involving entities in Deckhouse Development Portal (DDP). It contains three tabs:
+The widget displays statistics about events involving entities in Deckhouse Development Portal (DDP).
+It contains three tabs:
 
-1. **Event statistics** — A chart showing the number of events by type over the selected time range, with configurable time grouping.
-1. **Top entities** — A table of entities that generated the most events.
-1. **Redis events** — A table of Redis event streams. For each stream, it shows:
+1. **Event statistics**: A chart showing the number of events by type over the selected time range, with configurable time grouping.
+1. **Top entities**: A table of entities that generated the most events.
+1. **Redis events**: A table of Redis event streams. For each stream, it shows:
    - The stream name, which you can select to view all events.
    - The resource associated with the stream.
    - The number of events in the stream.
@@ -16,7 +17,9 @@ The widget displays statistics about events involving entities in Deckhouse Deve
 
 ## Query parameters
 
-| Name         | Required | Description                                                                            | Default      |
+The widget supports the following query parameters:
+
+| Name         | Required | Description                                                                            | Default value |
 | ------------ | -------- | -------------------------------------------------------------------------------------- | ------------ |
 | Date from    | Yes      | Start date for selecting events                                                        | 3 days ago   |
 | Date to      | Yes      | End date for selecting events                                                          | Current date |
@@ -28,11 +31,13 @@ The widget displays statistics about events involving entities in Deckhouse Deve
 
 The widget supports the following event types:
 
-- `ENTITY_CREATED` — Entity created.
-- `ENTITY_UPDATED` — Entity updated.
-- `ENTITY_DELETED` — Entity deleted.
+- `ENTITY_CREATED`: Entity created.
+- `ENTITY_UPDATED`: Entity updated.
+- `ENTITY_DELETED`: Entity deleted.
 
 ### Behavior
+
+The widget has the following specifics:
 
 - The chart shows events over the selected time range with configurable time grouping. The default grouping is by hour.
 - The table displays all events for each entity without date filtering.
