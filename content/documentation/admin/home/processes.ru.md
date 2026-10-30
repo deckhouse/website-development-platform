@@ -103,7 +103,7 @@ properties:
 | --- | --- |
 | `.context.template.id` | Идентификатор шаблона микросервиса |
 | `.context.template.version` | Целевая версия шаблона — последняя доступная |
-| `.context.upgrade.strategy` | Стратегия обновления: значение роли `microservice_binding_template_upgrade_strategy` микросервиса, если оно задано, иначе стратегия из пакета шаблона |
+| `.context.upgrade.strategy` | Стратегия обновления: значение управляемого параметра `ddp_template_upgrade_strategy` микросервиса, если оно задано, иначе стратегия из пакета шаблона |
 | `.context.upgrade.overwrite` | Перезаписываемые пути: значение микросервиса или пакета |
 | `.context.upgrade.add_if_missing` | Добавляемые пути: значение микросервиса или пакета |
 | `.context.review.title` | Заголовок запроса на слияние: `Upgrade <template_id> to <version>` |

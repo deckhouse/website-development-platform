@@ -29,15 +29,15 @@ updateAddIfMissing:
 
 ### Спецификация запроса
 
-Незаданные поля `templateId`, `templatePackSource`, `targetRepositoryUrl` и `targetBranch` заполняются из параметров сущности микросервиса по ролям [правил маппинга](../../home/mapping/#микросервисы).
+Незаданные `templateId` и `templatePackSource` заполняются из управляемых параметров сущности микросервиса. Поля `targetRepositoryUrl` и `targetBranch` заполняются по ролям [правил маппинга](../../home/mapping/#микросервисы).
 
 | Название                 | Обязательность | Описание                                                                                 | Значение по умолчанию |
 | ------------------------ | -------------- | ---------------------------------------------------------------------------------------- | --------------------- |
 | targetRepositoryUrl      | Да             | HTTPS-адрес репозитория микросервиса                                                      | Роль `microservice_repository` |
 | targetBranch             | Нет            | Ветка, от которой создаётся ветка обновления                                              | Роль `microservice_default_branch`, затем «Ветка по умолчанию» реестра шаблонов, затем `main` |
 | sourceBranch             | Нет            | Ветка, в которую записываются изменения                                                   | `<префикс ветки обновления><версия>`, например `ddp/template-upgrade-1.3.0` |
-| templateId               | Да             | Идентификатор шаблона                                                                     | Роль `microservice_binding_template_id` |
-| templatePackSource       | Да             | Название подключения в реестре шаблонов                                                   | Роль `microservice_binding_template_source` |
+| templateId               | Да             | Идентификатор шаблона                                                                     | Параметр `ddp_template_id` |
+| templatePackSource       | Да             | Название подключения в реестре шаблонов                                                   | Параметр `ddp_template_source` |
 | templateVersion          | Нет            | Целевая версия шаблона в формате semver                                                   | Последняя версия шаблона |
 | upgradeStrategy          | Нет            | Стратегия обновления: `selective`, `additive`, `selective_additive`, `full` или `merge`   | Параметр микросервиса, затем стратегия пакета, затем `selective` |
 | updateOverwrite          | Нет            | Glob-шаблоны перезаписываемых путей                                                       | Параметр микросервиса, затем список пакета |
