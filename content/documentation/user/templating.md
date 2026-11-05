@@ -418,7 +418,7 @@ where:
 - `property` — indicates that an action parameter is being accessed.
 - `<PROPERTY_SLUG>` — the identifier of the parameter whose value should be substituted.
 
-Parameter identifiers can be viewed on the "User form" tab in the action configuration window.
+Parameter identifiers can be viewed on the [Properties](../admin/actions/overview/#properties) tab in the action configuration window.
 
 Usage examples:
 

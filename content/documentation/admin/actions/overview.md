@@ -105,11 +105,11 @@ With this request body, the expression `{{ .property.project_id }}` is replaced 
 
 For built-in actions, the "Request body" parameter is part of the action configuration, and a configuration example is available.
 
-### User form
+### Properties
 
-#### Parameters
+#### Property settings
 
-The "User form" section specifies the parameters that the user can fill in when launching the action. Property types are described in the [Properties](../../user/properties/) section.
+The "Properties" tab specifies the parameters that the user can fill in when launching the action. Property types are described in the [Properties](../../user/properties/) section.
 
 The following options are available for each parameter:
 
