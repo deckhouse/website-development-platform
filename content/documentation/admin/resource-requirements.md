@@ -11,11 +11,11 @@ Allocate the following CPU, memory and disk for the installation scenarios:
 | Profile | DDP: CPU / memory | PostgreSQL: CPU / memory / disk | Redis: CPU / memory / disk | ClickHouse: CPU / memory / disk |
 | --- | --- | --- | --- | --- |
 | Demo installation | 4 CPU / 8 GB | 2 CPU / 4 GB / 20 GB | 1 CPU / 2 GB / 10 GB | 2 CPU / 8 GB / 50 GB |
-| 10 users | 8 CPU / 32 GB | 2 CPU / 8 GB / 32 GB | 2 CPU / 4 GB / 16 GB | 4 CPU / 16 GB / 64 GB |
-| 100 users | 16 CPU / 32 GB | 2 CPU / 16 GB / 64 GB | 2 CPU / 8 GB / 16 GB | 4 CPU / 16 GB / 64 GB |
-| 200 users | 16 CPU / 64 GB | 2 CPU / 16 GB / 64 GB | 2 CPU / 16 GB / 32 GB | 4 CPU / 16 GB / 128 GB |
-| 500 users | 32 CPU / 64 GB | 4 CPU / 64 GB / 256 GB | 2 CPU / 32 GB / 64 GB | 4 CPU / 16 GB / 256 GB |
-| 1000 users | 32 CPU / 128 GB | 16 CPU / 64 GB / 512 GB | 2 CPU / 32 GB / 128 GB | 4 CPU / 32 GB / 512 GB |
+| 10 users | 4 CPU / 8 GB | 2 CPU / 4 GB / 32 GB | 2 CPU / 4 GB / 16 GB | 4 CPU / 8 GB / 64 GB |
+| 100 users | 8 CPU / 16 GB | 2 CPU / 8 GB / 64 GB | 2 CPU / 8 GB / 16 GB | 4 CPU / 8 GB / 64 GB |
+| 200 users | 12 CPU / 24 GB | 2 CPU / 16 GB / 64 GB | 2 CPU / 16 GB / 32 GB | 4 CPU / 8 GB / 128 GB |
+| 500 users | 16 CPU / 32 GB | 4 CPU / 32 GB / 256 GB | 2 CPU / 32 GB / 64 GB | 4 CPU / 16 GB / 256 GB |
+| 1000 users | 20 CPU / 40 GB | 16 CPU / 64 GB / 512 GB | 2 CPU / 32 GB / 128 GB | 4 CPU / 32 GB / 512 GB |
 
 The DDP budget includes the API, the web interface, the platform AI agent and workers.
 The `managed` mode is recommended for databases in the demo installation; the `external` mode is recommended for the other profiles.
@@ -158,21 +158,22 @@ Plan further disk expansion.
 
 ## DDP component resources
 
-For the 10–1000-user profiles, the budget is made up of the following component resources.
-The table lists approximate values per instance before rounding:
+The budget depends on the number of workers `N`: `2 + 2 × N` CPU and `4 + 4 × N` GB of memory.
+The fixed part covers the API, the web interface and the platform AI agent; the rest covers the workers.
+The 100–1000-user profiles add a margin of 2 CPU and 4 GB of memory to the result
+because the API runs in one replica and its load grows with the number of active users:
 
-| Component | CPU | Memory |
-| --- | --- | --- |
-| API (`backend`) | 4 CPU | 8.59 GB |
-| Web interface (`frontend`) | 1 CPU | 2.15 GB |
-| Platform AI agent (`agent`) | 1 CPU | 1.07 GB |
-| One worker (`worker`) | 2 CPU | 8.59 GB |
+| Profile | Number of workers | Calculation | DDP budget |
+| --- | --- | --- | --- |
+| 10 users | 1 | 4 CPU / 8 GB | 4 CPU / 8 GB |
+| 100 users | 2 | 6 CPU / 12 GB | 8 CPU / 16 GB |
+| 200 users | 4 | 10 CPU / 20 GB | 12 CPU / 24 GB |
+| 500 users | 6 | 14 CPU / 28 GB | 16 CPU / 32 GB |
+| 1000 users | 8 | 18 CPU / 36 GB | 20 CPU / 40 GB |
 
-For `N` workers, the sum of the resources of the API, the web interface, the AI agent and the workers is
-`6 + 2 × N` CPU and about `11.81 + 8.59 × N` GB of memory.
-For example, for two workers the sum for the portal is `6 + 2 × 2 = 10` CPU
-and approximately `11.81 + 8.59 × 2 = 28.99` GB of memory.
-After rounding up, the budget is 16 CPU and 32 GB of memory without the databases.
+The budget is an estimate.
+After the installation, compare it with the actual consumption of the pods and switch to the next profile if needed.
+If the catalog is larger than in the profile scenario or synchronizations process large fetches, select the next profile as well.
 
 ## Database CPU and memory sizing
 
@@ -213,7 +214,8 @@ The working set volume is multiplied by 1.5 for indexes and caching.
 The sizing additionally adds a service margin of 2 GB,
 32 MB for the reads of each active user
 and 8 MB for each of the 10 parallel updates of one background task.
-The minimum memory budget in the model is 8 GB.
+The result is rounded up to a power of two.
+The minimum memory budget in the model is 4 GB.
 Account for parallel operations and connections in the PostgreSQL settings as well.
 PostgreSQL consumes the memory for sorts and hash operations per operation, as described
 in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-resource.html).
@@ -263,12 +265,12 @@ the estimated consumption is about 0.32 CPU.
 After multiplying by 4, the consumption stays below the minimum budget of the model, 4 CPU.
 Therefore, the CPU is the same in the listed profiles.
 
-The memory sizing is made up of 8 GB of service margin,
+The memory sizing is made up of 4 GB of service margin,
 0.5 GB per user who views the history at the same time
 and a cache of 25% of the history volume for the last month.
 The sizing additionally accounts for four copies of a batch of 10,000 records during insert processing.
-The minimum memory budget in the model is 16 GB.
-For the 1000-user profile, the sizing gives about 22 GB and is rounded up to 32 GB.
+The minimum memory budget in the model is 8 GB.
+For the 1000-user profile, the sizing gives about 18 GB and is rounded up to 32 GB.
 The memory consumption of reads and merges depends on the query, not only on the number of returned rows.
 The dependency of resources on queries is described
 in the [ClickHouse recommendations](https://clickhouse.com/docs/guides/oss/best-practices/sizing-and-hardware-recommendations).
