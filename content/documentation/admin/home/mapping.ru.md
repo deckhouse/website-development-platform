@@ -105,20 +105,19 @@ description: Справочник по наборам маппинга глав�
 
 | Область | Раздел главной | Роль ресурса | Роли связей | Роли свойств | Слоты |
 | --- | --- | --- | --- | --- | --- |
-| «Системы» | «Системы» | `system` | `has_ingress`, `system_has_deployment`, `system_has_integration` | `system_domain`, `system_lifecycle` | — |
+| «Системы» | «Системы» | `system` | `has_ingress`, `system_has_deployment`, `system_has_integration` | `system_lifecycle` | — |
 | «Микросервисы» | «Микросервисы» | `microservice` (несколько ресурсов) | `contains_service`, `has_deployment` | `microservice_*` | `deploy_microservice`, `delete_microservice`; действия по шаблонам; слоты виджетов |
 | «Окружения» | «Окружения» | `environment` | `environment_hosts_ingress` | `environment_type`, `environment_ttl`, `environment_marked_for_deletion`, `environment_domain` | `create_environment`, `delete_environment` |
 | «Общие ресурсы» | «Заказ ресурсов» | `shared_resource` (несколько ресурсов) | `contains_shared`, `shared_has_deployment` | `shared_environment`, `shared_kind`, `shared_provider` | `order_resource`, `connect_shared_resource`, `disconnect_shared_resource`, `delete_shared_resource` |
 | «Развёртывания» | «Развертывание систем» | `deployment` | `deployment_in_environment` | `deployment_*` | — |
 | «Ingress» | «Развертывание систем» | `ingress` | `ingress_routes_to` | `ingress_host`, `ingress_routes` | — |
 | «Кластеры» | «Кластеры и сети» | `cluster` | `cluster_hosts_environment` | `cluster_region`, `cluster_provider` | — |
-| «Гайды» | «Как работает платформа» | `guide` | — | `guide_category`, `guide_video_url`, `guide_doc_url` | — |
 | «Интеграции» | «Интеграции» | `integration` | `integration_targets_system` | `integration_criticality`, `integration_link_type` | — |
 | «Пространства в системе контроля версий» | «Создать микросервис» | `vcs_namespace` | — | `vcs_namespace_id` | — |
 
 Если в наборе есть ключи, которые не относятся к известным областям, форма показывает их в области «Прочее».
 
-Разделы «Команды», «Диаграммы» и «Потребление ресурсов» собственных областей не имеют и используют роли других областей.
+Разделы «Команды» и «Потребление ресурсов» собственных областей не имеют и используют роли других областей.
 
 ## Роли ресурсов
 
@@ -133,7 +132,6 @@ description: Справочник по наборам маппинга глав�
 | `deployment` | «Развёртывание» | Развёртывания микросервисов и систем на окружениях | «Deployments» (`kubernetes-deployments`) |
 | `ingress` | «Ingress» | Точки входа на схеме развёртывания | «Ingresses» (`kubernetes-ingresses`) |
 | `cluster` | «Кластер» | Кластеры, в которых размещены окружения | «Кластеры» (`clusters`) |
-| `guide` | «Гайд» | Карточки раздела «Как работает платформа» | «Справка» (`guides`) |
 | `integration` | «Интеграция» | Интеграции между системами | «Интеграции» (`integrations`) |
 | `vcs_namespace` | «Пространство в системе контроля версий» | Группы, в которых создаются репозитории микросервисов | «Groups» (`gitlab-groups`) |
 
@@ -164,23 +162,19 @@ description: Справочник по наборам маппинга глав�
 
 Роль свойства содержит идентификатор параметра сущности. Параметр выбирается из параметров ресурса родительской роли: для `system_*` — ресурса роли `system`, для `microservice_*` — ресурса роли `microservice` и т. д.
 
-### Системы, интеграции, кластеры, гайды
+### Системы, интеграции и кластеры
 
-Роли свойств систем, интеграций, кластеров и гайдов:
+Роли свойств систем, интеграций и кластеров:
 
 | Роль | Название в форме | Где отображается | Каноничный параметр |
 | --- | --- | --- | --- |
-| `system_domain` | «Домен системы» | Дерево «Домены» в разделе «Системы», колонка «Домен» в разделе «Микросервисы» | `domain` |
-| `system_lifecycle` | «Жизненный цикл системы» | «Жизненный цикл» на вкладке «Справка» системы | `lifecycle` |
-| `integration_criticality` | «Критичность интеграции» | «Критичность» интеграции, карточка «Критичные связи» | `criticality` |
+| `system_lifecycle` | «Жизненный цикл системы» | Жизненный цикл в профиле системы и фильтр списка | `lifecycle` |
+| `integration_criticality` | «Критичность интеграции» | Критичность в профиле интеграции и фильтр списка | `criticality` |
 | `integration_link_type` | «Тип связи интеграции» | «Тип связи» интеграции | `link_type` |
 | `cluster_region` | «Регион кластера» | Карточка кластера | `region` |
 | `cluster_provider` | «Провайдер кластера» | Карточка кластера | `provider` |
-| `guide_category` | «Категория гайда» | Группировка и фильтр гайдов | `category` |
-| `guide_video_url` | «URL видео гайда» | Кнопка «Смотреть видео» | `video_url` |
-| `guide_doc_url` | «URL документации гайда» | Кнопка «Открыть документацию» | `doc_url` |
 
-Интеграция считается критичной, если значение параметра `integration_criticality` равно `high` без учёта регистра.
+Критичность описывает значение интеграции для системы; результаты проверок её состояния отображаются отдельно.
 
 ### Микросервисы
 

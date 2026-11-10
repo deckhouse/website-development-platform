@@ -26,7 +26,6 @@ description: Настройка правил маппинга главной DDP
 | Роль | Объект каталога |
 | --- | --- |
 | `system` | Ресурс «Продукты» |
-| `system_domain` | Параметр `domain` ресурса «Продукты» |
 | `system_lifecycle` | Параметр `status` ресурса «Продукты» |
 | `microservice` | Ресурс «Сервисы» |
 | `microservice_language` | Параметр `lang` ресурса «Сервисы» |
