@@ -83,12 +83,12 @@ flowchart LR
 | Группа | Раздел | Роли ресурсов | Слоты действий и действия по шаблонам |
 | --- | --- | --- | --- |
 | AI-инструменты | [«Рабочие пространства»](../../user/workspaces/) | Правила маппинга не требуются | — |
+| AI-инструменты | [«Приложения»](../ai-pdlc/) | `microservice`, `environment`; возможность AI PDLC | Процесс изменения; создание и развёртывание по шаблону |
+| AI-инструменты | [«Решения»](../processes/decisions/) | Правила маппинга не требуются | — |
 | Организация | «Команды» | Команды портала; `system`, `microservice` | — |
 | Архитектура | «Системы» | `system`, `microservice`, `shared_resource`, `deployment`, `environment`, `cluster`, `integration` | — |
 | Архитектура | «Интеграции» | `system`, `integration` | — |
-| Архитектура | «Диаграммы» | `system`, `microservice`, `shared_resource` | — |
 | Архитектура | «Кластеры и сети» | `cluster`, `environment` | — |
-| Архитектура | «Как работает платформа» | `guide` | — |
 | Разработка | «Создать микросервис» | `system`, `vcs_namespace` | Действие по шаблону «Создать микросервис» |
 | Разработка | «Микросервисы» | `microservice`, `system`, `shared_resource`, `deployment`, `environment`, `cluster` | Действие по шаблону «Обновить микросервис из шаблона»; слоты виджетов вкладок «Пайплайны» и «MRs» |
 | Разработка | «Развертывание систем» | `system`, `microservice`, `environment`, `shared_resource`, `ingress`, `deployment` | `deploy_microservice`, `delete_microservice`, `order_resource`, `connect_shared_resource`, `disconnect_shared_resource`, `delete_shared_resource`; действия по шаблону «Развернуть микросервис на окружение» и «Удалить микросервис с окружения» |
