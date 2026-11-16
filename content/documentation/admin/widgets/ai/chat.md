@@ -22,10 +22,12 @@ Configure the following fields for each quick question:
 
 When writing a prompt, explicitly specify the names of the Model Context Protocol (MCP) tools that the model must call to prepare the response.
 
+To make the platform agent call `ddp_curated_get_external_data` from the prompt, include `curated_get_external_data` in the agent's MCP collection and grant the user access to this tool through the collection.
+
 Example prompt for a quick question:
 
 ```text
-1. Call the MCP tool get_external_data for the external service "Deckhouse Code" and retrieve pipelines for the project with ID {{ .entity.properties.deckhouse_code_id }}.
+1. Call the MCP tool ddp_curated_get_external_data for the external service "Deckhouse Code" and retrieve pipelines for the project with ID {{ .entity.properties.deckhouse_code_id }}.
 2. Display a table with the 10 latest pipelines.
 ```
 
