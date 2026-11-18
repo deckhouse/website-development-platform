@@ -7,7 +7,7 @@ description: Connect external AI clients to Deckhouse Development Portal and use
 The MCP server is a Preview feature. The set of tools and the API may change in future releases without backward compatibility.
 {{< /alert >}}
 
-The MCP server is a Deckhouse Development Portal (DDP, portal) component that implements the Model Context Protocol (MCP). It enables external AI clients, such as LM Studio and Claude Desktop, to interact with the portal.
+The MCP server is a Deckhouse Development Portal component that implements the Model Context Protocol (MCP). It enables external AI clients, such as LM Studio and Claude Desktop, to interact with the portal.
 The server uses JSON-RPC 2.0 and provides tools for working with portal resources and proxying requests to external infrastructure services.
 
 MCP is an open protocol for connecting AI models to external systems. For details, refer to the [official MCP website](https://modelcontextprotocol.io/).
@@ -19,6 +19,65 @@ In addition to built-in portal tools, the MCP server can call tools from [MCP co
 ## Available tools
 
 The following **built-in** portal tools are available. Tools of the `external` type become available after you [synchronize the MCP server catalog](../mcp-management/#mcp-servers) and [add the tools to an MCP collection](../mcp-management/#mcp-collections). Tools of the `custom` type are [created manually](../mcp-management/#mcp-tools) under **MCP tools** and become available after you add them to an MCP collection.
+
+### Tool names
+
+In an MCP client, use the name returned by `tools/list`. The platform agent and OpenCode workspace expose the same tools to the model with the `ddp_` prefix. When configuring a collection, use the name without this prefix:
+
+| Purpose | MCP client and collection catalog | Name for the agent model |
+| --- | --- | --- |
+| API operation | `get_resources` | `ddp_get_resources` |
+| Catalog browser | `query_catalog` | `ddp_query_catalog` |
+| Specialized process run | `curated_run_process` | `ddp_curated_run_process` |
+| Skill reading | `curated_get_skill` | `ddp_curated_get_skill` |
+
+The names in the second column are used by MCP clients and collection catalogs. Add `ddp_` to names in platform-agent instructions; an external agent may use its own model-facing names.
+
+### Catalog tools
+
+Tools in the **Catalog browser** group search and count entities, retrieve property schemas and relation graphs, inspect process runs, and check process readiness. These tools only read data; readiness checks do not run a process.
+
+The following names are used in the collection catalog and external MCP clients. The platform-agent model and OpenCode receive the `ddp_` prefix, for example `ddp_query_catalog`.
+
+| Tool | Purpose |
+| --- | --- |
+| `describe_me` | Current user, teams, roles, permissions, time and time zone |
+| `get_catalog_schema` | Visible resources, properties and relation types; with `resource`, details of one resource |
+| `search_catalog` | Search resources, teams and entities by words |
+| `query_catalog` | Filter, count and group entities |
+| `get_entity_summary` | Entity card with properties, checks, relations and recent runs |
+| `get_entity_relation_graph` | Traverse relations with a depth and path from the source entity |
+| `list_process_runs` | Search, count and group process runs |
+| `get_process_run` | Diagnose a run using events from the current attempt: errors, approvals, retries and timers |
+| `find_operations` | Processes and actions available for reading and linked to an entity resource |
+| `check_process_readiness` | Check process parameters and conditions without running it |
+
+### Skills
+
+Skill-reading tools pass instructions and additional files:
+
+| Tool | Arguments | Result |
+| --- | --- | --- |
+| `curated_list_skills` | Optional string `q` | Skills available to the user with descriptions and latest versions |
+| `curated_get_skill` | Required `name`, optional `version` | `SKILL.md` text, version and file list |
+| `curated_get_skill_file` | Required `name` and `path`, optional `version` | Text of an additional file |
+
+In an MCP client, select a version by its label. If no label is specified, the latest active version is used. During an agent run, access is limited to the skills assigned to the agent and their pinned versions. `curated_get_skill_file` cannot read binary files or files larger than 1 MiB.
+
+### Workspaces
+
+Workspace tools can prepare a [workspace](workspaces/) from a chat:
+
+| Tool | Arguments | Result |
+| --- | --- | --- |
+| `curated_get_workspace_templates` | None | Available templates with an active version, repository settings and parameters |
+| `curated_create_workspace` | Required `template_uuid`, `name`, `ttl_hours`; optional `provider`, `repository_url`, `base_ref`, `entity_uuid`, `parameters` | Created workspace state; the operation runs asynchronously |
+| `curated_get_workspace` | Required `workspace_uuid`, optional `wait_seconds` up to 45 | Status, readiness, last error and active operation |
+| `curated_attach_workspace` | Required `workspace_uuid` | Attach the workspace to the current chat |
+
+You can omit `provider` when a suitable provider is already set in the chat context. Otherwise, specify it explicitly. `parameters` is an object containing template variable values, and `ttl_hours` is an integer from 1 to 720.
+
+`curated_attach_workspace` works only in the context of an agent responding in a portal chat. Get the templates, create a workspace, wait for it to become ready, and attach it to the chat.
 
 ### get_resources
 
@@ -270,7 +329,7 @@ Request body:
     "content": [
       {
         "type": "text",
-        "text": "[{\"uuid\":\"...\",\"name\":\"Service 1\",\"properties\":{...}},...]"
+        "text": "{\"status\":200,\"contentType\":\"application/json; charset=utf-8\",\"encoding\":\"json\",\"body\":{\"response\":[],\"error\":null}}"
       }
     ]
   }
